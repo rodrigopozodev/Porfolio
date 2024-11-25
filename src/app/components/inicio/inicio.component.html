@@ -1,0 +1,29 @@
+<div class="bg-white min-h-screen flex flex-col">
+  <!-- Sección de inicio -->
+  <section class="flex flex-col px-56 py-16 text-left">
+    <h1 class="text-3xl font-semibold text-orange-400 mb-6">¡Hola! Soy Rodrigo</h1>
+    <p class="text-4xl mb-6">Desarrollador web especializado en Angular y Node.js</p>
+    <p class="text-2xl mb-6">Estudiante de último curso de Desarrollo de Aplicaciones Web, buscando mi primer empleo para aplicar mis conocimientos en la creación de sitios web dinámicos y aplicaciones robustas.</p>
+    <h2 class="text-3xl font-semibold mt-32">Proyectos</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Proyecto ZapasPro -->
+      <a href="https://zapaspro.netlify.app" class="mt-10 bg-white p-4 rounded-lg shadow-lg border border-gray-300 relative group overflow-hidden transform transition-transform duration-300 hover:scale-105" style="height: 450px; width: 300px;">
+        <!-- Imagen en la tarjeta -->
+        <img src="previe.png" alt="Vista previa del proyecto ZapasPro" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-70">
+        
+        <!-- Información visible por defecto (ZapasPro siempre visible con fondo blanco) -->
+        <h3 class="text-2xl font-semibold text-black absolute top-0 left-0 w-full p-4 bg-white z-10">ZapasPro</h3>
+        
+        <!-- Información que aparece cuando pasas el ratón -->
+        <div class="absolute inset-0 bg-black bg-opacity-60 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4">
+          <p class="text-xl text-white mb-4 mt-12">Plataforma de e-commerce de zapatillas con un frontend en Angular y Tailwind CSS, conectada a un backend en Node.js.</p>
+          <ul class=" text-xl list-disc pl-5 text-white mb-4">
+            <li>Autenticación de usuarios (roles de cliente y administrador).</li>
+            <li>Gestión de productos y usuarios.</li>
+            <li>Carrito de compras para clientes.</li>
+          </ul>
+        </div>
+      </a>
+    </div>
+  </section>
+</div>
