@@ -1,8 +1,6 @@
-<div [ngClass]="modoOscuro ? 'dark' : ''" class="min-h-screen">
+<div [ngClass]="modoOscuro ? 'dark' : ''" class="min-h-screen px-4 pt-10 flex flex-col justify-center relative overflow-hidden">
   <!-- Barra de navegación -->
-  <nav class="p-4 flex justify-between items-center">
-    <h1 class="text-xl font-semibold text-gray-800 dark:text-white">Mi Portafolio</h1>
-    
+  <nav class="flex justify-end items-center">
     <!-- Botón de cambio de tema -->
     <label class="switch">
       <input id="input" type="checkbox" [checked]="modoOscuro" (change)="cambiarModo()" />
@@ -26,10 +24,46 @@
           <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="50"></circle>
           </svg>
+    
+          <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+          </svg>
+          <svg id="cloud-2" class="cloud-dark" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+          </svg>
+          <svg id="cloud-3" class="cloud-dark" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+          </svg>
+          <svg id="cloud-4" class="cloud-light" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+          </svg>
+          <svg id="cloud-5" class="cloud-light" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+          </svg>
+          <svg id="cloud-6" class="cloud-light" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="50"></circle>
+          </svg>
         </div>
         <div class="stars">
           <svg id="star-1" class="star" viewBox="0 0 20 20">
-            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
+            <path
+              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+            ></path>
+          </svg>
+          <svg id="star-2" class="star" viewBox="0 0 20 20">
+            <path
+              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+            ></path>
+          </svg>
+          <svg id="star-3" class="star" viewBox="0 0 20 20">
+            <path
+              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+            ></path>
+          </svg>
+          <svg id="star-4" class="star" viewBox="0 0 20 20">
+            <path
+              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
+            ></path>
           </svg>
         </div>
       </div>
@@ -37,12 +71,24 @@
   </nav>
   
   <!-- Contenido Principal -->
-  <div class="flex justify-center items-center min-h-screen">
-    <div class="w-full sm:w-1/2 p-4">
-      <h2 class="text-4xl font-bold mb-4 text-center text-gray-800 dark:text-green-500">
-        ¡Bienvenido a mi Portafolio!
-      </h2>
-      <p class="text-center text-gray-600 dark:text-gray-300">Desarrollador Web - Creando experiencias digitales impactantes.</p>
+  <div [ngClass]="modoOscuro ? 'dark' : ''" class="flex-grow flex items-center justify-center px-4 opacity-0 animate-fade-in">
+    <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <!-- Texto -->
+      <div>
+        <h2 class="text-6xl font-bold text-gray-800 dark:text-green-500 leading-tight">
+          Hola, soy Rodrigo
+        </h2>
+        <p class="mt-6 text-xl text-gray-600 dark:text-gray-300">
+          Desarrollador web especializado en la creación de interfaces elegantes, funcionales y optimizadas para la mejor experiencia de usuario. 
+          Mi enfoque es construir soluciones digitales eficientes y bien diseñadas.
+        </p>
+      </div>
+  
+      <!-- Imagen -->
+      <div class="flex justify-center">
+        <img src="assets/tu-imagen.jpg" alt="Foto de [Tu Nombre]" class="w-96 h-96 object-cover rounded-lg shadow-lg">
+      </div>
     </div>
   </div>
 </div>
+
