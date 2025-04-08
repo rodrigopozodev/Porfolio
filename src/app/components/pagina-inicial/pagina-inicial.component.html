@@ -71,22 +71,16 @@
   </nav>
   
   <!-- Contenido Principal -->
-  <div [ngClass]="modoOscuro ? 'dark' : ''" class="flex-grow flex items-center justify-center px-4 opacity-0 animate-fade-in">
+  <div [ngClass]="modoOscuro ? 'dark' : 'bg-neutral-50'" class="flex-grow flex items-center justify-center px-4 opacity-0 animate-fade-in">
     <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
       <!-- Texto -->
       <div>
         <h2 class="text-6xl font-bold text-gray-800 dark:text-green-500 leading-tight">
           Hola, soy Rodrigo
         </h2>
-        <p class="mt-6 text-xl text-gray-600 dark:text-gray-300">
-          Desarrollador web especializado en la creación de interfaces elegantes, funcionales y optimizadas para la mejor experiencia de usuario. 
-          Mi enfoque es construir soluciones digitales eficientes y bien diseñadas.
+        <p [ngClass]="modoOscuro ? 'text-gray-300' : 'text-blue-900'" class="mt-6 text-xl">
+          Me especializo en el desarrollo con Angular, además de tener experiencia en Java y Spring Boot. Actualmente, estoy ampliando mis conocimientos en la creación de agentes de inteligencia artificial
         </p>
-      </div>
-  
-      <!-- Imagen -->
-      <div class="flex justify-center">
-        <img src="assets/tu-imagen.jpg" alt="Foto de [Tu Nombre]" class="w-96 h-96 object-cover rounded-lg shadow-lg">
       </div>
     </div>
   </div>
