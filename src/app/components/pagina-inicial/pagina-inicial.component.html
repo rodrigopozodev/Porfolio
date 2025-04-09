@@ -24,7 +24,6 @@
           <svg id="light-ray-3" class="light-ray" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="50"></circle>
           </svg>
-    
           <svg id="cloud-1" class="cloud-dark" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="50"></circle>
           </svg>
@@ -46,43 +45,37 @@
         </div>
         <div class="stars">
           <svg id="star-1" class="star" viewBox="0 0 20 20">
-            <path
-              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
-            ></path>
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
           </svg>
           <svg id="star-2" class="star" viewBox="0 0 20 20">
-            <path
-              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
-            ></path>
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
           </svg>
           <svg id="star-3" class="star" viewBox="0 0 20 20">
-            <path
-              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
-            ></path>
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
           </svg>
           <svg id="star-4" class="star" viewBox="0 0 20 20">
-            <path
-              d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"
-            ></path>
+            <path d="M 0 10 C 10 10,10 10 ,0 10 C 10 10 , 10 10 , 10 20 C 10 10 , 10 10 , 20 10 C 10 10 , 10 10 , 10 0 C 10 10,10 10 ,0 10 Z"></path>
           </svg>
         </div>
       </div>
     </label>
   </nav>
-  
+
   <!-- Contenido Principal -->
   <div [ngClass]="modoOscuro ? 'dark' : 'bg-neutral-50'" class="flex-grow flex items-center justify-center px-4 opacity-0 animate-fade-in">
-    <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <!-- Texto -->
-      <div>
-        <h2 class="text-6xl font-bold text-gray-800 dark:text-green-500 leading-tight">
-          Hola, soy Rodrigo
-        </h2>
-        <p [ngClass]="modoOscuro ? 'text-gray-300' : 'text-blue-900'" class="mt-6 text-xl">
-          Me especializo en el desarrollo con Angular, además de tener experiencia en Java y Spring Boot. Actualmente, estoy ampliando mis conocimientos en la creación de agentes de inteligencia artificial
-        </p>
+    <div class="w-full flex flex-col justify-center items-center">
+      <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Texto -->
+        <div>
+          <h2 class="text-7xl font-bold text-gray-800 dark:text-green-500 leading-tight">
+            Hola, soy Rodrigo
+          </h2>
+          <p [ngClass]="modoOscuro ? 'text-gray-300' : 'text-blue-900'" class="mt-6 text-2xl">
+            Me especializo en el desarrollo con Angular, además de tener experiencia en Java y Spring Boot. Actualmente, estoy ampliando mis conocimientos en la creación de agentes de inteligencia artificial.
+          </p>
+        </div>
+        <img src="Rodrigo.png" alt="Rodrigo" class="ml-6 w-80 h-80 rounded-full object-cover">
       </div>
     </div>
   </div>
 </div>
-
