@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule],
+  imports: [], // Removed CommonModule as it's not strictly needed for this template
   templateUrl: './about.component.html',
 })
-export class AboutComponent {
-  // Add properties or methods if needed
-}
+export class AboutComponent {}

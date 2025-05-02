@@ -1,7 +1,7 @@
 <section class="container mx-auto py-20 px-4" id="projects">
-  <h2 class="text-3xl font-bold mb-12 text-center">Recent Projects</h2>
+  <h2 class="text-3xl font-bold mb-12 text-center">Proyectos Recientes</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let project of projects" class="card overflow-hidden flex flex-col h-full">
+    <div *ngFor="let project of projects; let i = index" class="card overflow-hidden flex flex-col h-full">
       <div class="relative h-48 w-full">
          <img [src]="project.image" [alt]="project.title" [attr.data-ai-hint]="project.aiHint" class="absolute inset-0 w-full h-full object-cover" />
       </div>
@@ -17,10 +17,24 @@
         </div>
       </div>
       <div class="card-footer flex justify-between">
-        <a *ngIf="project.codeLink" [href]="project.codeLink" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-          <lucide-icon name="github" size="16"></lucide-icon>
-          Code
-        </a>
+        <!-- Conditional links based on project index or properties -->
+        <ng-container *ngIf="project.frontendRepo && project.backendRepo; else singleCodeLink">
+           <a [href]="project.frontendRepo" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+             <lucide-icon name="github" size="16"></lucide-icon>
+             Frontend
+           </a>
+           <a [href]="project.backendRepo" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+             <lucide-icon name="github" size="16"></lucide-icon>
+             Backend
+           </a>
+        </ng-container>
+        <ng-template #singleCodeLink>
+          <a *ngIf="project.codeLink" [href]="project.codeLink" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+            <lucide-icon name="github" size="16"></lucide-icon>
+            Código
+          </a>
+        </ng-template>
+
         <a *ngIf="project.demoLink" [href]="project.demoLink" target="_blank" rel="noopener noreferrer" class="btn btn-default btn-sm">
           <lucide-icon name="external-link" size="16"></lucide-icon>
           Demo

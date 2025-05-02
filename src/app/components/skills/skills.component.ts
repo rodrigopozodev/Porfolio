@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 interface Skill {
   name: string;
@@ -10,7 +9,7 @@ interface Skill {
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [CommonModule],
+  imports: [], // Removed CommonModule
   templateUrl: './skills.component.html',
 })
 export class SkillsComponent {
