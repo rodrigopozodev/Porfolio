@@ -25,12 +25,12 @@ export class ProjectsComponent {
     {
       title: "Plataforma E-commerce",
       description: "Una tienda online completa con carrito, proceso de pago e integración de pagos.",
-      image: "https://picsum.photos/384/192", // Placeholder image
-      technologies: ["Angular", "Node.js", "TypeScript", "Tailwind", "SQLite"], // Updated technologies
+      image: "", // Removed placeholder image URL
+      technologies: ["Angular", "Node.js", "TypeScript", "Tailwind", "SQLite"],
       frontendRepo: "https://github.com/rodrigopozodev/ZapasPro_Front",
       backendRepo: "https://github.com/rodrigopozodev/ZapasPro_Back",
       demoLink: "https://zapaspro.netlify.app/",
-      aiHint: "screenshot zapaspro store" // Updated AI hint for image generation
+      aiHint: "screenshot zapaspro store"
     },
     {
       title: "App Gestión de Tareas",
@@ -51,4 +51,12 @@ export class ProjectsComponent {
       aiHint: "mapa tiempo pronostico"
     },
   ];
+
+  showProjectInfo(project: Project) {
+    // Placeholder function for Info button click
+    // In the future, this could navigate to a details page or show a modal
+    console.log('Show info for project:', project.title);
+    // Example navigation (requires Router to be injected):
+    // this.router.navigate(['/project-details', project.id]);
+  }
 }

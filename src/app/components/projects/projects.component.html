@@ -16,7 +16,7 @@
           </span>
         </div>
       </div>
-      <div class="card-footer flex justify-between">
+      <div class="card-footer flex justify-between gap-2"> <!-- Added gap-2 for spacing -->
         <!-- Conditional links based on project index or properties -->
         <ng-container *ngIf="project.frontendRepo && project.backendRepo; else singleCodeLink">
            <a [href]="project.frontendRepo" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
@@ -35,10 +35,16 @@
           </a>
         </ng-template>
 
-        <a *ngIf="project.demoLink" [href]="project.demoLink" target="_blank" rel="noopener noreferrer" class="btn btn-default btn-sm">
-          <lucide-icon name="external-link" size="16"></lucide-icon>
-          Demo
-        </a>
+        <div class="flex gap-2"> <!-- Group Web and Info buttons -->
+          <a *ngIf="project.demoLink" [href]="project.demoLink" target="_blank" rel="noopener noreferrer" class="btn btn-default btn-sm">
+            <lucide-icon name="external-link" size="16"></lucide-icon>
+            Web <!-- Renamed from Demo -->
+          </a>
+          <button (click)="showProjectInfo(project)" class="btn btn-outline btn-sm">
+             <lucide-icon name="info" size="16"></lucide-icon>
+             Info
+          </button>
+        </div>
       </div>
     </div>
   </div>
