@@ -43,7 +43,7 @@ export class ContactComponent {
     console.log('Opening email client with mailto link:', mailtoLink);
     console.log('Datos del formulario:', this.contactForm);
 
-    // Open the default email client
+    // Open the default email client - This prepares an email, it doesn't send it automatically.
     window.location.href = mailtoLink;
 
     // Reset form after attempting to open email client
