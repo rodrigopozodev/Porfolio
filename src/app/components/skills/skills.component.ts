@@ -10,22 +10,22 @@ interface Skill {
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [CommonModule], // Removed CommonModule
+  imports: [CommonModule],
   templateUrl: './skills.component.html',
 })
 export class SkillsComponent {
   skills: Skill[] = [
-    { name: "JavaScript", iconText: "JS", iconClass: "text-yellow-500" },
     { name: "Angular", iconText: "Ng", iconClass: "text-red-500" },
+    { name: "Node.js", iconText: "Node", iconClass: "text-green-600" },
+    { name: "JavaScript", iconText: "JS", iconClass: "text-yellow-500" },
+    { name: "Java", iconText: "Java", iconClass: "text-orange-500" },
+    { name: "TypeScript", iconText: "TS", iconClass: "text-blue-600" },
     { name: "HTML", iconText: "HTML", iconClass: "text-orange-500" },
     { name: "CSS", iconText: "CSS", iconClass: "text-blue-500" },
     { name: "Python", iconText: "Py", iconClass: "text-green-500" },
-    { name: "React", iconText: "Re", iconClass: "text-blue-400" },
-    { name: "Node.js", iconText: "Node", iconClass: "text-green-600" },
     { name: "Git", iconText: "Git", iconClass: "text-orange-600" },
-    { name: "MongoDB", iconText: "DB", iconClass: "text-green-500" },
     { name: "Tailwind", iconText: "TW", iconClass: "text-cyan-500" },
-    { name: "TypeScript", iconText: "TS", iconClass: "text-blue-600" },
-    { name: "Figma", iconText: "Fig", iconClass: "text-purple-500" },
+    { name: "SQLite", iconText: "DB", iconClass: "text-blue-gray-500" }, // Adjusted icon and color
+    { name: "SQL Server", iconText: "SQL", iconClass: "text-blue-700" }, // Adjusted icon and color
   ];
 }
