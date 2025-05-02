@@ -37,28 +37,28 @@ export class ProjectsComponent {
       demoLink: "https://zapaspro.netlify.app/store",
       aiHint: "screenshot zapaspro store" // Keep the hint for screenshot
     },
-    {
-      title: "App Gestión de Tareas",
-      name: "taskmanager",
-      description: "Una aplicación de gestión de tareas estilo Kanban con funcionalidad de arrastrar y soltar.",
-      image: "",
-      technologies: ["React", "Firebase", "Tailwind CSS"],
-      codeLink: "#",
-      demoLink: "#",
-      aiHint: "tablero kanban tareas"
+    // {
+    //   title: "App Gestión de Tareas",
+    //   name: "taskmanager",
+    //   description: "Una aplicación de gestión de tareas estilo Kanban con funcionalidad de arrastrar y soltar.",
+    //   image: "",
+    //   technologies: ["React", "Firebase", "Tailwind CSS"],
+    //   codeLink: "#",
+    //   demoLink: "#",
+    //   aiHint: "tablero kanban tareas"
 
-    },
-    {
-      title: "Dashboard Meteorológico",
-      name: "weather",
-      description: "Información meteorológica en tiempo real con mapas interactivos y pronósticos.",
-      image: "",
-      technologies: ["JavaScript", "OpenWeather API", "Chart.js"],
-      codeLink: "#",
-      demoLink: "#",
-      aiHint: "mapa tiempo pronostico"
+    // },
+    // {
+    //   title: "Dashboard Meteorológico",
+    //   name: "weather",
+    //   description: "Información meteorológica en tiempo real con mapas interactivos y pronósticos.",
+    //   image: "",
+    //   technologies: ["JavaScript", "OpenWeather API", "Chart.js"],
+    //   codeLink: "#",
+    //   demoLink: "#",
+    //   aiHint: "mapa tiempo pronostico"
 
-    },
+    // },
   ];
   constructor(private sanitizer: DomSanitizer) { }
 
@@ -70,3 +70,4 @@ export class ProjectsComponent {
     // this.router.navigate(['/project-details', project.id]);
   }
 }
+
