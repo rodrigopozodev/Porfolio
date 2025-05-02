@@ -5,7 +5,7 @@ import { LucideAngularModule } from 'lucide-angular';
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule], // Added Linkedin
   templateUrl: './hero.component.html',
 })
 export class HeroComponent {

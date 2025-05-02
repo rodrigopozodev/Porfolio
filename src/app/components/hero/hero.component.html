@@ -5,7 +5,7 @@
     <p class="text-lg max-w-md text-muted-foreground">
       Construyo aplicaciones web responsivas y fáciles de usar con tecnologías modernas.
     </p>
-    <div class="flex flex-wrap gap-4 pt-4">
+    <div class="flex flex-wrap gap-4 pt-4 items-center"> <!-- Added items-center -->
       <button class="btn btn-default" (click)="downloadCV()">
         <lucide-icon name="download" size="18"></lucide-icon>
         Descargar CV
@@ -14,13 +14,23 @@
         <lucide-icon name="mail" size="18"></lucide-icon>
         Contactarme
       </button>
+       <!-- Added GitHub and LinkedIn icons -->
+      <a href="https://github.com/rodrigopozodev" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
+        <lucide-icon name="github" size="20"></lucide-icon>
+        <span class="sr-only">GitHub</span>
+      </a>
+      <a href="https://www.linkedin.com/in/rodrigopozosanchez/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
+        <lucide-icon name="linkedin" size="20"></lucide-icon>
+        <span class="sr-only">LinkedIn</span>
+      </a>
     </div>
   </div>
   <div class="flex-1 flex justify-center md:justify-end">
     <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
       <!-- Use the provided image -->
-      <img src="assets/images/profile.jpeg" alt="Perfil" />
+      <img src="assets/images/profile.jpeg" alt="Perfil" class="w-full h-full object-cover" />
         </div>
   </div>
 </section>
+
 
