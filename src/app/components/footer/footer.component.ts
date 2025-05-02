@@ -10,6 +10,6 @@ import { LucideAngularModule } from 'lucide-angular';
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();
 
-  githubLink = "#"; // Replace with your GitHub profile link
-  emailLink = "mailto:your.email@example.com"; // Replace with your email
+  githubLink = "https://github.com/rodrigopozodev"; // Updated GitHub link
+  emailLink = "mailto:rodrigopozosanchez@gmail.com"; // Updated email link to mailto
 }
