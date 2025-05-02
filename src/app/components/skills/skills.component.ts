@@ -14,17 +14,17 @@ interface Skill {
 })
 export class SkillsComponent {
   skills: Skill[] = [
-    { name: "Angular", iconPath: "assets/icons/angular.svg" },
-    { name: "Node.js", iconPath: "assets/icons/nodejs.svg" },
-    { name: "JavaScript", iconPath: "assets/icons/javascript.svg" },
-    { name: "Java", iconPath: "assets/icons/java.svg" },
-    { name: "TypeScript", iconPath: "assets/icons/typescript.svg" },
-    { name: "HTML", iconPath: "assets/icons/html.svg" },
-    { name: "CSS", iconPath: "assets/icons/css.svg" },
-    { name: "Python", iconPath: "assets/icons/python.svg" },
-    { name: "Git", iconPath: "assets/icons/git.svg" },
-    { name: "Tailwind", iconPath: "assets/icons/tailwind.svg" },
-    { name: "SQLite", iconPath: "assets/icons/sqlite.svg" },
-    { name: "SQL Server", iconPath: "assets/icons/sqlserver.svg" },
+    { name: "Angular", iconPath: "assets/svg/angular.svg" },
+    { name: "Node.js", iconPath: "assets/svg/nodedotjs.svg" },
+    { name: "JavaScript", iconPath: "assets/svg/javascript.svg" },
+    { name: "Java", iconPath: "assets/svg/icons8-logotipo-de-java-coffee-cup.svg" },
+    { name: "TypeScript", iconPath: "assets/svg/typescript.svg" },
+    { name: "HTML", iconPath: "assets/svg/html5.svg" },
+    { name: "CSS", iconPath: "assets/svg/css.svg" },
+    { name: "Python", iconPath: "assets/svg/python.svg" },
+    { name: "Git", iconPath: "assets/svg/github.svg" }, // Assuming github.svg for Git
+    { name: "Tailwind", iconPath: "assets/svg/tailwindcss.svg" },
+    { name: "SQLite", iconPath: "assets/svg/sqlite.svg" },
+    { name: "SQL Server", iconPath: "assets/svg/icons8-servidor-microsoft-sql.svg" },
   ];
 }
