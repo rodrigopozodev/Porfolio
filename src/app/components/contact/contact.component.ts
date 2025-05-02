@@ -29,7 +29,7 @@ export class ContactComponent {
         return;
     }
 
-    const recipientEmail = 'rodrigopozosanchez@gmail.com';
+    const recipientEmail = 'rodrigopozosanchez@gmail.com'; // Corrected recipient email
     const subject = encodeURIComponent(this.contactForm.subject || 'Contacto desde el sitio web'); // Default subject if empty
     const body = encodeURIComponent(
       `Nombre: ${this.contactForm.name}\n` +
