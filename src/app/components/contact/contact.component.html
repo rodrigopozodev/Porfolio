@@ -18,6 +18,13 @@
         </div>
       </div>
       <div class="space-y-2">
+        <label for="subject" class="label">Asunto</label>
+        <input id="subject" name="subject" placeholder="Asunto del mensaje" class="input" [(ngModel)]="contactForm.subject" required #subject="ngModel"/>
+         <div *ngIf="subject.invalid && (subject.dirty || subject.touched)" class="text-destructive text-xs mt-1">
+            El asunto es obligatorio.
+        </div>
+      </div>
+      <div class="space-y-2">
         <label for="message" class="label">Mensaje</label>
         <textarea id="message" name="message" placeholder="Tu mensaje" rows="5" class="textarea" [(ngModel)]="contactForm.message" required #message="ngModel"></textarea>
          <div *ngIf="message.invalid && (message.dirty || message.touched)" class="text-destructive text-xs mt-1">
