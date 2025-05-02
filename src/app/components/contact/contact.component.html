@@ -1,7 +1,7 @@
 <section class="container mx-auto py-20 px-4 bg-muted/50" id="contact">
   <h2 class="text-3xl font-bold mb-12 text-center">Ponte en Contacto</h2>
   <div class="max-w-md mx-auto">
-    <form (ngSubmit)="onSubmit()" #form="ngForm" class="space-y-6">
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="space-y-6">
       <div class="space-y-2">
         <label for="name" class="label">Nombre</label>
         <input id="name" name="name" placeholder="Tu nombre" class="input" [(ngModel)]="contactForm.name" required #name="ngModel" />
@@ -38,4 +38,3 @@
     </form>
   </div>
 </section>
-

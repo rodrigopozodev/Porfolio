@@ -1,6 +1,6 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { FormsModule, NgForm } from '@angular/forms'; // Import NgForm
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
@@ -23,14 +23,14 @@ export class ContactComponent {
   }
 
 
-  onSubmit() {
+  onSubmit(form: NgForm) { // Inject NgForm reference
     if (!this.isBrowser) {
         console.log('Mailto links only work in a browser environment.');
         return;
     }
 
-    const recipientEmail = 'rodrigopozosanchez@gmail.com'; // Corrected recipient email
-    const subject = encodeURIComponent(this.contactForm.subject || 'Contacto desde el sitio web'); // Default subject if empty
+    const recipientEmail = 'rodrigopozosanchez@gmail.com';
+    const subject = encodeURIComponent(this.contactForm.subject || 'Contacto desde el sitio web');
     const body = encodeURIComponent(
       `Nombre: ${this.contactForm.name}\n` +
       `Correo Electrónico: ${this.contactForm.email}\n\n` +
@@ -40,14 +40,18 @@ export class ContactComponent {
     // Construct the mailto link
     const mailtoLink = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
 
+    console.log('Opening email client with mailto link:', mailtoLink);
+    console.log('Datos del formulario:', this.contactForm);
+
     // Open the default email client
     window.location.href = mailtoLink;
 
-    console.log('Intento de envío de correo a:', recipientEmail);
-    console.log('Datos del formulario:', this.contactForm);
-
-    // Reset form (optional)
-    // Consider delaying reset or showing a success message first
-    // this.contactForm = { name: '', email: '', subject: '', message: '' };
+    // Reset form after attempting to open email client
+    // Use setTimeout to allow the mailto link to process before reset
+    setTimeout(() => {
+        form.resetForm(); // Use resetForm from NgForm to clear fields and validation state
+        this.contactForm = { name: '', email: '', subject: '', message: '' }; // Also reset component model
+        console.log('Formulario reiniciado.');
+    }, 100); // Small delay
   }
 }
