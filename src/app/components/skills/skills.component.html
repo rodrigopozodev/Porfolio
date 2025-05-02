@@ -2,11 +2,9 @@
   <h2 class="text-3xl font-bold mb-12 text-center">Habilidades</h2>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
     <div *ngFor="let skill of skills" class="flex flex-col items-center gap-3 transition-transform hover:scale-105">
-      <div class="w-16 h-16 flex items-center justify-center rounded-full bg-background shadow-sm text-2xl font-bold" [ngClass]="skill.iconClass">
-        {{ skill.iconText }}
-      </div>
+      <!-- Use img tag for SVG icons -->
+      <img [src]="skill.iconPath" [alt]="skill.name" class="w-16 h-16 object-contain p-1 rounded-full bg-background shadow-sm" />
       <span class="font-medium">{{ skill.name }}</span>
     </div>
   </div>
 </section>
-
