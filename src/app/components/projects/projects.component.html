@@ -2,11 +2,14 @@
   <h2 class="text-3xl font-bold mb-12 text-center">Proyectos Recientes</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div *ngFor="let project of projects; let i = index" class="card overflow-hidden flex flex-col h-full">
-      <div class="relative h-48 w-full bg-muted flex items-center justify-center">
-        <!-- Updated img tag to use [src] and [attr.data-ai-hint] -->
-         <img [src]="project.image || 'https://picsum.photos/384/192'" [alt]="project.title" [attr.data-ai-hint]="project.aiHint" class="absolute inset-0 w-full h-full object-cover" />
-         <!-- Fallback text if image is empty and placeholder fails -->
-         <span *ngIf="!project.image" class="text-muted-foreground text-sm">Image coming soon</span>
+      <div class="w-full bg-muted h-[600px] relative"> <!-- Added relative positioning -->
+        <ng-container *ngIf="project.name === 'zapaspro'; else defaultImage">
+            <iframe [src]="safeZapasproUrl" class="w-full h-full" frameborder="0"></iframe>
+        </ng-container>
+        <ng-template #defaultImage>
+          <img [src]="project.image" [alt]="project.title" [attr.data-ai-hint]="project.aiHint" class="absolute w-full h-full object-cover" />
+          <span *ngIf="!project.image" class="text-muted-foreground text-sm">Image coming soon</span>
+        </ng-template>
       </div>
       <div class="card-header">
         <h3 class="card-title">{{ project.title }}</h3>
@@ -22,6 +25,8 @@
       <div class="card-footer flex justify-between gap-2"> <!-- Added gap-2 for spacing -->
         <!-- Conditional links based on project index or properties -->
         <ng-container *ngIf="project.frontendRepo && project.backendRepo; else singleCodeLink">
+           <!-- Commented out repository links -->
+           <!--
            <a [href]="project.frontendRepo" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
              <lucide-icon name="github" size="16"></lucide-icon>
              Frontend
@@ -30,6 +35,7 @@
              <lucide-icon name="github" size="16"></lucide-icon>
              Backend
            </a>
+           -->
         </ng-container>
         <ng-template #singleCodeLink>
           <a *ngIf="project.codeLink" [href]="project.codeLink" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
@@ -52,3 +58,4 @@
     </div>
   </div>
 </section>
+

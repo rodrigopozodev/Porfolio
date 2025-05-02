@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule } from 'lucide-angular';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { LucideAngularModule } from 'lucide-angular'; 
 
 interface Project {
   title: string;
+  name: string;
   description: string;
   image: string;
   technologies: string[];
@@ -20,12 +22,15 @@ interface Project {
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './projects.component.html',
 })
+
 export class ProjectsComponent {
+  safeZapasproUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://zapaspro.netlify.app/store/")
   projects: Project[] = [
     {
-      title: "Plataforma E-commerce",
+      title: "ZapasPro",
       description: "Una tienda online completa con carrito, proceso de pago e integración de pagos.",
-      image: "https://picsum.photos/384/192", // Use placeholder image
+      image: "", // Use placeholder image
+      name: "zapaspro",
       technologies: ["Angular", "Node.js", "TypeScript", "Tailwind", "SQLite"],
       frontendRepo: "https://github.com/rodrigopozodev/ZapasPro_Front",
       backendRepo: "https://github.com/rodrigopozodev/ZapasPro_Back",
@@ -34,23 +39,28 @@ export class ProjectsComponent {
     },
     {
       title: "App Gestión de Tareas",
+      name: "taskmanager",
       description: "Una aplicación de gestión de tareas estilo Kanban con funcionalidad de arrastrar y soltar.",
-      image: "https://picsum.photos/384/192",
+      image: "",
       technologies: ["React", "Firebase", "Tailwind CSS"],
       codeLink: "#",
       demoLink: "#",
       aiHint: "tablero kanban tareas"
+
     },
     {
       title: "Dashboard Meteorológico",
+      name: "weather",
       description: "Información meteorológica en tiempo real con mapas interactivos y pronósticos.",
-      image: "https://picsum.photos/384/192",
+      image: "",
       technologies: ["JavaScript", "OpenWeather API", "Chart.js"],
       codeLink: "#",
       demoLink: "#",
       aiHint: "mapa tiempo pronostico"
+
     },
   ];
+  constructor(private sanitizer: DomSanitizer) { }
 
   showProjectInfo(project: Project) {
     // Placeholder function for Info button click
