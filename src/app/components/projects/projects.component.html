@@ -2,8 +2,11 @@
   <h2 class="text-3xl font-bold mb-12 text-center">Proyectos Recientes</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div *ngFor="let project of projects; let i = index" class="card overflow-hidden flex flex-col h-full">
-      <div class="relative h-48 w-full">
-         <img [src]="project.image" [alt]="project.title" [attr.data-ai-hint]="project.aiHint" class="absolute inset-0 w-full h-full object-cover" />
+      <div class="relative h-48 w-full bg-muted flex items-center justify-center">
+        <!-- Updated img tag to use [src] and [attr.data-ai-hint] -->
+         <img [src]="project.image || 'https://picsum.photos/384/192'" [alt]="project.title" [attr.data-ai-hint]="project.aiHint" class="absolute inset-0 w-full h-full object-cover" />
+         <!-- Fallback text if image is empty and placeholder fails -->
+         <span *ngIf="!project.image" class="text-muted-foreground text-sm">Image coming soon</span>
       </div>
       <div class="card-header">
         <h3 class="card-title">{{ project.title }}</h3>
