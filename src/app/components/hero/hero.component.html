@@ -1,0 +1,25 @@
+<section class="container mx-auto py-20 px-4 flex flex-col md:flex-row items-center justify-between gap-10">
+  <div class="flex-1 space-y-6">
+    <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Hi, I'm John Doe</h1>
+    <p class="text-xl md:text-2xl text-muted-foreground">Web Developer | JavaScript, Angular, Python</p>
+    <p class="text-lg max-w-md text-muted-foreground">
+      I build responsive, user-friendly web applications with modern technologies.
+    </p>
+    <div class="flex flex-wrap gap-4 pt-4">
+      <button class="btn btn-default" (click)="downloadCV()">
+        <lucide-icon name="download" size="18"></lucide-icon>
+        Download CV
+      </button>
+      <button class="btn btn-outline" (click)="scrollToContact()">
+        <lucide-icon name="mail" size="18"></lucide-icon>
+        Contact Me
+      </button>
+    </div>
+  </div>
+  <div class="flex-1 flex justify-center md:justify-end">
+    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
+      <!-- Use picsum for placeholder -->
+      <img src="https://picsum.photos/320/320" data-ai-hint="professional portrait developer" alt="John Doe" class="absolute inset-0 w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
