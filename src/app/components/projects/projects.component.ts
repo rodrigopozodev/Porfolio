@@ -25,12 +25,12 @@ export class ProjectsComponent {
     {
       title: "Plataforma E-commerce",
       description: "Una tienda online completa con carrito, proceso de pago e integración de pagos.",
-      image: "https://picsum.photos/384/192",
-      technologies: ["Angular", "Node.js", "MongoDB", "Stripe"],
-      frontendRepo: "https://github.com/rodrigopozodev/ZapasPro_Front", // Added frontend link
-      backendRepo: "https://github.com/rodrigopozodev/ZapasPro_Back", // Added backend link
-      demoLink: "https://zapaspro.netlify.app/", // Updated demo link
-      aiHint: "tienda online carrito compra"
+      image: "https://picsum.photos/384/192", // Placeholder image
+      technologies: ["Angular", "Node.js", "TypeScript", "Tailwind", "SQLite"], // Updated technologies
+      frontendRepo: "https://github.com/rodrigopozodev/ZapasPro_Front",
+      backendRepo: "https://github.com/rodrigopozodev/ZapasPro_Back",
+      demoLink: "https://zapaspro.netlify.app/",
+      aiHint: "screenshot zapaspro store" // Updated AI hint for image generation
     },
     {
       title: "App Gestión de Tareas",

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule, LucideAngularModule], // Add FormsModule here, removed CommonModule
+  imports: [CommonModule, FormsModule, LucideAngularModule],
   templateUrl: './contact.component.html',
 })
 export class ContactComponent {
