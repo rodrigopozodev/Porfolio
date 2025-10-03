@@ -4,13 +4,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes';
 import { importProvidersFrom } from '@angular/core';
-import { LucideAngularModule, Github, ExternalLink, Mail, Download, Send, Sun, Moon, Info, Linkedin } from 'lucide-angular'; // Added Github icon
+import { LucideAngularModule, Github, Mail, Download, Sun, Moon, Linkedin } from 'lucide-angular';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(appRoutes),
     provideHttpClient(),
-    importProvidersFrom(LucideAngularModule.pick({ Github, ExternalLink, Mail, Download, Send, Sun, Moon, Info, Linkedin })) // Added Github icon
+    importProvidersFrom(LucideAngularModule.pick({ Github, Mail, Download, Sun, Moon, Linkedin }))
   ]
 }).catch(err => console.error(err));
 

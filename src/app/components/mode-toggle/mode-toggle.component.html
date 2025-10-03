@@ -1,22 +1,50 @@
-<div class="relative" (document:click)="handleClickOutside($event)">
-  <button (click)="toggleDropdown()" class="btn btn-outline btn-icon">
-    <lucide-icon name="sun" class="h-[1.2rem] w-[1.2rem] transition-all" [class.dark:-rotate-90]="isDarkMode" [class.dark:scale-0]="isDarkMode" [class.rotate-0]="!isDarkMode" [class.scale-100]="!isDarkMode"></lucide-icon>
-    <lucide-icon name="moon" class="absolute h-[1.2rem] w-[1.2rem] transition-all" [class.dark:rotate-0]="isDarkMode" [class.dark:scale-100]="isDarkMode" [class.rotate-90]="!isDarkMode" [class.scale-0]="!isDarkMode"></lucide-icon>
-    <span class="sr-only">Toggle theme</span>
+<div class="relative">
+  <!-- Botón para abrir el panel de temas -->
+  <button #toggleBtn (click)="togglePanel()" class="btn btn-outline btn-icon" aria-label="Elegir tema">
+    <lucide-icon name="sun" class="h-[1.2rem] w-[1.2rem]"></lucide-icon>
   </button>
-  <div *ngIf="showDropdown"
-       class="dropdown-menu-content absolute right-0 mt-2 w-48 origin-top-right rounded-md shadow-lg"
-       @fadeInOut> <!-- Optional: Add animation -->
-    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-      <button (click)="setTheme('light')" class="dropdown-menu-item w-full text-left">
-        Light
-      </button>
-      <button (click)="setTheme('dark')" class="dropdown-menu-item w-full text-left">
-        Dark
-      </button>
-      <button (click)="setTheme('system')" class="dropdown-menu-item w-full text-left">
-        System
-      </button>
+
+  <!-- Panel de temas fijo en la parte superior que empuja el contenido hacia abajo -->
+  <div *ngIf="showPanel" class="fixed inset-x-0 top-0 z-50" #panelRef>
+    <div class="relative bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/75 border-b shadow-sm">
+      <div class="container mx-auto px-4">
+        <!-- Cabecera alta con título centrado -->
+        <div class="relative py-4">
+          <div class="flex items-center justify-center">
+            <span class="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Select Theme</span>
+          </div>
+          <button (click)="closePanel()" class="absolute right-0 top-1/2 -translate-y-1/2 btn btn-ghost w-12 h-12 text-3xl leading-none" aria-label="Cerrar selector de temas">×</button>
+        </div>
+
+        <nav class="w-full">
+          <div class="pb-3">
+            <div class="flex gap-3 overflow-x-auto pb-3">
+              <button
+                *ngFor="let t of themes"
+                #themeBtn
+                [attr.data-theme]="t"
+                (click)="setTheme(t, $event)"
+                class="group w-[100px] flex flex-col items-center gap-1 rounded-lg border px-2 py-2 hover:bg-accent/10"
+              >
+                <span class="text-xs font-medium capitalize whitespace-pre-line leading-tight text-center w-full">
+                  {{ t === 'cotton-candy' ? 'cotton\ncandy' : t.replace('-', ' ') }}
+                </span>
+                <div class="flex items-center gap-0">
+                  <span *ngFor="let c of [getPalette(t).accent, getPalette(t).secondary, getPalette(t).surface, getPalette(t).text, getPalette(t).background]; let i = index"
+                        class="h-5 w-5 rounded-full"
+                        [ngClass]="{'-ml-1': i > 0}"
+                        [style.backgroundColor]="c"></span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <!-- Triángulo indicador del tema activo, apuntando hacia arriba y encima de la línea -->
+        <div class="pointer-events-none absolute bottom-0 left-0"
+             [style.left.px]="arrowLeft"
+             style="width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:12px solid;transform: translateX(-50%);"
+             [style.borderBottomColor]="'hsl(var(--accent))'"></div>
+      </div>
     </div>
   </div>
 </div>

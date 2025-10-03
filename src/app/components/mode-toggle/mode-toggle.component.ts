@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, ElementRef, ViewChild, ViewChildren, QueryList, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { ThemeService, Theme } from '@/services/theme.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-mode-toggle',
@@ -10,36 +11,80 @@ import { ThemeService, Theme } from '@/services/theme.service';
   templateUrl: './mode-toggle.component.html',
 })
 export class ModeToggleComponent implements OnInit {
-  showDropdown = false;
-  currentTheme: Theme = 'system';
-  isDarkMode: boolean = false;
+  showPanel = false;
+  currentTheme: Theme = 'cotton-candy';
+  arrowLeft = 0;
+  @ViewChild('panelRef') panelRef?: ElementRef<HTMLDivElement>;
+  @ViewChildren('themeBtn') themeBtns?: QueryList<ElementRef<HTMLButtonElement>>;
+  @ViewChild('toggleBtn') toggleBtn?: ElementRef<HTMLButtonElement>;
+  // Mostrar solo dos temas por ahora
+  themes: Theme[] = [
+    'cotton-candy',
+    'choco-mountain'
+  ];
 
 
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: ThemeService, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
     this.currentTheme = this.themeService.getTheme();
-    this.isDarkMode = this.themeService.isDarkMode();
-    // Consider subscribing to theme changes if needed for dynamic updates
   }
 
-  toggleDropdown() {
-    this.showDropdown = !this.showDropdown;
+  togglePanel() {
+    this.showPanel = !this.showPanel;
+    if (this.showPanel) {
+      // Defer to next tick to measure panel height
+      setTimeout(() => {
+        const root = this.document.documentElement;
+        const h = this.panelRef?.nativeElement?.offsetHeight ?? 72; // altura de fallback
+        root.style.setProperty('--theme-panel-offset', `${h}px`);
+
+        // Position arrow under the current theme button
+        let btnEl = this.themeBtns?.find(ref => (ref.nativeElement.dataset['theme'] === this.currentTheme))?.nativeElement;
+        if (!btnEl) btnEl = this.themeBtns?.first?.nativeElement; // fallback a la primera tarjeta visible
+        if (btnEl && this.panelRef) {
+          const btnRect = btnEl.getBoundingClientRect();
+          const panelRect = this.panelRef.nativeElement.getBoundingClientRect();
+          this.arrowLeft = btnRect.left - panelRect.left + btnRect.width / 2;
+        }
+      });
+    } else {
+      const root = this.document.documentElement;
+      root.style.setProperty('--theme-panel-offset', '0px');
+    }
   }
 
-  setTheme(theme: Theme) {
+  closePanel() {
+    this.showPanel = false;
+    const root = this.document.documentElement;
+    root.style.setProperty('--theme-panel-offset', '0px');
+  }
+
+  setTheme(theme: Theme, ev?: MouseEvent) {
     this.themeService.setTheme(theme);
     this.currentTheme = theme;
-    this.isDarkMode = this.themeService.isDarkMode();
-    this.showDropdown = false; // Close dropdown after selection
+    // Reposition arrow to selected theme
+    if (ev && this.panelRef) {
+      const target = ev.currentTarget as HTMLElement;
+      const btnRect = target.getBoundingClientRect();
+      const panelRect = this.panelRef.nativeElement.getBoundingClientRect();
+      this.arrowLeft = btnRect.left - panelRect.left + btnRect.width / 2;
+    }
   }
 
-  // Helper to close dropdown when clicking outside
-  handleClickOutside(event: MouseEvent) {
-    // Basic implementation, might need refinement based on specific dropdown structure
-    const target = event.target as HTMLElement;
-    if (!target.closest('.relative')) { // Adjust selector if needed
-      this.showDropdown = false;
-    }
+  getPalette(theme: Theme) {
+    return this.themeService.getPalette(theme);
+  }
+
+  // Cerrar al hacer clic fuera del panel o fuera del botón
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(ev: MouseEvent) {
+    if (!this.showPanel) return;
+    const target = ev.target as Node;
+    const panelEl = this.panelRef?.nativeElement;
+    const toggleEl = this.toggleBtn?.nativeElement;
+    if (panelEl && panelEl.contains(target)) return;
+    if (toggleEl && toggleEl.contains(target)) return;
+    this.closePanel();
   }
 }
