@@ -1,14 +1,16 @@
 import { Component, Inject, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
+import { ContactModalComponent } from '@/components/contact/contact-modal.component';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [LucideAngularModule], // Added Linkedin
+  imports: [LucideAngularModule, ContactModalComponent], // Añadido modal de contacto
   templateUrl: './hero.component.html',
 })
 export class HeroComponent {
+  isContactOpen = false;
 
   constructor(
     private renderer: Renderer2,
@@ -16,10 +18,8 @@ export class HeroComponent {
   ) {}
 
   scrollToContact() {
-    const contactSection = this.document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Abrir modal de contacto en lugar de scroll
+    this.isContactOpen = true;
   }
 
   downloadCV() {
