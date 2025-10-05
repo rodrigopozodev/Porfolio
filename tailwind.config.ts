@@ -41,6 +41,8 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))', // Often matches accent or primary
+        // Explicit hover color for accent/primary actions
+        'accent-hover': 'hsl(var(--accent-hover))',
       },
       borderRadius: {
         lg: 'var(--radius)',

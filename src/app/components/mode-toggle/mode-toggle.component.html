@@ -26,8 +26,8 @@
                 (click)="setTheme(t, $event)"
                 class="group w-[100px] flex flex-col items-center gap-1 rounded-lg border px-2 py-2 hover:bg-accent/10"
               >
-                <span class="text-xs font-medium capitalize whitespace-pre-line leading-tight text-center w-full">
-                  {{ t === 'cotton-candy' ? 'cotton\ncandy' : t.replace('-', ' ') }}
+                <span class="text-xs font-medium whitespace-pre-line leading-tight text-center w-full">
+                  {{ t }}
                 </span>
                 <div class="flex items-center gap-0">
                   <span *ngFor="let c of [getPalette(t).accent, getPalette(t).secondary, getPalette(t).surface, getPalette(t).text, getPalette(t).background]; let i = index"

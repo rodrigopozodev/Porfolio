@@ -12,15 +12,21 @@ import { DOCUMENT } from '@angular/common';
 })
 export class ModeToggleComponent implements OnInit {
   showPanel = false;
-  currentTheme: Theme = 'cotton-candy';
+  currentTheme: Theme = 'Tema Claro Minimalista';
   arrowLeft = 0;
   @ViewChild('panelRef') panelRef?: ElementRef<HTMLDivElement>;
   @ViewChildren('themeBtn') themeBtns?: QueryList<ElementRef<HTMLButtonElement>>;
   @ViewChild('toggleBtn') toggleBtn?: ElementRef<HTMLButtonElement>;
-  // Mostrar solo dos temas por ahora
+  // Lista de temas disponibles
   themes: Theme[] = [
-    'cotton-candy',
-    'choco-mountain'
+    'Tema Claro Minimalista',
+    'Tema Oscuro Futurista',
+    'Tema Profesional Corporativo',
+    'Tema Natural (verde y tierra)',
+    'Tema Creativo Vibrante',
+    'Tema Nocturno Elegante',
+    'Tema Azul Tecnológico',
+    'Tema Arena Sofisticado'
   ];
 
 

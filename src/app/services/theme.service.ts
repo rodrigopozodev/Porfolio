@@ -2,84 +2,84 @@ import { Injectable, Inject, PLATFORM_ID, Renderer2, RendererFactory2 } from '@a
 import { isPlatformBrowser } from '@angular/common';
 
 export type Theme =
-  | 'rainbow-road'
-  | 'cotton-candy'
-  | 'choco-mountain'
-  | 'bubblegum-pop'
-  | 'lobster-life'
-  | 'yoshi-valley'
-  | 'pixel-retro'
-  | 'arcade-glow';
+  | 'Tema Claro Minimalista'
+  | 'Tema Oscuro Futurista'
+  | 'Tema Profesional Corporativo'
+  | 'Tema Natural (verde y tierra)'
+  | 'Tema Creativo Vibrante'
+  | 'Tema Nocturno Elegante'
+  | 'Tema Azul Tecnológico'
+  | 'Tema Arena Sofisticado';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
   private renderer: Renderer2;
-  private currentTheme: Theme = 'rainbow-road';
+  private currentTheme: Theme = 'Tema Claro Minimalista';
   private isBrowser: boolean;
   private palettes: Record<Theme, {
     background: string;
-    surface: string;
-    text: string;
-    accent: string;
-    secondary: string;
+    textPrimary: string;
+    textSecondary: string;
+    button: string;
+    hover: string;
   }> = {
-    'rainbow-road': {
-      background: '#0f1226',
-      surface: '#1a1f3b',
-      text: '#ffffff',
-      accent: '#ff6b6b',
-      secondary: '#4dd2ff'
+    'Tema Claro Minimalista': {
+      background: '#F9FAFB',
+      textPrimary: '#1F2937',
+      textSecondary: '#6B7280',
+      button: '#2563EB',
+      hover: '#1D4ED8'
     },
-    'cotton-candy': {
-      background: '#FFF0F6',
-      surface: '#FFE4EC',
-      text: '#333333',
-      accent: '#FF80B5',
-      secondary: '#A7D8FF'
+    'Tema Oscuro Futurista': {
+      background: '#0F172A',
+      textPrimary: '#E2E8F0',
+      textSecondary: '#94A3B8',
+      button: '#6366F1',
+      hover: '#4F46E5'
     },
-    'choco-mountain': {
-      background: '#221714',
-      surface: '#3a2721',
-      text: '#f3e9e5',
-      accent: '#7b3f00',
-      secondary: '#c58940'
+    'Tema Profesional Corporativo': {
+      background: '#FFFFFF',
+      textPrimary: '#111827',
+      textSecondary: '#6B7280',
+      button: '#2563EB',
+      hover: '#1E40AF'
     },
-    'bubblegum-pop': {
-      background: '#0b0f1a',
-      surface: '#121826',
-      text: '#eaf0ff',
-      accent: '#ff5ea2',
-      secondary: '#7c4dff'
+    'Tema Natural (verde y tierra)': {
+      background: '#F3F4E9',
+      textPrimary: '#1E3A34',
+      textSecondary: '#4B5563',
+      button: '#4ADE80',
+      hover: '#22C55E'
     },
-    'lobster-life': {
-      background: '#0f1416',
-      surface: '#1a2224',
-      text: '#f7f9fa',
-      accent: '#e63946',
-      secondary: '#457b9d'
+    'Tema Creativo Vibrante': {
+      background: '#FDF2F8',
+      textPrimary: '#831843',
+      textSecondary: '#9D174D',
+      button: '#EC4899',
+      hover: '#DB2777'
     },
-    'yoshi-valley': {
-      background: '#0d1f17',
-      surface: '#153327',
-      text: '#e8fff4',
-      accent: '#2ecc71',
-      secondary: '#f1c40f'
+    'Tema Nocturno Elegante': {
+      background: '#1A1A1A',
+      textPrimary: '#F5F5F5',
+      textSecondary: '#A3A3A3',
+      button: '#9333EA',
+      hover: '#7E22CE'
     },
-    'pixel-retro': {
-      background: '#101010',
-      surface: '#1f1f1f',
-      text: '#f5f5f5',
-      accent: '#ffcc00',
-      secondary: '#00e5ff'
+    'Tema Azul Tecnológico': {
+      background: '#E0F2FE',
+      textPrimary: '#0C4A6E',
+      textSecondary: '#0369A1',
+      button: '#0284C7',
+      hover: '#0369A1'
     },
-    'arcade-glow': {
-      background: '#0a0f1f',
-      surface: '#121a2e',
-      text: '#e6f7ff',
-      accent: '#00ffa3',
-      secondary: '#7df9ff'
+    'Tema Arena Sofisticado': {
+      background: '#FAF3E0',
+      textPrimary: '#3E2723',
+      textSecondary: '#6D4C41',
+      button: '#D7CCC8',
+      hover: '#BCAAA4'
     }
   };
 
@@ -93,12 +93,20 @@ export class ThemeService {
 
   loadTheme() {
     if (!this.isBrowser) return;
-    const storedTheme = localStorage.getItem('theme') as Theme | null;
-    this.setTheme(storedTheme ?? this.currentTheme);
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme && (storedTheme in this.palettes)) {
+      this.setTheme(storedTheme as Theme);
+    } else {
+      this.setTheme(this.currentTheme);
+    }
   }
 
   setTheme(theme: Theme) {
     if (!this.isBrowser) return;
+    // Validate theme exists; fallback to default if invalid
+    if (!(theme in this.palettes)) {
+      theme = this.currentTheme;
+    }
     this.currentTheme = theme;
     localStorage.setItem('theme', theme);
     this.applyTheme();
@@ -115,26 +123,31 @@ export class ThemeService {
 
     const toHsl = (hex: string) => this.hexToHslString(hex);
 
-    // Core roles
+    // Core roles (map nuevas claves)
     this.setVar(root, '--background', toHsl(palette.background));
-    this.setVar(root, '--foreground', toHsl(palette.text));
-    this.setVar(root, '--accent', toHsl(palette.accent));
-    this.setVar(root, '--accent-foreground', toHsl(this.bestForeground(palette.accent)));
-    this.setVar(root, '--secondary', toHsl(palette.secondary));
-    this.setVar(root, '--secondary-foreground', toHsl(this.bestForeground(palette.secondary)));
+    this.setVar(root, '--foreground', toHsl(palette.textPrimary));
+    this.setVar(root, '--muted-foreground', toHsl(palette.textSecondary));
+    // Botón principal como accent/primary
+    this.setVar(root, '--accent', toHsl(palette.button));
+    this.setVar(root, '--accent-foreground', toHsl(this.bestForeground(palette.button)));
+    // Hover explícito
+    this.setVar(root, '--accent-hover', toHsl(palette.hover));
 
-    // Derived roles
-    this.setVar(root, '--card', toHsl(palette.surface));
-    this.setVar(root, '--card-foreground', toHsl(palette.text));
-    this.setVar(root, '--popover', toHsl(palette.surface));
-    this.setVar(root, '--popover-foreground', toHsl(palette.text));
-    this.setVar(root, '--muted', toHsl(this.mixHex(palette.surface, palette.text, 0.15)));
-    this.setVar(root, '--muted-foreground', toHsl(this.mixHex(palette.text, palette.surface, 0.2)));
+    // Derivados para fondos secundarios y superficies
+    const surfaceHex = this.mixHex(palette.background, palette.textPrimary, 0.08);
+    const secondaryHex = this.mixHex(palette.background, palette.button, 0.15);
+    this.setVar(root, '--secondary', toHsl(secondaryHex));
+    this.setVar(root, '--secondary-foreground', toHsl(this.bestForeground(secondaryHex)));
+    this.setVar(root, '--card', toHsl(surfaceHex));
+    this.setVar(root, '--card-foreground', toHsl(palette.textPrimary));
+    this.setVar(root, '--popover', toHsl(surfaceHex));
+    this.setVar(root, '--popover-foreground', toHsl(palette.textPrimary));
+    this.setVar(root, '--muted', toHsl(this.mixHex(surfaceHex, palette.textPrimary, 0.15)));
     this.setVar(root, '--destructive', toHsl('#ff3b30'));
     this.setVar(root, '--destructive-foreground', toHsl('#ffffff'));
-    this.setVar(root, '--border', toHsl(this.mixHex(palette.surface, palette.text, 0.3)));
-    this.setVar(root, '--input', toHsl(this.mixHex(palette.surface, palette.text, 0.25)));
-    this.setVar(root, '--ring', toHsl(palette.accent));
+    this.setVar(root, '--border', toHsl(this.mixHex(surfaceHex, palette.textPrimary, 0.3)));
+    this.setVar(root, '--input', toHsl(this.mixHex(surfaceHex, palette.textPrimary, 0.25)));
+    this.setVar(root, '--ring', toHsl(palette.button));
     this.setVar(root, '--radius', '0.5rem');
   }
 
@@ -187,8 +200,17 @@ export class ThemeService {
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
   }
 
-  // Expose palette for preview UI
+  // Expose palette for preview UI (adaptado a nuevas claves)
   getPalette(theme: Theme) {
-    return this.palettes[theme];
+    const p = this.palettes[theme];
+    const surface = this.mixHex(p.background, p.textPrimary, 0.08);
+    const secondary = this.mixHex(p.background, p.button, 0.15);
+    return {
+      background: p.background,
+      text: p.textPrimary,
+      accent: p.button,
+      secondary,
+      surface
+    };
   }
 }
