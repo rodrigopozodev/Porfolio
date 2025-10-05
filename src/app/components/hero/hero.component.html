@@ -1,11 +1,14 @@
-<section class="container mx-auto py-20 px-4 flex flex-col md:flex-row items-center justify-between gap-10">
-  <div class="flex-1 space-y-6">
-    <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Hola, soy Rodrigo Pozo Sánchez</h1>
-    <p class="text-xl md:text-2xl text-muted-foreground">Desarrollador Web | JavaScript, Angular, Python</p>
-    <p class="text-lg max-w-md text-muted-foreground">
-      Construyo aplicaciones web responsivas y fáciles de usar con tecnologías modernas.
+<section class="container mx-auto py-24 px-4">
+  <div class="space-y-6 max-w-5xl">
+    <p class="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Hola, mi nombre es Rodrigo</p>
+    <h1 class="font-extrabold text-5xl md:text-7xl leading-[0.95] text-foreground">Construyo sitios web.</h1>
+    <p class="text-xl md:text-2xl text-muted-foreground">
+      Soy desarrollador front‑end y back‑end. Trabajo con
+      <span class="px-1 rounded bg-accent/20">JavaScript</span>,
+      <span class="px-1 rounded bg-accent/20">Angular</span>
+      y <span class="px-1 rounded bg-accent/20">Python</span>.
     </p>
-    <div class="flex flex-wrap gap-4 pt-4 items-center"> <!-- Added items-center -->
+    <div class="flex flex-wrap gap-4 pt-6 items-center">
       <button class="btn btn-default" (click)="downloadCV()">
         <lucide-icon name="download" size="18"></lucide-icon>
         Descargar CV
@@ -14,7 +17,6 @@
         <lucide-icon name="mail" size="18"></lucide-icon>
         Contactarme
       </button>
-       <!-- Added GitHub and LinkedIn icons -->
       <a href="https://github.com/rodrigopozodev" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
         <lucide-icon name="github" size="20"></lucide-icon>
         <span class="sr-only">GitHub</span>
@@ -24,12 +26,6 @@
         <span class="sr-only">LinkedIn</span>
       </a>
     </div>
-  </div>
-  <div class="flex-1 flex justify-center md:justify-end">
-    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary/20">
-      <!-- Use the provided image -->
-      <img src="assets/images/profile.jpeg" alt="Perfil" class="w-full h-full object-cover" />
-        </div>
   </div>
   <!-- Modal de contacto -->
   <app-contact-modal [open]="isContactOpen" (close)="isContactOpen=false"></app-contact-modal>
