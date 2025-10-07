@@ -1,0 +1,4 @@
+<button (click)="toggle()" class="btn btn-outline btn-icon" [attr.aria-label]="'language.toggleAria' | t">
+  <lucide-icon name="languages" class="h-[1.2rem] w-[1.2rem]"></lucide-icon>
+  <span class="sr-only">{{ 'language.srLabel' | t: { code: (current | uppercase) } }}</span>
+</button>

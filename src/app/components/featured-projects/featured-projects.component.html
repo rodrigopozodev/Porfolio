@@ -1,0 +1,56 @@
+<section class="container mx-auto px-4 pb-16">
+  <div class="flex items-baseline justify-between mb-6">
+    <h2 class="text-3xl font-bold">{{ 'home.featuredTitle' | t }}</h2>
+    <a routerLink="/proyectos" class="text-primary font-medium flex items-center gap-1 hover:underline">
+      {{ 'home.seeAllProjects' | t }}
+      <span aria-hidden>→</span>
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <ng-container *ngFor="let item of items | slice:0:8">
+      <!-- Enlace externo si tiene URL -->
+      <a *ngIf="item.url; else internalCard"
+         [href]="item.url"
+         target="_blank" rel="noopener noreferrer"
+         class="relative rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden group">
+        <!-- Imagen del proyecto como background para evitar roturas si no existe aún -->
+        <div class="h-40 sm:h-52 w-full group-hover:brightness-95 transition bg-cover bg-center"
+             [ngStyle]="{ 'background-image': item.image ? 'url(' + item.image + ')' : 'none' }"
+             [ngClass]="{ 'bg-muted': !item.image }"></div>
+        <!-- Título siempre visible -->
+        <div class="absolute inset-0 p-4 flex items-start">
+          <h3 class="text-xl font-semibold drop-shadow-sm">{{ item.title }}</h3>
+        </div>
+        <!-- Overlay de descripción al hacer hover -->
+        <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+          <div class="absolute inset-0 p-4 flex flex-col justify-end">
+            <p class="text-sm text-white/90">{{ item.desc }}</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- Fallback: navega a /proyectos -->
+      <ng-template #internalCard>
+        <a routerLink="/proyectos" class="relative rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden group">
+          <!-- Imagen del proyecto como background para evitar roturas si no existe aún -->
+          <div class="h-40 sm:h-52 w-full group-hover:brightness-95 transition bg-cover bg-center"
+               [ngStyle]="{ 'background-image': item.image ? 'url(' + item.image + ')' : 'none' }"
+               [ngClass]="{ 'bg-muted': !item.image }"></div>
+          <!-- Título siempre visible -->
+          <div class="absolute inset-0 p-4 flex items-start">
+            <h3 class="text-xl font-semibold drop-shadow-sm">{{ item.title }}</h3>
+          </div>
+          <!-- Overlay de descripción al hacer hover (si existiera) -->
+          <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+            <div class="absolute inset-0 p-4 flex flex-col justify-end">
+              <p class="text-sm text-white/90">{{ item.desc }}</p>
+            </div>
+          </div>
+        </a>
+      </ng-template>
+    </ng-container>
+  </div>
+</section>

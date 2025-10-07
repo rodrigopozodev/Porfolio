@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from '@/pipes/translate.pipe';
 import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-contact-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslatePipe],
   templateUrl: './contact-modal.component.html',
 })
 export class ContactModalComponent {
@@ -57,8 +58,8 @@ export class ContactModalComponent {
         }, 1200);
       } else {
         this.errorMsg = res.message || 'No se pudo enviar el mensaje.';
-      }
-    } catch (e) {
+    }
+  } catch (e) {
       this.errorMsg = 'Error de red al enviar el mensaje.';
     } finally {
       this.sending = false;

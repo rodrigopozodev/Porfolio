@@ -1,9 +1,27 @@
 <header class="container mx-auto px-4">
   <div class="py-4 flex justify-between items-center">
-    <div class="flex items-center gap-3">
-      <img src="assets/images/profile.jpeg" alt="Foto de Rodrigo Pozo Sánchez" class="w-10 h-10 rounded-full object-cover" />
-      <h1 class="text-xl font-bold">Rodrigo Pozo Sánchez</h1>
+    <!-- Nombre y foto como botón que lleva a Inicio -->
+    <a routerLink="/inicio" class="px-2 flex items-center gap-3">
+      <img src="assets/images/profile.jpeg" [attr.alt]="'header.photoAlt' | t: { name: 'Rodrigo Pozo Sánchez' }" class="w-10 h-10 rounded-full object-cover" />
+      <h1 class="text-xl font-bold text-foreground hover:text-[hsl(var(--accent))] transition-colors">Rodrigo Pozo Sánchez</h1>
+    </a>
+    <!-- Navegación -->
+    <nav class="hidden md:flex items-center gap-6">
+      <a routerLink="/inicio" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" [ngClass]="{
+        'text-foreground': isHomeActive(),
+        'font-semibold': isHomeActive(),
+        'underline': isHomeActive(),
+        'decoration-[hsl(var(--link))]': isHomeActive(),
+        'decoration-2': isHomeActive(),
+        'underline-offset-4': isHomeActive()
+      }" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.home' | t }}</a>
+      <a routerLink="/sobre-mi" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.about' | t }}</a>
+      <a routerLink="/tecnologias" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.tech' | t }}</a>
+      <a routerLink="/proyectos" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.projects' | t }}</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <app-language-toggle></app-language-toggle>
+      <app-mode-toggle></app-mode-toggle>
     </div>
-    <app-mode-toggle></app-mode-toggle>
   </div>
 </header>

@@ -1,7 +1,7 @@
 <div class="relative">
   <!-- Botón para abrir el panel de temas -->
-  <button #toggleBtn (click)="togglePanel()" class="btn btn-outline btn-icon" aria-label="Elegir tema">
-    <lucide-icon name="sun" class="h-[1.2rem] w-[1.2rem]"></lucide-icon>
+  <button #toggleBtn (click)="togglePanel()" class="btn btn-outline btn-icon" [attr.aria-label]="'theme.selectAria' | t">
+    <lucide-icon name="paint-roller" class="h-[1.2rem] w-[1.2rem]"></lucide-icon>
   </button>
 
   <!-- Panel de temas fijo en la parte superior que empuja el contenido hacia abajo -->
@@ -11,29 +11,29 @@
         <!-- Cabecera alta con título centrado -->
         <div class="relative py-4">
           <div class="flex items-center justify-center">
-            <span class="text-xs font-semibold tracking-wide text-muted-foreground uppercase">Select Theme</span>
+            <span class="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{{ 'theme.panelTitle' | t }}</span>
           </div>
-          <button (click)="closePanel()" class="absolute right-0 top-1/2 -translate-y-1/2 btn btn-ghost w-12 h-12 text-3xl leading-none" aria-label="Cerrar selector de temas">×</button>
+          <button (click)="closePanel()" class="absolute right-2 top-2 btn btn-ghost w-8 h-8 text-xl leading-none" [attr.aria-label]="'theme.closeAria' | t">×</button>
         </div>
 
         <nav class="w-full">
           <div class="pb-3">
-            <div class="flex gap-3 overflow-x-auto pb-3">
+            <div class="flex gap-4 overflow-x-auto pb-3 justify-center">
               <button
                 *ngFor="let t of themes"
                 #themeBtn
                 [attr.data-theme]="t"
                 (click)="setTheme(t, $event)"
-                class="group w-[100px] flex flex-col items-center gap-1 rounded-lg border px-2 py-2 hover:bg-accent/10"
+                class="group w-[128px] h-[88px] flex flex-col justify-between items-center gap-1 rounded-lg border px-3 py-2 hover:bg-accent/10"
               >
-                <span class="text-xs font-medium whitespace-pre-line leading-tight text-center w-full">
-                  {{ t }}
+                <span class="text-xs font-medium whitespace-pre-line leading-tight text-center w-full min-h-[32px]">
+                  {{ t | t }}
                 </span>
-                <div class="flex items-center gap-0">
+                <div class="flex items-center gap-0 pb-1">
                   <span *ngFor="let c of [getPalette(t).accent, getPalette(t).secondary, getPalette(t).surface, getPalette(t).text, getPalette(t).background]; let i = index"
-                        class="h-5 w-5 rounded-full"
-                        [ngClass]="{'-ml-1': i > 0}"
-                        [style.backgroundColor]="c"></span>
+                          class="h-5 w-5 rounded-full"
+                          [ngClass]="{'-ml-1': i > 0}"
+                          [style.backgroundColor]="c"></span>
                 </div>
               </button>
             </div>

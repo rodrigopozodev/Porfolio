@@ -2,11 +2,13 @@ import { Component, Inject, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { ContactModalComponent } from '@/components/contact/contact-modal.component';
+import { FeaturedProjectsComponent } from '@/components/featured-projects/featured-projects.component';
+import { TranslatePipe } from '@/pipes/translate.pipe';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [LucideAngularModule, ContactModalComponent], // Añadido modal de contacto
+  imports: [LucideAngularModule, ContactModalComponent, TranslatePipe, FeaturedProjectsComponent], // Añadido modal de contacto, pipe y sección de destacados
   templateUrl: './hero.component.html',
 })
 export class HeroComponent {

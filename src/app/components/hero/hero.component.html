@@ -1,9 +1,9 @@
 <section class="container mx-auto py-24 px-4">
   <div class="space-y-6 max-w-5xl">
-    <p class="text-xs font-semibold tracking-widest uppercase text-muted-foreground">Hola, mi nombre es Rodrigo</p>
-    <h1 class="font-extrabold text-5xl md:text-7xl leading-[0.95] text-foreground">Construyo sitios web.</h1>
+    <p class="text-xs font-semibold tracking-widest uppercase text-muted-foreground">{{ 'hero.greeting' | t: { name: 'Rodrigo' } }}</p>
+    <h1 class="font-extrabold text-5xl md:text-7xl leading-[0.95] text-foreground">{{ 'hero.title' | t }}</h1>
     <p class="text-xl md:text-2xl text-muted-foreground">
-      Soy desarrollador front‑end y back‑end. Trabajo con
+      {{ 'hero.workWith' | t }}
       <span class="px-1 rounded bg-accent/20">JavaScript</span>,
       <span class="px-1 rounded bg-accent/20">Angular</span>
       y <span class="px-1 rounded bg-accent/20">Python</span>.
@@ -11,11 +11,11 @@
     <div class="flex flex-wrap gap-4 pt-6 items-center">
       <button class="btn btn-default" (click)="downloadCV()">
         <lucide-icon name="download" size="18"></lucide-icon>
-        Descargar CV
+        {{ 'hero.downloadCV' | t }}
       </button>
       <button class="btn btn-outline" (click)="scrollToContact()">
         <lucide-icon name="mail" size="18"></lucide-icon>
-        Contactarme
+        {{ 'hero.contactMe' | t }}
       </button>
       <a href="https://github.com/rodrigopozodev" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
         <lucide-icon name="github" size="20"></lucide-icon>
@@ -30,5 +30,8 @@
   <!-- Modal de contacto -->
   <app-contact-modal [open]="isContactOpen" (close)="isContactOpen=false"></app-contact-modal>
 </section>
+
+<!-- Featured Projects under hero -->
+<app-featured-projects></app-featured-projects>
 
 

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { ThemeService, Theme } from '@/services/theme.service';
 import { DOCUMENT } from '@angular/common';
+import { TranslatePipe } from '@/pipes/translate.pipe';
 
 @Component({
   selector: 'app-mode-toggle',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, TranslatePipe],
   templateUrl: './mode-toggle.component.html',
 })
 export class ModeToggleComponent implements OnInit {

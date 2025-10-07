@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { ThemeService } from './services/theme.service';
+import { LanguageService } from './services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private themeService: ThemeService,
+    private languageService: LanguageService,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
@@ -30,6 +32,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if (this.isBrowser) {
       this.themeService.loadTheme();
+      this.languageService.loadLanguage();
     }
   }
 }

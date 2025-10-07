@@ -5,38 +5,38 @@
   <div class="absolute inset-0 flex items-center justify-center p-4">
     <div class="card w-full max-w-md">
       <div class="card-header">
-        <h2 class="card-title">Contactarme</h2>
-        <p class="card-description">Envíame un mensaje por correo.</p>
+        <h2 class="card-title">{{ 'contact.title' | t }}</h2>
+        <p class="card-description">{{ 'contact.desc' | t }}</p>
       </div>
       <div class="card-content space-y-4">
         <div>
-          <label class="label" for="name">Nombre</label>
-          <input id="name" type="text" class="input" [(ngModel)]="name" placeholder="Tu nombre" />
+          <label class="label" for="name">{{ 'contact.name' | t }}</label>
+          <input id="name" type="text" class="input" [(ngModel)]="name" [attr.placeholder]="'contact.namePlaceholder' | t" />
         </div>
         <div>
-          <label class="label" for="email">Email</label>
-          <input id="email" type="email" class="input" [(ngModel)]="email" placeholder="tu@email.com" />
+          <label class="label" for="email">{{ 'contact.email' | t }}</label>
+          <input id="email" type="email" class="input" [(ngModel)]="email" [attr.placeholder]="'contact.emailPlaceholder' | t" />
         </div>
         <div>
-          <label class="label" for="subject">Asunto (opcional)</label>
-          <input id="subject" type="text" class="input" [(ngModel)]="subject" placeholder="Motivo del contacto" />
+          <label class="label" for="subject">{{ 'contact.subjectOptional' | t }}</label>
+          <input id="subject" type="text" class="input" [(ngModel)]="subject" [attr.placeholder]="'contact.subjectPlaceholder' | t" />
         </div>
         <div>
-          <label class="label" for="message">Mensaje</label>
-          <textarea id="message" class="textarea" rows="4" [(ngModel)]="message" placeholder="Escribe tu mensaje..."></textarea>
+          <label class="label" for="message">{{ 'contact.message' | t }}</label>
+          <textarea id="message" class="textarea" rows="4" [(ngModel)]="message" [attr.placeholder]="'contact.messagePlaceholder' | t"></textarea>
         </div>
         <div *ngIf="errorMsg" class="text-sm rounded-md border px-3 py-2 bg-red-500/10 text-foreground border-red-600/40">
-          {{ errorMsg }}
+          {{ errorMsg | t }}
         </div>
         <div *ngIf="successMsg" class="text-sm rounded-md border px-3 py-2 bg-emerald-500/10 text-foreground border-emerald-600/40">
-          {{ successMsg }}
+          {{ successMsg | t }}
         </div>
       </div>
       <div class="card-footer justify-end gap-2">
-        <button class="btn btn-ghost" (click)="handleClose()" [disabled]="sending">Cancelar</button>
+        <button class="btn btn-ghost" (click)="handleClose()" [disabled]="sending">{{ 'contact.cancel' | t }}</button>
         <button class="btn btn-default" (click)="submit()" [disabled]="sending">
-          <span *ngIf="!sending">Enviar</span>
-          <span *ngIf="sending">Enviando…</span>
+          <span *ngIf="!sending">{{ 'contact.send' | t }}</span>
+          <span *ngIf="sending">{{ 'contact.sending' | t }}</span>
         </button>
       </div>
     </div>
