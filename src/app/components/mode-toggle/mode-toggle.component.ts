@@ -26,7 +26,7 @@ export class ModeToggleComponent implements OnInit {
     'Tema Natural (verde y tierra)',
     'Tema Creativo Vibrante',
     'Tema Nocturno Elegante',
-    'Tema Azul Tecnológico',
+    'Tema Azul',
     'Tema Arena Sofisticado'
   ];
 

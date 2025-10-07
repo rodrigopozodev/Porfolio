@@ -57,7 +57,7 @@ export class I18nService {
     'Tema Natural (verde y tierra)': 'Tema Natural (verde y tierra)',
     'Tema Creativo Vibrante': 'Tema Creativo Vibrante',
     'Tema Nocturno Elegante': 'Tema Nocturno Elegante',
-    'Tema Azul Tecnológico': 'Tema Azul Tecnológico',
+    'Tema Azul': 'Tema Azul',
     'Tema Arena Sofisticado': 'Tema Arena Sofisticado',
 
     // Language toggle
@@ -124,7 +124,7 @@ export class I18nService {
     'Tema Natural (verde y tierra)': 'Natural Theme (green and earth)',
     'Tema Creativo Vibrante': 'Creative Vibrant Theme',
     'Tema Nocturno Elegante': 'Elegant Night Theme',
-    'Tema Azul Tecnológico': 'Tech Blue Theme',
+    'Tema Azul': 'Blue Theme',
     'Tema Arena Sofisticado': 'Sophisticated Sand Theme',
 
     // Mensajes dinámicos del contacto (mapeo literal)

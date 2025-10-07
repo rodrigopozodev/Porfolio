@@ -8,7 +8,7 @@ export type Theme =
   | 'Tema Natural (verde y tierra)'
   | 'Tema Creativo Vibrante'
   | 'Tema Nocturno Elegante'
-  | 'Tema Azul Tecnológico'
+  | 'Tema Azul'
   | 'Tema Arena Sofisticado';
 
 @Injectable({
@@ -67,7 +67,7 @@ export class ThemeService {
       button: '#9333EA',
       hover: '#7E22CE'
     },
-    'Tema Azul Tecnológico': {
+    'Tema Azul': {
       background: '#E0F2FE',
       textPrimary: '#0C4A6E',
       textSecondary: '#0369A1',
