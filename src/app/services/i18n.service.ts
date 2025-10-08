@@ -23,7 +23,7 @@ export class I18nService {
     // Hero
     'hero.greeting': 'Hola, mi nombre es {{name}}',
     'hero.title': 'Construyo sitios web.',
-    'hero.workWith': 'Soy desarrollador front‑end y back‑end. Trabajo con',
+    'hero.workWith': 'Soy desarrollador front‑end y back‑end.',
     'hero.downloadCV': 'Descargar CV',
     'hero.contactMe': 'Contactarme',
 
@@ -90,7 +90,7 @@ export class I18nService {
     // Hero
     'hero.greeting': 'Hello, my name is {{name}}',
     'hero.title': 'I build websites.',
-    "hero.workWith": "I'm a front‑end and back‑end developer. I work with",
+    "hero.workWith": "I'm a front‑end and back‑end developer.",
     'hero.downloadCV': 'Download CV',
     'hero.contactMe': 'Contact me',
 

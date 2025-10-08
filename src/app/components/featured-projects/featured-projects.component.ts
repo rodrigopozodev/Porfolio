@@ -12,6 +12,6 @@ import { TranslatePipe } from '@/pipes/translate.pipe';
 export class FeaturedProjectsComponent {
   // Lista de últimos proyectos (se limita a 8 en la plantilla)
   items = [
-    { title: 'ZapasPro', url: 'https://zapaspro.netlify.app', desc: 'E-commerce hecho con Angular y Node.', image: 'assets/images/ZapasPro.png' },
+    { title: '', url: 'https://zapaspro.netlify.app', desc: 'Desarrolado con Angular y Node.js con TypeScript. Permite explorar modelos de zapatillas, añadir productos al carrito y completar la compra. Incluye control de stock por tallas y colores, gestión de usuarios y almacenamiento de datos en SQLite.', image: 'assets/images/ZapasPro.png' },
   ];
 }
