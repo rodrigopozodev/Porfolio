@@ -26,11 +26,16 @@ export class ThemeService {
     hover: string;
   }> = {
     'Tema Claro Minimalista': {
-      background: '#F9FAFB',
-      textPrimary: '#1F2937',
-      textSecondary: '#6B7280',
-      button: '#2563EB',
-      hover: '#1D4ED8'
+      // Color 3: Blanco para el fondo
+      background: '#FFFFFF',
+      // Color 5: Texto importante gris más oscuro
+      textPrimary: '#3F3F46',
+      // Color 4: Texto normal gris
+      textSecondary: '#9CA3AF',
+      // Color 1: Rosa para marcos y subrayados (usado como accent/button)
+      button: '#F43F5E',
+      // Hover del rosa
+      hover: '#E11D48'
     },
     'Tema Oscuro Futurista': {
       background: '#0F172A',
@@ -133,6 +138,15 @@ export class ThemeService {
     // Hover explícito
     this.setVar(root, '--accent-hover', toHsl(palette.hover));
 
+    // Color de subrayado/link: en tema claro usa el verde (color 2), en el resto usa el accent
+    const isLightTheme = this.currentTheme === 'Tema Claro Minimalista';
+    const linkHex = isLightTheme ? '#2CB9A6' : palette.button; // Verde teal para claro
+    this.setVar(root, '--link', toHsl(linkHex));
+
+    // Cursores por tema (personalizables)
+    this.setVar(root, '--cursor-default', 'auto');
+    this.setVar(root, '--cursor-pointer', 'pointer');
+
     // Derivados para fondos secundarios y superficies
     const surfaceHex = this.mixHex(palette.background, palette.textPrimary, 0.08);
     const secondaryHex = this.mixHex(palette.background, palette.button, 0.15);
@@ -145,7 +159,9 @@ export class ThemeService {
     this.setVar(root, '--muted', toHsl(this.mixHex(surfaceHex, palette.textPrimary, 0.15)));
     this.setVar(root, '--destructive', toHsl('#ff3b30'));
     this.setVar(root, '--destructive-foreground', toHsl('#ffffff'));
-    this.setVar(root, '--border', toHsl(this.mixHex(surfaceHex, palette.textPrimary, 0.3)));
+    // En el tema claro, usamos el rosa (accent/button) para los marcos/bordes
+    // Reutilizamos flag de tema claro para bordes
+    this.setVar(root, '--border', toHsl(isLightTheme ? palette.button : this.mixHex(surfaceHex, palette.textPrimary, 0.3)));
     this.setVar(root, '--input', toHsl(this.mixHex(surfaceHex, palette.textPrimary, 0.25)));
     this.setVar(root, '--ring', toHsl(palette.button));
     this.setVar(root, '--radius', '0.5rem');
@@ -204,7 +220,11 @@ export class ThemeService {
   getPalette(theme: Theme) {
     const p = this.palettes[theme];
     const surface = this.mixHex(p.background, p.textPrimary, 0.08);
-    const secondary = this.mixHex(p.background, p.button, 0.15);
+    let secondary = this.mixHex(p.background, p.button, 0.15);
+    // En tema claro, el segundo color del preview debe ser el verde (color 2)
+    if (theme === 'Tema Claro Minimalista') {
+      secondary = '#2CB9A6';
+    }
     return {
       background: p.background,
       text: p.textPrimary,

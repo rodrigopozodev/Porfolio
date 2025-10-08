@@ -73,7 +73,7 @@ export class I18nService {
     'pages.projects.description': 'Portafolio de proyectos y trabajos realizados.',
 
     // Home destacados
-    'home.featuredTitle': 'Proyectos destacados',
+    'home.featuredTitle': 'Proyectos Recientes',
     'home.seeAllProjects': 'Ver todos los proyectos',
   };
 

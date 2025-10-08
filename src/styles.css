@@ -35,6 +35,10 @@
     --input: 240 5.9% 90%;
     --ring: 180 100% 25%; /* Teal for focus rings */
 
+    /* Cursores por tema (personalizable) */
+    --cursor-default: auto;
+    --cursor-pointer: pointer;
+
     --radius: 0.5rem;
   }
 
@@ -66,6 +70,9 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 180 100% 35%; /* Slightly brighter Teal for focus rings */
+    /* Cursores en modo oscuro (por defecto) */
+    --cursor-default: auto;
+    --cursor-pointer: pointer;
   }
 }
 
@@ -81,6 +88,12 @@
   html {
     @apply scroll-smooth; /* Optional: Add smooth scrolling */
   }
+  /* Aplicación de cursores usando variables de tema */
+  body { cursor: var(--cursor-default, auto); }
+  a, button { cursor: var(--cursor-pointer, pointer); }
+  /* Selección de texto usando Color 2 del tema (secondary) */
+  ::selection { background-color: hsl(var(--link)); color: #ffffff; }
+  ::-moz-selection { background-color: hsl(var(--link)); color: #ffffff; }
 }
 
 /* Component Styles matching ShadCN-like appearance */
@@ -158,6 +171,66 @@
       @apply z-50 min-w-[8rem] rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95;
   }
   .dropdown-menu-item {
-       @apply relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50;
+      @apply relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50;
+  }
+
+  /* Bocadillo estilo cómic */
+  .speech-bubble {
+    position: relative;
+    background: hsl(var(--card));
+    color: hsl(var(--foreground));
+    border: 2px solid hsl(var(--foreground));
+    border-radius: 9999px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  /* Tail en forma de burbujas circulares (estilo pensamiento) */
+  .speech-bubble.tail-left::after {
+    content: '';
+    position: absolute;
+    right: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px; height: 18px;
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--foreground));
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .speech-bubble.tail-left::before {
+    content: '';
+    position: absolute;
+    right: -42px;
+    top: calc(50% + 12px);
+    transform: translateY(-50%);
+    width: 12px; height: 12px;
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--foreground));
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .speech-bubble.tail-right::after {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px; height: 18px;
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--foreground));
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  }
+  .speech-bubble.tail-right::before {
+    content: '';
+    position: absolute;
+    left: -42px;
+    top: calc(50% + 12px);
+    transform: translateY(-50%);
+    width: 12px; height: 12px;
+    background: hsl(var(--card));
+    border: 2px solid hsl(var(--foreground));
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
   }
 }

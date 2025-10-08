@@ -14,10 +14,10 @@
         'decoration-[hsl(var(--link))]': isHomeActive(),
         'decoration-2': isHomeActive(),
         'underline-offset-4': isHomeActive()
-      }" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.home' | t }}</a>
-      <a routerLink="/sobre-mi" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.about' | t }}</a>
-      <a routerLink="/tecnologias" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.tech' | t }}</a>
-      <a routerLink="/proyectos" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-sm text-muted-foreground hover:text-foreground">{{ 'nav.projects' | t }}</a>
+      }" class="text-base text-muted-foreground hover:text-foreground">{{ 'nav.home' | t }}</a>
+      <a routerLink="/sobre-mi" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-base text-muted-foreground hover:text-foreground">{{ 'nav.about' | t }}</a>
+      <a routerLink="/tecnologias" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-base text-muted-foreground hover:text-foreground">{{ 'nav.tech' | t }}</a>
+      <a routerLink="/proyectos" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-foreground font-semibold underline decoration-[hsl(var(--link))] decoration-2 underline-offset-4" class="text-base text-muted-foreground hover:text-foreground">{{ 'nav.projects' | t }}</a>
     </nav>
     <div class="flex items-center gap-2">
       <app-language-toggle></app-language-toggle>

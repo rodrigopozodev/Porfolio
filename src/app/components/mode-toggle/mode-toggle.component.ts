@@ -83,6 +83,30 @@ export class ModeToggleComponent implements OnInit {
     return this.themeService.getPalette(theme);
   }
 
+  // Etiquetas cortas para los nombres de los temas en la UI
+  shortName(theme: Theme): string {
+    switch (theme) {
+      case 'Tema Claro Minimalista':
+        return 'Claro';
+      case 'Tema Oscuro Futurista':
+        return 'Oscuro';
+      case 'Tema Profesional Corporativo':
+        return 'Profesional';
+      case 'Tema Natural (verde y tierra)':
+        return 'Natural';
+      case 'Tema Creativo Vibrante':
+        return 'Creativo';
+      case 'Tema Nocturno Elegante':
+        return 'Nocturno';
+      case 'Tema Azul':
+        return 'Azul';
+      case 'Tema Arena Sofisticado':
+        return 'Arena';
+      default:
+        return theme;
+    }
+  }
+
   // Cerrar al hacer clic fuera del panel o fuera del botón
   @HostListener('document:click', ['$event'])
   onDocumentClick(ev: MouseEvent) {

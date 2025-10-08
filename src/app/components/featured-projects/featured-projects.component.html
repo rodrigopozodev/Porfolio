@@ -1,21 +1,22 @@
 <section class="container mx-auto px-4 pb-16">
   <div class="flex items-baseline justify-between mb-6">
     <h2 class="text-3xl font-bold">{{ 'home.featuredTitle' | t }}</h2>
-    <a routerLink="/proyectos" class="text-primary font-medium flex items-center gap-1 hover:underline">
+    <a routerLink="/proyectos" class="text-[hsl(var(--accent))] font-semibold flex items-center gap-2 group">
       {{ 'home.seeAllProjects' | t }}
-      <span aria-hidden>→</span>
+      <lucide-icon name="arrow-right" size="18" class="transition-transform duration-200 group-hover:translate-x-1"></lucide-icon>
     </a>
   </div>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <ng-container *ngFor="let item of items | slice:0:8">
+    <ng-container *ngFor="let item of items | slice:0:8; let i = index">
       <!-- Enlace externo si tiene URL -->
       <a *ngIf="item.url; else internalCard"
          [href]="item.url"
          target="_blank" rel="noopener noreferrer"
-         class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden group justify-self-center">
+         (click)="openOptions(i, $event)"
+         class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-visible group justify-self-center transition-transform duration-200 ease-out hover:scale-[1.04] transform-gpu">
         <!-- Imagen del proyecto como background para evitar roturas si no existe aún -->
-        <div class="h-[280px] sm:h-[320px] w-full group-hover:brightness-95 transition bg-cover bg-center"
+        <div class="h-[280px] sm:h-[320px] w-full group-hover:brightness-95 transition bg-cover bg-center rounded-xl"
              [ngStyle]="{ 'background-image': item.image ? 'url(' + item.image + ')' : 'none' }"
              [ngClass]="{ 'bg-muted': !item.image }"></div>
         <!-- Título siempre visible -->
@@ -23,19 +24,33 @@
           <h3 *ngIf="item.title" class="text-xl font-semibold drop-shadow-sm">{{ item.title }}</h3>
         </div>
         <!-- Overlay de descripción al hacer hover -->
-        <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+        <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl overflow-hidden">
+          <div class="absolute inset-0 rounded-xl bg-black/80"></div>
           <div class="absolute inset-0 p-4 flex flex-col justify-end">
-            <p class="text-[15px] text-white/90">{{ item.desc }}</p>
+            <p class="text-[15px] text-white">{{ item.desc }}</p>
           </div>
         </div>
+        <!-- Bocadillos fuera de la tarjeta, por clic (solo ZapasPro) -->
+        <ng-container *ngIf="isZapasPro(item) && bubbleOpenIndex === i">
+          <!-- Overlay para cerrar al hacer clic fuera -->
+          <div class="fixed inset-0 z-[5] bg-transparent" (click)="closeOptions()"></div>
+          <!-- Dos burbujas en columna a la derecha -->
+          <div class="absolute -right-40 sm:-right-44 top-1/2 -translate-y-1/2 z-[10] flex flex-col gap-3">
+            <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="visitWeb(item)">
+              <span>Pulsa para visitar la web</span>
+            </button>
+            <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="moreInfo()">
+              <span>Más información</span>
+            </button>
+          </div>
+        </ng-container>
       </a>
 
       <!-- Fallback: navega a /proyectos -->
       <ng-template #internalCard>
-        <a routerLink="/proyectos" class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-hidden group justify-self-center">
+        <a routerLink="/proyectos" (click)="openOptions(i, $event)" class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-visible group justify-self-center transition-transform duration-200 ease-out hover:scale-[1.04] transform-gpu">
           <!-- Imagen del proyecto como background para evitar roturas si no existe aún -->
-          <div class="h-[280px] sm:h-[320px] w-full group-hover:brightness-95 transition bg-cover bg-center"
+          <div class="h-[280px] sm:h-[320px] w-full group-hover:brightness-95 transition bg-cover bg-center rounded-xl"
                [ngStyle]="{ 'background-image': item.image ? 'url(' + item.image + ')' : 'none' }"
                [ngClass]="{ 'bg-muted': !item.image }"></div>
           <!-- Título siempre visible -->
@@ -43,12 +58,26 @@
             <h3 *ngIf="item.title" class="text-xl font-semibold drop-shadow-sm">{{ item.title }}</h3>
           </div>
           <!-- Overlay de descripción al hacer hover (si existiera) -->
-          <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+          <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl overflow-hidden">
+            <div class="absolute inset-0 rounded-xl bg-black/80"></div>
             <div class="absolute inset-0 p-4 flex flex-col justify-end">
-              <p class="text-[15px] text-white/90">{{ item.desc }}</p>
+              <p class="text-[15px] text-white">{{ item.desc }}</p>
             </div>
           </div>
+          <!-- Bocadillos fuera de la tarjeta, por clic (solo ZapasPro) -->
+          <ng-container *ngIf="isZapasPro(item) && bubbleOpenIndex === i">
+            <!-- Overlay para cerrar al hacer clic fuera -->
+            <div class="fixed inset-0 z-[5] bg-transparent" (click)="closeOptions()"></div>
+            <!-- Dos burbujas en columna a la derecha -->
+            <div class="absolute -right-40 sm:-right-44 top-1/2 -translate-y-1/2 z-[10] flex flex-col gap-3">
+              <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="visitWeb(item)">
+                <span>Pulsa para visitar la web</span>
+              </button>
+              <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="moreInfo()">
+                <span>Más información</span>
+              </button>
+            </div>
+          </ng-container>
         </a>
       </ng-template>
     </ng-container>

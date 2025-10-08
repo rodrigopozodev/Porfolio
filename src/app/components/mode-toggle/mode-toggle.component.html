@@ -8,8 +8,8 @@
   <div *ngIf="showPanel" class="fixed inset-x-0 top-0 z-50" #panelRef>
     <div class="relative bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/75 border-b shadow-sm">
       <div class="container mx-auto px-4">
-        <!-- Cabecera alta con título centrado -->
-        <div class="relative py-4">
+        <!-- Cabecera más compacta con título centrado -->
+        <div class="relative py-2">
           <div class="flex items-center justify-center">
             <span class="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{{ 'theme.panelTitle' | t }}</span>
           </div>
@@ -18,20 +18,23 @@
 
         <nav class="w-full">
           <div class="pb-3">
-            <div class="flex gap-4 overflow-x-auto pb-3 justify-center">
+            <div class="flex gap-3 overflow-x-auto pb-2 justify-center">
               <button
                 *ngFor="let t of themes"
                 #themeBtn
                 [attr.data-theme]="t"
                 (click)="setTheme(t, $event)"
-                class="group w-[96px] h-[120px] flex flex-col justify-between items-center gap-1 rounded-lg border px-3 py-2 hover:bg-accent/10"
+                class="group w-[88px] h-[56px] flex flex-col justify-between items-center gap-1 rounded-md border px-2 py-1"
+                [style.backgroundColor]="getPalette(t).background"
+                [style.borderColor]="getPalette(t).accent"
+                [style.color]="getPalette(t).text"
               >
-                <span class="text-xs font-medium whitespace-pre-line leading-tight text-center w-full min-h-[32px]">
-                  {{ t | t }}
+                <span class="text-xs font-medium leading-snug text-center w-full min-h-[24px]">
+                  {{ shortName(t) }}
                 </span>
-                <div class="flex items-center gap-0 pb-1">
+                <div class="flex items-center gap-0 pb-0">
                   <span *ngFor="let c of [getPalette(t).accent, getPalette(t).secondary, getPalette(t).surface, getPalette(t).text, getPalette(t).background]; let i = index"
-                          class="h-5 w-5 rounded-full"
+                          class="h-4 w-4 rounded-full"
                           [ngClass]="{'-ml-1': i > 0}"
                           [style.backgroundColor]="c"></span>
                 </div>
