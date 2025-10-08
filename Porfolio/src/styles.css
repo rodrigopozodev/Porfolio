@@ -40,7 +40,6 @@
     --cursor-pointer: pointer;
     --cursor-text: text;
     --cursor-not-allowed: not-allowed;
-    --cursor-no-drop: no-drop;
 
     --radius: 0.5rem;
   }
@@ -78,7 +77,6 @@
     --cursor-pointer: pointer;
     --cursor-text: text;
     --cursor-not-allowed: not-allowed;
-    --cursor-no-drop: no-drop;
   }
 }
 
@@ -99,8 +97,6 @@
   a, button, [role="button"], .cursor-pointer { cursor: var(--cursor-pointer, pointer); }
   input, textarea, select, pre, code, [contenteditable="true"], .cursor-text { cursor: var(--cursor-text, text); }
   [disabled], .disabled, .btn:disabled, button:disabled, input:disabled, textarea:disabled, select:disabled, [aria-disabled="true"], .cursor-not-allowed { cursor: var(--cursor-not-allowed, not-allowed); }
-  /* Drag & Drop: no permitido */
-  .cursor-no-drop, .no-drop, [data-droppable="false"] { cursor: var(--cursor-no-drop, no-drop); }
   /* Selección de texto usando Color 2 del tema (secondary) */
   ::selection { background-color: hsl(var(--link)); color: #ffffff; }
   ::-moz-selection { background-color: hsl(var(--link)); color: #ffffff; }
@@ -109,11 +105,8 @@
 /* Overrides fuera de Tailwind layers para asegurar prioridad y recálculo con variables dinámicas */
 body { cursor: var(--cursor-default, auto) !important; }
 a, button, [role="button"], .cursor-pointer { cursor: var(--cursor-pointer, pointer) !important; }
-/* Fuerza cursor de texto en elementos y clases utilizadas en formularios */
-input, textarea, select, pre, code, [contenteditable="true"], .cursor-text, .input, .textarea, .prose pre, .prose code { cursor: var(--cursor-text, text) !important; }
+input, textarea, select, pre, code, [contenteditable="true"], .cursor-text { cursor: var(--cursor-text, text) !important; }
 [disabled], .disabled, .btn:disabled, button:disabled, input:disabled, textarea:disabled, select:disabled, [aria-disabled="true"], .cursor-not-allowed { cursor: var(--cursor-not-allowed, not-allowed) !important; }
-/* Drag & Drop: no permitido */
-.cursor-no-drop, .no-drop, [data-droppable="false"] { cursor: var(--cursor-no-drop, no-drop) !important; }
 
 /* Component Styles matching ShadCN-like appearance */
 @layer components {

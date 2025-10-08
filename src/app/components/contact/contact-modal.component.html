@@ -34,7 +34,7 @@
       </div>
       <div class="card-footer justify-end gap-2">
         <button class="btn btn-ghost" (click)="handleClose()" [disabled]="sending">{{ 'contact.cancel' | t }}</button>
-        <button class="btn btn-default" (click)="submit()" [disabled]="sending">
+        <button class="btn btn-ghost" (click)="submit()" [disabled]="sending">
           <span *ngIf="!sending">{{ 'contact.send' | t }}</span>
           <span *ngIf="sending">{{ 'contact.sending' | t }}</span>
         </button>

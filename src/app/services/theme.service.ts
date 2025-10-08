@@ -17,6 +17,7 @@ export type Theme =
 export class ThemeService {
   private renderer: Renderer2;
   private currentTheme: Theme = 'Tema Claro Minimalista';
+  private handedness: 'zurdo' | 'diestro' = 'diestro';
   private isBrowser: boolean;
   private palettes: Record<Theme, {
     background: string;
@@ -99,10 +100,14 @@ export class ThemeService {
   loadTheme() {
     if (!this.isBrowser) return;
     const storedTheme = localStorage.getItem('theme');
+    const storedHanded = localStorage.getItem('handedness');
     if (storedTheme && (storedTheme in this.palettes)) {
       this.setTheme(storedTheme as Theme);
     } else {
       this.setTheme(this.currentTheme);
+    }
+    if (storedHanded === 'zurdo' || storedHanded === 'diestro') {
+      this.handedness = storedHanded as 'zurdo' | 'diestro';
     }
   }
 
@@ -144,8 +149,25 @@ export class ThemeService {
     this.setVar(root, '--link', toHsl(linkHex));
 
     // Cursores por tema (personalizables)
-    this.setVar(root, '--cursor-default', 'auto');
-    this.setVar(root, '--cursor-pointer', 'pointer');
+    if (isLightTheme) {
+      // Usamos las 4 imágenes del tema claro alojadas en assets/svg (ruta relativa sin barra inicial).
+      // Añadimos puntos calientes (hotspot) para mejorar compatibilidad en navegadores.
+      const pointerAsset = this.handedness === 'diestro'
+        ? 'assets/svg/Claro_Puntero_Diestro.png'
+        : 'assets/svg/Claro_Puntero.png';
+      this.setVar(root, '--cursor-default', `url("${pointerAsset}") 0 0, auto`);
+      this.setVar(root, '--cursor-text', 'url("assets/svg/Claro_Texto.png") 12 12, text');
+      this.setVar(root, '--cursor-pointer', 'url("assets/svg/Claro_Mano.png") 8 2, pointer');
+      this.setVar(root, '--cursor-not-allowed', 'url("assets/svg/Claro_Prohibido.png") 12 12, not-allowed');
+      this.setVar(root, '--cursor-no-drop', 'url("assets/svg/Claro_Prohibido.png") 12 12, no-drop');
+    } else {
+      // Para el resto de temas, mantener cursores del sistema
+      this.setVar(root, '--cursor-default', 'auto');
+      this.setVar(root, '--cursor-text', 'text');
+      this.setVar(root, '--cursor-pointer', 'pointer');
+      this.setVar(root, '--cursor-not-allowed', 'not-allowed');
+      this.setVar(root, '--cursor-no-drop', 'no-drop');
+    }
 
     // Derivados para fondos secundarios y superficies
     const surfaceHex = this.mixHex(palette.background, palette.textPrimary, 0.08);
@@ -165,6 +187,17 @@ export class ThemeService {
     this.setVar(root, '--input', toHsl(this.mixHex(surfaceHex, palette.textPrimary, 0.25)));
     this.setVar(root, '--ring', toHsl(palette.button));
     this.setVar(root, '--radius', '0.5rem');
+  }
+
+  setHandedness(value: 'zurdo' | 'diestro') {
+    if (!this.isBrowser) return;
+    this.handedness = value;
+    localStorage.setItem('handedness', value);
+    this.applyTheme();
+  }
+
+  getHandedness(): 'zurdo' | 'diestro' {
+    return this.handedness;
   }
 
   private setVar(root: HTMLElement, name: string, value: string) {
