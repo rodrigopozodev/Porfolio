@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { LanguageService } from '@/services/language.service';
-import { TranslatePipe } from '@/pipes/translate.pipe';
+import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 
 @Component({
   selector: 'app-language-toggle',

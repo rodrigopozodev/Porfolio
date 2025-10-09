@@ -4,7 +4,7 @@ import { LanguageToggleComponent } from '../language-toggle/language-toggle.comp
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '@/services/language.service';
-import { TranslatePipe } from '@/pipes/translate.pipe';
+import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({

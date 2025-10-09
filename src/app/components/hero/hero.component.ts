@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { ContactModalComponent } from '@/components/contact/contact-modal.component';
 import { FeaturedProjectsComponent } from '@/components/featured-projects/featured-projects.component';
-import { TranslatePipe } from '@/pipes/translate.pipe';
+import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 
 @Component({
   selector: 'app-hero',
@@ -44,8 +44,8 @@ export class HeroComponent implements OnInit, OnDestroy {
 
   downloadCV() {
     const link = this.renderer.createElement('a');
-    link.setAttribute('href', 'assets/pdf/Rodrigo_Pozo_Sánchez_CV.pdf');
-    link.setAttribute('download', 'Rodrigo_Pozo_Sánchez_CV.pdf');
+    link.setAttribute('href', 'assets/pdf/CV_Rodrigo_Pozo_Sánchez.pdf');
+    link.setAttribute('download', 'CV_Rodrigo_Pozo_Sánchez.pdf');
     this.renderer.appendChild(this.document.body, link);
     link.click();
     this.renderer.removeChild(this.document.body, link);

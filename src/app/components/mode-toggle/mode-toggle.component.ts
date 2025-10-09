@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 import { ThemeService, Theme } from '@/services/theme.service';
 import { DOCUMENT } from '@angular/common';
-import { TranslatePipe } from '@/pipes/translate.pipe';
+import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 
 @Component({
   selector: 'app-mode-toggle',
