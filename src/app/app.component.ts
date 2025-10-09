@@ -1,8 +1,7 @@
 import { Component, OnInit, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './components/header/header.component';
-import { HeroComponent } from './components/hero/hero.component';
+import { HeaderComponent } from '@/components/Diseño-General/header/header.component';
 import { TemaService } from './services/tema.service';
 import { IdiomaService } from './services/idioma.service';
 

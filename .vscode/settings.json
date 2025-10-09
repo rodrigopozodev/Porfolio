@@ -1,18 +1,23 @@
 {
     "IDX.aI.enableInlineCompletion": true,
     "IDX.aI.enableCodebaseIndexing": true,
-    // Evita el aviso "Unknown at rule @tailwind" del validador CSS
+    // Desactiva validación pesada para CSS/SCSS/LESS (reduce alertas del editor)
     "css.validate": false,
-    // Hace que el lenguaje CSS se trate como PostCSS para Tailwind
-    "tailwindCSS.includeLanguages": {
-        "css": "postcss",
-        "scss": "postcss",
-        "less": "postcss"
-    },
-    // Asocia archivos .css a PostCSS para mejor IntelliSense de Tailwind
+    "scss.validate": false,
+    "less.validate": false,
+    // Ignora avisos comunes del linter CSS para un archivo con Tailwind/PostCSS
+    "css.lint.unknownAtRules": "ignore",
+    "css.lint.unknownProperties": "ignore",
+    "css.lint.vendorPrefix": "ignore",
+    "css.lint.boxModel": "ignore",
+    // Usa el lenguaje CSS nativo para coloreado de sintaxis
     "files.associations": {
-        "*.css": "postcss"
+        "*.css": "css",
+        "*.scss": "scss",
+        "*.less": "less"
     },
     // Opcional: autocompletado de Emmet con clases Tailwind
-    "tailwindCSS.emmetCompletions": true
+    "tailwindCSS.emmetCompletions": true,
+    // Garantiza resaltado semántico
+    "editor.semanticHighlighting.enabled": true
 }

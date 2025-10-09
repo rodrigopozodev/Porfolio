@@ -2,17 +2,17 @@ import { Component, Inject, Renderer2, ElementRef, ViewChild, ViewChildren, Quer
 import { DOCUMENT } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
-import { ContactModalComponent } from '@/components/contact/contact-modal.component';
-import { FeaturedProjectsComponent } from '@/components/featured-projects/featured-projects.component';
+import { ContactModalComponent } from '@/components/Diseño-General/contact/contact-modal.component';
+import { ProyectosRecientesComponent } from '@/components/inicio/proyectos-recientes/proyectos-recientes.component';
 import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-scroll',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule, ContactModalComponent, TranslatePipe, FeaturedProjectsComponent], // Añadido modal de contacto, pipe y sección de destacados
-  templateUrl: './hero.component.html',
+  imports: [CommonModule, LucideAngularModule, ContactModalComponent, TranslatePipe, ProyectosRecientesComponent],
+  templateUrl: './scroll.component.html',
 })
-export class HeroComponent implements OnInit, OnDestroy {
+export class ScrollComponent implements OnInit, OnDestroy {
   isContactOpen = false;
   // Scroll por secciones en Inicio (Bienvenida y Proyectos)
   @ViewChild('homeScroll') homeScroll?: ElementRef<HTMLDivElement>;
@@ -37,8 +37,8 @@ export class HeroComponent implements OnInit, OnDestroy {
     document.body.style.overflowY = '';
   }
 
+  // Abrir modal de contacto en lugar de scroll
   scrollToContact() {
-    // Abrir modal de contacto en lugar de scroll
     this.isContactOpen = true;
   }
 
@@ -69,10 +69,10 @@ export class HeroComponent implements OnInit, OnDestroy {
     this.activeIndex = idx;
     this.animating = true;
     const to = target.offsetTop;
-    this.animateScrollTo(container, to, 700);
+    this.scroll(container, to, 700);
   }
 
-  private animateScrollTo(container: HTMLElement, to: number, duration: number) {
+  private scroll(container: HTMLElement, to: number, duration: number) {
     const start = container.scrollTop;
     const change = to - start;
     const startTime = performance.now();

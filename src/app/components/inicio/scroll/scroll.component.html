@@ -38,7 +38,7 @@
   <section #homeSection class="snap-start h-screen">
     <div class="transition-all duration-700 ease-out"
          [ngClass]="activeIndex === 1 ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-2'">
-      <app-featured-projects></app-featured-projects>
+      <app-proyectos-recientes></app-proyectos-recientes>
     </div>
   </section>
 </div>
@@ -54,5 +54,3 @@
           [attr.aria-label]="'Ir a sección ' + (i + 1)">
   </button>
 </div>
-
-

@@ -5,6 +5,5 @@ import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.
   selector: 'app-sobre-mi',
   standalone: true,
   templateUrl: './sobre-mi.component.html',
-  imports: [TranslatePipe],
 })
 export class SobreMiComponent {}

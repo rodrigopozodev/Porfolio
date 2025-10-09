@@ -3,6 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Guía rápida de temas: usa variables en :root y .dark (ver tokens más abajo). */
+
 @layer base {
   :root {
     --background: 0 0% 100%; /* Light Gray */
@@ -27,6 +29,10 @@
 
     --accent: 180 100% 25%; /* Teal */
     --accent-foreground: 0 0% 100%; /* White */
+    --accent-hover: 180 100% 28%; /* Teal al pasar el cursor (hover) */
+
+    /* Color de enlaces (por defecto igual que accent) */
+    --link: 180 100% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -66,6 +72,10 @@
 
     --accent: 180 100% 35%; /* Slightly brighter Teal */
     --accent-foreground: 0 0% 98%; /* Light Gray */
+    --accent-hover: 180 100% 38%; /* Teal hover en modo oscuro */
+
+    /* Enlaces en modo oscuro (ligeramente más brillantes que accent) */
+    --link: 180 100% 35%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -92,7 +102,7 @@
     padding-top: var(--theme-panel-offset);
   }
   html {
-    @apply scroll-smooth; /* Optional: Add smooth scrolling */
+    @apply scroll-smooth; /* Desplazamiento suave opcional */
   }
   /* Aplicación de cursores usando variables de tema */
   body { cursor: var(--cursor-default, auto); }
@@ -101,7 +111,7 @@
   [disabled], .disabled, .btn:disabled, button:disabled, input:disabled, textarea:disabled, select:disabled, [aria-disabled="true"], .cursor-not-allowed { cursor: var(--cursor-not-allowed, not-allowed); }
   /* Drag & Drop: no permitido */
   .cursor-no-drop, .no-drop, [data-droppable="false"] { cursor: var(--cursor-no-drop, no-drop); }
-  /* Selección de texto usando Color 2 del tema (secondary) */
+  /* Selección de texto (usa `--link` para controlar el color de selección) */
   ::selection { background-color: hsl(var(--link)); color: #ffffff; }
   ::-moz-selection { background-color: hsl(var(--link)); color: #ffffff; }
 }
@@ -254,7 +264,7 @@ input, textarea, select, pre, code, [contenteditable="true"], .cursor-text, .inp
   }
 }
 
-/* Ocultar barras de desplazamiento en el contenedor de Proyectos y contener overscroll */
+/* Contenedor de scroll en páginas de secciones (oculta barras y contiene overscroll) */
 .projects-scroll {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */

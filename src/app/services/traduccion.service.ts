@@ -72,8 +72,9 @@ export class TraduccionService {
     'pages.projects.title': 'Proyectos',
     'pages.projects.description': 'Portafolio de proyectos y trabajos realizados.',
 
-    // Home destacados
+    // Home recientes
     'home.featuredTitle': 'Proyectos Recientes',
+    'home.recentTitle': 'Proyectos Recientes',
     'home.seeAllProjects': 'Ver todos los proyectos',
   };
 
@@ -145,8 +146,8 @@ export class TraduccionService {
     'pages.projects.title': 'Projects',
     'pages.projects.description': 'Portfolio of projects and work done.',
 
-    // Home featured
-    'home.featuredTitle': 'Featured Projects',
+    // Home recent
+    'home.recentTitle': 'Recent Projects',
     'home.seeAllProjects': 'See all projects',
   };
 
