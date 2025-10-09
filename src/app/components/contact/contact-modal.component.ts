@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
-import { ContactService } from '../../services/contact.service';
+import { ContactoService } from '../../services/contacto.service';
 
 @Component({
   selector: 'app-contact-modal',
@@ -29,7 +29,7 @@ export class ContactModalComponent {
     }
   }
 
-  constructor(private contactService: ContactService) {}
+  constructor(private contactService: ContactoService) {}
 
   async submit() {
     this.errorMsg = '';

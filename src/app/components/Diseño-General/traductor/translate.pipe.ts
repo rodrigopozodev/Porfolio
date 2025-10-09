@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { I18nService } from '@/services/i18n.service';
+import { TraduccionService } from '@/services/traduccion.service';
 
 @Pipe({
   name: 't',
@@ -7,7 +7,7 @@ import { I18nService } from '@/services/i18n.service';
   pure: false, // Impuro para reaccionar a cambios de idioma
 })
 export class TranslatePipe implements PipeTransform {
-  constructor(private i18n: I18nService) {}
+  constructor(private i18n: TraduccionService) {}
 
   transform(key: string, params?: Record<string, string | number>): string {
     return this.i18n.t(key, params);

@@ -8,7 +8,7 @@ export interface ContactPayload {
 }
 
 @Injectable({ providedIn: 'root' })
-export class ContactService {
+export class ContactoService {
   // Using FormSubmit (no keys required). First submission triggers a verification email.
   private endpoint = 'https://formsubmit.co/ajax/rodrigopozosanchez@gmail.com';
 

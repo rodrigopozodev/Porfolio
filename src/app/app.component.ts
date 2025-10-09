@@ -3,8 +3,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
-import { ThemeService } from './services/theme.service';
-import { LanguageService } from './services/language.service';
+import { TemaService } from './services/tema.service';
+import { IdiomaService } from './services/idioma.service';
 
 // Componente raíz de la aplicación.
 // Renderiza el encabezado y el outlet de enrutamiento para las páginas.
@@ -14,6 +14,7 @@ import { LanguageService } from './services/language.service';
   imports: [
     RouterOutlet,
     HeaderComponent
+    
   ],
   templateUrl: './app.component.html'
 })
@@ -22,8 +23,8 @@ export class AppComponent implements OnInit {
   isBrowser: boolean;
 
   constructor(
-    private themeService: ThemeService,
-    private languageService: LanguageService,
+    private themeService: TemaService,
+    private languageService: IdiomaService,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {

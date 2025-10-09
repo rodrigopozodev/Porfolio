@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, ElementRef, ViewChild, ViewChildren, QueryList, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
-import { ThemeService, Theme } from '@/services/theme.service';
+import { TemaService, Theme } from '@/services/tema.service';
 import { DOCUMENT } from '@angular/common';
 import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 
@@ -31,7 +31,7 @@ export class ModeToggleComponent implements OnInit {
   ];
 
 
-  constructor(private themeService: ThemeService, @Inject(DOCUMENT) private document: Document) {}
+  constructor(private themeService: TemaService, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit() {
     this.currentTheme = this.themeService.getTheme();

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
-import { LanguageService } from '@/services/language.service';
+import { IdiomaService } from '@/services/idioma.service';
 import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 
 @Component({
@@ -11,7 +11,7 @@ import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.
   templateUrl: './language-toggle.component.html',
 })
 export class LanguageToggleComponent {
-  constructor(private languageService: LanguageService) {}
+  constructor(private languageService: IdiomaService) {}
 
   get current() {
     return this.languageService.getLanguage();

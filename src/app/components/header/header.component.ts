@@ -3,7 +3,7 @@ import { ModeToggleComponent } from '../mode-toggle/mode-toggle.component';
 import { LanguageToggleComponent } from '../language-toggle/language-toggle.component';
 import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LanguageService } from '@/services/language.service';
+import { IdiomaService } from '../../services/idioma.service';
 import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -18,7 +18,7 @@ export class HeaderComponent {
   private platformId: object;
   homeActive = false;
   constructor(
-    private languageService: LanguageService,
+    private languageService: IdiomaService,
     public router: Router,
     @Inject(PLATFORM_ID) platformId: object
   ) {

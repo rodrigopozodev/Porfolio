@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslatePipe } from '@/pipes/translate.pipe';
+import { TranslatePipe } from '@/components/Diseño-General/traductor/translate.pipe';
 
 @Component({
   selector: 'app-sobre-mi',

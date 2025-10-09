@@ -14,7 +14,7 @@ export type Theme =
 @Injectable({
   providedIn: 'root',
 })
-export class ThemeService {
+export class TemaService {
   private renderer: Renderer2;
   private currentTheme: Theme = 'Tema Claro Minimalista';
   private handedness: 'zurdo' | 'diestro' = 'diestro';

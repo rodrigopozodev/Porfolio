@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 export type Language = 'es' | 'en';
 
 @Injectable({ providedIn: 'root' })
-export class LanguageService {
+export class IdiomaService {
   private isBrowser: boolean;
   private _language$ = new BehaviorSubject<Language>('es');
   language$ = this._language$.asObservable();
