@@ -1,4 +1,188 @@
-<section class="container mx-auto py-16 px-4">
-  <h1 class="text-3xl font-bold">{{ 'pages.tech.title' | t }}</h1>
-  <p class="text-muted-foreground mt-2">{{ 'pages.tech.description' | t }}</p>
+<!-- Sección "Tecnologías y herramientas" en primera persona -->
+<section id="tecnologias" class="relative bg-gradient-to-br from-background to-muted/40 text-foreground">
+  <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <!-- Cabecera -->
+    <div class="space-y-4 mb-10">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Tecnologías y herramientas</h2>
+      <p class="text-muted-foreground max-w-3xl">
+        Soy un desarrollador web fullstack con experiencia en Angular, FastAPI, Python, Tailwind CSS y bases de datos SQL. Me gusta aprender de forma continua y aplicar cada tecnología con un enfoque práctico, buscando impacto y calidad en cada proyecto.
+      </p>
+    </div>
+
+    <!-- Grid de categorías -->
+    <div class="grid grid-cols-1 gap-10">
+      <!-- Frontend -->
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Frontend</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Angular -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-red-500/15 text-red-600 flex items-center justify-center">
+              <lucide-icon name="code" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Angular</p>
+              <p class="text-xs text-muted-foreground">Avanzado</p>
+            </div>
+          </div>
+          <!-- Tailwind CSS -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-cyan-500/15 text-cyan-600 flex items-center justify-center">
+              <lucide-icon name="wind" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Tailwind CSS</p>
+              <p class="text-xs text-muted-foreground">Avanzado</p>
+            </div>
+          </div>
+          <!-- TypeScript -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-blue-500/15 text-blue-600 flex items-center justify-center">
+              <lucide-icon name="file-code" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">TypeScript</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+          <!-- HTML/CSS -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-orange-500/15 text-orange-600 flex items-center justify-center">
+              <lucide-icon name="layout-dashboard" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">HTML &amp; CSS</p>
+              <p class="text-xs text-muted-foreground">Avanzado</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Backend -->
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Backend</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- FastAPI -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center">
+              <lucide-icon name="server" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">FastAPI</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+          <!-- Python -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-yellow-500/15 text-yellow-600 flex items-center justify-center">
+              <lucide-icon name="file-code-2" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Python</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+          <!-- SQL -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-indigo-500/15 text-indigo-600 flex items-center justify-center">
+              <lucide-icon name="database" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Bases de datos SQL</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+          <!-- API REST -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-teal-500/15 text-teal-600 flex items-center justify-center">
+              <lucide-icon name="network" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">APIs REST</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IA -->
+      <div>
+        <h3 class="text-xl font-semibold mb-4">IA</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Integración de IA -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-purple-500/15 text-purple-600 flex items-center justify-center">
+              <lucide-icon name="brain" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Integración de IA</p>
+              <p class="text-xs text-muted-foreground">En progreso</p>
+            </div>
+          </div>
+          <!-- Modelos y APIs -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-fuchsia-500/15 text-fuchsia-600 flex items-center justify-center">
+              <lucide-icon name="cpu" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Modelos y APIs</p>
+              <p class="text-xs text-muted-foreground">En progreso</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Herramientas -->
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Herramientas</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Git -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-rose-500/15 text-rose-600 flex items-center justify-center">
+              <lucide-icon name="git-branch" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Git</p>
+              <p class="text-xs text-muted-foreground">Avanzado</p>
+            </div>
+          </div>
+          <!-- Docker -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-sky-500/15 text-sky-600 flex items-center justify-center">
+              <lucide-icon name="box" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Docker</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+          <!-- Postman -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-amber-500/15 text-amber-600 flex items-center justify-center">
+              <lucide-icon name="flask-conical" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Postman</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+          <!-- Figma -->
+          <div class="flex items-center gap-3 rounded-xl border border-border bg-card text-card-foreground p-4 shadow-sm">
+            <div class="w-10 h-10 rounded-full bg-pink-500/15 text-pink-600 flex items-center justify-center">
+              <lucide-icon name="figma" class="w-5 h-5"></lucide-icon>
+            </div>
+            <div>
+              <p class="font-medium">Figma</p>
+              <p class="text-xs text-muted-foreground">Intermedio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frase final motivadora -->
+    <p class="mt-10 font-medium text-[hsl(var(--accent))]">
+      Sigo ampliando mi stack y profundizando en cada herramienta para entregar soluciones sólidas y efectivas.
+    </p>
+  </div>
 </section>
