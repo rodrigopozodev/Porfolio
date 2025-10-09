@@ -1,4 +1,41 @@
-<section class="container mx-auto py-16 px-4">
-  <h1 class="text-3xl font-bold">{{ 'pages.projects.title' | t }}</h1>
-  <p class="text-muted-foreground mt-2">{{ 'pages.projects.description' | t }}</p>
-</section>
+<!-- Contenedor de secciones: sin cabecera, navegación por rueda con animación de 1s -->
+<div #scrollContainer class="projects-scroll h-screen overflow-y-auto snap-y snap-mandatory" (wheel)="onWheel($event)">
+  <!-- Sections por proyecto -->
+  <section *ngFor="let p of projects; index as i" #sectionRef class="snap-start h-screen">
+    <div class="container mx-auto h-full px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <!-- Columna izquierda: texto -->
+      <div class="flex flex-col gap-6 transition-all duration-700 ease-out"
+           [ngClass]="i === activeIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'">
+        <div class="flex items-center justify-between">
+          <h2 class="text-3xl md:text-4xl font-bold">{{ p.title }}</h2>
+        </div>
+        <p class="text-muted-foreground text-base max-w-xl">
+          {{ p.description }}
+        </p>
+        <span class="text-xs tracking-widest text-muted-foreground uppercase">{{ p.category }}</span>
+
+        
+      </div>
+
+      <!-- Columna derecha: visual -->
+      <div class="rounded-2xl p-6 md:p-10 shadow-sm {{ p.bgClass }} transition-all duration-700 ease-out"
+           [ngClass]="i === activeIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'">
+        <div class="aspect-[4/3] w-full flex items-center justify-center overflow-hidden">
+          <img [src]="p.image" [alt]="p.title" class="w-[75%] md:w-[65%] lg:w-[60%] object-contain drop-shadow-xl transition-transform duration-500 ease-out hover:scale-[1.03]" />
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Indicador vertical fijo: siempre visible en Proyectos -->
+<div class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 select-none">
+  <button *ngFor="let _ of projects; index as i"
+          (click)="goToIndex(i)"
+          class="transition-transform"
+          [ngClass]="i === activeIndex
+            ? 'w-4 h-4 border-2 border-[hsl(var(--accent))] rounded-none'
+            : 'w-2 h-2 rounded-full rotate-45 bg-[hsl(var(--accent))]'"
+          [attr.aria-label]="'Ir a sección ' + (i + 1)">
+  </button>
+</div>

@@ -14,7 +14,8 @@ import { LucideAngularModule } from 'lucide-angular';
 export class FeaturedProjectsComponent {
   // Lista de últimos proyectos (se limita a 8 en la plantilla)
   items = [
-    { title: '', url: '', desc: 'Desarrolado con Angular y Node.js con TypeScript. Permite explorar modelos de zapatillas, añadir productos al carrito y completar la compra. Incluye control de stock por tallas y colores, gestión de usuarios y almacenamiento de datos en SQLite.', image: 'assets/images/ZapasPro.png' },
+    { title: 'ZapasPro', url: 'https://zapaspro.netlify.app/', desc: 'Desarrolado con Angular y Node.js con TypeScript. Permite explorar modelos de zapatillas, añadir productos al carrito y completar la compra. Incluye control de stock por tallas y colores, gestión de usuarios y almacenamiento de datos en SQLite.', image: 'assets/images/ZapasPro_Rosa.png' },
+    { title: 'Punteator', url: 'https://punteator.netlify.app/', desc: 'Aplicación web para puntuar y anotar contenido. Próximamente más detalles.', image: 'assets/svg/Claro_Puntero.png' },
   ];
 
   // Control de bocadillos por clic
@@ -31,7 +32,8 @@ export class FeaturedProjectsComponent {
     // Evita la navegación directa para mostrar opciones
     event.preventDefault();
     event.stopPropagation();
-    this.bubbleOpenIndex = index;
+    // Alterna selección: si ya está abierto, ciérralo
+    this.bubbleOpenIndex = this.bubbleOpenIndex === index ? null : index;
   }
 
   closeOptions() {
@@ -43,8 +45,8 @@ export class FeaturedProjectsComponent {
     this.closeOptions();
   }
 
-  moreInfo() {
-    this.router.navigate(['/proyectos']);
+  moreInfo(index: number) {
+    this.router.navigate(['/proyectos'], { state: { index } });
     this.closeOptions();
   }
 }

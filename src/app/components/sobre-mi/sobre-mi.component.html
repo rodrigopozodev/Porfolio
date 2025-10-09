@@ -1,4 +1,68 @@
-<section class="container mx-auto py-16 px-4">
-  <h1 class="text-3xl font-bold">{{ 'pages.about.title' | t }}</h1>
-  <p class="text-muted-foreground mt-2">{{ 'pages.about.description' | t }}</p>
+<!-- Sección "Sobre mí" con diseño limpio y acento de color -->
+<section id="sobre-mi" class="relative overflow-hidden bg-background text-foreground">
+  <div class="mx-auto max-w-6xl px-6 py-16 md:py-24">
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <!-- Texto -->
+      <div class="space-y-6">
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Sobre mí</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          Rodrigo es un desarrollador apasionado por la tecnología, recién graduado en desarrollo de aplicaciones web, con experiencia en Angular, FastAPI, Python, Tailwind CSS y bases de datos. Le interesa construir aplicaciones completas con frontend, backend e integración de IA. Su enfoque es práctico y orientado a resultados, siempre con curiosidad por aprender y mejorar cada iteración.
+        </p>
+
+        <!-- Habilidades destacadas -->
+        <div>
+          <h3 class="text-lg font-medium">Habilidades destacadas</h3>
+          <ul class="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <li class="flex items-center gap-2 rounded-lg border border-border bg-card text-card-foreground px-3 py-2">
+              <span class="h-2 w-2 rounded-full bg-[hsl(var(--accent))]"></span>
+              <span class="text-sm">Angular</span>
+            </li>
+            <li class="flex items-center gap-2 rounded-lg border border-border bg-card text-card-foreground px-3 py-2">
+              <span class="h-2 w-2 rounded-full bg-[hsl(var(--accent))]"></span>
+              <span class="text-sm">FastAPI &amp; Python</span>
+            </li>
+            <li class="flex items-center gap-2 rounded-lg border border-border bg-card text-card-foreground px-3 py-2">
+              <span class="h-2 w-2 rounded-full bg-[hsl(var(--accent))]"></span>
+              <span class="text-sm">Tailwind CSS</span>
+            </li>
+            <li class="flex items-center gap-2 rounded-lg border border-border bg-card text-card-foreground px-3 py-2">
+              <span class="h-2 w-2 rounded-full bg-[hsl(var(--accent))]"></span>
+              <span class="text-sm">Bases de datos</span>
+            </li>
+            <li class="flex items-center gap-2 rounded-lg border border-border bg-card text-card-foreground px-3 py-2">
+              <span class="h-2 w-2 rounded-full bg-[hsl(var(--accent))]"></span>
+              <span class="text-sm">Integración de IA</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Frase final motivadora -->
+        <p class="mt-4 font-medium text-[hsl(var(--accent))]">
+          Siempre en búsqueda de retos que impulsen el aprendizaje y el impacto. ¿Colaboramos?
+        </p>
+
+        <!-- CTA -->
+        <div class="mt-2">
+          <a routerLink="/proyectos" class="btn btn-outline inline-flex items-center gap-2">
+            Explora mis proyectos
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4">
+              <path d="M5.25 12a.75.75 0 0 1 .75-.75h9.19l-3.22-3.22a.75.75 0 1 1 1.06-1.06l4.5 4.5a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 1 1-1.06-1.06l3.22-3.22H6a.75.75 0 0 1-.75-.75Z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Imagen / ilustración de perfil -->
+      <div class="flex justify-center md:justify-end">
+        <div class="relative h-48 w-48 overflow-hidden rounded-2xl border border-border shadow-lg md:h-64 md:w-64">
+          <!-- Usa la foto existente del header -->
+          <img src="assets/images/profile.jpeg" alt="Foto de perfil de Rodrigo" class="h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-tr from-background/30 to-transparent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acento visual inferior -->
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--accent))]/40 to-transparent"></div>
 </section>

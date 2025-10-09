@@ -1,4 +1,18 @@
 {
     "IDX.aI.enableInlineCompletion": true,
-    "IDX.aI.enableCodebaseIndexing": true
+    "IDX.aI.enableCodebaseIndexing": true,
+    // Evita el aviso "Unknown at rule @tailwind" del validador CSS
+    "css.validate": false,
+    // Hace que el lenguaje CSS se trate como PostCSS para Tailwind
+    "tailwindCSS.includeLanguages": {
+        "css": "postcss",
+        "scss": "postcss",
+        "less": "postcss"
+    },
+    // Asocia archivos .css a PostCSS para mejor IntelliSense de Tailwind
+    "files.associations": {
+        "*.css": "postcss"
+    },
+    // Opcional: autocompletado de Emmet con clases Tailwind
+    "tailwindCSS.emmetCompletions": true
 }

@@ -9,46 +9,13 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     <ng-container *ngFor="let item of items | slice:0:8; let i = index">
-      <!-- Enlace externo si tiene URL -->
-      <a *ngIf="item.url; else internalCard"
-         [href]="item.url"
-         target="_blank" rel="noopener noreferrer"
-         (click)="openOptions(i, $event)"
-         class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-visible group justify-self-center transition-transform duration-200 ease-out hover:scale-[1.04] transform-gpu">
-        <!-- Imagen del proyecto como background para evitar roturas si no existe aún -->
-        <div class="h-[280px] sm:h-[320px] w-full group-hover:brightness-95 transition bg-cover bg-center rounded-xl"
-             [ngStyle]="{ 'background-image': item.image ? 'url(' + item.image + ')' : 'none' }"
-             [ngClass]="{ 'bg-muted': !item.image }"></div>
-        <!-- Título siempre visible -->
-        <div class="absolute inset-0 p-4 flex items-start">
-          <h3 *ngIf="item.title" class="text-xl font-semibold drop-shadow-sm">{{ item.title }}</h3>
-        </div>
-        <!-- Overlay de descripción al hacer hover -->
-        <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl overflow-hidden">
-          <div class="absolute inset-0 rounded-xl bg-black/80"></div>
-          <div class="absolute inset-0 p-4 flex flex-col justify-end">
-            <p class="text-[15px] text-white">{{ item.desc }}</p>
-          </div>
-        </div>
-        <!-- Bocadillos fuera de la tarjeta, por clic (solo ZapasPro) -->
-        <ng-container *ngIf="isZapasPro(item) && bubbleOpenIndex === i">
-          <!-- Overlay para cerrar al hacer clic fuera -->
-          <div class="fixed inset-0 z-[5] bg-transparent" (click)="closeOptions()"></div>
-          <!-- Dos burbujas en columna a la derecha -->
-          <div class="absolute -right-40 sm:-right-44 top-1/2 -translate-y-1/2 z-[10] flex flex-col gap-3">
-            <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="visitWeb(item)">
-              <span>Pulsa para visitar la web</span>
-            </button>
-            <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="moreInfo()">
-              <span>Más información</span>
-            </button>
-          </div>
-        </ng-container>
-      </a>
-
-      <!-- Fallback: navega a /proyectos -->
-      <ng-template #internalCard>
-        <a routerLink="/proyectos" (click)="openOptions(i, $event)" class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-visible group justify-self-center transition-transform duration-200 ease-out hover:scale-[1.04] transform-gpu">
+      <!-- Wrapper para hover que incluye tarjeta y botones debajo -->
+      <div class="flex flex-col items-center" (mouseenter)="bubbleOpenIndex = i" (mouseleave)="closeOptions()">
+        <!-- Enlace externo si tiene URL -->
+        <a *ngIf="item.url; else internalCard"
+           [href]="item.url"
+           target="_blank" rel="noopener noreferrer"
+           class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-visible group justify-self-center transition-transform duration-200 ease-out hover:scale-[1.04] transform-gpu">
           <!-- Imagen del proyecto como background para evitar roturas si no existe aún -->
           <div class="h-[280px] sm:h-[320px] w-full group-hover:brightness-95 transition bg-cover bg-center rounded-xl"
                [ngStyle]="{ 'background-image': item.image ? 'url(' + item.image + ')' : 'none' }"
@@ -57,28 +24,43 @@
           <div class="absolute inset-0 p-4 flex items-start">
             <h3 *ngIf="item.title" class="text-xl font-semibold drop-shadow-sm">{{ item.title }}</h3>
           </div>
-          <!-- Overlay de descripción al hacer hover (si existiera) -->
+          <!-- Overlay de descripción al hacer hover -->
           <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl overflow-hidden">
             <div class="absolute inset-0 rounded-xl bg-black/80"></div>
             <div class="absolute inset-0 p-4 flex flex-col justify-end">
               <p class="text-[15px] text-white">{{ item.desc }}</p>
             </div>
           </div>
-          <!-- Bocadillos fuera de la tarjeta, por clic (solo ZapasPro) -->
-          <ng-container *ngIf="isZapasPro(item) && bubbleOpenIndex === i">
-            <!-- Overlay para cerrar al hacer clic fuera -->
-            <div class="fixed inset-0 z-[5] bg-transparent" (click)="closeOptions()"></div>
-            <!-- Dos burbujas en columna a la derecha -->
-            <div class="absolute -right-40 sm:-right-44 top-1/2 -translate-y-1/2 z-[10] flex flex-col gap-3">
-              <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="visitWeb(item)">
-                <span>Pulsa para visitar la web</span>
-              </button>
-              <button type="button" class="speech-bubble tail-left text-sm font-semibold hover:scale-[1.03] transition flex flex-col text-left leading-snug" (click)="moreInfo()">
-                <span>Más información</span>
-              </button>
-            </div>
-          </ng-container>
+          <!-- Botones debajo de la tarjeta cuando está seleccionada (solo ZapasPro) -->
+          
         </a>
+
+        
+      </div>
+
+      <!-- Fallback: navega a /proyectos -->
+      <ng-template #internalCard>
+        <div class="flex flex-col items-center" (mouseenter)="bubbleOpenIndex = i" (mouseleave)="closeOptions()">
+          <a routerLink="/proyectos" class="relative w-[180px] sm:w-[200px] rounded-xl border bg-card text-card-foreground shadow-sm overflow-visible group justify-self-center transition-transform duration-200 ease-out hover:scale-[1.04] transform-gpu">
+            <!-- Imagen del proyecto como background para evitar roturas si no existe aún -->
+            <div class="h-[280px] sm:h-[320px] w-full group-hover:brightness-95 transition bg-cover bg-center rounded-xl"
+                 [ngStyle]="{ 'background-image': item.image ? 'url(' + item.image + ')' : 'none' }"
+                 [ngClass]="{ 'bg-muted': !item.image }"></div>
+            <!-- Título siempre visible -->
+            <div class="absolute inset-0 p-4 flex items-start">
+              <h3 *ngIf="item.title" class="text-xl font-semibold drop-shadow-sm">{{ item.title }}</h3>
+            </div>
+            <!-- Overlay de descripción al hacer hover (si existiera) -->
+            <div *ngIf="item.desc" class="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl overflow-hidden">
+              <div class="absolute inset-0 rounded-xl bg-black/80"></div>
+              <div class="absolute inset-0 p-4 flex flex-col justify-end">
+                <p class="text-[15px] text-white">{{ item.desc }}</p>
+              </div>
+            </div>
+            <!-- Botones debajo de la tarjeta cuando está seleccionada (solo ZapasPro) -->
+          </a>
+          
+        </div>
       </ng-template>
     </ng-container>
   </div>

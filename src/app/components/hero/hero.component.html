@@ -1,34 +1,58 @@
-<section class="container mx-auto py-24 px-4">
-  <div class="space-y-6 max-w-5xl">
-    <p class="text-xs font-semibold tracking-widest uppercase text-muted-foreground">{{ 'hero.greeting' | t: { name: 'Rodrigo' } }}</p>
-    <h1 class="font-extrabold text-5xl md:text-7xl leading-[0.95] text-foreground">{{ 'hero.title' | t }}</h1>
-    <p class="text-xl md:text-2xl text-muted-foreground">
-      {{ 'hero.workWith' | t }}
-    </p>
-    <div class="flex flex-wrap gap-4 pt-6 items-center">
-      <button class="btn btn-outline" (click)="downloadCV()">
-        <lucide-icon name="download" size="18"></lucide-icon>
-        {{ 'hero.downloadCV' | t }}
-      </button>
-      <button class="btn btn-outline" (click)="scrollToContact()">
-        <lucide-icon name="mail" size="18"></lucide-icon>
-        {{ 'hero.contactMe' | t }}
-      </button>
-      <a href="https://github.com/rodrigopozodev" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
-        <lucide-icon name="github" size="20"></lucide-icon>
-        <span class="sr-only">GitHub</span>
-      </a>
-      <a href="https://www.linkedin.com/in/rodrigopozosanchez/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
-        <lucide-icon name="linkedin" size="20"></lucide-icon>
-        <span class="sr-only">LinkedIn</span>
-      </a>
-    </div>
-  </div>
-  <!-- Modal de contacto -->
-  <app-contact-modal [open]="isContactOpen" (close)="isContactOpen=false"></app-contact-modal>
-</section>
+<!-- Contenedor scroll-snap para Inicio (Bienvenida + Proyectos) -->
+<div #homeScroll class="projects-scroll h-screen overflow-y-auto snap-y snap-mandatory" (wheel)="onWheel($event)">
+  <!-- Sección 1: Bienvenida -->
+  <section #homeSection class="snap-start h-screen">
+    <section class="container mx-auto py-24 px-4 transition-all duration-700 ease-out"
+             [ngClass]="activeIndex === 0 ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-2'">
+      <div class="space-y-6 max-w-5xl">
+        <p class="text-xs font-semibold tracking-widest uppercase text-muted-foreground">{{ 'hero.greeting' | t: { name: 'Rodrigo' } }}</p>
+        <h1 class="font-extrabold text-5xl md:text-7xl leading-[0.95] text-foreground">{{ 'hero.title' | t }}</h1>
+        <p class="text-xl md:text-2xl text-muted-foreground">
+          {{ 'hero.workWith' | t }}
+        </p>
+        <div class="flex flex-wrap gap-4 pt-6 items-center">
+          <button class="btn btn-outline" (click)="downloadCV()">
+            <lucide-icon name="download" size="18"></lucide-icon>
+            {{ 'hero.downloadCV' | t }}
+          </button>
+          <button class="btn btn-outline" (click)="scrollToContact()">
+            <lucide-icon name="mail" size="18"></lucide-icon>
+            {{ 'hero.contactMe' | t }}
+          </button>
+          <a href="https://github.com/rodrigopozodev" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
+            <lucide-icon name="github" size="20"></lucide-icon>
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/rodrigopozosanchez/" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-icon">
+            <lucide-icon name="linkedin" size="20"></lucide-icon>
+            <span class="sr-only">LinkedIn</span>
+          </a>
+        </div>
+      </div>
+      <!-- Modal de contacto -->
+      <app-contact-modal [open]="isContactOpen" (close)="isContactOpen=false"></app-contact-modal>
+    </section>
+  </section>
 
-<!-- Featured Projects under hero -->
-<app-featured-projects></app-featured-projects>
+  <!-- Sección 2: Proyectos recientes -->
+  <section #homeSection class="snap-start h-screen">
+    <div class="transition-all duration-700 ease-out"
+         [ngClass]="activeIndex === 1 ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-2'">
+      <app-featured-projects></app-featured-projects>
+    </div>
+  </section>
+</div>
+
+<!-- Indicador vertical fijo (Inicio) -->
+<div class="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col items-center gap-6 select-none">
+  <button *ngFor="let _ of [0,1]; index as i"
+          (click)="goToIndex(i)"
+          class="transition-transform"
+          [ngClass]="i === activeIndex
+            ? 'w-4 h-4 border-2 border-[hsl(var(--accent))] rounded-none'
+            : 'w-2 h-2 rounded-full rotate-45 bg-[hsl(var(--accent))]'"
+          [attr.aria-label]="'Ir a sección ' + (i + 1)">
+  </button>
+</div>
 
 

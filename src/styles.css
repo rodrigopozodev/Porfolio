@@ -253,3 +253,14 @@ input, textarea, select, pre, code, [contenteditable="true"], .cursor-text, .inp
     box-shadow: 0 2px 6px rgba(0,0,0,0.12);
   }
 }
+
+/* Ocultar barras de desplazamiento en el contenedor de Proyectos y contener overscroll */
+.projects-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  overscroll-behavior: contain;
+}
+.projects-scroll::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
