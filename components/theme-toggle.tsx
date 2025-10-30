@@ -1,0 +1,55 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { Moon, Sun } from "lucide-react"
+import { Button } from "@/components/ui/button"
+
+export function ThemeToggle() {
+  const [theme, setTheme] = useState<"light" | "dark" | "system">("system")
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | "system" | null
+    if (savedTheme) {
+      setTheme(savedTheme)
+      applyTheme(savedTheme)
+    } else {
+      applyTheme("system")
+    }
+  }, [])
+
+  const applyTheme = (newTheme: "light" | "dark" | "system") => {
+    const root = document.documentElement
+
+    if (newTheme === "system") {
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+      root.classList.toggle("dark", systemTheme === "dark")
+    } else {
+      root.classList.toggle("dark", newTheme === "dark")
+    }
+  }
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light"
+    setTheme(newTheme)
+    localStorage.setItem("theme", newTheme)
+    applyTheme(newTheme)
+  }
+
+  if (!mounted) {
+    return null
+  }
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={toggleTheme}
+      className="fixed right-6 top-6 z-50 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110"
+      aria-label="Cambiar tema"
+    >
+      {theme === "dark" ? <Sun className="h-5 w-5 text-foreground" /> : <Moon className="h-5 w-5 text-foreground" />}
+    </Button>
+  )
+}
