@@ -40,8 +40,21 @@ const MovingBorder = ({
     }
   });
 
-  const x = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).x ?? 0);
-  const y = useTransform(progress, (val) => pathRef.current?.getPointAtLength(val).y ?? 0);
+  const getPoint = (val: number) => {
+    const el = pathRef.current;
+    if (!el) return { x: 0, y: 0 } as DOMPoint;
+    const total = el.getTotalLength?.();
+    if (!total || total <= 0) return { x: 0, y: 0 } as DOMPoint;
+    const clamped = Math.max(0, Math.min(val, total));
+    try {
+      return el.getPointAtLength(clamped);
+    } catch {
+      return { x: 0, y: 0 } as DOMPoint;
+    }
+  };
+
+  const x = useTransform(progress, (val) => getPoint(val).x ?? 0);
+  const y = useTransform(progress, (val) => getPoint(val).y ?? 0);
   const transform = useMotionTemplate`translateX(${x}px) translateY(${y}px) translateX(-50%) translateY(-50%)`;
 
   return (
