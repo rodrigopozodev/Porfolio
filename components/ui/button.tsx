@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        animatedBorder: "relative inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border-2 border-blue-500 bg-transparent text-black dark:text-white font-medium transition-all hover:scale-105 hover:shadow-lg focus-visible:ring-2 focus-visible:ring-blue-500 before:absolute before:inset-0 before:rounded-full before:border-2 before:border-blue-500 before:animate-[borderMove_2s_linear_infinite]"
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

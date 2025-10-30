@@ -5,6 +5,7 @@ import { ArrowDown } from "lucide-react"
 import { useState, useEffect } from "react"
 import { translations, type Language } from "@/lib/translations"
 import Typeanimation from "@/components/ui/typeanimation"
+import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 
 export function HeroSection() {
   const [language, setLanguage] = useState<Language>("es")
@@ -58,15 +59,19 @@ export function HeroSection() {
           />
         </div>
 
-        {/* Botón debajo de las palabras animadas */}
-        <Button
-          size="lg"
-          onClick={scrollToPortfolio}
-          className="group gap-2 rounded-full px-8 py-6 text-base font-medium shadow-lg transition-all hover:scale-105 hover:shadow-xl"
-        >
-          {t.cta}
-          <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" />
-        </Button>
+        {/* Botón debajo de las palabras animadas envuelto en Announcement */}
+        <Announcement movingBorder>
+          <AnnouncementTitle>
+            <Button
+              size="lg"
+              onClick={scrollToPortfolio}
+              className="bg-transparent text-black dark:text-white text-lg font-semibold transition-all group cta-button"
+            >
+              {t.cta}
+              <ArrowDown className="arrow-icon" />
+            </Button>
+          </AnnouncementTitle>
+        </Announcement>
       </div>
 
       {/* Indicador de scroll */}

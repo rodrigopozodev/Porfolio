@@ -156,3 +156,36 @@
     transition-duration: 0ms;
   }
 }
+
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem; /* un poco más de espacio entre texto y flecha */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.arrow-icon {
+  display: inline-block;
+  width: 1.5rem;   /* 24px */
+  height: 1.5rem;  /* 24px */
+  transition: transform 0.2s;
+}
+
+.cta-button:hover .arrow-icon {
+  animation: bounceArrow 0.6s infinite;
+}
+
+@keyframes bounceArrow {
+  0% {
+    transform: translateY(-5px); /* sube un poco más */
+  }
+  50% {
+    transform: translateY(12px); /* baja más */
+  }
+  100% {
+    transform: translateY(-5px); /* vuelve al punto alto */
+  }
+}
