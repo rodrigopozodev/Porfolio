@@ -6,12 +6,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Eye } from "lucide-react"
 import { useState, useEffect } from "react"
-import { translations, type Language } from "@/lib/translations"
+import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/language-context"
 
 const projectImages = [
-  "/modern-ecommerce-interface.png",
-  "/analytics-dashboard.png",
-  "/mobile-social-app-interface.jpg",
+  "/modern-ecommerce-interface.svg",
+  "/analytics-dashboard.svg",
+  "/mobile-social-app-interface.svg",
 ]
 
 const projectTags = [
@@ -21,23 +22,10 @@ const projectTags = [
 ]
 
 export function PortfolioSection() {
-  const [language, setLanguage] = useState<Language>("es")
+  const { language } = useLanguage()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
-
-  useEffect(() => {
-    const savedLanguage = (localStorage.getItem("language") as Language) || "es"
-    setLanguage(savedLanguage)
-
-    const handleLanguageChange = (e: Event) => {
-      const customEvent = e as CustomEvent
-      setLanguage(customEvent.detail)
-    }
-
-    window.addEventListener("languageChange", handleLanguageChange)
-    return () => window.removeEventListener("languageChange", handleLanguageChange)
-  }, [])
 
   const t = translations[language].portfolio
 

@@ -2,33 +2,21 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Github, Linkedin, Mail, Download } from "lucide-react"
-import { translations, type Language } from "@/lib/translations"
+import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/language-context"
 
 export function ContactSection() {
-  const [language, setLanguage] = useState<Language>("es")
+  const { language } = useLanguage()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   })
-
-  useEffect(() => {
-    const savedLanguage = (localStorage.getItem("language") as Language) || "es"
-    setLanguage(savedLanguage)
-
-    const handleLanguageChange = (e: Event) => {
-      const customEvent = e as CustomEvent
-      setLanguage(customEvent.detail)
-    }
-
-    window.addEventListener("languageChange", handleLanguageChange)
-    return () => window.removeEventListener("languageChange", handleLanguageChange)
-  }, [])
 
   const t = translations[language].contact
 

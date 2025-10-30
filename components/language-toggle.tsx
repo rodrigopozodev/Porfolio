@@ -1,33 +1,21 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Languages } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/lib/language-context"
 
 export function LanguageToggle() {
-  const [language, setLanguage] = useState<"es" | "en">("es")
-  const [mounted, setMounted] = useState(false)
+  const { language, setLanguage } = useLanguage()
+  const [currentLang, setCurrentLang] = useState(language)
 
   useEffect(() => {
-    setMounted(true)
-    const savedLanguage = localStorage.getItem("language") as "es" | "en" | null
-    if (savedLanguage) {
-      setLanguage(savedLanguage)
-      // Dispatch custom event to notify components
-      window.dispatchEvent(new CustomEvent("languageChange", { detail: savedLanguage }))
-    }
-  }, [])
+    setCurrentLang(language)
+  }, [language])
 
   const toggleLanguage = () => {
-    const newLanguage = language === "es" ? "en" : "es"
-    setLanguage(newLanguage)
-    localStorage.setItem("language", newLanguage)
-    // Dispatch custom event to notify all components
-    window.dispatchEvent(new CustomEvent("languageChange", { detail: newLanguage }))
-  }
-
-  if (!mounted) {
-    return null
+    const newLang = language === "es" ? "en" : "es"
+    setLanguage(newLang)
   }
 
   return (
@@ -39,8 +27,8 @@ export function LanguageToggle() {
       aria-label="Cambiar idioma"
     >
       <div className="flex items-center gap-1">
-        <Languages className="h-5 w-5 text-foreground" />
-        <span className="text-xs font-semibold">{language.toUpperCase()}</span>
+        <Languages className="h-4 w-4 text-foreground" />
+        <span className="text-xs font-semibold">{currentLang.toUpperCase()}</span>
       </div>
     </Button>
   )

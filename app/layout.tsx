@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Transition from "@/components/ui/transition"
+import { LanguageProvider } from "@/lib/language-context"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -36,17 +37,19 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
-        <Transition
-          intro={null}
-          introDuration={2}
-          transitionDuration={1}
-          type="curved"
-          direction="bottom"
-          skip
-          autoExit={false}
-        >
-          {children}
-        </Transition>
+        <LanguageProvider>
+          <Transition
+            intro={null}
+            introDuration={2}
+            transitionDuration={1}
+            type="curved"
+            direction="bottom"
+            skip
+            autoExit={false}
+          >
+            {children}
+          </Transition>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>
