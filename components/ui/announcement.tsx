@@ -33,8 +33,15 @@ const MovingBorder = ({
   const progress = useMotionValue(0);
 
   useAnimationFrame((time) => {
-    const length = pathRef.current?.getTotalLength?.();
-    if (length) {
+    const el = pathRef.current;
+    if (!el) return;
+    let length = 0;
+    try {
+      length = el.getTotalLength();
+    } catch {
+      return; // element not rendered yet
+    }
+    if (length && length > 0) {
       const pxPerMillisecond = length / duration;
       progress.set((time * pxPerMillisecond) % length);
     }
