@@ -1,7 +1,7 @@
 export const translations = {
   es: {
     hero: {
-      name: "María García",
+      name: "Rodrigo Pozo Sánchez",
       tagline: "Desarrolladora web creando experiencias digitales excepcionales",
       cta: "Ver trabajos",
     },
@@ -33,12 +33,12 @@ export const translations = {
       send: "Enviar mensaje",
       connect: "Conecta conmigo",
       download: "Descargar CV",
-      footer: "© 2025 María García. Todos los derechos reservados.",
+      footer: "© 2025 Rodrigo Pozo Sánchez. Todos los derechos reservados.",
     },
   },
   en: {
     hero: {
-      name: "María García",
+      name: "Rodrigo Pozo Sánchez",
       tagline: "Web developer creating exceptional digital experiences",
       cta: "View work",
     },
@@ -70,7 +70,7 @@ export const translations = {
       send: "Send message",
       connect: "Connect with me",
       download: "Download CV",
-      footer: "© 2025 María García. All rights reserved.",
+      footer: "© 2025 Rodrigo Pozo Sánchez. All rights reserved.",
     },
   },
 }
