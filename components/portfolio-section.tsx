@@ -8,6 +8,7 @@ import { ExternalLink, Eye } from "lucide-react"
 import { useState, useEffect } from "react"
 import { translations } from "@/lib/translations"
 import { useLanguage } from "@/lib/language-context"
+import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 
 const projectImages = [
   "/modern-ecommerce-interface.svg",
@@ -103,15 +104,21 @@ export function PortfolioSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-                <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
-                  <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
-                    <Eye className="h-4 w-4" />
-                    {t.view}
-                  </Button>
-                  <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
-                    <ExternalLink className="h-4 w-4" />
-                    {t.visit}
-                  </Button>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
+                  <Announcement movingBorder>
+                    <AnnouncementTitle>
+                      <div className="flex items-center justify-center gap-2">
+                        <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
+                          <Eye className="h-4 w-4" />
+                          {t.view}
+                        </Button>
+                        <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
+                          <ExternalLink className="h-4 w-4" />
+                          {t.visit}
+                        </Button>
+                      </div>
+                    </AnnouncementTitle>
+                  </Announcement>
                 </div>
               </div>
 
@@ -164,15 +171,21 @@ export function PortfolioSection() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-center gap-2">
-                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm">
-                            <Eye className="h-4 w-4" />
-                            {t.view}
-                          </Button>
-                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm">
-                            <ExternalLink className="h-4 w-4" />
-                            {t.visit}
-                          </Button>
+                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-center">
+                          <Announcement movingBorder>
+                            <AnnouncementTitle>
+                              <div className="flex items-center justify-center gap-2">
+                                <Button size="sm" variant="secondary" className="gap-2 shadow-sm">
+                                  <Eye className="h-4 w-4" />
+                                  {t.view}
+                                </Button>
+                                <Button size="sm" variant="secondary" className="gap-2 shadow-sm">
+                                  <ExternalLink className="h-4 w-4" />
+                                  {t.visit}
+                                </Button>
+                              </div>
+                            </AnnouncementTitle>
+                          </Announcement>
                         </div>
                       </div>
 
