@@ -5,10 +5,10 @@ import type React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Eye } from "lucide-react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { translations } from "@/lib/translations"
 import { useLanguage } from "@/lib/language-context"
-import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
+import { CardFlip, CardFlipFront, CardFlipBack, CardFlipContent } from "@/components/ui/card-flip"
 
 const projectImages = [
   "/modern-ecommerce-interface.svg",
@@ -27,6 +27,9 @@ export function PortfolioSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const pauseTimerRef = useRef<number | null>(null)
+  const [isInstantSwitch, setIsInstantSwitch] = useState(false)
 
   const t = translations[language].portfolio
 
@@ -65,12 +68,45 @@ export function PortfolioSection() {
   }
 
   useEffect(() => {
+    if (isPaused) return
     const autoplayInterval = setInterval(() => {
       nextProject()
     }, 4000)
 
     return () => clearInterval(autoplayInterval)
-  }, [currentIndex])
+  }, [currentIndex, isPaused])
+
+  // Limpieza del temporizador de pausa en desmontaje
+  useEffect(() => {
+    return () => {
+      if (pauseTimerRef.current) {
+        window.clearTimeout(pauseTimerRef.current)
+      }
+    }
+  }, [])
+
+  const handleCardClick = (index: number) => {
+    // Navegar a la tarjeta clicada
+    setCurrentIndex(index)
+    // Alternar pausa/reanudación del autoplay
+    if (!isPaused) {
+      setIsPaused(true)
+      if (pauseTimerRef.current) {
+        window.clearTimeout(pauseTimerRef.current)
+      }
+      pauseTimerRef.current = window.setTimeout(() => {
+        setIsPaused(false)
+        pauseTimerRef.current = null
+      }, 20000)
+    } else {
+      // Segundo clic: reanudar inmediatamente
+      setIsPaused(false)
+      if (pauseTimerRef.current) {
+        window.clearTimeout(pauseTimerRef.current)
+        pauseTimerRef.current = null
+      }
+    }
+  }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -85,74 +121,78 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="snap-section flex items-center justify-center bg-secondary/30 px-4 py-12 md:py-16 lg:px-6 lg:py-12"
+      className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-4 md:pt-6 md:pb-6 lg:px-6 lg:py-12"
     >
-      <div className="mx-auto w-full max-w-6xl">
-        <h2 className="mb-6 text-center text-3xl font-bold tracking-tight text-foreground md:mb-8 md:text-4xl lg:mb-12 lg:text-5xl">
-          {t.title}
+      <div className="mx-auto w-full max-w-7xl">
+        <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground md:mt-6 md:mb-6 md:text-4xl lg:mt-8 lg:mb-8 lg:text-5xl">
+          {t.title.split(" ").map((word, i) => (
+            <span key={i} className="block">
+              {word}
+            </span>
+          ))}
         </h2>
 
         {/* Desktop grid */}
         <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6">
           {t.projects.map((project, index) => (
-            <Card key={index} className="group overflow-hidden transition-all hover:scale-[1.03] hover:shadow-lg">
-              <div className="relative aspect-video overflow-hidden bg-muted">
-                <img
-                  src={projectImages[index] || "/placeholder.svg"}
-                  alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-100">
-                  <Announcement movingBorder>
-                    <AnnouncementTitle>
-                      <div className="flex items-center justify-center gap-2">
-                        <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
-                          <Eye className="h-4 w-4" />
-                          {t.view}
-                        </Button>
-                        <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
-                          <ExternalLink className="h-4 w-4" />
-                          {t.visit}
-                        </Button>
-                      </div>
-                    </AnnouncementTitle>
-                  </Announcement>
+            <CardFlip key={index} className="select-none">
+              <CardFlipFront className="overflow-hidden">
+                <div className="relative aspect-[3/2] overflow-hidden bg-muted">
+                  <img
+                    src={projectImages[index] || "/placeholder.svg"}
+                    alt={project.title}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
-              </div>
+              </CardFlipFront>
 
-              <CardContent className="p-6">
-                <h3 className="mb-2 text-xl font-semibold text-card-foreground">{project.title}</h3>
-                <p className="mb-4 line-clamp-2 text-sm text-muted-foreground">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {projectTags[index].map((tag, tagIndex) => (
-                    <span
-                      key={tagIndex}
-                      className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+              <CardFlipBack className="overflow-hidden">
+                <div className="relative aspect-[3/2] bg-white dark:bg-black flex items-center justify-center">
+                  <div className="max-w-[85%] text-center text-black dark:text-white">
+                    <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                    <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                    <div className="mb-4 flex flex-wrap justify-center gap-2">
+                      {projectTags[index].map((tag, tagIndex) => (
+                        <span
+                          key={tagIndex}
+                          className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-center gap-2">
+                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
+                        <Eye className="h-4 w-4" />
+                        {t.view}
+                      </Button>
+                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
+                        <ExternalLink className="h-4 w-4" />
+                        {t.visit}
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </CardFlipBack>
+            </CardFlip>
           ))}
         </div>
 
         {/* Mobile/Tablet carousel */}
-        <div className="relative lg:hidden">
+        <div className="relative lg:hidden mt-4 md:mt-6">
           <div
-            className="relative min-h-[420px] overflow-hidden md:min-h-[400px]"
+            className="relative overflow-visible min-h-[78vh] sm:min-h-[82vh]"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            <div className="flex h-full items-center justify-center">
+            <div className="flex items-start justify-center">
               {t.projects.map((project, index) => (
                 <div
                   key={index}
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-[600ms] ease-[cubic-bezier(0.445,0.05,0.55,0.95)] ${
+                  className={`absolute inset-0 flex items-start justify-center ${
+                    isInstantSwitch ? "transition-none" : "transition-all duration-[600ms] ease-[cubic-bezier(0.445,0.05,0.55,0.95)]"
+                  } ${
                     index === currentIndex
                       ? "translate-x-0 opacity-100 scale-100"
                       : index < currentIndex
@@ -161,67 +201,86 @@ export function PortfolioSection() {
                   }`}
                   style={{ pointerEvents: index === currentIndex ? "auto" : "none" }}
                 >
-                  <div className="w-[90%] max-w-md md:w-[80%] md:max-w-lg">
-                    <Card className="overflow-hidden shadow-md">
-                      <div className="relative aspect-video overflow-hidden bg-muted">
-                        <img
-                          src={projectImages[index] || "/placeholder.svg"}
-                          alt={project.title}
-                          className="h-full w-full object-cover"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-center">
-                          <Announcement movingBorder>
-                            <AnnouncementTitle>
-                              <div className="flex items-center justify-center gap-2">
-                                <Button size="sm" variant="secondary" className="gap-2 shadow-sm">
-                                  <Eye className="h-4 w-4" />
-                                  {t.view}
-                                </Button>
-                                <Button size="sm" variant="secondary" className="gap-2 shadow-sm">
-                                  <ExternalLink className="h-4 w-4" />
-                                  {t.visit}
-                                </Button>
-                              </div>
-                            </AnnouncementTitle>
-                          </Announcement>
+                  <div className="w-full max-w-[92%] sm:max-w-[80%] px-2 sm:px-4 mx-auto" onClick={() => handleCardClick(index)}>
+                    <CardFlip className="select-none" autoFlipBackMs={20000}
+                      onFlipChange={(flipped) => {
+                        // Pausar autoplay mientras está volteado
+                        if (flipped) {
+                          setIsPaused(true)
+                          if (pauseTimerRef.current) window.clearTimeout(pauseTimerRef.current)
+                          pauseTimerRef.current = window.setTimeout(() => {
+                            setIsPaused(false)
+                            pauseTimerRef.current = null
+                          }, 20000)
+                        }
+                      }}
+                    >
+                      <CardFlipFront className="overflow-hidden shadow-md">
+                        <div className="relative h-[72vh] sm:h-[76vh] overflow-hidden bg-muted">
+                          <img
+                            src={projectImages[index] || "/placeholder.svg"}
+                            alt={project.title}
+                            className="h-full w-full object-cover"
+                          />
                         </div>
-                      </div>
+                      </CardFlipFront>
 
-                      <CardContent className="p-4 md:p-6">
-                        <h3 className="mb-2 text-xl font-semibold text-card-foreground">{project.title}</h3>
-                        <p className="mb-4 text-sm text-muted-foreground">{project.description}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {projectTags[index].map((tag, tagIndex) => (
-                            <span
-                              key={tagIndex}
-                              className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
-                            >
-                              {tag}
-                            </span>
-                          ))}
+                      <CardFlipBack className="overflow-hidden shadow-md">
+                        <div className="relative h-[72vh] sm:h-[76vh] bg-white dark:bg-black flex items-center justify-center">
+                          <div className="max-w-[90%] text-center text-black dark:text-white">
+                            <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                            <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                            <div className="mb-4 flex flex-wrap justify-center gap-2">
+                              {projectTags[index].map((tag, tagIndex) => (
+                                <span
+                                  key={tagIndex}
+                                  className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                            <div className="flex items-center justify-center gap-2">
+                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm" onClick={(e) => e.stopPropagation()}>
+                                <Eye className="h-4 w-4" />
+                                {t.view}
+                              </Button>
+                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm" onClick={(e) => e.stopPropagation()}>
+                                <ExternalLink className="h-4 w-4" />
+                                {t.visit}
+                              </Button>
+                            </div>
+                          </div>
                         </div>
-                      </CardContent>
-                    </Card>
+                      </CardFlipBack>
+                    </CardFlip>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Indicadores de puntos */}
-          <div className="mt-6 flex justify-center gap-2">
-            {t.projects.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentIndex ? "w-8 bg-accent" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                }`}
-                aria-label={`Ir al proyecto ${index + 1}`}
-              />
-            ))}
+            {/* Indicadores de puntos dentro del carrusel */}
+            <div className="absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-2 pointer-events-auto">
+              {t.projects.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    // Forzar salto inmediato sin animación usando doble RAF
+                    setIsInstantSwitch(true)
+                    setCurrentIndex(index)
+                    requestAnimationFrame(() => {
+                      requestAnimationFrame(() => {
+                        setIsInstantSwitch(false)
+                      })
+                    })
+                  }}
+                  className={`h-2 rounded-full transition-all ${
+                    index === currentIndex ? "w-8 bg-accent" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  }`}
+                  aria-label={`Ir al proyecto ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
