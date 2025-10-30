@@ -35,6 +35,8 @@ export function ThemeToggle() {
     setTheme(newTheme)
     localStorage.setItem("theme", newTheme)
     applyTheme(newTheme)
+    // Dispara la transición global del layout
+    window.dispatchEvent(new Event("themeToggleTransition"))
   }
 
   if (!mounted) {

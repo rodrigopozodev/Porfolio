@@ -125,6 +125,7 @@
   }
 }
 
+
 /* Smooth scroll snap behavior */
 .snap-container {
   scroll-snap-type: y mandatory;

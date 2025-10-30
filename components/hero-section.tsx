@@ -51,6 +51,7 @@ export function HeroSection() {
         {/* Palabras animadas con color azul sólido */}
         <div className="mb-8">
           <Typeanimation
+            key={language}
             words={t.animatedWords}
             typingSpeed="slow"
             deletingSpeed="slow"
