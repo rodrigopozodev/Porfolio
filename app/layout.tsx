@@ -8,8 +8,8 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Rodrigo Pozo Sánchez - Desarrolladora Web",
-  description: "Portfolio de desarrolladora web especializada en crear experiencias digitales excepcionales",
+  title: "Rodrigo Pozo Sánchez - Desarrollador Web",
+  description: "Portfolio de Desarrollador web especializada en crear experiencias digitales excepcionales",
   generator: "v0.app",
 }
 

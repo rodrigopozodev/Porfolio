@@ -2,7 +2,8 @@ export const translations = {
   es: {
     hero: {
       name: "Rodrigo Pozo Sánchez",
-      tagline: "Desarrolladora web creando experiencias digitales excepcionales",
+      tagline: "Impulsando tu negocio con", // ✅ nueva frase
+      animatedWords: ["Soluciones", "Calidad", "Innovación"],
       cta: "Ver trabajos",
     },
     portfolio: {
@@ -39,7 +40,8 @@ export const translations = {
   en: {
     hero: {
       name: "Rodrigo Pozo Sánchez",
-      tagline: "Web developer creating exceptional digital experiences",
+      tagline: "Driving your business with", // ✅ versión en inglés
+      animatedWords: ["Solutions", "Quality", "Innovation"],
       cta: "View work",
     },
     portfolio: {
