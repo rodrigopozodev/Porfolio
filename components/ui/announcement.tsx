@@ -43,7 +43,12 @@ const MovingBorder = ({
   const getPoint = (val: number) => {
     const el = pathRef.current;
     if (!el) return { x: 0, y: 0 } as DOMPoint;
-    const total = el.getTotalLength?.();
+    let total = 0;
+    try {
+      total = el.getTotalLength();
+    } catch {
+      return { x: 0, y: 0 } as DOMPoint;
+    }
     if (!total || total <= 0) return { x: 0, y: 0 } as DOMPoint;
     const clamped = Math.max(0, Math.min(val, total));
     try {
