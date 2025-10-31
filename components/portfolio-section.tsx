@@ -30,6 +30,8 @@ export function PortfolioSection() {
   const [isPaused, setIsPaused] = useState(false)
   const pauseTimerRef = useRef<number | null>(null)
   const [isInstantSwitch, setIsInstantSwitch] = useState(false)
+  const [shouldCarousel, setShouldCarousel] = useState(false)
+  const containerRef = useRef<HTMLDivElement | null>(null)
 
   const t = translations[language].portfolio
 
@@ -118,70 +120,94 @@ export function PortfolioSection() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [])
 
+  // Decidir si usar carrusel según el ancho disponible: si caben ≥4 tarjetas, usamos grid.
+  useEffect(() => {
+    const recalc = () => {
+      const el = containerRef.current
+      if (!el) return
+      const width = el.clientWidth
+      const cardMinWidth = 320 // ancho mínimo estimado por tarjeta
+      const fitCount = Math.floor(width / cardMinWidth)
+      setShouldCarousel(fitCount < 4)
+    }
+    recalc()
+    window.addEventListener("resize", recalc)
+    return () => window.removeEventListener("resize", recalc)
+  }, [])
+
   return (
     <section
       id="portfolio"
       className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-4 md:pt-6 md:pb-6 lg:px-6 lg:py-12"
     >
-      <div className="mx-auto w-full max-w-7xl">
+      <div ref={containerRef} className="mx-auto w-full max-w-7xl">
         <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground md:mt-6 md:mb-6 md:text-4xl lg:mt-8 lg:mb-8 lg:text-5xl">
-          {t.title.split(" ").map((word, i) => (
-            <span key={i} className="block">
-              {word}
-            </span>
-          ))}
+          {(() => {
+            const parts = t.title.split(" ")
+            const first = parts.shift() || ""
+            const rest = parts.join(" ")
+            return (
+              <>
+                <span>{first} </span>
+                <span className="max-[550px]:block">{rest}</span>
+              </>
+            )
+          })()}
         </h2>
 
-        {/* Desktop grid */}
-        <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6">
-          {t.projects.map((project, index) => (
-            <CardFlip key={index} className="select-none cursor-pointer">
-              <CardFlipFront className="overflow-hidden">
-                <div className="relative aspect-[3/2] overflow-hidden bg-muted">
-                  <img
-                    src={projectImages[index] || "/placeholder.svg"}
-                    alt={project.title}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              </CardFlipFront>
+        {/* Grid con diseño móvil aplicado (solo si caben ≥4 por fila) */}
+        {!shouldCarousel && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.projects.map((project, index) => (
+              <CardFlip key={index} className="select-none cursor-pointer" autoFlipBackMs={20000}>
+                <CardFlipFront className="overflow-hidden shadow-md">
+                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[60vh] overflow-hidden bg-muted">
+                    <img
+                      src={projectImages[index] || "/placeholder.svg"}
+                      alt={project.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                </CardFlipFront>
 
-              <CardFlipBack className="overflow-hidden">
-                <div className="relative aspect-[3/2] bg-white dark:bg-black flex items-center justify-center">
-                  <div className="max-w-[85%] text-center text-black dark:text-white">
-                    <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
-                    <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
-                    <div className="mb-4 flex flex-wrap justify-center gap-2">
-                      {projectTags[index].map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-center gap-2">
-                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg cursor-pointer">
-                        <Eye className="h-4 w-4" />
-                        {t.view}
-                      </Button>
-                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg cursor-pointer">
-                        <ExternalLink className="h-4 w-4" />
-                        {t.visit}
-                      </Button>
+                <CardFlipBack className="overflow-hidden shadow-md">
+                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[60vh] bg-white dark:bg-black flex items-center justify-center">
+                    <div className="max-w-[90%] text-center text-black dark:text-white">
+                      <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                      <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                      <div className="mb-4 flex flex-wrap justify-center gap-2">
+                        {projectTags[index].map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex items-center justify-center gap-2">
+                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                          <Eye className="h-4 w-4" />
+                          {t.view}
+                        </Button>
+                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                          <ExternalLink className="h-4 w-4" />
+                          {t.visit}
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </CardFlipBack>
-            </CardFlip>
-          ))}
-        </div>
+                </CardFlipBack>
+              </CardFlip>
+            ))}
+          </div>
+        )}
 
-        {/* Mobile/Tablet carousel */}
-        <div className="relative lg:hidden mt-4 md:mt-6">
+        {/* Carrusel móvil/tablet (solo si NO caben ≥4 por fila) */}
+        {shouldCarousel && (
+        <div className="relative mt-4 md:mt-6">
           <div
-            className="relative overflow-visible min-h-[78vh] sm:min-h-[82vh]"
+            className="relative overflow-visible min-h-[74vh] sm:min-h-[78vh] pb-10 sm:pb-12 md:pb-14"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -216,7 +242,7 @@ export function PortfolioSection() {
                       }}
                     >
                       <CardFlipFront className="overflow-hidden shadow-md">
-                        <div className="relative h-[72vh] sm:h-[76vh] overflow-hidden bg-muted">
+                        <div className="relative h-[66vh] sm:h-[70vh] overflow-hidden bg-muted">
                           <img
                             src={projectImages[index] || "/placeholder.svg"}
                             alt={project.title}
@@ -226,7 +252,7 @@ export function PortfolioSection() {
                       </CardFlipFront>
 
                       <CardFlipBack className="overflow-hidden shadow-md">
-                        <div className="relative h-[72vh] sm:h-[76vh] bg-white dark:bg-black flex items-center justify-center">
+                        <div className="relative h-[66vh] sm:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
                           <div className="max-w-[90%] text-center text-black dark:text-white">
                             <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                             <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
@@ -260,7 +286,7 @@ export function PortfolioSection() {
             </div>
 
             {/* Indicadores de puntos dentro del carrusel */}
-            <div className="absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-2 pointer-events-auto">
+            <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-0 right-0 z-20 flex justify-center gap-2 pointer-events-auto">
               {t.projects.map((project, index) => (
                 <button
                   key={index}
@@ -287,6 +313,7 @@ export function PortfolioSection() {
             </div>
           </div>
         </div>
+        )}
       </div>
     </section>
   )
