@@ -33,7 +33,7 @@ export function PageNavigation() {
   }
 
   return (
-    <nav className="fixed right-2 md:right-6 top-1/2 z-50 flex -translate-y-1/2 flex-col gap-4" aria-label="Navegación de página">
+    <nav className="fixed right-1 md:right-3 top-1/2 z-50 flex -translate-y-1/2 flex-col gap-4" aria-label="Navegación de página">
       {sections.map((section, index) => (
         <button
           key={section.id}

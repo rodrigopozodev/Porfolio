@@ -146,7 +146,7 @@ export function PortfolioSection() {
       id="portfolio"
       className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-2 md:pt-6 md:pb-4 lg:px-6 lg:pt-12 lg:pb-8"
     >
-      <div ref={containerRef} className="mx-auto w-full max-w-7xl">
+      <div ref={containerRef} className="mx-auto w-full max-w-7xl pr-2 md:pr-3 lg:pr-3 xl:pr-4">
         <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground md:mt-6 md:mb-6 md:text-4xl lg:mt-2 lg:mb-4 lg:text-5xl xl:mt-1 xl:mb-2 lg:-translate-y-3 xl:-translate-y-5 2xl:-translate-y-6">
           {(() => {
             const parts = t.title.split(" ")
