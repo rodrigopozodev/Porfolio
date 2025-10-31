@@ -47,16 +47,20 @@ export function HeroSection() {
           </CardFlipFront>
           <CardFlipBack className="bg-transparent border-none shadow-none p-0">
             <div className="relative w-[200px] h-[200px] mx-auto flex flex-col items-center justify-center text-center px-4 xl:mb-14 2xl:mb-16 sm:scale-[0.80] md:scale-[0.9] lg:scale-[0.85] xl:scale-[1.35] 2xl:scale-[1.5] translate-y-[10%] xl:translate-y-6 2xl:translate-y-8">
-              <h3 className="text-foreground font-semibold mb-1 text-[1.45rem] xl:text-base 2xl:text-base">Sobre mi</h3>
+              <h3 className="text-foreground font-semibold mb-1 text-[1.45rem] xl:text-base 2xl:text-base">{t.aboutTitle}</h3>
               <p className="text-foreground leading-normal text-[1.25rem] xl:text-sm 2xl:text-sm">
-                Hola, soy Rodrigo.<br />
-                Tengo 22 años, soy de Madrid y me apasiona la programación.
+                {t.aboutText.split("\n").map((line, i) => (
+                  <React.Fragment key={i}>
+                    {line}
+                    {i < t.aboutText.split("\n").length - 1 && <br />}
+                  </React.Fragment>
+                ))}
               </p>
               <Button
                 size="lg"
                 variant="secondary"
                 className="mt-3 font-semibold text-base px-4 py-2 shadow-sm cursor-pointer hover:bg-blue-500 hover:text-white hover:border-blue-500"
-                aria-label="Saber más"
+                aria-label={t.aboutCta}
                 onClick={(e) => {
                   e.stopPropagation();
                   // Reutiliza el CTA para bajar al portfolio
@@ -64,7 +68,7 @@ export function HeroSection() {
                   el?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
-                Saber más
+                {t.aboutCta}
               </Button>
             </div>
           </CardFlipBack>

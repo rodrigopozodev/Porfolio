@@ -21,9 +21,9 @@ export function LanguageToggle() {
   return (
     <Button
       variant="outline"
-      size="icon"
+      size="default"
       onClick={toggleLanguage}
-      className="fixed top-6 left-6 md:left-auto md:right-20 z-50 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer"
+      className="h-10 w-20 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer flex items-center justify-center"
       aria-label="Cambiar idioma"
     >
       <div className="flex items-center gap-1">

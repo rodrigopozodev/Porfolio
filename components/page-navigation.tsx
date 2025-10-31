@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
+import { useHandedness } from "@/lib/handedness-context"
 
 const sections = [
   { id: "hero", label: "Inicio" },
@@ -11,6 +12,7 @@ const sections = [
 
 export function PageNavigation() {
   const [activeSection, setActiveSection] = useState(0)
+  const { handedness } = useHandedness()
 
   useEffect(() => {
     const container = document.querySelector(".snap-container")
@@ -33,7 +35,13 @@ export function PageNavigation() {
   }
 
   return (
-    <nav className="fixed right-1 md:right-3 top-1/2 z-50 flex -translate-y-1/2 flex-col gap-4" aria-label="Navegación de página">
+    <nav
+      className={cn(
+        "fixed top-1/2 z-50 flex -translate-y-1/2 flex-col gap-4",
+        handedness === "right" ? "right-1 md:right-3" : "left-1 md:left-3",
+      )}
+      aria-label="Navegación de página"
+    >
       {sections.map((section, index) => (
         <button
           key={section.id}
@@ -50,7 +58,12 @@ export function PageNavigation() {
                 : "bg-transparent hover:border-accent hover:bg-accent/20",
             )}
           />
-          <span className="absolute right-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-foreground px-3 py-1 text-xs font-medium text-background opacity-0 transition-opacity group-hover:opacity-100">
+          <span
+            className={cn(
+              "absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md bg-foreground px-3 py-1 text-xs font-medium text-background opacity-0 transition-opacity group-hover:opacity-100",
+              handedness === "right" ? "right-6" : "left-6",
+            )}
+          >
             {section.label}
           </span>
         </button>

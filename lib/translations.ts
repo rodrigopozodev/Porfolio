@@ -5,6 +5,9 @@ export const translations = {
       tagline: "Impulsando tu negocio con", // ✅ nueva frase
       animatedWords: ["Soluciones", "Calidad", "Innovación"],
       cta: "Ver trabajos",
+      aboutTitle: "Sobre mi",
+      aboutText: "Hola, soy Rodrigo.\nTengo 22 años, soy de Madrid y me apasiona la programación.",
+      aboutCta: "Saber más",
     },
     portfolio: {
       title: "Proyectos Destacados",
@@ -36,6 +39,10 @@ export const translations = {
       download: "Descargar CV",
       footer: "© 2025 Rodrigo Pozo Sánchez. Todos los derechos reservados.",
     },
+    ui: {
+      handedLeft: "Zurdo",
+      handedRight: "Diestro",
+    },
   },
   en: {
     hero: {
@@ -43,6 +50,9 @@ export const translations = {
       tagline: "Driving your business with", // ✅ versión en inglés
       animatedWords: ["Solutions", "Quality", "Innovation"],
       cta: "View work",
+      aboutTitle: "About me",
+      aboutText: "Hi, I'm Rodrigo.\nI'm 22, from Madrid, and I'm passionate about programming.",
+      aboutCta: "Learn more",
     },
     portfolio: {
       title: "Featured Projects",
@@ -73,6 +83,10 @@ export const translations = {
       connect: "Connect with me",
       download: "Download CV",
       footer: "© 2025 Rodrigo Pozo Sánchez. All rights reserved.",
+    },
+    ui: {
+      handedLeft: "Left-handed",
+      handedRight: "Right-handed",
     },
   },
 }

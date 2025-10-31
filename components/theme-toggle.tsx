@@ -46,9 +46,9 @@ export function ThemeToggle() {
   return (
     <Button
       variant="outline"
-      size="icon"
+      size="default"
       onClick={toggleTheme}
-      className="fixed right-6 top-6 z-50 h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer"
+      className="h-10 w-20 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer flex items-center justify-center"
       aria-label="Cambiar tema"
     >
       {theme === "dark" ? <Sun className="h-5 w-5 text-foreground" /> : <Moon className="h-5 w-5 text-foreground" />}

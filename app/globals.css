@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ======================
+   Variables CSS
+====================== */
 :root {
   --background: oklch(0.98 0.002 264);
   --foreground: oklch(0.15 0.01 264);
@@ -74,8 +77,10 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* ======================
+   Variables de tema inline
+====================== */
 @theme inline {
-  /* optional: --font-sans, --font-serif, --font-mono if they are applied in the layout.tsx */
   --font-sans: "Geist", "Geist Fallback";
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
@@ -116,17 +121,33 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ======================
+   Estilos base y cursores
+====================== */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Cursor global para toda la web */
+  html, body, * {
+    cursor: url('/public/'), auto !important;
+    transition: cursor 0.2s ease-in-out;
+  }
+
+  /* Cursor tipo puntero para elementos clicables */
+  a, button, [role="button"], input[type="button"], input[type="submit"], .cursor-pointer {
+    cursor: url('/puntero.png'), pointer !important;
+  }
 }
 
-
-/* Smooth scroll snap behavior */
+/* ======================
+   Smooth scroll snap
+====================== */
 .snap-container {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -158,11 +179,14 @@
   }
 }
 
+/* ======================
+   CTA Button
+====================== */
 .cta-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem; /* un poco más de espacio entre texto y flecha */
+  gap: 0.75rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -170,8 +194,8 @@
 
 .arrow-icon {
   display: inline-block;
-  width: 1.5rem;   /* 24px */
-  height: 1.5rem;  /* 24px */
+  width: 1.5rem;
+  height: 1.5rem;
   transition: transform 0.2s;
 }
 
@@ -180,13 +204,7 @@
 }
 
 @keyframes bounceArrow {
-  0% {
-    transform: translateY(-5px); /* sube un poco más */
-  }
-  50% {
-    transform: translateY(12px); /* baja más */
-  }
-  100% {
-    transform: translateY(-5px); /* vuelve al punto alto */
-  }
+  0% { transform: translateY(-5px); }
+  50% { transform: translateY(12px); }
+  100% { transform: translateY(-5px); }
 }

@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Transition from "@/components/ui/transition"
 import { LanguageProvider } from "@/lib/language-context"
+import { HandednessProvider } from "@/lib/handedness-context"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -35,9 +36,25 @@ export default function RootLayout({
             `,
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                // Ensure site starts in RIGHT-handed mode before hydration
+                try {
+                  document.documentElement.dataset.handed = 'right';
+                  localStorage.setItem('handedness', 'right');
+                } catch (e) {
+                  document.documentElement.dataset.handed = 'right';
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`font-sans antialiased`}>
         <LanguageProvider>
+          <HandednessProvider>
           <Transition
             intro={null}
             introDuration={2}
@@ -49,6 +66,7 @@ export default function RootLayout({
           >
             {children}
           </Transition>
+          </HandednessProvider>
         </LanguageProvider>
         <Analytics />
       </body>
