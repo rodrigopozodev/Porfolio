@@ -125,6 +125,12 @@ export function PortfolioSection() {
     const recalc = () => {
       const el = containerRef.current
       if (!el) return
+      const viewportWidth = window.innerWidth
+      // Forzar grid en pantallas grandes (>= lg 1024px)
+      if (viewportWidth >= 1024) {
+        setShouldCarousel(false)
+        return
+      }
       const width = el.clientWidth
       const cardMinWidth = 320 // ancho mínimo estimado por tarjeta
       const fitCount = Math.floor(width / cardMinWidth)
@@ -138,10 +144,10 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-4 md:pt-6 md:pb-6 lg:px-6 lg:py-12"
+      className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-2 md:pt-6 md:pb-4 lg:px-6 lg:pt-12 lg:pb-8"
     >
       <div ref={containerRef} className="mx-auto w-full max-w-7xl">
-        <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground md:mt-6 md:mb-6 md:text-4xl lg:mt-8 lg:mb-8 lg:text-5xl">
+        <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground md:mt-6 md:mb-6 md:text-4xl lg:mt-2 lg:mb-4 lg:text-5xl xl:mt-1 xl:mb-2 lg:-translate-y-3 xl:-translate-y-5 2xl:-translate-y-6">
           {(() => {
             const parts = t.title.split(" ")
             const first = parts.shift() || ""
@@ -157,11 +163,11 @@ export function PortfolioSection() {
 
         {/* Grid con diseño móvil aplicado (solo si caben ≥4 por fila) */}
         {!shouldCarousel && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-2 md:mt-4 lg:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {t.projects.map((project, index) => (
               <CardFlip key={index} className="select-none cursor-pointer" autoFlipBackMs={20000}>
                 <CardFlipFront className="overflow-hidden shadow-md">
-                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[60vh] overflow-hidden bg-muted">
+                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted">
                     <img
                       src={projectImages[index] || "/placeholder.svg"}
                       alt={project.title}
@@ -171,7 +177,7 @@ export function PortfolioSection() {
                 </CardFlipFront>
 
                 <CardFlipBack className="overflow-hidden shadow-md">
-                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[60vh] bg-white dark:bg-black flex items-center justify-center">
+                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
                     <div className="max-w-[90%] text-center text-black dark:text-white">
                       <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                       <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
@@ -186,11 +192,11 @@ export function PortfolioSection() {
                         ))}
                       </div>
                       <div className="flex items-center justify-center gap-2">
-                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
                           <Eye className="h-4 w-4" />
                           {t.view}
                         </Button>
-                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
                           <ExternalLink className="h-4 w-4" />
                           {t.visit}
                         </Button>
@@ -205,9 +211,9 @@ export function PortfolioSection() {
 
         {/* Carrusel móvil/tablet (solo si NO caben ≥4 por fila) */}
         {shouldCarousel && (
-        <div className="relative mt-4 md:mt-6">
+        <div className="relative mt-6 md:mt-8 lg:mt-10">
           <div
-            className="relative overflow-visible min-h-[74vh] sm:min-h-[78vh] pb-10 sm:pb-12 md:pb-14"
+            className="relative overflow-visible min-h-[74vh] sm:min-h-[78vh] lg:min-h-[78vh] xl:min-h-[80vh] pb-8 sm:pb-10 md:pb-12 lg:pb-10"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -242,7 +248,7 @@ export function PortfolioSection() {
                       }}
                     >
                       <CardFlipFront className="overflow-hidden shadow-md">
-                        <div className="relative h-[66vh] sm:h-[70vh] overflow-hidden bg-muted">
+                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] overflow-hidden bg-muted">
                           <img
                             src={projectImages[index] || "/placeholder.svg"}
                             alt={project.title}
@@ -252,7 +258,7 @@ export function PortfolioSection() {
                       </CardFlipFront>
 
                       <CardFlipBack className="overflow-hidden shadow-md">
-                        <div className="relative h-[66vh] sm:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
+                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] bg-white dark:bg-black flex items-center justify-center">
                           <div className="max-w-[90%] text-center text-black dark:text-white">
                             <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                             <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
@@ -267,11 +273,11 @@ export function PortfolioSection() {
                               ))}
                             </div>
                             <div className="flex items-center justify-center gap-2">
-                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
                                 <Eye className="h-4 w-4" />
                                 {t.view}
                               </Button>
-                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
+                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
                                 <ExternalLink className="h-4 w-4" />
                                 {t.visit}
                               </Button>
