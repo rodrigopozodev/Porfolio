@@ -135,7 +135,7 @@ export function PortfolioSection() {
         {/* Desktop grid */}
         <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6">
           {t.projects.map((project, index) => (
-            <CardFlip key={index} className="select-none">
+            <CardFlip key={index} className="select-none cursor-pointer">
               <CardFlipFront className="overflow-hidden">
                 <div className="relative aspect-[3/2] overflow-hidden bg-muted">
                   <img
@@ -162,11 +162,11 @@ export function PortfolioSection() {
                       ))}
                     </div>
                     <div className="flex items-center justify-center gap-2">
-                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
+                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg cursor-pointer">
                         <Eye className="h-4 w-4" />
                         {t.view}
                       </Button>
-                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg">
+                      <Button size="sm" variant="secondary" className="gap-2 shadow-lg cursor-pointer">
                         <ExternalLink className="h-4 w-4" />
                         {t.visit}
                       </Button>
@@ -201,8 +201,8 @@ export function PortfolioSection() {
                   }`}
                   style={{ pointerEvents: index === currentIndex ? "auto" : "none" }}
                 >
-                  <div className="w-full max-w-[92%] sm:max-w-[80%] px-2 sm:px-4 mx-auto" onClick={() => handleCardClick(index)}>
-                    <CardFlip className="select-none" autoFlipBackMs={20000}
+                  <div className="w-full max-w-[92%] sm:max-w-[80%] px-2 sm:px-4 mx-auto cursor-pointer" onClick={() => handleCardClick(index)}>
+                    <CardFlip className="select-none cursor-pointer" autoFlipBackMs={20000}
                       onFlipChange={(flipped) => {
                         // Pausar autoplay mientras está volteado
                         if (flipped) {
@@ -241,11 +241,11 @@ export function PortfolioSection() {
                               ))}
                             </div>
                             <div className="flex items-center justify-center gap-2">
-                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm" onClick={(e) => e.stopPropagation()}>
+                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
                                 <Eye className="h-4 w-4" />
                                 {t.view}
                               </Button>
-                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm" onClick={(e) => e.stopPropagation()}>
+                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer" onClick={(e) => e.stopPropagation()}>
                                 <ExternalLink className="h-4 w-4" />
                                 {t.visit}
                               </Button>
@@ -261,7 +261,7 @@ export function PortfolioSection() {
 
             {/* Indicadores de puntos dentro del carrusel */}
             <div className="absolute bottom-3 left-0 right-0 z-20 flex justify-center gap-2 pointer-events-auto">
-              {t.projects.map((_, index) => (
+              {t.projects.map((project, index) => (
                 <button
                   key={index}
                   onClick={() => {
@@ -274,11 +274,15 @@ export function PortfolioSection() {
                       })
                     })
                   }}
-                  className={`h-2 rounded-full transition-all ${
+                  className={`group relative h-2 rounded-full transition-all cursor-pointer ${
                     index === currentIndex ? "w-8 bg-accent" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                   }`}
-                  aria-label={`Ir al proyecto ${index + 1}`}
-                />
+                  aria-label={`Ir al proyecto ${index + 1}: ${project.title}`}
+                >
+                  <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-6 whitespace-nowrap rounded-md bg-foreground px-3 py-1 text-xs font-medium text-background opacity-0 transition-opacity group-hover:opacity-100">
+                    {project.title}
+                  </span>
+                </button>
               ))}
             </div>
           </div>

@@ -38,13 +38,13 @@ export function PageNavigation() {
         <button
           key={section.id}
           onClick={() => scrollToSection(index)}
-          className="group relative"
+          className="group relative cursor-pointer"
           aria-label={section.label}
           aria-current={activeSection === index ? "true" : "false"}
         >
           <span
             className={cn(
-              "block h-3 w-3 rounded-full border-2 border-foreground/30 transition-all",
+              "block h-3 w-3 rounded-full border-2 border-foreground/30 transition-all cursor-pointer",
               activeSection === index
                 ? "scale-125 border-accent bg-accent shadow-lg shadow-accent/50"
                 : "bg-transparent hover:border-accent hover:bg-accent/20",
