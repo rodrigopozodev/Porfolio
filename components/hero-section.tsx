@@ -35,8 +35,10 @@ export function HeroSection() {
     >
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent" />
 
-      <div key={renderKey} className="relative z-10 mx-auto max-w-5xl px-6 text-center sm:-mt-2 lg:-mt-6 xl:-mt-8 2xl:-mt-10 origin-top sm:scale-[0.90] md:scale-[0.90] lg:scale-[0.95] xl:scale-100 2xl:scale-100">
-        <CardFlip className="hidden sm:block mx-auto cursor-pointer" autoFlipBackMs={20000}>
+      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="hidden md:block" />
+        <div key={renderKey} className="relative z-10 mx-auto max-w-5xl px-6 text-center sm:-mt-2 lg:-mt-6 xl:-mt-8 2xl:-mt-10 origin-top sm:scale-[0.90] md:scale-[0.90] lg:scale-[0.95] xl:scale-100 2xl:scale-100">
+          <CardFlip className="hidden sm:block mx-auto cursor-pointer" autoFlipBackMs={20000}>
           <CardFlipFront className="bg-transparent border-none shadow-none p-0">
             <Image
               src="/Rodrigo.png"
@@ -118,12 +120,11 @@ export function HeroSection() {
             </Button>
           </AnnouncementTitle>
         </Announcement>
+        </div>
+        <div className="hidden md:block" />
       </div>
 
-      {/* Indicador de scroll */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="h-8 w-[2px] bg-gradient-to-b from-accent to-transparent" />
-      </div>
+      {/* Indicador de scroll eliminado */}
     </section>
   )
 }
