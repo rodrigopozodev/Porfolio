@@ -11,6 +11,8 @@ export const translations = {
     },
     portfolio: {
       title: "Proyectos Destacados",
+      seeAll: "Ver Todos",
+      allTitle: "Todos los Proyectos",
       projects: [
         {
           title: "E-commerce Platform",
@@ -27,6 +29,7 @@ export const translations = {
       ],
       view: "Ver",
       visit: "Visitar",
+      back: "Volver",
     },
     contact: {
       title: "Trabajemos Juntos",
@@ -56,6 +59,8 @@ export const translations = {
     },
     portfolio: {
       title: "Featured Projects",
+      seeAll: "See All",
+      allTitle: "All Projects",
       projects: [
         {
           title: "E-commerce Platform",
@@ -72,6 +77,7 @@ export const translations = {
       ],
       view: "View",
       visit: "Visit",
+      back: "Back",
     },
     contact: {
       title: "Let's Work Together",

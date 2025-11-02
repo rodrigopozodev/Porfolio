@@ -9,10 +9,12 @@ import Typeanimation from "@/components/ui/typeanimation"
 import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 import Image from "next/image"
 import { CardFlip, CardFlipFront, CardFlipBack } from "@/components/ui/card-flip"
+import { useRouter } from "next/navigation"
 
 export function HeroSection() {
   const { language } = useLanguage()
   const [renderKey, setRenderKey] = useState(0)
+  const router = useRouter()
 
   const t = translations[language].hero
 
@@ -41,7 +43,7 @@ export function HeroSection() {
               alt="Foto de Rodrigo Pozo Sánchez"
               width={200}
               height={200}
-              className="hidden sm:block mx-auto rounded-full shadow-lg xl:mb-14 2xl:mb-16 sm:scale-[0.80] md:scale-[0.9] lg:scale-[0.85] xl:scale-[1.35] 2xl:scale-[1.5] object-cover"
+              className="hidden sm:block mx-auto rounded-full shadow-lg xl:mb-14 2xl:mb-16 sm:scale-[0.80] md:scale-[0.9] lg:scale-[0.85] xl:scale-[1.35] 2xl:scale-[1.5] object-cover cursor-pointer"
               priority
             />
           </CardFlipFront>
@@ -62,10 +64,8 @@ export function HeroSection() {
                 className="mt-3 font-semibold text-base px-4 py-2 shadow-sm cursor-pointer hover:bg-blue-500 hover:text-white hover:border-blue-500"
                 aria-label={t.aboutCta}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  // Reutiliza el CTA para bajar al portfolio
-                  const el = document.getElementById("portfolio");
-                  el?.scrollIntoView({ behavior: "smooth" });
+                  e.stopPropagation()
+                  router.push("/about")
                 }}
               >
                 {t.aboutCta}
