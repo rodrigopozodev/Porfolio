@@ -4,10 +4,14 @@ export const translations = {
       name: "Rodrigo Pozo Sánchez",
       tagline: "Impulsando tu negocio con", // ✅ nueva frase
       animatedWords: ["Soluciones", "Calidad", "Innovación"],
-      cta: "Ver trabajos",
+      cta: "Ver Trabajos",
       aboutTitle: "Sobre mi",
       aboutText: "Hola, soy Rodrigo.\nTengo 22 años, soy de Madrid y me apasiona la programación.",
       aboutCta: "Saber más",
+    },
+    testimonials: {
+      title: "Recomendaciones",
+      subtitle: "Lo que dicen sobre mi trabajo",
     },
     portfolio: {
       title: "Proyectos Destacados",
@@ -56,6 +60,10 @@ export const translations = {
       aboutTitle: "About me",
       aboutText: "Hi, I'm Rodrigo.\nI'm 22, from Madrid, and I'm passionate about programming.",
       aboutCta: "Learn more",
+    },
+    testimonials: {
+      title: "Recommendations",
+      subtitle: "What people say about my work",
     },
     portfolio: {
       title: "Featured Projects",

@@ -192,6 +192,24 @@
   cursor: pointer;
 }
 
+/* Entre 700px y 800px: apilar texto y flecha como en la captura */
+@media (min-width: 700px) and (max-width: 800px) {
+  .cta-button {
+    flex-direction: column;
+    gap: 0.5rem;
+    height: auto;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+  }
+  .arrow-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.125rem;
+  }
+}
+
+/* Diseño del botón: mantener formato horizontal en móviles */
+
 .arrow-icon {
   display: inline-block;
   width: 1.5rem;
@@ -207,4 +225,119 @@
   0% { transform: translateY(-5px); }
   50% { transform: translateY(12px); }
   100% { transform: translateY(-5px); }
+}
+/* ======================
+   Kinetic Testimonials
+====================== */
+@keyframes kinetic-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, -50%, 0); }
+}
+
+@keyframes kinetic-scroll-reverse {
+  0% { transform: translate3d(0, -50%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.kinetic-column .kinetic-inner {
+  animation: kinetic-scroll var(--kinetic-duration, 28s) linear infinite;
+  animation-delay: var(--kinetic-delay, 0s);
+}
+
+.kinetic-column.reverse .kinetic-inner {
+  animation-name: kinetic-scroll-reverse;
+}
+
+.kinetic-column:hover .kinetic-inner {
+  animation-play-state: paused;
+}
+
+/* Fade suave en los bordes superior e inferior del contenedor */
+.kinetic-mask {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+/* Altura responsiva para Kinetic Testimonials basada en altura de viewport */
+.kinetic-responsive { /* altura por defecto ya viene de clases Tailwind */ }
+@media (max-height: 840px) {
+  .kinetic-responsive { height: 460px !important; }
+}
+
+/* Ajustes específicos entre 840px y 800px de altura */
+@media (max-height: 839px) and (min-height: 799px) {
+  /* Quitar espacio vertical entre bloques dentro de TestimonialsSection */
+  .testimonials-wrapper > * + * { margin-top: 0 !important; }
+  /* Eliminar margen inferior del header dentro del wrapper del componente */
+  .kinetic-shell .mb-6 { margin-bottom: 0 !important; }
+  /* Bajar el botón para que quede más abajo en la columna */
+  .recommend-btn-wrap { margin-top: 3rem !important; }
+}
+
+/* Overlay de desvanecido compatible con light/dark usando color de fondo */
+.kinetic-fade::before,
+.kinetic-fade::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.kinetic-fade::before {
+  top: 0;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--color-background) 0%, rgba(0,0,0,0) 100%);
+}
+
+.kinetic-fade::after {
+  bottom: 0;
+  height: 48px;
+  background: linear-gradient(to top, var(--color-background) 0%, rgba(0,0,0,0) 100%);
+}
+
+/* ===============================
+   Hero height-aware responsiveness
+=============================== */
+.hero-responsive .hero-container {
+  min-height: 75vh;
+}
+
+@media (max-height: 900px) {
+  .hero-responsive .hero-container { min-height: 65vh; }
+  .hero-responsive .hero-column { padding-top: 0.5rem; }
+}
+
+@media (max-height: 800px) {
+  .hero-responsive .hero-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.1;
+  }
+  .hero-responsive .hero-image {
+    transform: scale(0.85);
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .hero-responsive .hero-container { min-height: 55vh; }
+  .hero-responsive .hero-title {
+    font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+  }
+  .hero-responsive .hero-type {
+    font-size: clamp(1rem, 2.8vw, 1.25rem);
+  }
+  .hero-responsive .cta-button {
+    padding: 0.5rem 0.875rem;
+  }
+}
+
+@media (max-height: 580px) {
+  .hero-responsive .hero-image {
+    transform: scale(0.75);
+  }
+  .hero-responsive .hero-title {
+    margin-top: 0.25rem;
+  }
 }

@@ -27,7 +27,7 @@ export function HandednessToggle() {
     >
       <div className="flex items-center gap-1">
         <Hand className="h-4 w-4 text-foreground" />
-        <span className="text-xs font-semibold uppercase hidden md:inline">{current === "left" ? ui.handedLeft : ui.handedRight}</span>
+        <span className="text-xs font-semibold uppercase hidden min-[900px]:inline">{current === "left" ? ui.handedLeft : ui.handedRight}</span>
       </div>
     </Button>
   )

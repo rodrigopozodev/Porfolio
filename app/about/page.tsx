@@ -17,17 +17,17 @@ export default function AboutPage() {
 
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground">
-      <section className="container mx-auto px-6 py-20 md:py-24 lg:py-28">
+      <section className="container mx-auto px-6 py-20 min-[900px]:py-24 lg:py-28">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl mx-auto"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl min-[900px]:text-5xl font-bold mb-4">
             {tHero.aboutTitle}
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed whitespace-pre-line mb-8">
+          <p className="text-lg min-[900px]:text-xl text-muted-foreground leading-relaxed whitespace-pre-line mb-8">
             {tHero.aboutText}
           </p>
           <div className="flex items-center gap-3">

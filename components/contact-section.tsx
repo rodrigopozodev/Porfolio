@@ -15,14 +15,14 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="snap-section flex items-center justify-center bg-background px-4 py-8 md:px-6 md:py-10 lg:py-12"
+      className="snap-section flex items-center justify-center bg-background px-4 py-8 min-[900px]:px-6 min-[900px]:py-10 lg:py-12"
     >
       <div className="mx-auto w-full max-w-4xl">
         <div className="text-center">
-          <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground md:mb-3 md:text-3xl lg:mb-4 lg:text-5xl">
+          <h2 className="mb-2 text-2xl font-bold tracking-tight text-foreground min-[900px]:mb-3 min-[900px]:text-3xl lg:mb-4 lg:text-5xl">
             {t.title}
           </h2>
-          <p className="mb-6 text-sm text-muted-foreground md:mb-8 md:text-base lg:mb-12 lg:text-lg">{t.subtitle}</p>
+          <p className="mb-6 text-sm text-muted-foreground min-[900px]:mb-8 min-[900px]:text-base lg:mb-12 lg:text-lg">{t.subtitle}</p>
         </div>
 
         <div className="flex flex-col items-center space-y-6">

@@ -38,7 +38,7 @@ export function PageNavigation() {
     <nav
       className={cn(
         "fixed top-1/2 z-50 flex -translate-y-1/2 flex-col gap-4",
-        handedness === "right" ? "right-1 md:right-3" : "left-1 md:left-3",
+        handedness === "right" ? "right-1 min-[900px]:right-3" : "left-1 min-[900px]:left-3",
       )}
       aria-label="Navegación de página"
     >

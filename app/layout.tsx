@@ -6,6 +6,7 @@ import "./globals.css"
 import Transition from "@/components/ui/transition"
 import { LanguageProvider } from "@/lib/language-context"
 import { HandednessProvider } from "@/lib/handedness-context"
+import { AuthProvider } from "@/context/AuthContext"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -53,8 +54,9 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
-        <LanguageProvider>
-          <HandednessProvider>
+        <AuthProvider>
+          <LanguageProvider>
+            <HandednessProvider>
           <Transition
             intro={null}
             introDuration={2}
@@ -66,8 +68,9 @@ export default function RootLayout({
           >
             {children}
           </Transition>
-          </HandednessProvider>
-        </LanguageProvider>
+            </HandednessProvider>
+          </LanguageProvider>
+        </AuthProvider>
         <Analytics />
       </body>
     </html>

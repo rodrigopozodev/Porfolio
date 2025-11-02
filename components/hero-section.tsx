@@ -8,6 +8,7 @@ import { useLanguage } from "@/lib/language-context"
 import Typeanimation from "@/components/ui/typeanimation"
 import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 import Image from "next/image"
+import { TestimonialsSection } from "@/components/testimonials-section"
 import { CardFlip, CardFlipFront, CardFlipBack } from "@/components/ui/card-flip"
 import { useRouter } from "next/navigation"
 
@@ -31,28 +32,31 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="snap-section relative flex items-center justify-center bg-background"
+      className="snap-section hero-responsive relative flex items-center justify-center bg-background"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent" />
 
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="hidden md:block" />
-        <div key={renderKey} className="relative z-10 mx-auto max-w-5xl px-6 text-center sm:-mt-2 lg:-mt-6 xl:-mt-8 2xl:-mt-10 origin-top sm:scale-[0.90] md:scale-[0.90] lg:scale-[0.95] xl:scale-100 2xl:scale-100">
-          <CardFlip className="hidden sm:block mx-auto cursor-pointer" autoFlipBackMs={20000}>
+      <div className="hero-container w-full max-w-screen-2xl mx-auto px-4 min-[700px]:px-6 grid grid-cols-1 min-[700px]:grid-cols-3 items-stretch min-[700px]:gap-4 lg:gap-6 pt-8 min-[700px]:pt-12 min-h-[60vh] min-[700px]:min-h-[65vh]">
+        <div className="hidden min-[700px]:block hero-column min-[700px]:border-2 min-[700px]:border-blue-400 p-4 h-full pt-8">
+          <TestimonialsSection />
+        </div>
+        <div key={renderKey} className="relative hero-column z-10 mx-auto max-w-none xl:max-w-5xl px-4 min-[700px]:px-6 text-center min-[700px]:border-2 min-[700px]:border-blue-400 h-full pt-8">
+        <div className="origin-top min-[700px]:scale-[0.90] min-[900px]:scale-[0.90] lg:scale-[0.95] xl:scale-100 2xl:scale-100">
+          <CardFlip className="hidden min-[700px]:block mx-auto cursor-pointer" autoFlipBackMs={20000}>
           <CardFlipFront className="bg-transparent border-none shadow-none p-0">
             <Image
               src="/Rodrigo.png"
               alt="Foto de Rodrigo Pozo Sánchez"
               width={200}
               height={200}
-              className="hidden sm:block mx-auto rounded-full shadow-lg xl:mb-14 2xl:mb-16 sm:scale-[0.80] md:scale-[0.9] lg:scale-[0.85] xl:scale-[1.35] 2xl:scale-[1.5] object-cover cursor-pointer"
+              className="hidden min-[700px]:block hero-image mx-auto rounded-full shadow-lg xl:mb-14 2xl:mb-16 min-[700px]:scale-[0.80] min-[900px]:scale-[0.9] lg:scale-[0.85] xl:scale-[1.35] 2xl:scale-[1.5] object-cover cursor-pointer"
               priority
             />
           </CardFlipFront>
           <CardFlipBack className="bg-transparent border-none shadow-none p-0">
-            <div className="relative w-[200px] h-[200px] mx-auto flex flex-col items-center justify-center text-center px-4 xl:mb-14 2xl:mb-16 sm:scale-[0.80] md:scale-[0.9] lg:scale-[0.85] xl:scale-[1.35] 2xl:scale-[1.5] translate-y-[10%] xl:translate-y-6 2xl:translate-y-8">
-              <h3 className="text-foreground font-semibold mb-1 text-[1.45rem] xl:text-base 2xl:text-base">{t.aboutTitle}</h3>
-              <p className="text-foreground leading-normal text-[1.25rem] xl:text-sm 2xl:text-sm">
+            <div className="relative w-[200px] h-[200px] mx-auto flex flex-col items-center justify-center text-center px-4 xl:mb-14 2xl:mb-16 min-[700px]:scale-[0.80] min-[900px]:scale-[0.9] lg:scale-[0.85] xl:scale-[1.35] 2xl:scale-[1.5] min-[700px]:max-[800px]:translate-x-[-8px] min-[700px]:max-[760px]:translate-x-[-12px] min-[700px]:max-[750px]:translate-x-[-14px] min-[700px]:max-[740px]:translate-x-[-16px] min-[700px]:max-[730px]:translate-x-[-18px] min-[700px]:max-[720px]:translate-x-[-20px] min-[700px]:max-[710px]:translate-x-[-22px] translate-y-[10%] xl:translate-y-6 2xl:translate-y-8">
+              <h3 className="text-foreground font-semibold mb-1 text-[1.25rem] xl:text-base 2xl:text-base">{t.aboutTitle}</h3>
+              <p className="text-foreground leading-snug text-base xl:text-sm 2xl:text-sm max-w-[90%] mx-auto">
                 {t.aboutText.split("\n").map((line, i) => (
                   <React.Fragment key={i}>
                     {line}
@@ -83,7 +87,7 @@ export function HeroSection() {
           const last = parts.pop()
           const first = parts.join(" ")
           return (
-            <h1 className="mb-6 font-sans font-bold tracking-tight text-foreground text-[2.36rem] sm:text-[2.36rem] md:text-5xl lg:text-5xl xl:text-8xl 2xl:text-8xl lg:leading-tight">
+            <h1 className="hero-title mb-6 font-sans font-bold tracking-tight text-foreground text-[2.36rem] min-[700px]:text-[2.36rem] min-[900px]:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl lg:leading-tight">
               <span>{first} </span>
               <span className="block xl:inline">{last}</span>
             </h1>
@@ -91,7 +95,7 @@ export function HeroSection() {
         })()}
 
         {/* Tagline */}
-        <p className="mb-4 text-pretty text-xl text-muted-foreground md:text-xl lg:text-xl xl:text-2xl">
+        <p className="mb-4 text-pretty text-xl text-muted-foreground min-[700px]:text-xl lg:text-xl xl:text-2xl">
           {t.tagline}
         </p>
 
@@ -103,7 +107,7 @@ export function HeroSection() {
             typingSpeed="slow"
             deletingSpeed="slow"
             pauseDuration={1500}
-            className="text-blue-500 text-2xl md:text-2xl lg:text-2xl xl:text-3xl font-extrabold"
+            className="hero-type text-blue-500 text-2xl min-[900px]:text-2xl lg:text-2xl xl:text-3xl font-extrabold"
           />
         </div>
 
@@ -121,7 +125,8 @@ export function HeroSection() {
           </AnnouncementTitle>
         </Announcement>
         </div>
-        <div className="hidden md:block" />
+        </div>
+        <div className="hidden min-[700px]:block hero-column min-[700px]:border-2 min-[700px]:border-blue-400 h-full pt-8" />
       </div>
 
       {/* Indicador de scroll eliminado */}

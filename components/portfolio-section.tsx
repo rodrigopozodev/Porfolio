@@ -146,13 +146,13 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-2 md:pt-6 md:pb-4 lg:px-6 lg:pt-12 lg:pb-8"
+      className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-2 min-[900px]:pt-6 min-[900px]:pb-4 lg:px-6 lg:pt-12 lg:pb-8"
     >
       <div
         ref={containerRef}
-        className={`mx-auto w-full max-w-7xl ${handedness === "right" ? "pr-2 md:pr-3 lg:pr-3 xl:pr-4" : "pl-2 md:pl-3 lg:pl-3 xl:pl-4"}`}
+        className={`mx-auto w-full max-w-7xl ${handedness === "right" ? "pr-2 min-[900px]:pr-3 lg:pr-3 xl:pr-4" : "pl-2 min-[900px]:pl-3 lg:pl-3 xl:pl-4"}`}
       >
-        <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground md:mt-6 md:mb-6 md:text-4xl lg:mt-2 lg:mb-4 lg:text-5xl xl:mt-1 xl:mb-2 lg:-translate-y-3 xl:-translate-y-5 2xl:-translate-y-6">
+        <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground min-[900px]:mt-6 min-[900px]:mb-6 min-[900px]:text-4xl lg:mt-2 lg:mb-4 lg:text-5xl xl:mt-1 xl:mb-2 lg:-translate-y-3 xl:-translate-y-5 2xl:-translate-y-6">
           {(() => {
             const parts = t.title.split(" ")
             const first = parts.shift() || ""
@@ -168,11 +168,11 @@ export function PortfolioSection() {
 
         {/* Grid con diseño móvil aplicado (solo si caben ≥4 por fila) */}
         {!shouldCarousel && (
-          <div className="mt-2 md:mt-4 lg:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mt-2 min-[900px]:mt-4 lg:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {t.projects.map((project, index) => (
               <CardFlip key={index} className="select-none cursor-pointer" autoFlipBackMs={20000}>
                 <CardFlipFront className="overflow-hidden shadow-md">
-                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted">
+                  <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted">
                     <img
                       src={projectImages[index] || "/placeholder.svg"}
                       alt={project.title}
@@ -182,7 +182,7 @@ export function PortfolioSection() {
                 </CardFlipFront>
 
                 <CardFlipBack className="overflow-hidden shadow-md">
-                  <div className="relative h-[55vh] md:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
+                  <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
                     <div className="max-w-[90%] text-center text-black dark:text-white">
                       <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                       <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
@@ -216,9 +216,9 @@ export function PortfolioSection() {
 
         {/* Carrusel móvil/tablet (solo si NO caben ≥4 por fila) */}
         {shouldCarousel && (
-        <div className="relative mt-6 md:mt-8 lg:mt-10">
+        <div className="relative mt-6 min-[900px]:mt-8 lg:mt-10">
           <div
-            className="relative overflow-visible min-h-[74vh] sm:min-h-[78vh] lg:min-h-[78vh] xl:min-h-[80vh] pb-8 sm:pb-10 md:pb-12 lg:pb-10"
+            className="relative overflow-visible min-h-[74vh] sm:min-h-[78vh] lg:min-h-[78vh] xl:min-h-[80vh] pb-8 sm:pb-10 min-[900px]:pb-12 lg:pb-10"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
