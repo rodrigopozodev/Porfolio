@@ -1,0 +1,12 @@
+{
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Rodrigo Pozo Sanchez",
+      "handle": "https://www.linkedin.com/in/rodrigopozosanchez/",
+      "review": "Es muy buen  trabajador",
+      "avatar": null,
+      "created_at": "2025-11-03T09:31:09.003Z"
+    }
+  ]
+}

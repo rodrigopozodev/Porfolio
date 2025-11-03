@@ -12,6 +12,15 @@ export const translations = {
     testimonials: {
       title: "Recomendaciones",
       subtitle: "Lo que dicen sobre mi trabajo",
+      cta: "Realizar Recomendaciones",
+      nameLabel: "Tu nombre",
+      lastNameLabel: "Tus apellidos",
+      selectFile: "Seleccionar archivo",
+      textareaPlaceholder: "Escribe tu recomendación profesional aquí...",
+      send: "Enviar recomendación",
+      signOut: "Cerrar sesión",
+      jobTitleLabel: "Tu cargo (opcional)",
+      photoLabel: "Foto (opcional)",
     },
     portfolio: {
       title: "Proyectos Destacados",
@@ -64,6 +73,15 @@ export const translations = {
     testimonials: {
       title: "Recommendations",
       subtitle: "What people say about my work",
+      cta: "Make Recommendations",
+      nameLabel: "Your name",
+      lastNameLabel: "Your last name(s)",
+      selectFile: "Select file",
+      textareaPlaceholder: "Write your professional recommendation here...",
+      send: "Send recommendation",
+      signOut: "Sign out",
+      jobTitleLabel: "Your job title (optional)",
+      photoLabel: "Photo (optional)",
     },
     portfolio: {
       title: "Featured Projects",
