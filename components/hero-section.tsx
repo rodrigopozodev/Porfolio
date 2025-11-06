@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown, ExternalLink, Eye } from "lucide-react"
+import { ArrowDown, ExternalLink, Eye, Github, Linkedin, Mail, Download } from "lucide-react"
 import React, { useEffect, useState } from "react"
 import { translations } from "@/lib/translations"
 import { useLanguage } from "@/lib/language-context"
@@ -124,6 +124,39 @@ export function HeroSection() {
             </Button>
           </AnnouncementTitle>
         </Announcement>
+
+        {/* Conecta conmigo */}
+        <div className="mt-2 flex flex-col items-center gap-3">
+          <h3 className="text-foreground font-bold text-[clamp(1.1rem,2.4vw,1.35rem)]">{translations[language].contact.connect}</h3>
+          <div className="flex items-center justify-center gap-3">
+            <a href="https://github.com/rodrigopozodev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Button variant="secondary" className="h-12 w-12 rounded-full p-0 bg-transparent text-foreground border border-foreground/20 hover:border-blue-500 hover:text-blue-500 cursor-pointer">
+                <Github className="h-5 w-5" />
+              </Button>
+            </a>
+            <a href="https://www.linkedin.com/in/rodrigopozosanchez/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Button variant="secondary" className="h-12 w-12 rounded-full p-0 bg-transparent text-foreground border border-foreground/20 hover:border-blue-500 hover:text-blue-500 cursor-pointer">
+                <Linkedin className="h-5 w-5" />
+              </Button>
+            </a>
+            <a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=rodrigopozosanchez@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Email"
+            >
+              <Button variant="secondary" className="h-12 w-12 rounded-full p-0 bg-transparent text-foreground border border-foreground/20 hover:border-blue-500 hover:text-blue-500 cursor-pointer">
+                <Mail className="h-5 w-5" />
+              </Button>
+            </a>
+          </div>
+          <a href="/CV_Rodrigo_Pozo_Sánchez.pdf" download className="pointer-events-auto" aria-label={translations[language].contact.download}>
+            <Button size="lg" variant="secondary" className="rounded-full gap-2 bg-transparent text-foreground border border-foreground/20 hover:bg-blue-500 hover:text-white hover:border-blue-500 cursor-pointer">
+              <Download className="h-5 w-5" />
+              {translations[language].contact.download}
+            </Button>
+          </a>
+        </div>
         </div>
         </div>
         {/* Columna 3: Proyecto Destacado */}
