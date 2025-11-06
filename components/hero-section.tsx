@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown } from "lucide-react"
+import { ArrowDown, ExternalLink, Eye } from "lucide-react"
 import React, { useEffect, useState } from "react"
 import { translations } from "@/lib/translations"
 import { useLanguage } from "@/lib/language-context"
@@ -126,7 +126,56 @@ export function HeroSection() {
         </Announcement>
         </div>
         </div>
-        <div className="hidden min-[700px]:block hero-column min-[700px]:border-2 min-[700px]:border-blue-400 h-full pt-8" />
+        {/* Columna 3: Proyecto Destacado */}
+        <div className="hidden min-[700px]:block hero-column min-[700px]:border-2 min-[700px]:border-blue-400 h-full pt-8">
+          {(() => {
+            const tp = translations[language].portfolio
+            const featured = tp.projects[0] // por ahora, cualquiera de los 3 (el primero)
+            const imgByTitle: Record<string, string> = {
+              "E-commerce Platform": "/modern-ecommerce-interface.svg",
+              "Dashboard Analytics": "/analytics-dashboard.svg",
+              "App Móvil Social": "/mobile-social-app-interface.svg",
+              "Analytics Dashboard": "/analytics-dashboard.svg",
+              "Social Mobile App": "/mobile-social-app-interface.svg",
+            }
+            const imgSrc = imgByTitle[featured.title] || "/analytics-dashboard.svg"
+            return (
+              <div className="flex flex-col gap-3">
+                {/* Título con EXACTOS estilos que "Recomendaciones" */}
+                <div className="mb-6 text-center px-3">
+                  <h3 className="font-bold bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-400 dark:to-blue-500 bg-clip-text text-transparent whitespace-nowrap tracking-tight max-w-full text-[clamp(0.95rem,8cqw,2.3rem)]">Proyecto Destacado</h3>
+                </div>
+                {/* Tarjeta igual a las de "Proyectos Destacados" */}
+                <CardFlip className="select-none cursor-pointer" autoFlipBackMs={20000}>
+                  <CardFlipFront className="overflow-hidden shadow-md">
+                    <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted">
+                      <img src={imgSrc} alt={featured.title} className="h-full w-full object-cover" />
+                    </div>
+                  </CardFlipFront>
+
+                  <CardFlipBack className="overflow-hidden shadow-md">
+                    <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
+                      <div className="max-w-[90%] text-center text-black dark:text-white">
+                        <h3 className="mb-2 text-xl font-semibold">{featured.title}</h3>
+                        <p className="mb-4 text-sm text-black/70 dark:text-white/70">{featured.description}</p>
+                        <div className="flex items-center justify-center gap-2">
+                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                            <Eye className="h-4 w-4" />
+                            {translations[language].portfolio.view}
+                          </Button>
+                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                            <ExternalLink className="h-4 w-4" />
+                            {translations[language].portfolio.visit}
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </CardFlipBack>
+                </CardFlip>
+              </div>
+            )
+          })()}
+        </div>
       </div>
 
       {/* Indicador de scroll eliminado */}
