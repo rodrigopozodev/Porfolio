@@ -24,6 +24,7 @@ export const translations = {
     },
     portfolio: {
       title: "Proyectos Destacados",
+      featuredTitle: "Proyecto Destacado",
       seeAll: "Ver Todos",
       allTitle: "Todos los Proyectos",
       projects: [
@@ -85,6 +86,7 @@ export const translations = {
     },
     portfolio: {
       title: "Featured Projects",
+      featuredTitle: "Featured Project",
       seeAll: "See All",
       allTitle: "All Projects",
       projects: [

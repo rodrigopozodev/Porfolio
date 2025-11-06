@@ -144,9 +144,11 @@ export default function KineticTestimonial({
                     return (
                       <Card
                         key={`first-${t.name}-${idx}`}
-                        className={`group relative w-full overflow-hidden p-4 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-800 rounded-xl shrink-0 ${cardClassName} transition-shadow hover:shadow-lg hover:ring-1 hover:ring-blue-200 dark:hover:ring-blue-400`}
+                        className={`group relative w-full overflow-hidden p-4 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-800 rounded-xl shrink-0 ${cardClassName} transition-all hover:shadow-xl hover:ring-2 hover:ring-blue-300 dark:hover:ring-blue-300 hover:-translate-y-[2px] hover:scale-[1.02] cursor-pointer`}
+                        onClick={/linkedin\.com/i.test((t.handle ?? '').trim()) ? () => window.open(t.handle, '_blank') : undefined}
+                        role={/linkedin\.com/i.test((t.handle ?? '').trim()) ? 'link' : undefined}
                       >
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-200/40 via-blue-100/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:from-sky-500/20 dark:via-blue-500/10" />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-300/50 via-blue-200/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:from-sky-500/30 dark:via-blue-500/20" />
                         <p className="text-sm leading-relaxed mb-4">“{t.review}”</p>
                         <div className="flex items-center gap-3">
                           {hasAvatar && (
@@ -158,7 +160,7 @@ export default function KineticTestimonial({
                           )}
                           <div className="min-w-0">
                             <p className="text-sm font-semibold">{t.name}</p>
-                            {t.handle && t.handle.trim().length > 0 && (
+                            {t.handle && t.handle.trim().length > 0 && !/linkedin\.com/i.test(t.handle.trim()) && (
                               <p className="text-xs text-neutral-500 dark:text-white/70">{t.handle}</p>
                             )}
                           </div>
@@ -177,9 +179,11 @@ export default function KineticTestimonial({
                     return (
                       <Card
                         key={`second-${t.name}-${idx}`}
-                        className={`group relative w-full overflow-hidden p-4 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-800 rounded-xl shrink-0 ${cardClassName} transition-shadow hover:shadow-lg hover:ring-1 hover:ring-blue-200 dark:hover:ring-blue-400`}
+                        className={`group relative w-full overflow-hidden p-4 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-800 rounded-xl shrink-0 ${cardClassName} transition-all hover:shadow-xl hover:ring-2 hover:ring-blue-300 dark:hover:ring-blue-300 hover:-translate-y-[2px] hover:scale-[1.02] cursor-pointer`}
+                        onClick={/linkedin\.com/i.test((t.handle ?? '').trim()) ? () => window.open(t.handle, '_blank') : undefined}
+                        role={/linkedin\.com/i.test((t.handle ?? '').trim()) ? 'link' : undefined}
                       >
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-200/40 via-blue-100/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:from-sky-500/20 dark:via-blue-500/10" />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-300/50 via-blue-200/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:from-sky-500/30 dark:via-blue-500/20" />
                         <p className="text-sm leading-relaxed mb-4">“{t.review}”</p>
                         <div className="flex items-center gap-3">
                           {hasAvatar && (
@@ -191,7 +195,7 @@ export default function KineticTestimonial({
                           )}
                           <div className="min-w-0">
                             <p className="text-sm font-semibold">{t.name}</p>
-                            {t.handle && t.handle.trim().length > 0 && (
+                            {t.handle && t.handle.trim().length > 0 && !/linkedin\.com/i.test(t.handle.trim()) && (
                               <p className="text-xs text-neutral-500 dark:text-white/70">{t.handle}</p>
                             )}
                           </div>

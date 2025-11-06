@@ -176,7 +176,7 @@ export function HeroSection() {
               <div className="flex flex-col gap-3">
                 {/* Título con EXACTOS estilos que "Recomendaciones" */}
                 <div className="mb-6 text-center px-3">
-                  <h3 className="font-bold bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-400 dark:to-blue-500 bg-clip-text text-transparent whitespace-nowrap tracking-tight max-w-full text-[clamp(0.95rem,8cqw,2.3rem)]">Proyecto Destacado</h3>
+                  <h3 className="font-bold bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-400 dark:to-blue-500 bg-clip-text text-transparent whitespace-nowrap tracking-tight max-w-full text-[clamp(0.95rem,8cqw,2.3rem)]">{tp.featuredTitle}</h3>
                 </div>
                 {/* Tarjeta igual a las de "Proyectos Destacados" */}
                 <CardFlip className="select-none cursor-pointer" autoFlipBackMs={20000}>
