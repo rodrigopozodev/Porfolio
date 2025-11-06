@@ -7,7 +7,6 @@ import { useHandedness } from "@/lib/handedness-context"
 const sections = [
   { id: "hero", label: "Inicio" },
   { id: "portfolio", label: "Proyectos" },
-  { id: "contact", label: "Contacto" },
 ]
 
 export function PageNavigation() {

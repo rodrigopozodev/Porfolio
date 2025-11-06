@@ -3,7 +3,6 @@
 import React from "react"
 import { HeroSection } from "@/components/hero-section"
 import { PortfolioSection } from "@/components/portfolio-section"
-import { ContactSection } from "@/components/contact-section"
 import { PageNavigation } from "@/components/page-navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
@@ -20,7 +19,6 @@ export default function Home() {
     >
       <HeroSection />
       <PortfolioSection />
-      <ContactSection />
       <PageNavigation />
       <div className="fixed top-6 left-6 z-50">
         <HandednessToggle />
