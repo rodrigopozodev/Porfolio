@@ -262,11 +262,11 @@ export function TestimonialsSection() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="h-full flex flex-col">
 
       <KineticTestimonial
         testimonials={allTestimonials}
-        className="bg-transparent not-prose"
+        className="bg-transparent not-prose flex-1"
         cardClassName="shadow-lg"
         avatarClassName="ring-2 ring-blue-500"
         desktopColumns={2}
@@ -276,24 +276,22 @@ export function TestimonialsSection() {
         subtitle={tTestimonials.subtitle}
       />
 
-      {
-        <div className="recommend-btn-wrap relative z-10 flex items-center justify-center pointer-events-auto px-2">
-          <Announcement movingBorder className="w-full sm:w-auto">
-            <AnnouncementTitle className="w-full sm:w-auto">
-              <Button
-                size="lg"
-                type="button"
-                onClick={() => setIsModalOpen(true)}
-                className="bg-transparent hover:bg-transparent text-black dark:text-white font-semibold transition-all group cta-button cursor-pointer rounded-full px-[clamp(0.75rem,3vw,1rem)] py-[clamp(0.5rem,2vw,0.75rem)] text-[clamp(0.95rem,2.8vw,1.25rem)] w-full sm:w-auto max-w-[min(95vw,480px)] whitespace-normal sm:whitespace-nowrap text-center mx-auto"
-              >
-                <span className="transition-colors group-hover:bg-gradient-to-r group-hover:from-sky-500 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent dark:group-hover:from-sky-400 dark:group-hover:to-blue-500">
-                  {tTestimonials.cta}
-                </span>
-              </Button>
-            </AnnouncementTitle>
-          </Announcement>
-        </div>
-      }
+      <div className="recommend-btn-wrap mt-auto relative z-10 flex items-center justify-center pointer-events-auto px-2">
+        <Announcement movingBorder className="w-full sm:w-auto">
+          <AnnouncementTitle className="w-full sm:w-auto">
+            <Button
+              size="lg"
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className="bg-transparent hover:bg-transparent text-black dark:text-white font-semibold transition-all group cta-button cursor-pointer rounded-full px-[clamp(0.75rem,3vw,1rem)] py-[clamp(0.5rem,2vw,0.75rem)] text-[clamp(0.95rem,2.8vw,1.25rem)] w-full sm:w-auto max-w-[min(95vw,480px)] whitespace-normal sm:whitespace-nowrap text-center mx-auto"
+            >
+              <span className="transition-colors group-hover:bg-gradient-to-r group-hover:from-sky-500 group-hover:to-blue-600 group-hover:bg-clip-text group-hover:text-transparent dark:group-hover:from-sky-400 dark:group-hover:to-blue-500">
+                {tTestimonials.cta}
+              </span>
+            </Button>
+          </AnnouncementTitle>
+        </Announcement>
+      </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
@@ -311,8 +309,7 @@ export function TestimonialsSection() {
               </button>
             </div>
 
-            {
-              <form onSubmit={handleSubmit} className="space-y-2">
+            <form onSubmit={handleSubmit} className="space-y-2">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <div className="flex flex-col gap-1">
                     <label className="text-[clamp(0.85rem,1.1vw,1rem)] opacity-80" htmlFor="name-input">
@@ -410,8 +407,7 @@ export function TestimonialsSection() {
                     {submitting ? (language === 'es' ? "Enviando..." : "Sending...") : tTestimonials.send}
                   </Button>
                 </div>
-              </form>
-            }
+            </form>
           </div>
         </div>
       )}

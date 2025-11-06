@@ -258,21 +258,7 @@
   mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
 }
 
-/* Altura responsiva para Kinetic Testimonials basada en altura de viewport */
-.kinetic-responsive { /* altura por defecto ya viene de clases Tailwind */ }
-@media (max-height: 840px) {
-  .kinetic-responsive { height: 460px !important; }
-}
-
-/* Ajustes específicos entre 840px y 800px de altura */
-@media (max-height: 839px) and (min-height: 799px) {
-  /* Quitar espacio vertical entre bloques dentro de TestimonialsSection */
-  .testimonials-wrapper > * + * { margin-top: 0 !important; }
-  /* Eliminar margen inferior del header dentro del wrapper del componente */
-  .kinetic-shell .mb-6 { margin-bottom: 0 !important; }
-  /* Bajar el botón para que quede más abajo en la columna */
-  .recommend-btn-wrap { margin-top: 3rem !important; }
-}
+/* Eliminamos reglas responsivas que alteraban altura/márgenes de testimonios y CTA */
 
 /* Overlay de desvanecido compatible con light/dark usando color de fondo */
 .kinetic-fade::before,

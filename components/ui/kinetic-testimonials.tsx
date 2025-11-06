@@ -105,7 +105,7 @@ export default function KineticTestimonial({
         </div>
       )}
 
-      <div className={`relative overflow-hidden h-[520px] min-[900px]:h-[560px] kinetic-mask`}>
+      <div className={`relative overflow-hidden h-[610px] min-[900px]:h-[690px] kinetic-mask`}>
 
         <div
           className={

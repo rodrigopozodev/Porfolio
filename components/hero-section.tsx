@@ -37,7 +37,7 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent" />
 
       <div className="hero-container w-full max-w-screen-2xl mx-auto px-4 min-[700px]:px-6 grid grid-cols-1 min-[700px]:grid-cols-3 items-stretch min-[700px]:gap-4 lg:gap-6 pt-8 min-[700px]:pt-12 min-h-[60vh] min-[700px]:min-h-[65vh]">
-        <div className="hidden min-[700px]:block hero-column min-[700px]:border-2 min-[700px]:border-blue-400 p-4 h-full pt-8">
+        <div className="hidden min-[700px]:block hero-column min-[700px]:border-2 min-[700px]:border-blue-400 p-4 pb-0 h-full pt-8 flex flex-col">
           <TestimonialsSection />
         </div>
         <div key={renderKey} className="relative hero-column z-10 mx-auto max-w-none xl:max-w-5xl px-4 min-[700px]:px-6 text-center min-[700px]:border-2 min-[700px]:border-blue-400 h-full pt-8">
