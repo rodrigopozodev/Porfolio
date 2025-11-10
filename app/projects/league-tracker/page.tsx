@@ -8,6 +8,14 @@ import { ArrowLeft, ExternalLink } from "lucide-react"
 export default function LeagueTrackerPage() {
   const router = useRouter()
 
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      router.back()
+    } else {
+      router.push("/")
+    }
+  }
+
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
@@ -16,7 +24,7 @@ export default function LeagueTrackerPage() {
             size="sm"
             variant="secondary"
             className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
-            onClick={() => router.push("/projects")}
+            onClick={handleBack}
           >
             <ArrowLeft className="h-4 w-4" />
             Volver

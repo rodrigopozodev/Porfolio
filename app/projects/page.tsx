@@ -36,7 +36,13 @@ export default function ProjectsPage() {
               size="sm"
               variant="secondary"
               className="absolute left-0 top-1/2 -translate-y-1/2 gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
-              onClick={() => router.push("/")}
+              onClick={() => {
+                if (typeof window !== "undefined" && window.history.length > 1) {
+                  router.back()
+                } else {
+                  router.push("/")
+                }
+              }}
             >
               <ArrowLeft className="h-4 w-4" />
               {t.back}
