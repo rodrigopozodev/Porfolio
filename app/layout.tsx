@@ -59,10 +59,13 @@ export default function RootLayout({
             <HandednessProvider>
           <Transition
             intro={null}
-            introDuration={2}
-            transitionDuration={1}
+            // Restauramos configuración por defecto para el botón de temas
+            // (curved desde bottom, colores neutros)
+            introDuration={1.5}
+            transitionDuration={0.9}
             type="curved"
             direction="bottom"
+            className="bg-neutral-900 dark:bg-white"
             skip
             autoExit={false}
           >

@@ -327,3 +327,53 @@
     margin-top: 0.25rem;
   }
 }
+
+/* ======================
+   Sweep To Right (click)
+====================== */
+.sweep-btn {
+  position: relative;
+  overflow: hidden;
+}
+.sweep-btn > * {
+  position: relative;
+  z-index: 1;
+}
+.sweep-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #3b82f6; /* tailwind blue-500 */
+  transform: translateX(-100%);
+  z-index: 0;
+}
+.sweep-btn.sweep-animate {
+  color: #ffffff;
+}
+.sweep-btn.sweep-animate::before {
+  animation: sweepToRight 600ms ease;
+}
+
+@keyframes sweepToRight {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Sweep To Right for full section/page */
+.sweep-page {
+  position: relative;
+  overflow: hidden;
+}
+.sweep-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #3b82f6; /* tailwind blue-500 */
+  transform: translateX(-100%);
+  z-index: 40; /* above content but below global overlays */
+  pointer-events: none;
+}
+.sweep-page-animate::before {
+  animation: sweepToRight 600ms ease;
+}

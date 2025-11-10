@@ -8,8 +8,22 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { motion } from "framer-motion"
+import { useEffect } from "react"
 
 export default function Home() {
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search)
+      const section = params.get("section")
+      if (section === "portfolio" || section === "2") {
+        const el = document.getElementById("portfolio")
+        if (el) {
+          // Desplazar inmediatamente a la sección 2 (Proyectos Destacados)
+          el.scrollIntoView({ behavior: "auto", block: "start" })
+        }
+      }
+    } catch {}
+  }, [])
   return (
     <motion.main
       className="snap-container"

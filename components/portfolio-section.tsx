@@ -36,6 +36,7 @@ export function PortfolioSection() {
   const [isInstantSwitch, setIsInstantSwitch] = useState(false)
   const [shouldCarousel, setShouldCarousel] = useState(false)
   const containerRef = useRef<HTMLDivElement | null>(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
 
   const t = translations[language].portfolio
 
@@ -148,7 +149,8 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-2 min-[900px]:pt-6 min-[900px]:pb-4 lg:px-6 lg:pt-12 lg:pb-8"
+      ref={sectionRef}
+      className="sweep-page snap-section flex items-center justify-center bg-secondary/30 px-2 pt-4 pb-2 min-[900px]:pt-6 min-[900px]:pb-4 lg:px-6 lg:pt-12 lg:pb-8"
     >
       <div
         ref={containerRef}
@@ -174,7 +176,18 @@ export function PortfolioSection() {
             size="sm"
             variant="secondary"
             className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
-            onClick={() => router.push("/projects")}
+            onClick={() => {
+              // Disparar overlay global Sweep To Right
+              try {
+                window.dispatchEvent(
+                  new CustomEvent("routeSweep", {
+                    detail: { direction: "right", type: "slide", className: "bg-accent", transitionDuration: 0.6 },
+                  })
+                )
+              } catch {}
+              // Navegar inmediatamente durante el barrido
+              router.push("/projects")
+            }}
           >
             Todos Los Proyectos
           </Button>

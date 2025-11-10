@@ -9,11 +9,14 @@ export default function LeagueTrackerPage() {
   const router = useRouter()
 
   const handleBack = () => {
-    if (typeof window !== "undefined" && window.history.length > 1) {
-      router.back()
-    } else {
-      router.push("/")
-    }
+    try {
+      window.dispatchEvent(
+        new CustomEvent("routeSweep", {
+          detail: { direction: "left", type: "slide", className: "bg-accent", transitionDuration: 0.6 },
+        })
+      )
+    } catch {}
+    router.push("/projects")
   }
 
   return (

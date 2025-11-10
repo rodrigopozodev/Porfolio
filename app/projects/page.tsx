@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react"
-import { motion } from "framer-motion"
 import { useLanguage } from "@/lib/language-context"
 import { translations } from "@/lib/translations"
 import { Card } from "@/components/ui/card"
@@ -26,22 +25,22 @@ export default function ProjectsPage() {
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
-        <motion.div
-          initial={{ opacity: 0, x: 10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div>
           <div className="relative mb-6">
             <Button
               size="sm"
               variant="secondary"
               className="absolute left-0 top-1/2 -translate-y-1/2 gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
               onClick={() => {
-                if (typeof window !== "undefined" && window.history.length > 1) {
-                  router.back()
-                } else {
-                  router.push("/")
-                }
+                // Barrido inverso (Sweep To Left) y redirección a Proyectos Destacados
+                try {
+                  window.dispatchEvent(
+                    new CustomEvent("routeSweep", {
+                      detail: { direction: "left", type: "slide", className: "bg-accent", transitionDuration: 0.6 },
+                    })
+                  )
+                } catch {}
+                router.push("/?section=portfolio")
               }}
             >
               <ArrowLeft className="h-4 w-4" />
@@ -119,7 +118,7 @@ export default function ProjectsPage() {
               </Card>
             ))}
           </div>
-        </motion.div>
+        </div>
       </section>
 
       <div className="fixed top-6 left-6 z-50">

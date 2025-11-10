@@ -39,6 +39,10 @@ export const Transition: React.FC<TransitionProps> = ({
   const [showIntro, setShowIntro] = useState(!skip);
   const [animating, setAnimating] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [overrideDir, setOverrideDir] = useState<Dir | null>(null);
+  const [overrideType, setOverrideType] = useState<Type | null>(null);
+  const [overrideClassName, setOverrideClassName] = useState<string | null>(null);
+  const [overrideTransitionDuration, setOverrideTransitionDuration] = useState<number | null>(null);
 
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-100px", once: true }); 
@@ -53,7 +57,8 @@ export const Transition: React.FC<TransitionProps> = ({
     const tick = (now: number) => {
       if (!startTime) startTime = now;
       const elapsed = (now - startTime) / 1000;
-      const raw = Math.min(elapsed / transitionDuration, 1);
+      const dur = overrideTransitionDuration ?? transitionDuration;
+      const raw = Math.min(elapsed / dur, 1);
       const eased = easeInOutCubic(raw);
       setProgress(eased);
 
@@ -64,6 +69,10 @@ export const Transition: React.FC<TransitionProps> = ({
         setShowIntro(false);
         setProgress(0);
         rafRef.current = null;
+        setOverrideDir(null);
+        setOverrideType(null);
+        setOverrideClassName(null);
+        setOverrideTransitionDuration(null);
         onFinished?.();
       }
     };
@@ -111,10 +120,33 @@ export const Transition: React.FC<TransitionProps> = ({
     };
   }, [startTransition]);
 
+  // Evento para transiciones de ruta con dirección dinámica
+  useEffect(() => {
+    const handleRouteSweep = (e: any) => {
+      try {
+        const dir = e?.detail?.direction as Dir | undefined;
+        const typ = e?.detail?.type as Type | undefined;
+        const cls = e?.detail?.className as string | undefined;
+        const dur = e?.detail?.transitionDuration as number | undefined;
+        setOverrideDir(dir ?? null);
+        setOverrideType(typ ?? null);
+        setOverrideClassName(cls ?? null);
+        setOverrideTransitionDuration(dur ?? null);
+      } catch {}
+      setShowIntro(true);
+      startTransition();
+    };
+    window.addEventListener("routeSweep", handleRouteSweep as EventListener);
+    return () => {
+      window.removeEventListener("routeSweep", handleRouteSweep as EventListener);
+    };
+  }, [startTransition]);
+
   const getCurvedClip = (p: number) => {
     const startRadius = 160;
     const radius = Math.max(0, startRadius * (1 - p));
-    switch (direction) {
+    const d = overrideDir ?? direction;
+    switch (d) {
       case "top":
         return `circle(${radius}% at 50% 0%)`;
       case "bottom":
@@ -129,7 +161,8 @@ export const Transition: React.FC<TransitionProps> = ({
 
   const getSlideTransform = (p: number) => {
     const pct = Math.round(p * 100);
-    switch (direction) {
+    const d = overrideDir ?? direction;
+    switch (d) {
       case "bottom":
         return `translateY(${pct}%)`;
       case "top":
@@ -148,18 +181,18 @@ export const Transition: React.FC<TransitionProps> = ({
 
       {showIntro && (
         <div
-          className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none"
+          className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none"
           aria-hidden={!showIntro ? undefined : true}
         >
           <div
-            className="absolute inset-0"
+            className="fixed inset-0"
             style={
-              type === "curved"
+              (overrideType ?? type) === "curved"
                 ? { clipPath: getCurvedClip(progress), transition: animating ? undefined : "none" }
                 : { transform: getSlideTransform(progress) }
             }
           >
-            <div className={`absolute inset-0 ${className}`} />
+            <div className={`absolute inset-0 ${overrideClassName ?? className}`} />
             <div className="absolute inset-0 flex items-center justify-center">
               {typeof intro === "function" ? intro(startTransition) : intro}
             </div>
