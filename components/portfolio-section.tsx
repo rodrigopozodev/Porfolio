@@ -168,6 +168,18 @@ export function PortfolioSection() {
           })()}
         </h2>
 
+        {/* Botón para ir a la página de todos los proyectos */}
+        <div className="mb-4 flex justify-center">
+          <Button
+            size="sm"
+            variant="secondary"
+            className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
+            onClick={() => router.push("/projects")}
+          >
+            Todos Los Proyectos
+          </Button>
+        </div>
+
         {/* Grid con diseño móvil aplicado (solo si caben ≥4 por fila) */}
         {!shouldCarousel && (
           <div className="mt-2 min-[900px]:mt-4 lg:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
