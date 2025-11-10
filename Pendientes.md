@@ -18,10 +18,10 @@ Este documento recoge las tareas pendientes para mantener el proyecto 100% respo
     - [x] Incluir enlace directo al perfil de LinkedIn
   - [x] Mostrar la recomendación en la página justo después de enviar, sin recargar
   - [x] El botón de idioma debe cambiar todo el texto del formulario y del botón al inglés si se ha pulsado el botón del idioma.
-  - [X] Hacer clicable el botón de “realizar recomendaciones”, añadir hover azul gradiente como el título de recomendaciones y añadir traducción al inglés si se pulsa el botón de idioma.
+  - [X] Hacer clicable el botón de “Realizar Recomendación”, añadir hover azul gradiente como el título de recomendaciones y añadir traducción al inglés si se pulsa el botón de idioma.
   - [x] Añadir campo apellidos en el formulario de recomendaciones.
   - [x] Implementar validaciones visibles en el formulario de recomendaciones.
-  - [X] Añadir cursor-pointer al botón de “realizar recomendaciones”
+  - [X] Añadir cursor-pointer al botón de “Realizar Recomendación”
 
 ## Recordatorio en cambios de código
 

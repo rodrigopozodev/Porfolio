@@ -14,9 +14,17 @@ export function CardFlip({ className, children, toggleOnClick = true, autoFlipBa
   const [isFlipped, setIsFlipped] = useState(false);
   const [front, back] = React.Children.toArray(children);
   const flipBackTimerRef = useRef<number | null>(null);
+  const [isSelectingText, setIsSelectingText] = useState(false);
 
-  const handleToggle = () => {
+  const handleToggle = (e: React.MouseEvent) => {
     if (!toggleOnClick) return;
+    // Evitar flip si hay selección activa de texto (subrayado)
+    const sel = window.getSelection();
+    const isSelectingText = sel && sel.rangeCount > 0 && !sel.isCollapsed && sel.toString().trim().length > 0;
+    if (isSelectingText) {
+      e.stopPropagation();
+      return;
+    }
     setIsFlipped((v) => !v);
   };
 
@@ -31,7 +39,7 @@ export function CardFlip({ className, children, toggleOnClick = true, autoFlipBa
     }
 
     // Si está volteado y hay autoFlipBackMs, programar vuelta automática
-    if (isFlipped && autoFlipBackMs && autoFlipBackMs > 0) {
+    if (isFlipped && autoFlipBackMs && autoFlipBackMs > 0 && !isSelectingText) {
       flipBackTimerRef.current = window.setTimeout(() => {
         setIsFlipped(false);
         flipBackTimerRef.current = null;
@@ -44,12 +52,23 @@ export function CardFlip({ className, children, toggleOnClick = true, autoFlipBa
         flipBackTimerRef.current = null;
       }
     };
-  }, [isFlipped, autoFlipBackMs, onFlipChange]);
+  }, [isFlipped, autoFlipBackMs, onFlipChange, isSelectingText]);
+
+  // Detectar selección de texto global para pausar el auto-flip
+  useEffect(() => {
+    const handleSelectionChange = () => {
+      const sel = window.getSelection();
+      const selecting = !!(sel && sel.rangeCount > 0 && !sel.isCollapsed && sel.toString().trim().length > 0);
+      setIsSelectingText(selecting);
+    };
+    document.addEventListener("selectionchange", handleSelectionChange);
+    return () => document.removeEventListener("selectionchange", handleSelectionChange);
+  }, []);
 
   return (
     <div className={cn("relative w-full", className)} style={{ perspective: "1000px" }} {...props}>
       <motion.div
-        className="relative w-full"
+        className={cn("relative w-full", toggleOnClick && "cursor-pointer")}
         initial={false}
         animate={{ rotateY: isFlipped ? -180 : 0 }}
         transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}

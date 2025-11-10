@@ -12,7 +12,7 @@ export const translations = {
     testimonials: {
       title: "Recomendaciones",
       subtitle: "Lo que dicen sobre mi trabajo",
-      cta: "Realizar Recomendaciones",
+      cta: "Realizar Recomendación",
       nameLabel: "Tu nombre",
       lastNameLabel: "Tus apellidos",
       selectFile: "Seleccionar archivo",
@@ -29,8 +29,9 @@ export const translations = {
       allTitle: "Todos los Proyectos",
       projects: [
         {
-          title: "E-commerce Platform",
-          description: "Plataforma completa de comercio electrónico con pasarela de pagos",
+          title: "League tracker",
+          description: "App web Next.js para consultar y comparar perfiles de LoL (Solo/Q y Flex) con datos en tiempo real vía APIs de Riot. Autenticación y gestión de usuarios con Supabase.",
+          slug: "league-tracker",
         },
         {
           title: "Dashboard Analytics",
@@ -93,14 +94,17 @@ export const translations = {
         {
           title: "E-commerce Platform",
           description: "Complete e-commerce platform with payment gateway",
+          slug: "ecommerce-platform",
         },
         {
           title: "Analytics Dashboard",
           description: "Real-time analytics panel with interactive visualizations",
+          slug: "analytics-dashboard",
         },
         {
           title: "Social Mobile App",
           description: "Social application with real-time chat and notifications",
+          slug: "social-mobile-app",
         },
       ],
       view: "View",

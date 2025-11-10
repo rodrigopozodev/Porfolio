@@ -6,19 +6,20 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Eye } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
 import { translations } from "@/lib/translations"
 import { useLanguage } from "@/lib/language-context"
 import { CardFlip, CardFlipFront, CardFlipBack, CardFlipContent } from "@/components/ui/card-flip"
 import { useHandedness } from "@/lib/handedness-context"
 
 const projectImages = [
-  "/modern-ecommerce-interface.svg",
+  "/League Tracker.png",
   "/analytics-dashboard.svg",
   "/mobile-social-app-interface.svg",
 ]
 
 const projectTags = [
-  ["Next.js", "TypeScript", "Stripe"],
+  [],
   ["React", "D3.js", "Node.js"],
   ["React Native", "Firebase", "WebSocket"],
 ]
@@ -26,6 +27,7 @@ const projectTags = [
 export function PortfolioSection() {
   const { language } = useLanguage()
   const { handedness } = useHandedness()
+  const router = useRouter()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
@@ -170,38 +172,84 @@ export function PortfolioSection() {
         {!shouldCarousel && (
           <div className="mt-2 min-[900px]:mt-4 lg:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {t.projects.map((project, index) => (
-              <CardFlip key={index} className="select-none cursor-pointer" autoFlipBackMs={20000}>
+              <CardFlip key={index} className="select-none cursor-pointer" autoFlipBackMs={60000}>
                 <CardFlipFront className="overflow-hidden shadow-md">
-                  <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted">
+                  <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted cursor-pointer">
                     <img
                       src={projectImages[index] || "/placeholder.svg"}
                       alt={project.title}
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover cursor-pointer"
                     />
                   </div>
                 </CardFlipFront>
 
                 <CardFlipBack className="overflow-hidden shadow-md">
                   <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
-                    <div className="max-w-[90%] text-center text-black dark:text-white">
+                    <div className="max-w-[90%] text-center text-black dark:text-white select-text">
                       <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
-                      <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
-                      <div className="mb-4 flex flex-wrap justify-center gap-2">
-                        {projectTags[index].map((tag, tagIndex) => (
-                          <span
-                            key={tagIndex}
-                            className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                      { (project as any).slug === "league-tracker" ? (
+                        <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                          <p className="font-semibold">Servicio Que Se Ofrece</p>
+                          <ul className="list-none space-y-1">
+                            <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
+                            <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
+                            <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
+                            <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
+                            <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
+                          </ul>
+                          <p className="font-semibold">Tecnologías</p>
+                          <ul className="list-none space-y-1">
+                            <li>Next.js, React, TypeScript y TailwindCSS.</li>
+                            <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
+                            <li>Supabase para autenticación y administración de usuarios.</li>
+                            <li>Integración controlada de Google AdSense.</li>
+                          </ul>
+                          <p className="font-semibold">Funcionalidad</p>
+                          <ul className="list-none space-y-1">
+                            <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
+                            <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
+                            <li>Vista de perfil con información de summoner y ligas.</li>
+                          </ul>
+                        </div>
+                      ) : (
+                        <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                      )}
+                      {projectTags[index].length > 0 && (
+                        <div className="mb-4 flex flex-wrap justify-center gap-2">
+                          {projectTags[index].map((tag, tagIndex) => (
+                            <span
+                              key={tagIndex}
+                              className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                       <div className="flex items-center justify-center gap-2">
-                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            const project = t.projects[index]
+                            if (project && (project as any).slug) {
+                              router.push(`/projects/${(project as any).slug}`)
+                            }
+                          }}
+                        >
                           <Eye className="h-4 w-4" />
                           {t.view}
                         </Button>
-                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
+                        <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => {
+                          e.stopPropagation()
+                          const project = t.projects[index]
+                          const slug = (project as any)?.slug
+                          if (slug === "league-tracker") {
+                            window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
+                          }
+                        }}>
                           <ExternalLink className="h-4 w-4" />
                           {t.visit}
                         </Button>
@@ -239,7 +287,7 @@ export function PortfolioSection() {
                   style={{ pointerEvents: index === currentIndex ? "auto" : "none" }}
                 >
                   <div className="w-full max-w-[92%] sm:max-w-[80%] px-2 sm:px-4 mx-auto cursor-pointer" onClick={() => handleCardClick(index)}>
-                    <CardFlip className="select-none cursor-pointer" autoFlipBackMs={20000}
+                    <CardFlip className="select-none cursor-pointer" autoFlipBackMs={60000}
                       onFlipChange={(flipped) => {
                         // Pausar autoplay mientras está volteado
                         if (flipped) {
@@ -248,41 +296,87 @@ export function PortfolioSection() {
                           pauseTimerRef.current = window.setTimeout(() => {
                             setIsPaused(false)
                             pauseTimerRef.current = null
-                          }, 20000)
+                          }, 60000)
                         }
                       }}
                     >
                       <CardFlipFront className="overflow-hidden shadow-md">
-                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] overflow-hidden bg-muted">
+                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] overflow-hidden bg-muted cursor-pointer">
                           <img
                             src={projectImages[index] || "/placeholder.svg"}
                             alt={project.title}
-                            className="h-full w-full object-cover"
+                            className="h-full w-full object-cover cursor-pointer"
                           />
                         </div>
                       </CardFlipFront>
 
                       <CardFlipBack className="overflow-hidden shadow-md">
                         <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] bg-white dark:bg-black flex items-center justify-center">
-                          <div className="max-w-[90%] text-center text-black dark:text-white">
+                          <div className="max-w-[90%] text-center text-black dark:text-white select-text">
                             <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
-                            <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
-                            <div className="mb-4 flex flex-wrap justify-center gap-2">
-                              {projectTags[index].map((tag, tagIndex) => (
-                                <span
-                                  key={tagIndex}
-                                  className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
+                            { (project as any).slug === "league-tracker" ? (
+                              <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                                <p className="font-semibold">Servicio Que Se Ofrece</p>
+                                <ul className="list-none space-y-1">
+                                  <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
+                                  <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
+                                  <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
+                                  <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
+                                  <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
+                                </ul>
+                                <p className="font-semibold">Tecnologías</p>
+                                <ul className="list-none space-y-1">
+                                  <li>Next.js, React, TypeScript y TailwindCSS.</li>
+                                  <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
+                                  <li>Supabase para autenticación y administración de usuarios.</li>
+                                  <li>Integración controlada de Google AdSense.</li>
+                                </ul>
+                                <p className="font-semibold">Funcionalidad</p>
+                                <ul className="list-none space-y-1">
+                                  <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
+                                  <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
+                                  <li>Vista de perfil con información de summoner y ligas.</li>
+                                </ul>
+                              </div>
+                            ) : (
+                              <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                            )}
+                            {projectTags[index].length > 0 && (
+                              <div className="mb-4 flex flex-wrap justify-center gap-2">
+                                {projectTags[index].map((tag, tagIndex) => (
+                                  <span
+                                    key={tagIndex}
+                                    className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
                             <div className="flex items-center justify-center gap-2">
-                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  const project = t.projects[index]
+                                  if (project && (project as any).slug) {
+                                    router.push(`/projects/${(project as any).slug}`)
+                                  }
+                                }}
+                              >
                                 <Eye className="h-4 w-4" />
                                 {t.view}
                               </Button>
-                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => e.stopPropagation()}>
+                              <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => {
+                                e.stopPropagation()
+                                const project = t.projects[index]
+                                const slug = (project as any)?.slug
+                                if (slug === "league-tracker") {
+                                  window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
+                                }
+                              }}>
                                 <ExternalLink className="h-4 w-4" />
                                 {t.visit}
                               </Button>

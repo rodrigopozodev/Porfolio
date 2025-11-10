@@ -42,7 +42,7 @@ export function HeroSection() {
         </div>
         <div key={renderKey} className="relative hero-column z-10 mx-auto max-w-none xl:max-w-5xl px-4 min-[700px]:px-6 text-center min-[700px]:border-2 min-[700px]:border-blue-400 h-full pt-8">
         <div className="origin-top min-[700px]:scale-[0.90] min-[900px]:scale-[0.90] lg:scale-[0.95] xl:scale-100 2xl:scale-100">
-          <CardFlip className="hidden min-[700px]:block mx-auto cursor-pointer" autoFlipBackMs={20000}>
+          <CardFlip className="hidden min-[700px]:block mx-auto cursor-pointer" autoFlipBackMs={60000}>
           <CardFlipFront className="bg-transparent border-none shadow-none p-0">
             <Image
               src="/Rodrigo.png"
@@ -165,6 +165,8 @@ export function HeroSection() {
             const tp = translations[language].portfolio
             const featured = tp.projects[0] // por ahora, cualquiera de los 3 (el primero)
             const imgByTitle: Record<string, string> = {
+              "League tracker": "/League Tracker.png",
+              "League Tracker": "/League Tracker.png",
               "E-commerce Platform": "/modern-ecommerce-interface.svg",
               "Dashboard Analytics": "/analytics-dashboard.svg",
               "App Móvil Social": "/mobile-social-app-interface.svg",
@@ -179,24 +181,59 @@ export function HeroSection() {
                   <h3 className="font-bold bg-gradient-to-r from-sky-500 to-blue-600 dark:from-sky-400 dark:to-blue-500 bg-clip-text text-transparent whitespace-nowrap tracking-tight max-w-full text-[clamp(0.95rem,8cqw,2.3rem)]">{tp.featuredTitle}</h3>
                 </div>
                 {/* Tarjeta igual a las de "Proyectos Destacados" */}
-                <CardFlip className="select-none cursor-pointer" autoFlipBackMs={20000}>
+                <CardFlip className="select-none cursor-pointer" autoFlipBackMs={60000}>
                   <CardFlipFront className="overflow-hidden shadow-md">
-                    <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted">
-                      <img src={imgSrc} alt={featured.title} className="h-full w-full object-cover" />
+                    <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted cursor-pointer">
+                      <img src={imgSrc} alt={featured.title} className="h-full w-full object-cover cursor-pointer" />
                     </div>
                   </CardFlipFront>
 
                   <CardFlipBack className="overflow-hidden shadow-md">
                     <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
-                      <div className="max-w-[90%] text-center text-black dark:text-white">
+                      <div className="max-w-[90%] text-center text-black dark:text-white select-text">
                         <h3 className="mb-2 text-xl font-semibold">{featured.title}</h3>
-                        <p className="mb-4 text-sm text-black/70 dark:text-white/70">{featured.description}</p>
+                        { (featured as any).slug === "league-tracker" ? (
+                          <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                            <p className="font-semibold">Servicio Que Se Ofrece</p>
+                            <ul className="list-none space-y-1">
+                              <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
+                              <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
+                              <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
+                              <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
+                              <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
+                            </ul>
+                            <p className="font-semibold">Tecnologías</p>
+                            <ul className="list-none space-y-1">
+                              <li>Next.js, React, TypeScript y TailwindCSS.</li>
+                              <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
+                              <li>Supabase para autenticación y administración de usuarios.</li>
+                              <li>Integración controlada de Google AdSense.</li>
+                            </ul>
+                            <p className="font-semibold">Funcionalidad</p>
+                            <ul className="list-none space-y-1">
+                              <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
+                              <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
+                              <li>Vista de perfil con información de summoner y ligas.</li>
+                            </ul>
+                          </div>
+                        ) : (
+                          <p className="mb-4 text-sm text-black/70 dark:text-white/70">{featured.description}</p>
+                        )}
                         <div className="flex items-center justify-center gap-2">
-                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={() => {
+                            const slug = (featured as any).slug
+                            if (slug) router.push(`/projects/${slug}`)
+                          }}>
                             <Eye className="h-4 w-4" />
                             {translations[language].portfolio.view}
                           </Button>
-                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500">
+                          <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => {
+                            e.stopPropagation()
+                            const slug = (featured as any)?.slug
+                            if (slug === "league-tracker") {
+                              window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
+                            }
+                          }}>
                             <ExternalLink className="h-4 w-4" />
                             {translations[language].portfolio.visit}
                           </Button>
