@@ -10,6 +10,7 @@ import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useRouter } from "next/navigation"
 import { translateText } from "@/lib/translate"
+import { BackHomeButton } from "@/components/back-home-button"
 
 export default function AboutPage() {
   const { language } = useLanguage()
@@ -172,13 +173,12 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Button variant="secondary" onClick={() => router.push("/")}>{translations[language].ui.backToHome}</Button>
-          </div>
+          {/* Eliminado botón inferior; el acceso estará en el nav superior */}
         </motion.div>
       </section>
 
       <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+        <BackHomeButton />
         <HandednessToggle />
         <LanguageToggle />
         <ThemeToggle />
