@@ -22,6 +22,12 @@ export default function Home() {
         if (el) {
           // Desplazar inmediatamente a la sección 2 (Proyectos Destacados)
           el.scrollIntoView({ behavior: "auto", block: "start" })
+          // Limpiar el parámetro para que en futuras recargas se arranque en la sección 1
+          try {
+            const base = window.location.origin
+            const path = window.location.pathname || "/"
+            window.history.replaceState(null, "", `${base}${path}`)
+          } catch {}
         }
       }
     } catch {}
