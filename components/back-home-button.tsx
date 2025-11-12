@@ -7,7 +7,19 @@ import { useLanguage } from "@/lib/language-context"
 import { translations } from "@/lib/translations"
 import { useRouter } from "next/navigation"
 
-export function BackHomeButton() {
+type BackHomeButtonProps = {
+  animationType?: "fade" | "slide"
+  direction?: "top" | "bottom" | "left" | "right"
+  overlayClassName?: string
+  transitionDuration?: number
+}
+
+export function BackHomeButton({
+  animationType = "slide",
+  direction = "bottom",
+  overlayClassName = "bg-neutral-900 dark:bg-white",
+  transitionDuration = 0.6,
+}: BackHomeButtonProps) {
   const { language } = useLanguage()
   const router = useRouter()
   const label = translations[language].ui.backToHome
@@ -18,14 +30,15 @@ export function BackHomeButton() {
       size="default"
       onClick={() => {
         try {
-          const event = new CustomEvent("routeSweep", {
-            detail: {
-              type: "slide",
-              direction: "bottom",
-              className: "bg-neutral-900 dark:bg-white",
-              transitionDuration: 0.6,
-            },
-          })
+          const detail: any = {
+            type: animationType,
+            className: overlayClassName,
+            transitionDuration,
+          }
+          if (animationType === "slide") {
+            detail.direction = direction
+          }
+          const event = new CustomEvent("routeSweep", { detail })
           window.dispatchEvent(event)
         } catch {}
 

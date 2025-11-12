@@ -20,7 +20,7 @@ export default function LeagueTrackerPage() {
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
       <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
-        <BackHomeButton />
+        <BackHomeButton animationType="fade" />
         <BackFeaturedButton />
         <BackAllProjectsButton />
         <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />

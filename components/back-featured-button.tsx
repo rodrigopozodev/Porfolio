@@ -21,9 +21,8 @@ export function BackFeaturedButton() {
           window.dispatchEvent(
             new CustomEvent("routeSweep", {
               detail: {
-                type: "slide",
-                direction: "left",
-                className: "bg-accent",
+                type: "fade",
+                className: "bg-neutral-900 dark:bg-white",
                 transitionDuration: 0.6,
               },
             })
