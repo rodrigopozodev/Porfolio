@@ -3,35 +3,34 @@
 import React from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { ArrowLeft, ExternalLink } from "lucide-react"
+import { ExternalLink } from "lucide-react"
+import { BackHomeButton } from "@/components/back-home-button"
+import { BackFeaturedButton } from "@/components/back-featured-button"
+import { BackAllProjectsButton } from "@/components/back-all-projects-button"
+import { VisitProjectButton } from "@/components/visit-project-button"
+import { HandednessToggle } from "@/components/handedness-toggle"
+import { LanguageToggle } from "@/components/language-toggle"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function LeagueTrackerPage() {
   const router = useRouter()
 
-  const handleBack = () => {
-    try {
-      window.dispatchEvent(
-        new CustomEvent("routeSweep", {
-          detail: { direction: "left", type: "slide", className: "bg-accent", transitionDuration: 0.6 },
-        })
-      )
-    } catch {}
-    router.push("/projects")
-  }
+  // Navegación superior gestionada por botones reutilizables
 
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
+      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+        <BackHomeButton />
+        <BackFeaturedButton />
+        <BackAllProjectsButton />
+        <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
+        <HandednessToggle />
+        <LanguageToggle />
+        <ThemeToggle />
+      </div>
+
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
         <div className="relative mb-8 flex items-center gap-3">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
-            onClick={handleBack}
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Volver
-          </Button>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">League tracker</h1>
         </div>
 
@@ -174,18 +173,7 @@ export default function LeagueTrackerPage() {
 
         {/* CTA externo opcional */}
         <div className="mt-6">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
-            onClick={() => {
-              // Sustituir por la URL pública del proyecto cuando esté disponible
-              window.open("https://example.com/league-tracker", "_blank")
-            }}
-          >
-            <ExternalLink className="h-4 w-4" />
-            Visitar proyecto
-          </Button>
+          {/** Botón de visitar movido al nav superior **/}
         </div>
       </section>
     </main>

@@ -82,7 +82,12 @@ export function HeroSection() {
                     })
                     window.dispatchEvent(event)
                   } catch {}
-                  router.push("/about")
+                  const navigate = () => router.push("/about")
+                  window.addEventListener("routeSweepFinished", navigate, { once: true })
+                  window.setTimeout(() => {
+                    try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+                    navigate()
+                  }, 800)
                 }}
               >
                 {t.aboutCta}
@@ -233,7 +238,21 @@ export function HeroSection() {
                         <div className="flex items-center justify-center gap-2">
                           <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={() => {
                             const slug = (featured as any).slug
-                            if (slug) router.push(`/projects/${slug}`)
+                            if (slug) {
+                              try {
+                                window.dispatchEvent(
+                                  new CustomEvent("routeSweep", {
+                                    detail: { type: "fade", className: "bg-neutral-900 dark:bg-white", transitionDuration: 0.6 },
+                                  })
+                                )
+                              } catch {}
+                              const navigate = () => router.push(`/projects/${slug}`)
+                              window.addEventListener("routeSweepFinished", navigate, { once: true })
+                              window.setTimeout(() => {
+                                try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+                                navigate()
+                              }, 800)
+                            }
                           }}>
                             <Eye className="h-4 w-4" />
                             {translations[language].portfolio.view}

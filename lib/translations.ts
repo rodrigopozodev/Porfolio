@@ -123,6 +123,8 @@ export const translations = {
       handedLeft: "Zurdo",
       handedRight: "Diestro",
       backToHome: "Volver al inicio",
+      backToFeatured: "Volver a Proyectos destacados",
+      backToAllProjects: "Volver a todos los proyectos",
     },
   },
   en: {
@@ -252,6 +254,8 @@ export const translations = {
       handedLeft: "Left-handed",
       handedRight: "Right-handed",
       backToHome: "Back to home",
+      backToFeatured: "Back to Featured Projects",
+      backToAllProjects: "Back to All Projects",
     },
   },
 }

@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useInView } from "framer-motion";
 
-type Type = "curved" | "slide";
+type Type = "curved" | "slide" | "fade";
 type Dir = "top" | "bottom" | "left" | "right";
 
 export interface TransitionProps {
@@ -74,6 +74,9 @@ export const Transition: React.FC<TransitionProps> = ({
         setOverrideClassName(null);
         setOverrideTransitionDuration(null);
         onFinished?.();
+        try {
+          window.dispatchEvent(new CustomEvent("routeSweepFinished"));
+        } catch {}
       }
     };
 
@@ -175,6 +178,10 @@ export const Transition: React.FC<TransitionProps> = ({
     }
   };
 
+  const getFadeStyle = (p: number) => {
+    return { opacity: p };
+  };
+
   return (
     <div ref={ref} className="relative w-full h-full min-h-full">
       <div className="relative z-0 w-full h-full">{children}</div>
@@ -189,7 +196,9 @@ export const Transition: React.FC<TransitionProps> = ({
             style={
               (overrideType ?? type) === "curved"
                 ? { clipPath: getCurvedClip(progress), transition: animating ? undefined : "none" }
-                : { transform: getSlideTransform(progress) }
+                : (overrideType ?? type) === "slide"
+                  ? { transform: getSlideTransform(progress) }
+                  : getFadeStyle(progress)
             }
           >
             <div className={`absolute inset-0 ${overrideClassName ?? className}`} />

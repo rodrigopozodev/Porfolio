@@ -212,8 +212,13 @@ export function PortfolioSection() {
                   })
                 )
               } catch {}
-              // Navegar inmediatamente durante el barrido
-              router.push("/projects")
+              // Esperar a que termine la animación antes de navegar
+              const navigate = () => router.push("/projects")
+              window.addEventListener("routeSweepFinished", navigate, { once: true })
+              window.setTimeout(() => {
+                try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+                navigate()
+              }, 800)
             }}
           >
             Todos Los Proyectos
@@ -313,7 +318,19 @@ export function PortfolioSection() {
                             e.stopPropagation()
                             const project = projects[index]
                             if (project && (project as any).slug) {
-                              router.push(`/projects/${(project as any).slug}`)
+                              try {
+                                window.dispatchEvent(
+                                  new CustomEvent("routeSweep", {
+                                    detail: { type: "fade", className: "bg-neutral-900 dark:bg-white", transitionDuration: 0.6 },
+                                  })
+                                )
+                              } catch {}
+                              const navigate = () => router.push(`/projects/${(project as any).slug}`)
+                              window.addEventListener("routeSweepFinished", navigate, { once: true })
+                              window.setTimeout(() => {
+                                try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+                                navigate()
+                              }, 800)
                             }
                           }}
                         >
@@ -466,7 +483,19 @@ export function PortfolioSection() {
                                   e.stopPropagation()
                                   const project = projects[index]
                                   if (project && (project as any).slug) {
-                                    router.push(`/projects/${(project as any).slug}`)
+                                    try {
+                                      window.dispatchEvent(
+                                        new CustomEvent("routeSweep", {
+                                          detail: { type: "fade", className: "bg-neutral-900 dark:bg-white", transitionDuration: 0.6 },
+                                        })
+                                      )
+                                    } catch {}
+                                    const navigate = () => router.push(`/projects/${(project as any).slug}`)
+                                    window.addEventListener("routeSweepFinished", navigate, { once: true })
+                                    window.setTimeout(() => {
+                                      try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+                                      navigate()
+                                    }, 800)
                                   }
                                 }}
                               >
