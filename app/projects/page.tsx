@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { BackHomeButton } from "@/components/back-home-button"
+import { BackFeaturedButton } from "@/components/back-featured-button"
 import { useHandedness } from "@/lib/handedness-context"
 
 const projectImages = [
@@ -28,26 +30,7 @@ export default function ProjectsPage() {
     <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
         <div>
-          <div className="relative mb-6">
-            <Button
-              size="sm"
-              variant="secondary"
-              className="absolute left-0 top-1/2 -translate-y-1/2 gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
-              onClick={() => {
-                // Barrido inverso (Sweep To Left) y redirección a Proyectos Destacados
-                try {
-                  window.dispatchEvent(
-                    new CustomEvent("routeSweep", {
-                      detail: { direction: "left", type: "slide", className: "bg-accent", transitionDuration: 0.6 },
-                    })
-                  )
-                } catch {}
-                router.push("/?section=portfolio")
-              }}
-            >
-              <ArrowLeft className="h-4 w-4" />
-              {t.back}
-            </Button>
+          <div className="mb-6">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center">{t.allTitle}</h1>
           </div>
 
@@ -98,7 +81,19 @@ export default function ProjectsPage() {
                   onClick={() => {
                     const project = t.projects[index]
                     if (project && (project as any).slug) {
-                      router.push(`/projects/${(project as any).slug}`)
+                      try {
+                        window.dispatchEvent(
+                          new CustomEvent("routeSweep", {
+                            detail: { type: "fade", className: "bg-neutral-900 dark:bg-white", transitionDuration: 0.6 },
+                          })
+                        )
+                      } catch {}
+                      const navigate = () => router.push(`/projects/${(project as any).slug}`)
+                      window.addEventListener("routeSweepFinished", navigate, { once: true })
+                      window.setTimeout(() => {
+                        try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+                        navigate()
+                      }, 800)
                     }
                   }}
                 >
@@ -126,15 +121,19 @@ export default function ProjectsPage() {
       <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         {handedness === "right" ? (
           <>
-            <LanguageToggle />
+            <BackHomeButton animationType="fade" />
+            <BackFeaturedButton />
             <HandednessToggle />
+            <LanguageToggle />
             <ThemeToggle />
           </>
         ) : (
           <>
             <ThemeToggle />
-            <HandednessToggle />
             <LanguageToggle />
+            <HandednessToggle />
+            <BackFeaturedButton />
+            <BackHomeButton animationType="fade" />
           </>
         )}
       </div>

@@ -8,7 +8,7 @@ import { translations } from "@/lib/translations"
 import { useRouter } from "next/navigation"
 
 type BackHomeButtonProps = {
-  animationType?: "fade" | "slide"
+  animationType?: "fade" | "slide" | "none"
   direction?: "top" | "bottom" | "left" | "right"
   overlayClassName?: string
   transitionDuration?: number
@@ -29,6 +29,11 @@ export function BackHomeButton({
       variant="outline"
       size="default"
       onClick={() => {
+        if (animationType === "none") {
+          // Navegación directa sin overlay ni post-sweep
+          router.push("/")
+          return
+        }
         if (animationType === "slide") {
           // Navegación inmediata con animación post-navegación
           try {

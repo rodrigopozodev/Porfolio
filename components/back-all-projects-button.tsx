@@ -17,6 +17,7 @@ export function BackAllProjectsButton() {
       variant="outline"
       size="default"
       onClick={() => {
+        // Restaurar animación con overlay (fade) antes de navegar a /projects
         try {
           window.dispatchEvent(
             new CustomEvent("routeSweep", {
@@ -32,7 +33,7 @@ export function BackAllProjectsButton() {
         const navigate = () => router.push("/projects")
         window.addEventListener("routeSweepFinished", navigate, { once: true })
         window.setTimeout(() => {
-          try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+          try { window.removeEventListener("routeSweepFinished", navigate as unknown as EventListener) } catch {}
           navigate()
         }, 800)
       }}

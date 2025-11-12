@@ -204,11 +204,11 @@ export function PortfolioSection() {
             variant="secondary"
             className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
             onClick={() => {
-              // Disparar overlay global Sweep To Right
+              // Usar la misma animación que el botón "Ver": fade con overlay neutro
               try {
                 window.dispatchEvent(
                   new CustomEvent("routeSweep", {
-                    detail: { direction: "right", type: "slide", className: "bg-accent", transitionDuration: 0.6 },
+                    detail: { type: "fade", className: "bg-neutral-900 dark:bg-white", transitionDuration: 0.6 },
                   })
                 )
               } catch {}
