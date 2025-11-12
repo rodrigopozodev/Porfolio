@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useHandedness } from "@/lib/handedness-context"
 
 const projectImages = [
   "/League Tracker.png",
@@ -21,6 +22,7 @@ export default function ProjectsPage() {
   const { language } = useLanguage()
   const t = translations[language].portfolio
   const router = useRouter()
+  const { handedness } = useHandedness()
 
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
@@ -121,10 +123,8 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <div className="fixed top-6 left-6 z-50">
+      <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         <HandednessToggle />
-      </div>
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
         <LanguageToggle />
         <ThemeToggle />
       </div>

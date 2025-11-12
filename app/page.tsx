@@ -8,9 +8,11 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { motion } from "framer-motion"
+import { useHandedness } from "@/lib/handedness-context"
 import { useEffect } from "react"
 
 export default function Home() {
+  const { handedness } = useHandedness()
   useEffect(() => {
     try {
       const params = new URLSearchParams(window.location.search)
@@ -34,10 +36,8 @@ export default function Home() {
       <HeroSection />
       <PortfolioSection />
       <PageNavigation />
-      <div className="fixed top-6 left-6 z-50">
+      <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         <HandednessToggle />
-      </div>
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
         <LanguageToggle />
         <ThemeToggle />
       </div>

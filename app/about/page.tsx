@@ -11,6 +11,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useRouter } from "next/navigation"
 import { translateText } from "@/lib/translate"
 import { BackHomeButton } from "@/components/back-home-button"
+import { useHandedness } from "@/lib/handedness-context"
 
 export default function AboutPage() {
   const { language } = useLanguage()
@@ -18,6 +19,7 @@ export default function AboutPage() {
   const tEnAbout = translations.en.about
   const [aboutData, setAboutData] = useState<any>(translations[language].about ?? baseEs)
   const router = useRouter()
+  const { handedness } = useHandedness()
 
   useEffect(() => {
     const run = async () => {
@@ -177,7 +179,7 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
+      <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         <BackHomeButton />
         <HandednessToggle />
         <LanguageToggle />
