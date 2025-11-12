@@ -41,6 +41,79 @@ export function HeroSection() {
           <TestimonialsSection />
         </div>
         <div key={renderKey} className="relative hero-column z-10 mx-auto max-w-none xl:max-w-5xl px-4 min-[700px]:px-6 text-center min-[700px]:border-2 min-[700px]:border-blue-400 h-full pt-8">
+        {/* Foto y flip en móvil */}
+        <div className="block min-[700px]:hidden w-full flex flex-col items-center justify-center mt-6 mb-4">
+        <CardFlip className="cursor-pointer" autoFlipBackMs={60000}>
+          <CardFlipFront className="bg-transparent border-none shadow-none p-0">
+            <Image
+              src="/Rodrigo.png"
+              alt="Foto de Rodrigo Pozo Sánchez"
+              width={140}
+              height={140}
+              className="mx-auto rounded-full shadow-lg object-cover cursor-pointer"
+              priority
+            />
+          </CardFlipFront>
+          <CardFlipBack className="bg-transparent border-none shadow-none p-0">
+            <div className="relative w-[140px] h-[140px] mx-auto flex flex-col items-center text-center px-4 overflow-visible pt-2">
+              <h3 className="text-foreground font-semibold mb-2 text-base">{t.aboutTitle}</h3>
+              {(() => {
+                const raw = t.aboutText || ""
+                const L = 5
+                const words = raw.replace(/\s+/g, " ").trim().split(" ").filter(Boolean)
+                const lines: string[] = []
+                if (words.length === 0) {
+                  for (let i = 0; i < L; i++) lines.push("")
+                } else {
+                  const base = Math.floor(words.length / L)
+                  const remainder = words.length % L
+                  let offset = 0
+                  for (let i = 0; i < L; i++) {
+                    const size = base + (i < remainder ? 1 : 0)
+                    const end = Math.min(offset + size, words.length)
+                    const segment = words.slice(offset, end).join(" ")
+                    lines.push(segment)
+                    offset = end
+                  }
+                  while (lines.length < L) lines.push("")
+                  if (lines.length > L) lines.splice(L)
+                }
+                return (
+                  <p className="text-foreground leading-snug text-sm text-center mx-[10px] whitespace-nowrap">
+                    {lines.map((line, i) => (
+                      <React.Fragment key={i}>
+                        {line}
+                        {i < L - 1 && <br />}
+                      </React.Fragment>
+                    ))}
+                  </p>
+                )
+              })()}
+              <Button
+                size="sm"
+                variant="secondary"
+                className="mt-3 font-semibold px-3 py-1 shadow-sm cursor-pointer hover:bg-blue-500 hover:text-white hover:border-blue-500"
+                aria-label={t.aboutCta}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  try {
+                    const detail = {
+                      type: "slide",
+                      direction: "top",
+                      className: "bg-neutral-900 dark:bg-white",
+                      transitionDuration: 0.6,
+                    }
+                    sessionStorage.setItem("postSweep", JSON.stringify(detail))
+                  } catch {}
+                  router.push("/about")
+                }}
+              >
+                {t.aboutCta}
+              </Button>
+            </div>
+          </CardFlipBack>
+        </CardFlip>
+        </div>
         <div className="origin-top min-[700px]:scale-[0.90] min-[900px]:scale-[0.90] lg:scale-[0.95] xl:scale-100 2xl:scale-100">
           <CardFlip className="hidden min-[700px]:block mx-auto cursor-pointer" autoFlipBackMs={60000}>
           <CardFlipFront className="bg-transparent border-none shadow-none p-0">
@@ -110,7 +183,7 @@ export function HeroSection() {
         </p>
 
         {/* Palabras animadas con color azul sólido */}
-        <div className="mb-8 lg:mb-4">
+        <div className="mb-3 lg:mb-2">
           <Typeanimation
             key={language}
             words={t.animatedWords}
@@ -125,9 +198,9 @@ export function HeroSection() {
         <Announcement movingBorder>
           <AnnouncementTitle>
             <Button
-              size="lg"
+              size="sm"
               onClick={scrollToPortfolio}
-              className="bg-transparent text-black dark:text-white text-lg font-semibold transition-all group cta-button"
+              className="bg-transparent text-black dark:text-white text-base font-semibold transition-all group cta-button"
             >
               {t.cta}
               <ArrowDown className="arrow-icon" />
