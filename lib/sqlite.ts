@@ -30,6 +30,7 @@ export type DbTestimonial = {
   name: string
   handle: string
   review: string
+  review_en?: string
   avatar: string | null
   created_at: string
 }
@@ -43,6 +44,7 @@ export async function insertTestimonial(input: {
   name: string
   handle: string
   review: string
+  review_en?: string | null
   avatar: string | null
 }): Promise<DbTestimonial> {
   const store = readStore()
@@ -53,10 +55,26 @@ export async function insertTestimonial(input: {
     name: input.name,
     handle: input.handle,
     review: input.review,
+    review_en: input.review_en ?? undefined,
     avatar: input.avatar,
     created_at: now,
   }
   store.testimonials.unshift(inserted)
   writeStore(store)
   return inserted
+}
+
+export async function updateTestimonialReviewEn(id: number, review_en: string): Promise<DbTestimonial | null> {
+  const store = readStore()
+  const idx = store.testimonials.findIndex(t => t.id === id)
+  if (idx === -1) return null
+  store.testimonials[idx] = { ...store.testimonials[idx], review_en }
+  writeStore(store)
+  return store.testimonials[idx]
+}
+
+export async function clearTestimonials(): Promise<void> {
+  const store = readStore()
+  store.testimonials = []
+  writeStore(store)
 }

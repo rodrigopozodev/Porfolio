@@ -149,7 +149,7 @@ export default function KineticTestimonial({
                         role={/linkedin\.com/i.test((t.handle ?? '').trim()) ? 'link' : undefined}
                       >
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-300/50 via-blue-200/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:from-sky-500/30 dark:via-blue-500/20" />
-                        <p className="text-sm leading-relaxed mb-4">“{t.review}”</p>
+            <p className="text-sm leading-relaxed mb-4">{t.review}</p>
                         <div className="flex items-center gap-3">
                           {hasAvatar && (
                             <img
@@ -184,7 +184,7 @@ export default function KineticTestimonial({
                         role={/linkedin\.com/i.test((t.handle ?? '').trim()) ? 'link' : undefined}
                       >
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-300/50 via-blue-200/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:from-sky-500/30 dark:via-blue-500/20" />
-                        <p className="text-sm leading-relaxed mb-4">“{t.review}”</p>
+            <p className="text-sm leading-relaxed mb-4">{t.review}</p>
                         <div className="flex items-center gap-3">
                           {hasAvatar && (
                             <img

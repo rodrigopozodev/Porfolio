@@ -18,6 +18,22 @@ const projectImages = [
   "/mobile-social-app-interface.svg",
 ]
 
+// Imagen fija del proyecto destacado y asignación por slug/título
+const imageBySlug: Record<string, string> = {
+  "league-tracker": "/League Tracker.png",
+  "analytics-dashboard": "/analytics-dashboard.svg",
+  "social-mobile-app": "/mobile-social-app-interface.svg",
+}
+
+const imageByTitle: Record<string, string> = {
+  "Dashboard Analytics": "/analytics-dashboard.svg",
+  "Analytics Dashboard": "/analytics-dashboard.svg",
+  "App Móvil Social": "/mobile-social-app-interface.svg",
+  "Social Mobile App": "/mobile-social-app-interface.svg",
+  "League tracker": "/League Tracker.png",
+  "League Tracker": "/League Tracker.png",
+}
+
 const projectTags = [
   [],
   ["React", "D3.js", "Node.js"],
@@ -40,12 +56,23 @@ export function PortfolioSection() {
 
   const t = translations[language].portfolio
 
+  // Lista de proyectos según traducción (misma estructura en ambos idiomas)
+  const projects = t.projects
+
+  const getProjectImage = (project: any, indexFallback: number) => {
+    const slug = (project?.slug ?? "").toString()
+    const title = (project?.title ?? "").toString()
+    if (slug && imageBySlug[slug]) return imageBySlug[slug]
+    if (title && imageByTitle[title]) return imageByTitle[title]
+    return projectImages[indexFallback % projectImages.length]
+  }
+
   const nextProject = () => {
-    setCurrentIndex((prev) => (prev + 1) % t.projects.length)
+    setCurrentIndex((prev) => (prev + 1) % projects.length)
   }
 
   const prevProject = () => {
-    setCurrentIndex((prev) => (prev - 1 + t.projects.length) % t.projects.length)
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
   }
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -81,7 +108,7 @@ export function PortfolioSection() {
     }, 4000)
 
     return () => clearInterval(autoplayInterval)
-  }, [currentIndex, isPaused])
+  }, [currentIndex, isPaused, projects.length])
 
   // Limpieza del temporizador de pausa en desmontaje
   useEffect(() => {
@@ -196,12 +223,12 @@ export function PortfolioSection() {
         {/* Grid con diseño móvil aplicado (solo si caben ≥4 por fila) */}
         {!shouldCarousel && (
           <div className="mt-2 min-[900px]:mt-4 lg:mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.projects.map((project, index) => (
+            {projects.map((project, index) => (
               <CardFlip key={index} className="select-none cursor-pointer" autoFlipBackMs={60000}>
                 <CardFlipFront className="overflow-hidden shadow-md">
                   <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted cursor-pointer">
                     <img
-                      src={projectImages[index] || "/placeholder.svg"}
+                      src={getProjectImage(project, index) || "/placeholder.svg"}
                       alt={project.title}
                       className="h-full w-full object-cover cursor-pointer"
                     />
@@ -213,35 +240,61 @@ export function PortfolioSection() {
                     <div className="max-w-[90%] text-center text-black dark:text-white select-text">
                       <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                       { (project as any).slug === "league-tracker" ? (
-                        <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
-                          <p className="font-semibold">Servicio Que Se Ofrece</p>
-                          <ul className="list-none space-y-1">
-                            <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
-                            <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
-                            <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
-                            <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
-                            <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
-                          </ul>
-                          <p className="font-semibold">Tecnologías</p>
-                          <ul className="list-none space-y-1">
-                            <li>Next.js, React, TypeScript y TailwindCSS.</li>
-                            <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
-                            <li>Supabase para autenticación y administración de usuarios.</li>
-                            <li>Integración controlada de Google AdSense.</li>
-                          </ul>
-                          <p className="font-semibold">Funcionalidad</p>
-                          <ul className="list-none space-y-1">
-                            <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
-                            <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
-                            <li>Vista de perfil con información de summoner y ligas.</li>
-                          </ul>
-                        </div>
+                        language === "en" ? (
+                          <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                            <p className="font-semibold">Offered Service</p>
+                            <ul className="list-none space-y-1">
+                              <li>Lookup and compare LoL profiles by Riot ID in real time.</li>
+                              <li>View Solo/Duo and Flex ranks, LP, and activity summary.</li>
+                              <li>Privacy‑focused experience: without session searches aren’t stored; with session the profile is managed.</li>
+                              <li>Helpful editorial content in Home and Multi‑Search to guide users.</li>
+                              <li>AdSense limited to Home and Multi‑Search only.</li>
+                            </ul>
+                            <p className="font-semibold">Tech Stack</p>
+                            <ul className="list-none space-y-1">
+                              <li>Next.js, React, TypeScript, and TailwindCSS.</li>
+                              <li>Official Riot APIs for account, summoner, and league data.</li>
+                              <li>Supabase for authentication and user management.</li>
+                              <li>Controlled integration of Google AdSense.</li>
+                            </ul>
+                            <p className="font-semibold">Functionality</p>
+                            <ul className="list-none space-y-1">
+                              <li>Public summoner search and manual data refresh when needed.</li>
+                              <li>Multi‑Search to compare multiple profiles in one view.</li>
+                              <li>Profile view with summoner and league information.</li>
+                            </ul>
+                          </div>
+                        ) : (
+                          <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                            <p className="font-semibold">Servicio Que Se Ofrece</p>
+                            <ul className="list-none space-y-1">
+                              <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
+                              <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
+                              <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
+                              <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
+                              <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
+                            </ul>
+                            <p className="font-semibold">Tecnologías</p>
+                            <ul className="list-none space-y-1">
+                              <li>Next.js, React, TypeScript y TailwindCSS.</li>
+                              <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
+                              <li>Supabase para autenticación y administración de usuarios.</li>
+                              <li>Integración controlada de Google AdSense.</li>
+                            </ul>
+                            <p className="font-semibold">Funcionalidad</p>
+                            <ul className="list-none space-y-1">
+                              <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
+                              <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
+                              <li>Vista de perfil con información de summoner y ligas.</li>
+                            </ul>
+                          </div>
+                        )
                       ) : (
                         <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
                       )}
-                      {projectTags[index].length > 0 && (
+                      {(projectTags[index] ?? []).length > 0 && (
                         <div className="mb-4 flex flex-wrap justify-center gap-2">
-                          {projectTags[index].map((tag, tagIndex) => (
+                          {(projectTags[index] ?? []).map((tag, tagIndex) => (
                             <span
                               key={tagIndex}
                               className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
@@ -258,7 +311,7 @@ export function PortfolioSection() {
                           className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
                           onClick={(e) => {
                             e.stopPropagation()
-                            const project = t.projects[index]
+                            const project = projects[index]
                             if (project && (project as any).slug) {
                               router.push(`/projects/${(project as any).slug}`)
                             }
@@ -269,7 +322,7 @@ export function PortfolioSection() {
                         </Button>
                         <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => {
                           e.stopPropagation()
-                          const project = t.projects[index]
+                          const project = projects[index]
                           const slug = (project as any)?.slug
                           if (slug === "league-tracker") {
                             window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
@@ -297,7 +350,7 @@ export function PortfolioSection() {
             onTouchEnd={handleTouchEnd}
           >
             <div className="flex items-start justify-center">
-              {t.projects.map((project, index) => (
+              {projects.map((project, index) => (
                 <div
                   key={index}
                   className={`absolute inset-0 flex items-start justify-center ${
@@ -328,7 +381,7 @@ export function PortfolioSection() {
                       <CardFlipFront className="overflow-hidden shadow-md">
                         <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] overflow-hidden bg-muted cursor-pointer">
                           <img
-                            src={projectImages[index] || "/placeholder.svg"}
+                            src={getProjectImage(project, index) || "/placeholder.svg"}
                             alt={project.title}
                             className="h-full w-full object-cover cursor-pointer"
                           />
@@ -340,35 +393,61 @@ export function PortfolioSection() {
                           <div className="max-w-[90%] text-center text-black dark:text-white select-text">
                             <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                             { (project as any).slug === "league-tracker" ? (
-                              <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
-                                <p className="font-semibold">Servicio Que Se Ofrece</p>
-                                <ul className="list-none space-y-1">
-                                  <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
-                                  <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
-                                  <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
-                                  <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
-                                  <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
-                                </ul>
-                                <p className="font-semibold">Tecnologías</p>
-                                <ul className="list-none space-y-1">
-                                  <li>Next.js, React, TypeScript y TailwindCSS.</li>
-                                  <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
-                                  <li>Supabase para autenticación y administración de usuarios.</li>
-                                  <li>Integración controlada de Google AdSense.</li>
-                                </ul>
-                                <p className="font-semibold">Funcionalidad</p>
-                                <ul className="list-none space-y-1">
-                                  <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
-                                  <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
-                                  <li>Vista de perfil con información de summoner y ligas.</li>
-                                </ul>
-                              </div>
+                              language === "en" ? (
+                                <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                                  <p className="font-semibold">Offered Service</p>
+                                  <ul className="list-none space-y-1">
+                                    <li>Lookup and compare LoL profiles by Riot ID in real time.</li>
+                                    <li>View Solo/Duo and Flex ranks, LP, and activity summary.</li>
+                                    <li>Privacy‑focused experience: without session searches aren’t stored; with session the profile is managed.</li>
+                                    <li>Helpful editorial content in Home and Multi‑Search to guide users.</li>
+                                    <li>AdSense limited to Home and Multi‑Search only.</li>
+                                  </ul>
+                                  <p className="font-semibold">Tech Stack</p>
+                                  <ul className="list-none space-y-1">
+                                    <li>Next.js, React, TypeScript, and TailwindCSS.</li>
+                                    <li>Official Riot APIs for account, summoner, and league data.</li>
+                                    <li>Supabase for authentication and user management.</li>
+                                    <li>Controlled integration of Google AdSense.</li>
+                                  </ul>
+                                  <p className="font-semibold">Functionality</p>
+                                  <ul className="list-none space-y-1">
+                                    <li>Public summoner search and manual data refresh when needed.</li>
+                                    <li>Multi‑Search to compare multiple profiles in one view.</li>
+                                    <li>Profile view with summoner and league information.</li>
+                                  </ul>
+                                </div>
+                              ) : (
+                                <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                                  <p className="font-semibold">Servicio Que Se Ofrece</p>
+                                  <ul className="list-none space-y-1">
+                                    <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
+                                    <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
+                                    <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
+                                    <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
+                                    <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
+                                  </ul>
+                                  <p className="font-semibold">Tecnologías</p>
+                                  <ul className="list-none space-y-1">
+                                    <li>Next.js, React, TypeScript y TailwindCSS.</li>
+                                    <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
+                                    <li>Supabase para autenticación y administración de usuarios.</li>
+                                    <li>Integración controlada de Google AdSense.</li>
+                                  </ul>
+                                  <p className="font-semibold">Funcionalidad</p>
+                                  <ul className="list-none space-y-1">
+                                    <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
+                                    <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
+                                    <li>Vista de perfil con información de summoner y ligas.</li>
+                                  </ul>
+                                </div>
+                              )
                             ) : (
                               <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
                             )}
-                            {projectTags[index].length > 0 && (
+                            {(projectTags[index] ?? []).length > 0 && (
                               <div className="mb-4 flex flex-wrap justify-center gap-2">
-                                {projectTags[index].map((tag, tagIndex) => (
+                                {(projectTags[index] ?? []).map((tag, tagIndex) => (
                                   <span
                                     key={tagIndex}
                                     className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent"
@@ -385,7 +464,7 @@ export function PortfolioSection() {
                                 className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
                                 onClick={(e) => {
                                   e.stopPropagation()
-                                  const project = t.projects[index]
+                                  const project = projects[index]
                                   if (project && (project as any).slug) {
                                     router.push(`/projects/${(project as any).slug}`)
                                   }
@@ -396,7 +475,7 @@ export function PortfolioSection() {
                               </Button>
                               <Button size="sm" variant="secondary" className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500" onClick={(e) => {
                                 e.stopPropagation()
-                                const project = t.projects[index]
+                                const project = projects[index]
                                 const slug = (project as any)?.slug
                                 if (slug === "league-tracker") {
                                   window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
@@ -417,7 +496,7 @@ export function PortfolioSection() {
 
             {/* Indicadores de puntos dentro del carrusel */}
             <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-0 right-0 z-20 flex justify-center gap-2 pointer-events-auto">
-              {t.projects.map((project, index) => (
+              {projects.map((project, index) => (
                 <button
                   key={index}
                   onClick={() => {

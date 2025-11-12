@@ -8,6 +8,7 @@ import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 // Eliminamos requisito de autenticación para el formulario
 import { useLanguage } from "@/lib/language-context"
 import { translations } from "@/lib/translations"
+import { translateText } from "@/lib/translate"
 
 export function TestimonialsSection() {
   const loading = false
@@ -54,158 +55,134 @@ export function TestimonialsSection() {
     return Object.keys(newErrors).length === 0
   }
 
-  const staticTestimonials: Testimonial[] = useMemo(
-    () => [
-      {
-        name: "Ana López",
-        handle: "Frontend Engineer @ TechCo",
-        review: "Trabajar con Rodrigo fue súper eficiente. Gran atención al detalle.",
-        avatar: "https://randomuser.me/api/portraits/women/68.jpg",
-      },
-      {
-        name: "Carlos Méndez",
-        handle: "Product Manager",
-        review: "Excelente comunicación y entrega puntual. Recomendado al 100%.",
-        avatar: "https://randomuser.me/api/portraits/men/59.jpg",
-      },
-      {
-        name: "Lucía García",
-        handle: "UX Designer",
-        review: "Propuso soluciones creativas y escalables para nuestro proyecto.",
-        avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-      },
-      {
-        name: "Javier Ruiz",
-        handle: "Fullstack Developer",
-        review: "Código limpio y buenas prácticas. Muy profesional.",
-        avatar: "https://randomuser.me/api/portraits/men/62.jpg",
-      },
-      {
-        name: "Marta Fernández",
-        handle: "QA Engineer",
-        review: "Detectó problemas y propuso soluciones con rapidez.",
-        avatar: "https://randomuser.me/api/portraits/women/46.jpg",
-      },
-      {
-        name: "Pedro Sánchez",
-        handle: "Data Analyst",
-        review: "Aportó métricas claras y decisiones basadas en datos.",
-        avatar: "https://randomuser.me/api/portraits/men/56.jpg",
-      },
-      {
-        name: "Laura Torres",
-        handle: "Product Owner",
-        review: "Gran alineación con negocio y foco en valor.",
-        avatar: "https://randomuser.me/api/portraits/women/61.jpg",
-      },
-      {
-        name: "Diego Romero",
-        handle: "DevOps Engineer",
-        review: "Pipelines estables y despliegues sin sorpresas.",
-        avatar: "https://randomuser.me/api/portraits/men/54.jpg",
-      },
-      {
-        name: "Sofía Núñez",
-        handle: "UI Engineer",
-        review: "Microinteracciones cuidadas y accesibilidad impecable.",
-        avatar: "https://randomuser.me/api/portraits/women/53.jpg",
-      },
-      {
-        name: "Andrés Pérez",
-        handle: "Tech Lead",
-        review: "Buen criterio técnico y liderazgo calmado.",
-        avatar: "https://randomuser.me/api/portraits/men/63.jpg",
-      },
-      {
-        name: "Julia Herrera",
-        handle: "Backend Developer",
-        review: "APIs bien diseñadas y documentadas.",
-        avatar: "https://randomuser.me/api/portraits/women/57.jpg",
-      },
-      {
-        name: "Marcos Ortiz",
-        handle: "Mobile Engineer",
-        review: "Integraciones móviles fluidas y rendimiento óptimo.",
-        avatar: "https://randomuser.me/api/portraits/men/55.jpg",
-      },
-      {
-        name: "Valeria Gómez",
-        handle: "Scrum Master",
-        review: "La dinámica del equipo mejoró notablemente.",
-        avatar: "https://randomuser.me/api/portraits/women/49.jpg",
-      },
-      {
-        name: "Sergio Alonso",
-        handle: "Security Engineer",
-        review: "Buenas prácticas de seguridad desde el inicio.",
-        avatar: "https://randomuser.me/api/portraits/men/50.jpg",
-      },
-      {
-        name: "Elena Ruiz",
-        handle: "Content Strategist",
-        review: "Mensajes claros y consistentes en todo el sitio.",
-        avatar: "https://randomuser.me/api/portraits/women/64.jpg",
-      },
-      {
-        name: "Nicolás Cabrera",
-        handle: "SRE",
-        review: "Observabilidad y alertas bien afinadas.",
-        avatar: "https://randomuser.me/api/portraits/men/58.jpg",
-      },
-      {
-        name: "Carolina Vega",
-        handle: "Marketing Specialist",
-        review: "Landing pages con conversión superior.",
-        avatar: "https://randomuser.me/api/portraits/women/60.jpg",
-      },
-      {
-        name: "Tomás Medina",
-        handle: "Researcher",
-        review: "Prototipos rápidos que validaron hipótesis.",
-        avatar: "https://randomuser.me/api/portraits/men/66.jpg",
-      },
-      {
-        name: "Daniela Rojas",
-        handle: "Project Manager",
-        review: "Entrega a tiempo y gestión impecable.",
-        avatar: "https://randomuser.me/api/portraits/women/58.jpg",
-      },
-      {
-        name: "Bruno Castillo",
-        handle: "Software Architect",
-        review: "Arquitectura sólida y escalable.",
-        avatar: "https://randomuser.me/api/portraits/men/51.jpg",
-      },
-      {
-        name: "Irene Morales",
-        handle: "QA Lead",
-        review: "La cobertura de tests mejoró el producto.",
-        avatar: "https://randomuser.me/api/portraits/women/52.jpg",
-      },
-    ],
-    []
-  )
+  const staticTestimonials: Testimonial[] = useMemo(() => {
+    if (language === 'en') {
+      return [
+        { name: "Ana López", handle: "Frontend Engineer @ TechCo", review: "Working with Rodrigo was super efficient. Great attention to detail.", avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
+        { name: "Carlos Méndez", handle: "Product Manager", review: "Excellent communication and on-time delivery. 100% recommended.", avatar: "https://randomuser.me/api/portraits/men/59.jpg" },
+        { name: "Lucía García", handle: "UX Designer", review: "Proposed creative and scalable solutions for our project.", avatar: "https://randomuser.me/api/portraits/women/65.jpg" },
+        { name: "Javier Ruiz", handle: "Fullstack Developer", review: "Clean code and good practices. Very professional.", avatar: "https://randomuser.me/api/portraits/men/62.jpg" },
+        { name: "Marta Fernández", handle: "QA Engineer", review: "Identified issues and proposed solutions quickly.", avatar: "https://randomuser.me/api/portraits/women/46.jpg" },
+        { name: "Pedro Sánchez", handle: "Data Analyst", review: "Delivered clear metrics and data-driven decisions.", avatar: "https://randomuser.me/api/portraits/men/56.jpg" },
+        { name: "Laura Torres", handle: "Product Owner", review: "Strong business alignment and focus on value.", avatar: "https://randomuser.me/api/portraits/women/61.jpg" },
+        { name: "Diego Romero", handle: "DevOps Engineer", review: "Stable pipelines and surprise-free deployments.", avatar: "https://randomuser.me/api/portraits/men/54.jpg" },
+        { name: "Sofía Núñez", handle: "UI Engineer", review: "Thoughtful microinteractions and impeccable accessibility.", avatar: "https://randomuser.me/api/portraits/women/53.jpg" },
+        { name: "Andrés Pérez", handle: "Tech Lead", review: "Sound technical judgment and calm leadership.", avatar: "https://randomuser.me/api/portraits/men/63.jpg" },
+        { name: "Julia Herrera", handle: "Backend Developer", review: "Well-designed and documented APIs.", avatar: "https://randomuser.me/api/portraits/women/57.jpg" },
+        { name: "Marcos Ortiz", handle: "Mobile Engineer", review: "Smooth mobile integrations and optimal performance.", avatar: "https://randomuser.me/api/portraits/men/55.jpg" },
+        { name: "Valeria Gómez", handle: "Scrum Master", review: "The team's dynamics improved noticeably.", avatar: "https://randomuser.me/api/portraits/women/49.jpg" },
+        { name: "Sergio Alonso", handle: "Security Engineer", review: "Security best practices from the start.", avatar: "https://randomuser.me/api/portraits/men/50.jpg" },
+        { name: "Elena Ruiz", handle: "Content Strategist", review: "Clear and consistent messaging across the site.", avatar: "https://randomuser.me/api/portraits/women/64.jpg" },
+        { name: "Nicolás Cabrera", handle: "SRE", review: "Observability and alerts finely tuned.", avatar: "https://randomuser.me/api/portraits/men/58.jpg" },
+        { name: "Carolina Vega", handle: "Marketing Specialist", review: "Landing pages with superior conversion.", avatar: "https://randomuser.me/api/portraits/women/60.jpg" },
+        { name: "Tomás Medina", handle: "Researcher", review: "Fast prototypes that validated hypotheses.", avatar: "https://randomuser.me/api/portraits/men/66.jpg" },
+        { name: "Daniela Rojas", handle: "Project Manager", review: "On-time delivery and flawless management.", avatar: "https://randomuser.me/api/portraits/women/58.jpg" },
+        { name: "Bruno Castillo", handle: "Software Architect", review: "Solid, scalable architecture.", avatar: "https://randomuser.me/api/portraits/men/51.jpg" },
+        { name: "Irene Morales", handle: "QA Lead", review: "Test coverage improved the product.", avatar: "https://randomuser.me/api/portraits/women/52.jpg" },
+      ]
+    }
+    return [
+      { name: "Ana López", handle: "Frontend Engineer @ TechCo", review: "Trabajar con Rodrigo fue súper eficiente. Gran atención al detalle.", avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
+      { name: "Carlos Méndez", handle: "Product Manager", review: "Excelente comunicación y entrega puntual. Recomendado al 100%.", avatar: "https://randomuser.me/api/portraits/men/59.jpg" },
+      { name: "Lucía García", handle: "UX Designer", review: "Propuso soluciones creativas y escalables para nuestro proyecto.", avatar: "https://randomuser.me/api/portraits/women/65.jpg" },
+      { name: "Javier Ruiz", handle: "Fullstack Developer", review: "Código limpio y buenas prácticas. Muy profesional.", avatar: "https://randomuser.me/api/portraits/men/62.jpg" },
+      { name: "Marta Fernández", handle: "QA Engineer", review: "Detectó problemas y propuso soluciones con rapidez.", avatar: "https://randomuser.me/api/portraits/women/46.jpg" },
+      { name: "Pedro Sánchez", handle: "Data Analyst", review: "Aportó métricas claras y decisiones basadas en datos.", avatar: "https://randomuser.me/api/portraits/men/56.jpg" },
+      { name: "Laura Torres", handle: "Product Owner", review: "Gran alineación con negocio y foco en valor.", avatar: "https://randomuser.me/api/portraits/women/61.jpg" },
+      { name: "Diego Romero", handle: "DevOps Engineer", review: "Pipelines estables y despliegues sin sorpresas.", avatar: "https://randomuser.me/api/portraits/men/54.jpg" },
+      { name: "Sofía Núñez", handle: "UI Engineer", review: "Microinteracciones cuidadas y accesibilidad impecable.", avatar: "https://randomuser.me/api/portraits/women/53.jpg" },
+      { name: "Andrés Pérez", handle: "Tech Lead", review: "Buen criterio técnico y liderazgo calmado.", avatar: "https://randomuser.me/api/portraits/men/63.jpg" },
+      { name: "Julia Herrera", handle: "Backend Developer", review: "APIs bien diseñadas y documentadas.", avatar: "https://randomuser.me/api/portraits/women/57.jpg" },
+      { name: "Marcos Ortiz", handle: "Mobile Engineer", review: "Integraciones móviles fluidas y rendimiento óptimo.", avatar: "https://randomuser.me/api/portraits/men/55.jpg" },
+      { name: "Valeria Gómez", handle: "Scrum Master", review: "La dinámica del equipo mejoró notablemente.", avatar: "https://randomuser.me/api/portraits/women/49.jpg" },
+      { name: "Sergio Alonso", handle: "Security Engineer", review: "Buenas prácticas de seguridad desde el inicio.", avatar: "https://randomuser.me/api/portraits/men/50.jpg" },
+      { name: "Elena Ruiz", handle: "Content Strategist", review: "Mensajes claros y consistentes en todo el sitio.", avatar: "https://randomuser.me/api/portraits/women/64.jpg" },
+      { name: "Nicolás Cabrera", handle: "SRE", review: "Observabilidad y alertas bien afinadas.", avatar: "https://randomuser.me/api/portraits/men/58.jpg" },
+      { name: "Carolina Vega", handle: "Marketing Specialist", review: "Landing pages con conversión superior.", avatar: "https://randomuser.me/api/portraits/women/60.jpg" },
+      { name: "Tomás Medina", handle: "Researcher", review: "Prototipos rápidos que validaron hipótesis.", avatar: "https://randomuser.me/api/portraits/men/66.jpg" },
+      { name: "Daniela Rojas", handle: "Project Manager", review: "Entrega a tiempo y gestión impecable.", avatar: "https://randomuser.me/api/portraits/women/58.jpg" },
+      { name: "Bruno Castillo", handle: "Software Architect", review: "Arquitectura sólida y escalable.", avatar: "https://randomuser.me/api/portraits/men/51.jpg" },
+      { name: "Irene Morales", handle: "QA Lead", review: "La cobertura de tests mejoró el producto.", avatar: "https://randomuser.me/api/portraits/women/52.jpg" },
+    ]
+  }, [language])
 
   useEffect(() => {
-    const fetchTestimonials = async () => {
+    const loadTestimonials = async (lang: string) => {
       try {
-        const res = await fetch("/api/testimonials", { cache: "no-store" })
+        const res = await fetch(`/api/testimonials?language=${lang}`, { cache: "no-store" })
         if (!res.ok) return
         const data = await res.json()
         if (Array.isArray(data)) {
-          setDbTestimonials(
-            data.map((d: any) => ({
-              name: d.name,
-              handle: String(d.handle ?? ""),
-              review: d.review,
-              avatar: d.avatar || null,
-            }))
-          )
+          let mapped = data.map((d: any) => ({
+            name: d.name,
+            handle: String(d.handle ?? ""),
+            review: lang === 'en' ? String(d.review_en ?? d.review) : String(d.review),
+            avatar: d.avatar || null,
+          }))
+          // Fallback de cliente: si estamos en EN y algún item viene sin review_en, intentamos traducir aquí
+          if (lang === 'en') {
+            const translated = await Promise.all(
+              mapped.map(async (item, idx) => {
+                const raw = String(data[idx]?.review ?? "")
+                const hasEn = String(data[idx]?.review_en ?? "").trim().length > 0
+                if (!hasEn) {
+                  try {
+                    const t = await translateText(raw, "auto", "en")
+                    return { ...item, review: t || item.review }
+                  } catch {
+                    return item
+                  }
+                }
+                return item
+              })
+            )
+            mapped = translated
+          }
+          setDbTestimonials(mapped)
         }
       } catch {}
     }
-    fetchTestimonials()
+    loadTestimonials(language)
   }, [])
+
+  useEffect(() => {
+    const loadTestimonials = async (lang: string) => {
+      try {
+        const res = await fetch(`/api/testimonials?language=${lang}`, { cache: "no-store" })
+        if (!res.ok) return
+        const data = await res.json()
+        if (Array.isArray(data)) {
+          let mapped = data.map((d: any) => ({
+            name: d.name,
+            handle: String(d.handle ?? ""),
+            review: lang === 'en' ? String(d.review_en ?? d.review) : String(d.review),
+            avatar: d.avatar || null,
+          }))
+          // Fallback de cliente en cambios de idioma
+          if (lang === 'en') {
+            const translated = await Promise.all(
+              mapped.map(async (item, idx) => {
+                const raw = String(data[idx]?.review ?? "")
+                const hasEn = String(data[idx]?.review_en ?? "").trim().length > 0
+                if (!hasEn) {
+                  try {
+                    const t = await translateText(raw, "auto", "en")
+                    return { ...item, review: t || item.review }
+                  } catch {
+                    return item
+                  }
+                }
+                return item
+              })
+            )
+            mapped = translated
+          }
+          setDbTestimonials(mapped)
+        }
+      } catch {}
+    }
+    loadTestimonials(language)
+  }, [language])
 
   const allTestimonials = useMemo(() => {
     const staticLeftCount = Math.max(0, staticTestimonials.length - dbTestimonials.length)
@@ -231,10 +208,6 @@ export function TestimonialsSection() {
       return
     }
 
-    setDbTestimonials((prev) => [
-      { name, handle, review: reviewInput.trim(), avatar },
-      ...prev,
-    ])
     try {
       const res = await fetch("/api/testimonials", {
         method: "POST",
@@ -243,10 +216,21 @@ export function TestimonialsSection() {
           name,
           handle,
           review: reviewInput.trim(),
+          language,
           avatar: photoPreviewUrl || null,
         }),
       })
       if (res.ok) {
+        const inserted = await res.json()
+        setDbTestimonials((prev) => [
+          {
+            name: inserted.name,
+            handle: String(inserted.handle ?? ""),
+            review: language === 'en' ? String(inserted.review_en ?? inserted.review) : String(inserted.review),
+            avatar: inserted.avatar || null,
+          },
+          ...prev,
+        ])
         setReviewInput("")
         setJobTitleInput("")
         setNameInput("")
