@@ -71,6 +71,17 @@ export function HeroSection() {
                 aria-label={t.aboutCta}
                 onClick={(e) => {
                   e.stopPropagation()
+                  try {
+                    const event = new CustomEvent("routeSweep", {
+                      detail: {
+                        type: "slide",
+                        direction: "top",
+                        className: "bg-neutral-900 dark:bg-white",
+                        transitionDuration: 0.6,
+                      },
+                    })
+                    window.dispatchEvent(event)
+                  } catch {}
                   router.push("/about")
                 }}
               >

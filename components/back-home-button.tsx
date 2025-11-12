@@ -16,7 +16,20 @@ export function BackHomeButton() {
     <Button
       variant="outline"
       size="default"
-      onClick={() => router.push("/")}
+      onClick={() => {
+        try {
+          const event = new CustomEvent("routeSweep", {
+            detail: {
+              type: "slide",
+              direction: "bottom",
+              className: "bg-neutral-900 dark:bg-white",
+              transitionDuration: 0.6,
+            },
+          })
+          window.dispatchEvent(event)
+        } catch {}
+        router.push("/")
+      }}
       className="h-10 px-4 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer inline-flex items-center justify-center whitespace-nowrap"
       aria-label={label}
     >
