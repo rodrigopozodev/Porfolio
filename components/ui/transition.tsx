@@ -43,6 +43,8 @@ export const Transition: React.FC<TransitionProps> = ({
   const [overrideType, setOverrideType] = useState<Type | null>(null);
   const [overrideClassName, setOverrideClassName] = useState<string | null>(null);
   const [overrideTransitionDuration, setOverrideTransitionDuration] = useState<number | null>(null);
+  const [overrideHoldBeforeMove, setOverrideHoldBeforeMove] = useState<number | null>(null);
+  const awaitRouteReadyRef = useRef(false);
 
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: "-100px", once: true }); 
@@ -58,25 +60,52 @@ export const Transition: React.FC<TransitionProps> = ({
       if (!startTime) startTime = now;
       const elapsed = (now - startTime) / 1000;
       const dur = overrideTransitionDuration ?? transitionDuration;
-      const raw = Math.min(elapsed / dur, 1);
+      const hold = overrideHoldBeforeMove ?? 0;
+      const effectiveElapsed = Math.max(0, elapsed - hold);
+      const raw = Math.min(effectiveElapsed / dur, 1);
       const eased = easeInOutCubic(raw);
       setProgress(eased);
 
       if (raw < 1) {
         rafRef.current = requestAnimationFrame(tick);
       } else {
-        setAnimating(false);
-        setShowIntro(false);
-        setProgress(0);
-        rafRef.current = null;
-        setOverrideDir(null);
-        setOverrideType(null);
-        setOverrideClassName(null);
-        setOverrideTransitionDuration(null);
-        onFinished?.();
+        // Animación completada
+        const finish = () => {
+          setAnimating(false);
+          setShowIntro(false);
+          setProgress(0);
+          rafRef.current = null;
+          setOverrideDir(null);
+          setOverrideType(null);
+          setOverrideClassName(null);
+          setOverrideTransitionDuration(null);
+          setOverrideHoldBeforeMove(null);
+          awaitRouteReadyRef.current = false;
+          onFinished?.();
+        };
+
+        // Notificar fin de la animación a los botones que esperan este evento
         try {
           window.dispatchEvent(new CustomEvent("routeSweepFinished"));
         } catch {}
+
+        if (awaitRouteReadyRef.current) {
+          // Para transiciones de ruta, esperar a que la nueva ruta esté lista
+          const handleReady = () => {
+            window.removeEventListener("routeReady", handleReady as EventListener);
+            finish();
+          };
+          window.addEventListener("routeReady", handleReady as EventListener, { once: true });
+          // Fallback por si no llega routeReady a tiempo
+          const durMs = (overrideTransitionDuration ?? transitionDuration) * 1000;
+          window.setTimeout(() => {
+            window.removeEventListener("routeReady", handleReady as EventListener);
+            finish();
+          }, Math.max(300, Math.floor(durMs * 0.5)));
+        } else {
+          // No es transición de ruta
+          finish();
+        }
       }
     };
 
@@ -131,10 +160,14 @@ export const Transition: React.FC<TransitionProps> = ({
         const typ = e?.detail?.type as Type | undefined;
         const cls = e?.detail?.className as string | undefined;
         const dur = e?.detail?.transitionDuration as number | undefined;
+        const hold = e?.detail?.holdBeforeMove as number | undefined;
+        const awaitReady = e?.detail?.awaitReady as boolean | undefined;
         setOverrideDir(dir ?? null);
         setOverrideType(typ ?? null);
         setOverrideClassName(cls ?? null);
         setOverrideTransitionDuration(dur ?? null);
+        setOverrideHoldBeforeMove(hold ?? null);
+        awaitRouteReadyRef.current = awaitReady ?? true;
       } catch {}
       setShowIntro(true);
       startTransition();
@@ -188,7 +221,7 @@ export const Transition: React.FC<TransitionProps> = ({
 
       {showIntro && (
         <div
-          className="fixed inset-0 z-40 flex items-center justify-center pointer-events-none"
+          className="fixed inset-0 z-[100000] flex items-center justify-center pointer-events-none"
           aria-hidden={!showIntro ? undefined : true}
         >
           <div

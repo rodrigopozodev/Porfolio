@@ -71,23 +71,17 @@ export function HeroSection() {
                 aria-label={t.aboutCta}
                 onClick={(e) => {
                   e.stopPropagation()
+                  // Navegar inmediatamente y pedir animación post-navegación
                   try {
-                    const event = new CustomEvent("routeSweep", {
-                      detail: {
-                        type: "slide",
-                        direction: "top",
-                        className: "bg-neutral-900 dark:bg-white",
-                        transitionDuration: 0.6,
-                      },
-                    })
-                    window.dispatchEvent(event)
+                    const detail = {
+                      type: "slide",
+                      direction: "top",
+                      className: "bg-neutral-900 dark:bg-white",
+                      transitionDuration: 0.6,
+                    }
+                    sessionStorage.setItem("postSweep", JSON.stringify(detail))
                   } catch {}
-                  const navigate = () => router.push("/about")
-                  window.addEventListener("routeSweepFinished", navigate, { once: true })
-                  window.setTimeout(() => {
-                    try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
-                    navigate()
-                  }, 800)
+                  router.push("/about")
                 }}
               >
                 {t.aboutCta}

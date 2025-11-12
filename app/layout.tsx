@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Transition from "@/components/ui/transition"
+import RouteReadyEmitter from "@/components/route-ready-emitter"
 import { LanguageProvider } from "@/lib/language-context"
 import { HandednessProvider } from "@/lib/handedness-context"
 import { AuthProvider } from "@/context/AuthContext"
@@ -57,6 +58,7 @@ export default function RootLayout({
         <AuthProvider>
           <LanguageProvider>
             <HandednessProvider>
+          <RouteReadyEmitter />
           <Transition
             intro={null}
             // Restauramos configuración por defecto para el botón de temas

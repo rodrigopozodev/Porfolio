@@ -29,27 +29,38 @@ export function BackHomeButton({
       variant="outline"
       size="default"
       onClick={() => {
+        if (animationType === "slide") {
+          // Navegación inmediata con animación post-navegación
+          try {
+            const detail: any = {
+              type: "slide",
+              direction,
+              className: overlayClassName,
+              transitionDuration,
+            }
+            sessionStorage.setItem("postSweep", JSON.stringify(detail))
+          } catch {}
+          router.push("/")
+          return
+        }
+
+        // Para otros tipos (fade), mantener animación antes de navegar
         try {
           const detail: any = {
             type: animationType,
             className: overlayClassName,
             transitionDuration,
           }
-          if (animationType === "slide") {
-            detail.direction = direction
-          }
           const event = new CustomEvent("routeSweep", { detail })
           window.dispatchEvent(event)
         } catch {}
 
         const navigate = () => router.push("/")
-        // Esperar a que termine la transición antes de navegar
         window.addEventListener("routeSweepFinished", navigate, { once: true })
-        // Fallback por si el evento no llega
         window.setTimeout(() => {
           try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
           navigate()
-        }, 800)
+        }, Math.max(600, (transitionDuration ?? 0.6) * 1000 + 200))
       }}
       className="h-10 px-4 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer inline-flex items-center justify-center whitespace-nowrap"
       aria-label={label}
