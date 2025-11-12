@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/lib/language-context"
 import { translations } from "@/lib/translations"
 
-export function VisitProjectButton({ href }: { href: string }) {
+export function VisitProjectButton({ href, showLabelOnMobile = false }: { href: string, showLabelOnMobile?: boolean }) {
   const { language } = useLanguage()
   const label = translations[language].portfolio.visit
 
@@ -24,7 +24,7 @@ export function VisitProjectButton({ href }: { href: string }) {
     >
       <div className="flex items-center gap-1">
         <ExternalLink className="h-4 w-4 text-foreground" />
-        <span className="text-xs font-semibold hidden min-[900px]:inline">{label}</span>
+        <span className={showLabelOnMobile ? "text-xs font-semibold" : "text-xs font-semibold hidden min-[900px]:inline"}>{label}</span>
       </div>
     </Button>
   )

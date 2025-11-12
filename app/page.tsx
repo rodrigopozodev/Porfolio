@@ -42,7 +42,13 @@ export default function Home() {
       <HeroSection />
       <PortfolioSection />
       <PageNavigation />
-      <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
+      <div
+        className={`fixed top-6 z-50 flex items-center gap-3 
+          ${handedness === "right"
+            ? "left-0 right-0 justify-center min-[900px]:left-auto min-[900px]:right-3 min-[900px]:justify-end"
+            : "left-0 right-0 justify-center min-[900px]:right-auto min-[900px]:left-3 min-[900px]:justify-start"}
+        `}
+      >
         {handedness === "right" ? (
           <>
             <LanguageToggle />

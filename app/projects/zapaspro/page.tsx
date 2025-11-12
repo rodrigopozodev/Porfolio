@@ -9,6 +9,8 @@ import { VisitProjectButton } from "@/components/visit-project-button"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { HamburgerMenu } from "@/components/hamburger-menu"
+import { MobileNavDrawer } from "@/components/mobile-nav-drawer"
 import { useHandedness } from "@/lib/handedness-context"
 import { useLanguage } from "@/lib/language-context"
 
@@ -22,26 +24,40 @@ export default function ZapasProPage() {
       <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         {handedness === "right" ? (
           <>
-            <BackHomeButton animationType="fade" />
-            <BackFeaturedButton />
-            <BackAllProjectsButton />
-            <VisitProjectButton href="https://zapaspro.netlify.app/" />
+            <span className="hidden min-[900px]:inline-flex gap-3">
+              <BackHomeButton animationType="fade" />
+              <BackFeaturedButton />
+              <BackAllProjectsButton />
+              <VisitProjectButton href="https://zapaspro.netlify.app/" />
+            </span>
             <HandednessToggle />
             <LanguageToggle />
             <ThemeToggle />
+            <HamburgerMenu />
           </>
         ) : (
           <>
+            <HamburgerMenu />
             <ThemeToggle />
             <LanguageToggle />
             <HandednessToggle />
-            <VisitProjectButton href="https://zapaspro.netlify.app/" />
-            <BackAllProjectsButton />
-            <BackFeaturedButton />
-            <BackHomeButton animationType="fade" />
+            <span className="hidden min-[900px]:inline-flex gap-3">
+              <VisitProjectButton href="https://zapaspro.netlify.app/" />
+              <BackAllProjectsButton />
+              <BackFeaturedButton />
+              <BackHomeButton animationType="fade" />
+            </span>
           </>
         )}
       </div>
+      <MobileNavDrawer>
+        <div className="flex flex-col gap-3">
+          <BackHomeButton animationType="fade" showLabelOnMobile />
+          <BackFeaturedButton showLabelOnMobile />
+          <BackAllProjectsButton showLabelOnMobile />
+          <VisitProjectButton href="https://zapaspro.netlify.app/" showLabelOnMobile />
+        </div>
+      </MobileNavDrawer>
 
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
         <div className="relative mb-8 flex items-center gap-3">

@@ -11,6 +11,8 @@ import { VisitProjectButton } from "@/components/visit-project-button"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { HamburgerMenu } from "@/components/hamburger-menu"
+import { MobileNavDrawer } from "@/components/mobile-nav-drawer"
 import { useHandedness } from "@/lib/handedness-context"
 
 export default function LeagueTrackerPage() {
@@ -24,26 +26,40 @@ export default function LeagueTrackerPage() {
       <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         {handedness === "right" ? (
           <>
-            <BackHomeButton animationType="fade" />
-            <BackFeaturedButton />
-            <BackAllProjectsButton />
-            <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
+            <span className="hidden min-[900px]:inline-flex gap-3">
+              <BackHomeButton animationType="fade" />
+              <BackFeaturedButton />
+              <BackAllProjectsButton />
+              <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
+            </span>
             <HandednessToggle />
             <LanguageToggle />
             <ThemeToggle />
+            <HamburgerMenu />
           </>
         ) : (
           <>
+            <HamburgerMenu />
             <ThemeToggle />
             <LanguageToggle />
             <HandednessToggle />
-            <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
-            <BackAllProjectsButton />
-            <BackFeaturedButton />
-            <BackHomeButton animationType="fade" />
+            <span className="hidden min-[900px]:inline-flex gap-3">
+              <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
+              <BackAllProjectsButton />
+              <BackFeaturedButton />
+              <BackHomeButton animationType="fade" />
+            </span>
           </>
         )}
       </div>
+      <MobileNavDrawer>
+        <div className="flex flex-col gap-3">
+          <BackHomeButton animationType="fade" showLabelOnMobile />
+          <BackFeaturedButton showLabelOnMobile />
+          <BackAllProjectsButton showLabelOnMobile />
+          <VisitProjectButton href="https://lol-tracker-beta.vercel.app" showLabelOnMobile />
+        </div>
+      </MobileNavDrawer>
 
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
         <div className="relative mb-8 flex items-center gap-3">

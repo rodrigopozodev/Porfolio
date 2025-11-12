@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/lib/language-context"
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system")
   const [mounted, setMounted] = useState(false)
+  const { language } = useLanguage()
 
   useEffect(() => {
     setMounted(true)
@@ -48,7 +50,7 @@ export function ThemeToggle() {
       variant="outline"
       size="default"
       onClick={toggleTheme}
-      className="h-10 w-20 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer flex items-center justify-center"
+      className={`h-10 ${language === "en" ? "w-12" : "w-20"} min-[900px]:w-20 rounded-full bg-background/80 backdrop-blur-sm transition-all hover:scale-110 cursor-pointer flex items-center justify-center`}
       aria-label="Cambiar tema"
     >
       {theme === "dark" ? <Sun className="h-5 w-5 text-foreground" /> : <Moon className="h-5 w-5 text-foreground" />}

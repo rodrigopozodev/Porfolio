@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { HamburgerMenu } from "@/components/hamburger-menu"
+import { MobileNavDrawer } from "@/components/mobile-nav-drawer"
 import { useRouter } from "next/navigation"
 import { translateText } from "@/lib/translate"
 import { BackHomeButton } from "@/components/back-home-button"
@@ -182,20 +184,25 @@ export default function AboutPage() {
       <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         {handedness === "right" ? (
           <>
-            <BackHomeButton />
+            <span className="hidden min-[900px]:inline-flex"><BackHomeButton /></span>
             <HandednessToggle />
             <LanguageToggle />
             <ThemeToggle />
+            <HamburgerMenu />
           </>
         ) : (
           <>
+            <HamburgerMenu />
             <ThemeToggle />
             <LanguageToggle />
             <HandednessToggle />
-            <BackHomeButton />
+            <span className="hidden min-[900px]:inline-flex"><BackHomeButton /></span>
           </>
         )}
       </div>
+      <MobileNavDrawer>
+        <BackHomeButton showLabelOnMobile />
+      </MobileNavDrawer>
     </main>
   )
 }

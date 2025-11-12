@@ -175,48 +175,41 @@ export function PortfolioSection() {
     >
       <div
         ref={containerRef}
-        className={`mx-auto w-full max-w-7xl ${handedness === "right" ? "pr-2 min-[900px]:pr-3 lg:pr-3 xl:pr-4" : "pl-2 min-[900px]:pl-3 lg:pl-3 xl:pl-4"}`}
+        className={`mx-auto w-full max-w-7xl relative max-[900px]:pt-24 ${handedness === "right" ? "pr-2 min-[900px]:pr-3 lg:pr-3 xl:pr-4" : "pl-2 min-[900px]:pl-3 lg:pl-3 xl:pl-4"}`}
       >
-        <h2 className="mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground min-[900px]:mt-6 min-[900px]:mb-6 min-[900px]:text-4xl lg:mt-2 lg:mb-4 lg:text-5xl xl:mt-1 xl:mb-2 lg:-translate-y-3 xl:-translate-y-5 2xl:-translate-y-6">
-          {(() => {
-            const parts = t.title.split(" ")
-            const first = parts.shift() || ""
-            const rest = parts.join(" ")
-            return (
-              <>
-                <span>{first} </span>
-                <span className="max-[550px]:block">{rest}</span>
-              </>
-            )
-          })()}
-        </h2>
+        {/* Título y botón posicionados en móvil sin afectar las tarjetas */}
+        <div className="max-[900px]:absolute max-[900px]:left-1/2 max-[900px]:-translate-x-1/2 max-[900px]:top-10 w-full flex flex-col items-center">
+          <h2 className="max-[900px]:mt-0 max-[900px]:mb-1 mt-4 mb-3 text-center text-3xl font-bold tracking-tight text-foreground whitespace-nowrap min-[900px]:mt-6 min-[900px]:mb-6 min-[900px]:text-4xl lg:mt-2 lg:mb-4 lg:text-5xl xl:mt-1 xl:mb-2 lg:-translate-y-3 xl:-translate-y-5 2xl:-translate-y-6">
+            {t.title}
+          </h2>
 
-        {/* Botón para ir a la página de todos los proyectos */}
-        <div className="mb-4 flex justify-center">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
-            onClick={() => {
-              // Usar la misma animación que el botón "Ver": fade con overlay neutro
-              try {
-                window.dispatchEvent(
-                  new CustomEvent("routeSweep", {
-                    detail: { type: "fade", className: "bg-neutral-900 dark:bg-white", transitionDuration: 0.6 },
-                  })
-                )
-              } catch {}
-              // Esperar a que termine la animación antes de navegar
-              const navigate = () => router.push("/projects")
-              window.addEventListener("routeSweepFinished", navigate, { once: true })
-              window.setTimeout(() => {
-                try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
-                navigate()
-              }, 800)
-            }}
-          >
-            Todos Los Proyectos
-          </Button>
+          {/* Botón para ir a la página de todos los proyectos */}
+          <div className="max-[900px]:mb-0 mb-4 flex justify-center">
+            <Button
+              size="sm"
+              variant="secondary"
+              className="gap-2 shadow-sm cursor-pointer transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
+              onClick={() => {
+                // Usar la misma animación que el botón "Ver": fade con overlay neutro
+                try {
+                  window.dispatchEvent(
+                    new CustomEvent("routeSweep", {
+                      detail: { type: "fade", className: "bg-neutral-900 dark:bg-white", transitionDuration: 0.6 },
+                    })
+                  )
+                } catch {}
+                // Esperar a que termine la animación antes de navegar
+                const navigate = () => router.push("/projects")
+                window.addEventListener("routeSweepFinished", navigate, { once: true })
+                window.setTimeout(() => {
+                  try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
+                  navigate()
+                }, 800)
+              }}
+            >
+              {t.seeAll}
+            </Button>
+          </div>
         </div>
 
         {/* Grid con diseño móvil aplicado (solo si caben ≥4 por fila) */}
@@ -423,7 +416,7 @@ export function PortfolioSection() {
                   }`}
                   style={{ pointerEvents: index === currentIndex ? "auto" : "none" }}
                 >
-                  <div className="w-full max-w-[92%] sm:max-w-[80%] px-2 sm:px-4 mx-auto cursor-pointer" onClick={() => handleCardClick(index)}>
+                  <div className="w-full max-w-[96%] sm:max-w-[80%] px-2 sm:px-4 mx-auto cursor-pointer" onClick={() => handleCardClick(index)}>
                     <CardFlip className="select-none cursor-pointer" autoFlipBackMs={60000}
                       onFlipChange={(flipped) => {
                         // Pausar autoplay mientras está volteado
@@ -448,103 +441,127 @@ export function PortfolioSection() {
                       </CardFlipFront>
 
                       <CardFlipBack className="overflow-hidden shadow-md">
-                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] bg-white dark:bg-black flex items-center justify-center">
-                          <div className="max-w-[90%] text-center text-black dark:text-white select-text">
-                            <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] bg-white dark:bg-black flex items-center justify-center max-[900px]:items-start max-[900px]:justify-start max-[900px]:px-4 max-[900px]:pt-2">
+                          <div className="max-w-[90%] max-[900px]:max-w-[95%] text-center max-[900px]:text-left text-black dark:text-white select-text">
+                            <h3 className="mb-2 text-xl font-semibold max-[900px]:text-center">{project.title}</h3>
                             { (project as any).slug === "league-tracker" ? (
-                              language === "en" ? (
-                                <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
-                                  <p className="font-semibold">Offered Service</p>
-                                  <ul className="list-none space-y-1">
-                                    <li>Lookup and compare LoL profiles by Riot ID in real time.</li>
-                                    <li>View Solo/Duo and Flex ranks, LP, and activity summary.</li>
-                                    <li>Privacy‑focused experience: without session searches aren’t stored; with session the profile is managed.</li>
-                                    <li>Helpful editorial content in Home and Multi‑Search to guide users.</li>
-                                    <li>AdSense limited to Home and Multi‑Search only.</li>
-                                  </ul>
-                                  <p className="font-semibold">Tech Stack</p>
-                                  <ul className="list-none space-y-1">
-                                    <li>Next.js, React, TypeScript, and TailwindCSS.</li>
-                                    <li>Official Riot APIs for account, summoner, and league data.</li>
-                                    <li>Supabase for authentication and user management.</li>
-                                    <li>Controlled integration of Google AdSense.</li>
-                                  </ul>
-                                  <p className="font-semibold">Functionality</p>
-                                  <ul className="list-none space-y-1">
-                                    <li>Public summoner search and manual data refresh when needed.</li>
-                                    <li>Multi‑Search to compare multiple profiles in one view.</li>
-                                    <li>Profile view with summoner and league information.</li>
-                                  </ul>
-                                </div>
+                              shouldCarousel ? (
+                                language === "en" ? (
+                                  <p className="mb-4 text-sm leading-snug text-black/80 dark:text-white/80 text-left mx-auto max-w-[600px] max-[900px]:max-w-[95%]">
+                                    Lookup and compare LoL profiles by Riot ID in real time. View Solo/Duo and Flex ranks, LP and activity summary. Multi‑Search to compare multiple profiles. Editorial content guides users. Privacy‑first, searches without session aren’t stored. Built with Next.js, Riot APIs and Supabase. Official account, summoner and league data. Controlled AdSense only on Home and Multi‑Search; profile management when signed in. Public search with manual refresh when needed. Accessible and performant UI.
+                                  </p>
+                                ) : (
+                                  <p className="mb-4 text-sm leading-snug text-black/80 dark:text-white/80 text-left mx-auto max-w-[600px] max-[900px]:max-w-[95%]">
+                                    Consulta y compara perfiles de LoL por Riot ID en tiempo real. Visualiza rangos Solo/Duo y Flex, LP y resumen de actividad. Multi‑Search para comparar varios perfiles. Contenido editorial que guía al usuario. Privacidad primero, sin sesión no se guardan búsquedas. Hecho con Next.js, APIs de Riot y Supabase. Datos oficiales de cuenta, summoner y ligas. AdSense limitado a Home y Multi‑Search; gestión de perfil con sesión iniciada. Búsqueda pública con refresco manual cuando sea necesario. UI accesible y de alto rendimiento.
+                                  </p>
+                                )
                               ) : (
-                                <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
-                                  <p className="font-semibold">Servicio Que Se Ofrece</p>
-                                  <ul className="list-none space-y-1">
-                                    <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
-                                    <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
-                                    <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
-                                    <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
-                                    <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
-                                  </ul>
-                                  <p className="font-semibold">Tecnologías</p>
-                                  <ul className="list-none space-y-1">
-                                    <li>Next.js, React, TypeScript y TailwindCSS.</li>
-                                    <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
-                                    <li>Supabase para autenticación y administración de usuarios.</li>
-                                    <li>Integración controlada de Google AdSense.</li>
-                                  </ul>
-                                  <p className="font-semibold">Funcionalidad</p>
-                                  <ul className="list-none space-y-1">
-                                    <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
-                                    <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
-                                    <li>Vista de perfil con información de summoner y ligas.</li>
-                                  </ul>
-                                </div>
-                              )
-                            ) : (
-                              (project as any).slug === "zapaspro" ? (
                                 language === "en" ? (
                                   <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
                                     <p className="font-semibold">Offered Service</p>
                                     <ul className="list-none space-y-1">
-                                      <li>Sneaker e‑commerce with rich catalog and product details.</li>
-                                      <li>Powerful filters by brand, category, size, and price.</li>
-                                      <li>Cart and favorites with responsive, user‑friendly interface.</li>
+                                      <li>Lookup and compare LoL profiles by Riot ID in real time.</li>
+                                      <li>View Solo/Duo and Flex ranks, LP, and activity summary.</li>
+                                      <li>Privacy‑focused experience: without session searches aren’t stored; with session the profile is managed.</li>
+                                      <li>Helpful editorial content in Home and Multi‑Search to guide users.</li>
+                                      <li>AdSense limited to Home and Multi‑Search only.</li>
                                     </ul>
                                     <p className="font-semibold">Tech Stack</p>
                                     <ul className="list-none space-y-1">
-                                      <li>Angular (SPA) for the frontend.</li>
-                                      <li>Express for REST API and server logic.</li>
-                                      <li>SQLite as lightweight database.</li>
+                                      <li>Next.js, React, TypeScript, and TailwindCSS.</li>
+                                      <li>Official Riot APIs for account, summoner, and league data.</li>
+                                      <li>Supabase for authentication and user management.</li>
+                                      <li>Controlled integration of Google AdSense.</li>
                                     </ul>
                                     <p className="font-semibold">Functionality</p>
                                     <ul className="list-none space-y-1">
-                                      <li>Listing with sorting, search, and combined filters.</li>
-                                      <li>Add/remove items to cart and manage favorites.</li>
-                                      <li>Admin pages to manage catalog and inventory.</li>
+                                      <li>Public summoner search and manual data refresh when needed.</li>
+                                      <li>Multi‑Search to compare multiple profiles in one view.</li>
+                                      <li>Profile view with summoner and league information.</li>
                                     </ul>
                                   </div>
                                 ) : (
                                   <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
                                     <p className="font-semibold">Servicio Que Se Ofrece</p>
                                     <ul className="list-none space-y-1">
-                                      <li>E‑commerce de zapatillas con catálogo y fichas de producto completas.</li>
-                                      <li>Filtros potentes por marca, categoría, talla y precio.</li>
-                                      <li>Carrito y favoritos con una interfaz responsive y amigable.</li>
+                                      <li>Consulta y comparación de perfiles de LoL por Riot ID en tiempo real.</li>
+                                      <li>Visualización de rangos Solo/Duo y Flex, LP y resumen de actividad.</li>
+                                      <li>Experiencia centrada en privacidad: sin sesión no se guardan búsquedas; con sesión se gestiona el perfil.</li>
+                                      <li>Contenido editorial útil en Home y Multi‑Search para orientar al usuario.</li>
+                                      <li>Anuncios de AdSense limitados a Home y Multi‑Search.</li>
                                     </ul>
                                     <p className="font-semibold">Tecnologías</p>
                                     <ul className="list-none space-y-1">
-                                      <li>Angular (SPA) para el frontend.</li>
-                                      <li>Express para API REST y lógica de servidor.</li>
-                                      <li>SQLite como base de datos ligera.</li>
+                                      <li>Next.js, React, TypeScript y TailwindCSS.</li>
+                                      <li>APIs oficiales de Riot para datos de cuenta, summoner y ligas.</li>
+                                      <li>Supabase para autenticación y administración de usuarios.</li>
+                                      <li>Integración controlada de Google AdSense.</li>
                                     </ul>
                                     <p className="font-semibold">Funcionalidad</p>
                                     <ul className="list-none space-y-1">
-                                      <li>Listado con ordenación, búsqueda y combinación de filtros.</li>
-                                      <li>Añadir/quitar artículos al carrito y gestionar favoritos.</li>
-                                      <li>Páginas de administración para catálogo e inventario.</li>
+                                      <li>Búsqueda pública de invocadores y refresco de datos cuando sea necesario.</li>
+                                      <li>Multi‑Search para comparar varios perfiles en una sola vista.</li>
+                                      <li>Vista de perfil con información de summoner y ligas.</li>
                                     </ul>
                                   </div>
+                                )
+                              )
+                            ) : (
+                              (project as any).slug === "zapaspro" ? (
+                                shouldCarousel ? (
+                                  language === "en" ? (
+                                  <p className="mb-4 text-sm leading-snug text-black/80 dark:text-white/80 text-left mx-auto max-w-[600px] max-[900px]:max-w-[95%]">
+                                    Sneaker e‑commerce with rich catalog and detailed product pages. Filters by brand, category, size and price; search and sorting. Cart and favorites with responsive UI. Admin pages for catalog and inventory. Combined filters for fast browsing. Clean SPA with REST API backend. Built with Angular, Express and SQLite. Simple inventory management for admins.
+                                  </p>
+                                ) : (
+                                  <p className="mb-4 text-sm leading-snug text-black/80 dark:text-white/80 text-left mx-auto max-w-[600px] max-[900px]:max-w-[95%]">
+                                    Tienda online de zapatillas con catálogo y fichas detalladas. Filtros por marca, categoría, talla y precio; búsqueda y ordenación. Carrito y favoritos con UI responsive. Páginas de administración para catálogo e inventario. Filtros combinados y navegación rápida. SPA limpia con backend REST. Hecho con Angular, Express y SQLite. Gestión sencilla de inventario para administradores.
+                                  </p>
+                                )
+                                ) : (
+                                  language === "en" ? (
+                                    <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                                      <p className="font-semibold">Offered Service</p>
+                                      <ul className="list-none space-y-1">
+                                        <li>Sneaker e‑commerce with rich catalog and product details.</li>
+                                        <li>Powerful filters by brand, category, size, and price.</li>
+                                        <li>Cart and favorites with responsive, user‑friendly interface.</li>
+                                      </ul>
+                                      <p className="font-semibold">Tech Stack</p>
+                                      <ul className="list-none space-y-1">
+                                        <li>Angular (SPA) for the frontend.</li>
+                                        <li>Express for REST API and server logic.</li>
+                                        <li>SQLite as lightweight database.</li>
+                                      </ul>
+                                      <p className="font-semibold">Functionality</p>
+                                      <ul className="list-none space-y-1">
+                                        <li>Listing with sorting, search, and combined filters.</li>
+                                        <li>Add/remove items to cart and manage favorites.</li>
+                                        <li>Admin pages to manage catalog and inventory.</li>
+                                      </ul>
+                                    </div>
+                                  ) : (
+                                    <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                                      <p className="font-semibold">Servicio Que Se Ofrece</p>
+                                      <ul className="list-none space-y-1">
+                                        <li>E‑commerce de zapatillas con catálogo y fichas de producto completas.</li>
+                                        <li>Filtros potentes por marca, categoría, talla y precio.</li>
+                                        <li>Carrito y favoritos con una interfaz responsive y amigable.</li>
+                                      </ul>
+                                      <p className="font-semibold">Tecnologías</p>
+                                      <ul className="list-none space-y-1">
+                                        <li>Angular (SPA) para el frontend.</li>
+                                        <li>Express para API REST y lógica de servidor.</li>
+                                        <li>SQLite como base de datos ligera.</li>
+                                      </ul>
+                                      <p className="font-semibold">Funcionalidad</p>
+                                      <ul className="list-none space-y-1">
+                                        <li>Listado con ordenación, búsqueda y combinación de filtros.</li>
+                                        <li>Añadir/quitar artículos al carrito y gestionar favoritos.</li>
+                                        <li>Páginas de administración para catálogo e inventario.</li>
+                                      </ul>
+                                    </div>
+                                  )
                                 )
                               ) : (
                                 <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>

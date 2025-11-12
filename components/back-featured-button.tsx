@@ -7,7 +7,7 @@ import { useLanguage } from "@/lib/language-context"
 import { translations } from "@/lib/translations"
 import { useRouter } from "next/navigation"
 
-export function BackFeaturedButton() {
+export function BackFeaturedButton({ showLabelOnMobile = false }: { showLabelOnMobile?: boolean }) {
   const { language } = useLanguage()
   const router = useRouter()
   const label = translations[language].ui.backToFeatured
@@ -41,7 +41,7 @@ export function BackFeaturedButton() {
     >
       <div className="flex items-center gap-1">
         <Star className="h-4 w-4 text-foreground" />
-        <span className="text-xs font-semibold hidden min-[900px]:inline">{label}</span>
+        <span className={showLabelOnMobile ? "text-xs font-semibold" : "text-xs font-semibold hidden min-[900px]:inline"}>{label}</span>
       </div>
     </Button>
   )

@@ -12,6 +12,7 @@ type BackHomeButtonProps = {
   direction?: "top" | "bottom" | "left" | "right"
   overlayClassName?: string
   transitionDuration?: number
+  showLabelOnMobile?: boolean
 }
 
 export function BackHomeButton({
@@ -19,6 +20,7 @@ export function BackHomeButton({
   direction = "bottom",
   overlayClassName = "bg-neutral-900 dark:bg-white",
   transitionDuration = 0.6,
+  showLabelOnMobile = false,
 }: BackHomeButtonProps) {
   const { language } = useLanguage()
   const router = useRouter()
@@ -72,7 +74,7 @@ export function BackHomeButton({
     >
       <div className="flex items-center gap-1">
         <Home className="h-4 w-4 text-foreground" />
-        <span className="text-xs font-semibold hidden min-[900px]:inline">{label}</span>
+        <span className={showLabelOnMobile ? "text-xs font-semibold" : "text-xs font-semibold hidden min-[900px]:inline"}>{label}</span>
       </div>
     </Button>
   )
