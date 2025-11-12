@@ -180,10 +180,21 @@ export default function AboutPage() {
       </section>
 
       <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
-        <BackHomeButton />
-        <HandednessToggle />
-        <LanguageToggle />
-        <ThemeToggle />
+        {handedness === "right" ? (
+          <>
+            <BackHomeButton />
+            <HandednessToggle />
+            <LanguageToggle />
+            <ThemeToggle />
+          </>
+        ) : (
+          <>
+            <ThemeToggle />
+            <LanguageToggle />
+            <HandednessToggle />
+            <BackHomeButton />
+          </>
+        )}
       </div>
     </main>
   )

@@ -124,9 +124,19 @@ export default function ProjectsPage() {
       </section>
 
       <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
-        <HandednessToggle />
-        <LanguageToggle />
-        <ThemeToggle />
+        {handedness === "right" ? (
+          <>
+            <LanguageToggle />
+            <HandednessToggle />
+            <ThemeToggle />
+          </>
+        ) : (
+          <>
+            <ThemeToggle />
+            <HandednessToggle />
+            <LanguageToggle />
+          </>
+        )}
       </div>
     </main>
   )

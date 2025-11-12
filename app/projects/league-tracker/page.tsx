@@ -11,22 +11,38 @@ import { VisitProjectButton } from "@/components/visit-project-button"
 import { HandednessToggle } from "@/components/handedness-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useHandedness } from "@/lib/handedness-context"
 
 export default function LeagueTrackerPage() {
   const router = useRouter()
+  const { handedness } = useHandedness()
 
   // Navegación superior gestionada por botones reutilizables
 
   return (
     <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
-      <div className="fixed top-6 right-6 z-50 flex items-center gap-3">
-        <BackHomeButton animationType="fade" />
-        <BackFeaturedButton />
-        <BackAllProjectsButton />
-        <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
-        <HandednessToggle />
-        <LanguageToggle />
-        <ThemeToggle />
+      <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
+        {handedness === "right" ? (
+          <>
+            <BackHomeButton animationType="fade" />
+            <BackFeaturedButton />
+            <BackAllProjectsButton />
+            <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
+            <HandednessToggle />
+            <LanguageToggle />
+            <ThemeToggle />
+          </>
+        ) : (
+          <>
+            <ThemeToggle />
+            <LanguageToggle />
+            <HandednessToggle />
+            <VisitProjectButton href="https://lol-tracker-beta.vercel.app" />
+            <BackAllProjectsButton />
+            <BackFeaturedButton />
+            <BackHomeButton animationType="fade" />
+          </>
+        )}
       </div>
 
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
