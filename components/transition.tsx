@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, type Transition as FMTransition } from "framer-motion"
 import { type ReactNode, useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
@@ -51,15 +51,15 @@ export function Transition({
     }
   }
 
-  const getTransition = () => {
+  const getTransition = (): FMTransition => {
     switch (type) {
       case "spring":
-        return { type: "spring", stiffness: 100, damping: 20 }
+        return { type: "spring", stiffness: 100, damping: 20 } as const
       case "linear":
-        return { duration: transitionDuration, ease: "linear" }
+        return { duration: transitionDuration, ease: [0.0, 0.0, 1.0, 1.0] } as const
       case "curved":
       default:
-        return { duration: transitionDuration, ease: [0.43, 0.13, 0.23, 0.96] }
+        return { duration: transitionDuration, ease: [0.43, 0.13, 0.23, 0.96] } as const
     }
   }
 
