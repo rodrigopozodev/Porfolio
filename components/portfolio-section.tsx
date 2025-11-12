@@ -14,30 +14,24 @@ import { useHandedness } from "@/lib/handedness-context"
 
 const projectImages = [
   "/League Tracker.png",
-  "/analytics-dashboard.svg",
-  "/mobile-social-app-interface.svg",
+  "/ZapasPro.png",
 ]
 
 // Imagen fija del proyecto destacado y asignación por slug/título
 const imageBySlug: Record<string, string> = {
   "league-tracker": "/League Tracker.png",
-  "analytics-dashboard": "/analytics-dashboard.svg",
-  "social-mobile-app": "/mobile-social-app-interface.svg",
+  "zapaspro": "/ZapasPro.png",
 }
 
 const imageByTitle: Record<string, string> = {
-  "Dashboard Analytics": "/analytics-dashboard.svg",
-  "Analytics Dashboard": "/analytics-dashboard.svg",
-  "App Móvil Social": "/mobile-social-app-interface.svg",
-  "Social Mobile App": "/mobile-social-app-interface.svg",
   "League tracker": "/League Tracker.png",
   "League Tracker": "/League Tracker.png",
+  "ZapasPro": "/ZapasPro.png",
 }
 
 const projectTags = [
   [],
-  ["React", "D3.js", "Node.js"],
-  ["React Native", "Firebase", "WebSocket"],
+  [],
 ]
 
 export function PortfolioSection() {
@@ -295,7 +289,53 @@ export function PortfolioSection() {
                           </div>
                         )
                       ) : (
-                        <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                        (project as any).slug === "zapaspro" ? (
+                          language === "en" ? (
+                            <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                              <p className="font-semibold">Offered Service</p>
+                              <ul className="list-none space-y-1">
+                                <li>E‑commerce for sneakers with catalog browsing and detailed product pages.</li>
+                                <li>Advanced filters by brand, category, size, and price range.</li>
+                                <li>Cart and favorites management with a clean, responsive UI.</li>
+                              </ul>
+                              <p className="font-semibold">Tech Stack</p>
+                              <ul className="list-none space-y-1">
+                                <li>Angular for the frontend SPA.</li>
+                                <li>Express for RESTful API and server logic.</li>
+                                <li>SQLite for a lightweight data layer.</li>
+                              </ul>
+                              <p className="font-semibold">Functionality</p>
+                              <ul className="list-none space-y-1">
+                                <li>Product listing with sorting and search, and filter combinations.</li>
+                                <li>Add/remove items to cart and manage favorites.</li>
+                                <li>Dedicated admin pages for catalog and inventory management.</li>
+                              </ul>
+                            </div>
+                          ) : (
+                            <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                              <p className="font-semibold">Servicio Que Se Ofrece</p>
+                              <ul className="list-none space-y-1">
+                                <li>Tienda online de zapatillas con catálogo y fichas detalladas de productos.</li>
+                                <li>Filtros avanzados por marca, categoría, talla y rango de precio.</li>
+                                <li>Gestión de carrito y favoritos con una UI limpia y responsive.</li>
+                              </ul>
+                              <p className="font-semibold">Tecnologías</p>
+                              <ul className="list-none space-y-1">
+                                <li>Angular para el frontend (SPA).</li>
+                                <li>Express para API REST y lógica de servidor.</li>
+                                <li>SQLite como base de datos ligera.</li>
+                              </ul>
+                              <p className="font-semibold">Funcionalidad</p>
+                              <ul className="list-none space-y-1">
+                                <li>Listado de productos con ordenación, búsqueda y combinación de filtros.</li>
+                                <li>Añadir/quitar artículos del carrito y gestionar favoritos.</li>
+                                <li>Páginas de administración para gestionar catálogo e inventario.</li>
+                              </ul>
+                            </div>
+                          )
+                        ) : (
+                          <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                        )
                       )}
                       {(projectTags[index] ?? []).length > 0 && (
                         <div className="mb-4 flex flex-wrap justify-center gap-2">
@@ -343,6 +383,8 @@ export function PortfolioSection() {
                           const slug = (project as any)?.slug
                           if (slug === "league-tracker") {
                             window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
+                          } else if (slug === "zapaspro") {
+                            window.open("https://zapaspro.netlify.app/", "_blank", "noopener,noreferrer")
                           }
                         }}>
                           <ExternalLink className="h-4 w-4" />
@@ -460,7 +502,53 @@ export function PortfolioSection() {
                                 </div>
                               )
                             ) : (
-                              <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                              (project as any).slug === "zapaspro" ? (
+                                language === "en" ? (
+                                  <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                                    <p className="font-semibold">Offered Service</p>
+                                    <ul className="list-none space-y-1">
+                                      <li>Sneaker e‑commerce with rich catalog and product details.</li>
+                                      <li>Powerful filters by brand, category, size, and price.</li>
+                                      <li>Cart and favorites with responsive, user‑friendly interface.</li>
+                                    </ul>
+                                    <p className="font-semibold">Tech Stack</p>
+                                    <ul className="list-none space-y-1">
+                                      <li>Angular (SPA) for the frontend.</li>
+                                      <li>Express for REST API and server logic.</li>
+                                      <li>SQLite as lightweight database.</li>
+                                    </ul>
+                                    <p className="font-semibold">Functionality</p>
+                                    <ul className="list-none space-y-1">
+                                      <li>Listing with sorting, search, and combined filters.</li>
+                                      <li>Add/remove items to cart and manage favorites.</li>
+                                      <li>Admin pages to manage catalog and inventory.</li>
+                                    </ul>
+                                  </div>
+                                ) : (
+                                  <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">
+                                    <p className="font-semibold">Servicio Que Se Ofrece</p>
+                                    <ul className="list-none space-y-1">
+                                      <li>E‑commerce de zapatillas con catálogo y fichas de producto completas.</li>
+                                      <li>Filtros potentes por marca, categoría, talla y precio.</li>
+                                      <li>Carrito y favoritos con una interfaz responsive y amigable.</li>
+                                    </ul>
+                                    <p className="font-semibold">Tecnologías</p>
+                                    <ul className="list-none space-y-1">
+                                      <li>Angular (SPA) para el frontend.</li>
+                                      <li>Express para API REST y lógica de servidor.</li>
+                                      <li>SQLite como base de datos ligera.</li>
+                                    </ul>
+                                    <p className="font-semibold">Funcionalidad</p>
+                                    <ul className="list-none space-y-1">
+                                      <li>Listado con ordenación, búsqueda y combinación de filtros.</li>
+                                      <li>Añadir/quitar artículos al carrito y gestionar favoritos.</li>
+                                      <li>Páginas de administración para catálogo e inventario.</li>
+                                    </ul>
+                                  </div>
+                                )
+                              ) : (
+                                <p className="mb-4 text-sm text-black/70 dark:text-white/70">{project.description}</p>
+                              )
                             )}
                             {(projectTags[index] ?? []).length > 0 && (
                               <div className="mb-4 flex flex-wrap justify-center gap-2">
@@ -508,6 +596,8 @@ export function PortfolioSection() {
                                 const slug = (project as any)?.slug
                                 if (slug === "league-tracker") {
                                   window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
+                                } else if (slug === "zapaspro") {
+                                  window.open("https://zapaspro.netlify.app/", "_blank", "noopener,noreferrer")
                                 }
                               }}>
                                 <ExternalLink className="h-4 w-4" />

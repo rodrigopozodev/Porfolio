@@ -16,8 +16,7 @@ import { useHandedness } from "@/lib/handedness-context"
 
 const projectImages = [
   "/League Tracker.png",
-  "/analytics-dashboard.svg",
-  "/mobile-social-app-interface.svg",
+  "/ZapasPro.png",
 ]
 
 export default function ProjectsPage() {
@@ -105,6 +104,8 @@ export default function ProjectsPage() {
                       const slug = (project as any)?.slug
                       if (slug === "league-tracker") {
                         window.open("https://lol-tracker-beta.vercel.app", "_blank", "noopener,noreferrer")
+                      } else if (slug === "zapaspro") {
+                        window.open("https://zapaspro.netlify.app/", "_blank", "noopener,noreferrer")
                       }
                     }}>
                       <ExternalLink className="h-4 w-4" />

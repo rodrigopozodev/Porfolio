@@ -96,12 +96,9 @@ export const translations = {
           slug: "league-tracker",
         },
         {
-          title: "Dashboard Analytics",
-          description: "Panel de análisis en tiempo real con visualizaciones interactivas",
-        },
-        {
-          title: "App Móvil Social",
-          description: "Aplicación social con chat en tiempo real y notificaciones",
+          title: "ZapasPro",
+          description: "Ecommerce de zapatillas con catálogo, ficha con galería y carrito básico.",
+          slug: "zapaspro",
         },
       ],
       view: "Ver",
@@ -225,14 +222,9 @@ export const translations = {
           slug: "league-tracker",
         },
         {
-          title: "Analytics Dashboard",
-          description: "Real-time analytics panel with interactive visualizations",
-          slug: "analytics-dashboard",
-        },
-        {
-          title: "Social Mobile App",
-          description: "Social application with real-time chat and notifications",
-          slug: "social-mobile-app",
+          title: "ZapasPro",
+          description: "Sneakers ecommerce with catalog, product gallery, and basic cart.",
+          slug: "zapaspro",
         },
       ],
       view: "View",
