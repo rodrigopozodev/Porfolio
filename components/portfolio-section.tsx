@@ -230,7 +230,7 @@ export function PortfolioSection() {
                 <CardFlipBack className="overflow-hidden shadow-md">
                   <div className="relative h-55-mobile min-[900px]:h-60-mobile lg:h-66-mobile xl:h-70-mobile bg-white dark:bg-black flex items-center justify-center">
                     <div className="max-w-[90%] text-center text-black dark:text-white select-text">
-                      <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                      <h3 className="mb-2 text-xl font-semibold max-[900px]:text-center">{project.title}</h3>
                       { (project as any).slug === "league-tracker" ? (
                         language === "en" ? (
                           <div className="mb-4 text-sm text-black/80 dark:text-white/80 space-y-2 text-left mx-auto max-w-[600px]">

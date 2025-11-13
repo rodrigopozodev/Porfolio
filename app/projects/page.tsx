@@ -190,7 +190,7 @@ export default function ProjectsPage() {
                 <CardFlipBack className="overflow-hidden shadow-md">
                   <div className="relative h-55-mobile min-[900px]:h-60-mobile lg:h-66-mobile xl:h-70-mobile bg-white dark:bg-black flex items-center justify-center cursor-pointer max-[900px]:items-start max-[900px]:justify-start max-[900px]:px-4 max-[900px]:pt-2">
                     <div className="max-w-[90%] text-center max-[900px]:text-left text-black dark:text-white select-text">
-                      <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
+                      <h3 className="mb-2 text-xl font-semibold max-[900px]:text-center">{project.title}</h3>
                       {renderBackContent(project)}
                       {(projectTags[index] ?? []).length > 0 && (
                         <div className="mb-4 flex flex-wrap justify-center gap-2">
