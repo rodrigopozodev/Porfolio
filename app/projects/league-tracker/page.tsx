@@ -25,7 +25,7 @@ export default function LeagueTrackerPage() {
 
   return (
     <main className="relative min-h-mobile safe-area-pad w-full bg-background text-foreground overflow-y-auto">
-      <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
+      <div className={`fixed z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`} style={{ top: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}>
         {handedness === "right" ? (
           <>
             <span className="hidden min-[900px]:inline-flex gap-3">

@@ -244,6 +244,19 @@
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* Alturas móviles con fallback (Chrome/Android + iOS) */
+.h-55-mobile { height: 55vh; height: 55svh; height: 55dvh; }
+.h-60-mobile { height: 60vh; height: 60svh; height: 60dvh; }
+.h-66-mobile { height: 66vh; height: 66svh; height: 66dvh; }
+.h-70-mobile { height: 70vh; height: 70svh; height: 70dvh; }
+.h-74-mobile { height: 74vh; height: 74svh; height: 74dvh; }
+.h-76-mobile { height: 76vh; height: 76svh; height: 76dvh; }
+.min-h-60-mobile { min-height: 60vh; min-height: 60svh; min-height: 60dvh; }
+.min-h-65-mobile { min-height: 65vh; min-height: 65svh; min-height: 65dvh; }
+.min-h-74-mobile { min-height: 74vh; min-height: 74svh; min-height: 74dvh; }
+.min-h-78-mobile { min-height: 78vh; min-height: 78svh; min-height: 78dvh; }
+.min-h-80-mobile { min-height: 80vh; min-height: 80svh; min-height: 80dvh; }
 /* ======================
    Kinetic Testimonials
 ====================== */

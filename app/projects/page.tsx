@@ -188,7 +188,7 @@ export default function ProjectsPage() {
                 </CardFlipFront>
 
                 <CardFlipBack className="overflow-hidden shadow-md">
-                  <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center cursor-pointer max-[900px]:items-start max-[900px]:justify-start max-[900px]:px-4 max-[900px]:pt-2">
+                  <div className="relative h-55-mobile min-[900px]:h-60-mobile lg:h-66-mobile xl:h-70-mobile bg-white dark:bg-black flex items-center justify-center cursor-pointer max-[900px]:items-start max-[900px]:justify-start max-[900px]:px-4 max-[900px]:pt-2">
                     <div className="max-w-[90%] text-center max-[900px]:text-left text-black dark:text-white select-text">
                       <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                       {renderBackContent(project)}
@@ -259,7 +259,7 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
+      <div className={`fixed z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`} style={{ top: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}>
         {handedness === "right" ? (
           <>
             <span className="hidden min-[900px]:inline-flex gap-3">

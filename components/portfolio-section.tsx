@@ -228,7 +228,7 @@ export function PortfolioSection() {
                 </CardFlipFront>
 
                 <CardFlipBack className="overflow-hidden shadow-md">
-                  <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
+                  <div className="relative h-55-mobile min-[900px]:h-60-mobile lg:h-66-mobile xl:h-70-mobile bg-white dark:bg-black flex items-center justify-center">
                     <div className="max-w-[90%] text-center text-black dark:text-white select-text">
                       <h3 className="mb-2 text-xl font-semibold">{project.title}</h3>
                       { (project as any).slug === "league-tracker" ? (
@@ -396,7 +396,7 @@ export function PortfolioSection() {
         {shouldCarousel && (
         <div className="relative mt-6 min-[900px]:mt-8 lg:mt-10">
           <div
-            className="relative overflow-visible min-h-[74vh] sm:min-h-[78vh] lg:min-h-[78vh] xl:min-h-[80vh] pb-8 sm:pb-10 min-[900px]:pb-12 lg:pb-10"
+            className="relative overflow-visible min-h-74-mobile sm:min-h-78-mobile lg:min-h-78-mobile xl:min-h-80-mobile pb-8 sm:pb-10 min-[900px]:pb-12 lg:pb-10"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -431,7 +431,7 @@ export function PortfolioSection() {
                       }}
                     >
                       <CardFlipFront className="overflow-hidden shadow-md">
-                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] overflow-hidden bg-muted cursor-pointer">
+                        <div className="relative h-66-mobile sm:h-70-mobile lg:h-74-mobile xl:h-76-mobile overflow-hidden bg-muted cursor-pointer">
                           <img
                             src={getProjectImage(project, index) || "/placeholder.svg"}
                             alt={project.title}
@@ -441,7 +441,7 @@ export function PortfolioSection() {
                       </CardFlipFront>
 
                       <CardFlipBack className="overflow-hidden shadow-md">
-                        <div className="relative h-[66vh] sm:h-[70vh] lg:h-[74vh] xl:h-[76vh] bg-white dark:bg-black flex items-center justify-center max-[900px]:items-start max-[900px]:justify-start max-[900px]:px-4 max-[900px]:pt-2">
+                        <div className="relative h-66-mobile sm:h-70-mobile lg:h-74-mobile xl:h-76-mobile bg-white dark:bg-black flex items-center justify-center max-[900px]:items-start max-[900px]:justify-start max-[900px]:px-4 max-[900px]:pt-2">
                           <div className="max-w-[90%] max-[900px]:max-w-[95%] text-center max-[900px]:text-left text-black dark:text-white select-text">
                             <h3 className="mb-2 text-xl font-semibold max-[900px]:text-center">{project.title}</h3>
                             { (project as any).slug === "league-tracker" ? (

@@ -36,7 +36,7 @@ export function HeroSection() {
     >
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent" />
 
-      <div className="hero-container w-full max-w-screen-2xl mx-auto px-4 min-[700px]:px-6 grid grid-cols-1 min-[700px]:grid-cols-3 items-stretch min-[700px]:gap-4 lg:gap-6 pt-8 min-[700px]:pt-12 min-h-[60vh] min-[700px]:min-h-[65vh]">
+      <div className="hero-container w-full max-w-screen-2xl mx-auto px-4 min-[700px]:px-6 grid grid-cols-1 min-[700px]:grid-cols-3 items-stretch min-[700px]:gap-4 lg:gap-6 pt-8 min-[700px]:pt-12 min-h-60-mobile min-[700px]:min-h-65-mobile">
         <div className="hidden min-[700px]:block hero-column p-4 pb-0 h-full pt-8 flex flex-col">
           <TestimonialsSection />
         </div>
@@ -266,13 +266,13 @@ export function HeroSection() {
                 {/* Tarjeta igual a las de "Proyectos Destacados" */}
                 <CardFlip className="select-none cursor-pointer" autoFlipBackMs={60000}>
                   <CardFlipFront className="overflow-hidden shadow-md">
-                    <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] overflow-hidden bg-muted cursor-pointer">
+                    <div className="relative h-55-mobile min-[900px]:h-60-mobile lg:h-66-mobile xl:h-70-mobile overflow-hidden bg-muted cursor-pointer">
                       <img src={imgSrc} alt={featured.title} className="h-full w-full object-cover cursor-pointer" />
                     </div>
                   </CardFlipFront>
 
                   <CardFlipBack className="overflow-hidden shadow-md">
-                    <div className="relative h-[55vh] min-[900px]:h-[60vh] lg:h-[66vh] xl:h-[70vh] bg-white dark:bg-black flex items-center justify-center">
+                    <div className="relative h-55-mobile min-[900px]:h-60-mobile lg:h-66-mobile xl:h-70-mobile bg-white dark:bg-black flex items-center justify-center">
                       <div className="max-w-[90%] text-center text-black dark:text-white select-text">
                         <h3 className="mb-2 text-xl font-semibold">{featured.title}</h3>
                         { (featured as any).slug === "league-tracker" ? (
