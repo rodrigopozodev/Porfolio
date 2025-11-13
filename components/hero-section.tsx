@@ -32,7 +32,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="snap-section hero-responsive relative flex items-center justify-center bg-background"
+      className="snap-section hero-responsive relative flex items-center justify-center bg-background min-h-[100dvh] overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent" />
 
@@ -127,8 +127,8 @@ export function HeroSection() {
           <ArrowUpLeft className="pointer-arrow arrow-hint-br text-black dark:text-white" />
         </span>
         </div>
-        <div className="origin-top min-[700px]:scale-[0.90] min-[900px]:scale-[0.90] min-[768px]:max-[1023px]:scale-[1.12] min-[1024px]:max-[1366px]:scale-[1.5] xl:scale-100 2xl:scale-100">
-          <div className="relative w-fit mx-auto min-[768px]:max-[1023px]:-mt-14 min-[1024px]:max-[1366px]:-mt-24">
+        <div className="transform origin-top scale-100 min-[700px]:scale-[1.1] min-[820px]:max-[950px]:scale-[1.45] min-[912px]:max-[1024px]:scale-[1.75] min-[820px]:max-[950px]:-translate-y-[12%] min-[912px]:max-[1024px]:-translate-y-[26%] min-[1024px]:max-[1366px]:scale-[1.55] min-[1024px]:max-[1366px]:-translate-y-[4%] xl:scale-100 2xl:scale-100">
+          <div className="relative w-fit mx-auto min-[768px]:max-[1023px]:-mt-14 min-[1024px]:max-[1366px]:-mt-6">
           <CardFlip className="hidden min-[700px]:block mx-auto cursor-pointer" autoFlipBackMs={60000}>
           <CardFlipFront className="bg-transparent border-none shadow-none p-0">
             <Image
@@ -199,7 +199,7 @@ export function HeroSection() {
           return (
             <h1 className="hero-title mb-6 font-sans font-bold tracking-tight text-foreground text-[2.36rem] min-[700px]:text-[2.36rem] min-[900px]:text-5xl min-[768px]:max-[1023px]:text-[calc(2.36rem*1.12)] min-[768px]:max-[1023px]:mt-10 min-[1024px]:max-[1366px]:mt-12 lg:text-5xl xl:text-6xl 2xl:text-6xl lg:leading-tight">
               <span>{first} </span>
-              <span className="block min-[768px]:max-[1023px]:inline xl:inline">{last}</span>
+              <span className="block min-[768px]:max-[1023px]:inline min-[1024px]:max-[1366px]:inline xl:inline">{last}</span>
             </h1>
           )
         })()}
@@ -377,6 +377,29 @@ export function HeroSection() {
       <style jsx>{`
         @keyframes arrowMoveY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
         .arrow-move { animation: arrowMoveY 0.7s ease-in-out infinite; }
+
+        @media (min-width: 820px) and (max-width: 950px) and (orientation: portrait) {
+          #hero {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            transform: none;
+            transform-origin: top center;
+          }
+          .hero-container {
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+          }
+          .hero-title {
+            font-size: 2.6rem !important;
+          }
+          .hero-type {
+            font-size: 1.9rem !important;
+          }
+        }
       `}</style>
     </section>
   )
