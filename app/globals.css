@@ -219,6 +219,7 @@
   width: 1.5rem;
   height: 1.5rem;
   transition: transform 0.2s;
+  will-change: transform;
 }
 
 .cta-button:hover .arrow-icon {
@@ -229,6 +230,37 @@
   0% { transform: translateY(-5px); }
   50% { transform: translateY(12px); }
   100% { transform: translateY(-5px); }
+}
+
+/* Móvil: animación automática de la flecha del CTA */
+@media (max-width: 699px) {
+  .cta-button .arrow-icon {
+    animation: bounceArrow 0.8s infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-button .arrow-icon {
+    animation: none !important;
+  }
+}
+
+/* Flechas de pista alrededor de la foto en móvil */
+.pointer-arrow { width: 1.35rem; height: 1.35rem; opacity: 0.95; }
+@keyframes hint-tl { 0% { transform: translate(2px, 2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(2px, 2px); } }
+@keyframes hint-tr { 0% { transform: translate(-2px, 2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(-2px, 2px); } }
+@keyframes hint-bl { 0% { transform: translate(2px, -2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(2px, -2px); } }
+@keyframes hint-br { 0% { transform: translate(-2px, -2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(-2px, -2px); } }
+
+@media (max-width: 699px) {
+  .arrow-hint-tl { animation: hint-tl 0.9s ease-in-out infinite; }
+  .arrow-hint-tr { animation: hint-tr 0.9s ease-in-out infinite; }
+  .arrow-hint-bl { animation: hint-bl 0.9s ease-in-out infinite; }
+  .arrow-hint-br { animation: hint-br 0.9s ease-in-out infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow-hint-tl, .arrow-hint-tr, .arrow-hint-bl, .arrow-hint-br { animation: none !important; }
 }
 
 /* ======================

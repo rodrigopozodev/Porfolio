@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown, ExternalLink, Eye, Github, Linkedin, Mail, Download } from "lucide-react"
+import { ArrowDown, ArrowDownLeft, ArrowDownRight, ArrowUpLeft, ArrowUpRight, ExternalLink, Eye, Github, Linkedin, Mail, Download } from "lucide-react"
 import React, { useEffect, useState } from "react"
 import { translations } from "@/lib/translations"
 import { useLanguage } from "@/lib/language-context"
@@ -42,9 +42,9 @@ export function HeroSection() {
         </div>
         <div key={renderKey} className="relative hero-column z-10 mx-auto max-w-none xl:max-w-5xl px-4 min-[700px]:px-6 text-center h-full pt-8">
         {/* Foto y flip en móvil */}
-        <div className="block min-[700px]:hidden w-full flex flex-col items-center justify-center mt-6 mb-4">
-        <CardFlip className="cursor-pointer" autoFlipBackMs={60000}>
-          <CardFlipFront className="bg-transparent border-none shadow-none p-0">
+        <div className="relative block min-[700px]:hidden w-full flex flex-col items-center justify-center mt-6 mb-4">
+          <CardFlip className="cursor-pointer" autoFlipBackMs={60000}>
+            <CardFlipFront className="bg-transparent border-none shadow-none p-0">
             <Image
               src="/Rodrigo.png"
               alt="Foto de Rodrigo Pozo Sánchez"
@@ -53,7 +53,7 @@ export function HeroSection() {
               className="mx-auto rounded-full shadow-lg object-cover cursor-pointer"
               priority
             />
-          </CardFlipFront>
+            </CardFlipFront>
           <CardFlipBack className="bg-transparent border-none shadow-none p-0">
             <div className="relative w-[140px] h-[140px] mx-auto flex flex-col items-center text-center px-4 overflow-visible pt-2">
               <h3 className="text-foreground font-semibold mb-2 text-base">{t.aboutTitle}</h3>
@@ -113,6 +113,19 @@ export function HeroSection() {
             </div>
           </CardFlipBack>
         </CardFlip>
+        {/* Flechas de pista en primer nivel (no alteran el resto) */}
+        <span className="pointer-events-none absolute top-2 left-2">
+          <ArrowDownRight className="pointer-arrow arrow-hint-tl text-black dark:text-white" />
+        </span>
+        <span className="pointer-events-none absolute top-2 right-2">
+          <ArrowDownLeft className="pointer-arrow arrow-hint-tr text-black dark:text-white" />
+        </span>
+        <span className="pointer-events-none absolute bottom-2 left-2">
+          <ArrowUpRight className="pointer-arrow arrow-hint-bl text-black dark:text-white" />
+        </span>
+        <span className="pointer-events-none absolute bottom-2 right-2">
+          <ArrowUpLeft className="pointer-arrow arrow-hint-br text-black dark:text-white" />
+        </span>
         </div>
         <div className="origin-top min-[700px]:scale-[0.90] min-[900px]:scale-[0.90] lg:scale-[0.95] xl:scale-100 2xl:scale-100">
           <CardFlip className="hidden min-[700px]:block mx-auto cursor-pointer" autoFlipBackMs={60000}>
