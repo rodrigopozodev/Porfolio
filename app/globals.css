@@ -221,8 +221,8 @@
   100% { transform: translateY(-5px); }
 }
 
-/* Móvil y iPad: animación automática de la flecha del CTA */
-@media (max-width: 1023px) {
+/* Móvil, iPad y iPad Pro: animación automática de la flecha del CTA */
+@media (max-width: 1366px) {
   .cta-button .arrow-icon {
     animation: bounceArrow 0.7s infinite;
   }
@@ -241,12 +241,15 @@
 @keyframes hint-bl { 0% { transform: translate(2px, -2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(2px, -2px); } }
 @keyframes hint-br { 0% { transform: translate(-2px, -2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(-2px, -2px); } }
 
-@media (max-width: 1023px) {
+@media (max-width: 1366px) {
   .arrow-hint-tl { animation: hint-tl 0.9s ease-in-out infinite; }
   .arrow-hint-tr { animation: hint-tr 0.9s ease-in-out infinite; }
   .arrow-hint-bl { animation: hint-bl 0.9s ease-in-out infinite; }
   .arrow-hint-br { animation: hint-br 0.9s ease-in-out infinite; }
 }
+
+/* iPad Pro: flechas más grandes alrededor de la foto */
+/* Eliminamos tamaño especial de flechas en iPad Pro; se escalan con el contenedor */
 
 @media (prefers-reduced-motion: reduce) {
   .arrow-hint-tl, .arrow-hint-tr, .arrow-hint-bl, .arrow-hint-br { animation: none !important; }
