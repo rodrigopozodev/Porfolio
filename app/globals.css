@@ -122,7 +122,7 @@
 }
 
 /* ======================
-   Estilos base y cursores
+   Estilos base 
 ====================== */
 @layer base {
   * {
@@ -131,17 +131,6 @@
 
   body {
     @apply bg-background text-foreground;
-  }
-
-  /* Cursor global para toda la web */
-  html, body, * {
-    cursor: url('/public/'), auto !important;
-    transition: cursor 0.2s ease-in-out;
-  }
-
-  /* Cursor tipo puntero para elementos clicables */
-  a, button, [role="button"], input[type="button"], input[type="submit"], .cursor-pointer {
-    cursor: url('/puntero.png'), pointer !important;
   }
 }
 
@@ -196,8 +185,8 @@
   cursor: pointer;
 }
 
-/* Entre 700px y 800px: apilar texto y flecha como en la captura */
-@media (min-width: 700px) and (max-width: 800px) {
+/* Entre 700px y 740px: apilar texto y flecha como en la captura */
+@media (min-width: 700px) and (max-width: 740px) {
   .cta-button {
     flex-direction: column;
     gap: 0.5rem;
@@ -232,10 +221,10 @@
   100% { transform: translateY(-5px); }
 }
 
-/* Móvil: animación automática de la flecha del CTA */
-@media (max-width: 699px) {
+/* Móvil y iPad: animación automática de la flecha del CTA */
+@media (max-width: 1023px) {
   .cta-button .arrow-icon {
-    animation: bounceArrow 0.8s infinite;
+    animation: bounceArrow 0.7s infinite;
   }
 }
 
@@ -252,7 +241,7 @@
 @keyframes hint-bl { 0% { transform: translate(2px, -2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(2px, -2px); } }
 @keyframes hint-br { 0% { transform: translate(-2px, -2px); } 50% { transform: translate(0, 0); } 100% { transform: translate(-2px, -2px); } }
 
-@media (max-width: 699px) {
+@media (max-width: 1023px) {
   .arrow-hint-tl { animation: hint-tl 0.9s ease-in-out infinite; }
   .arrow-hint-tr { animation: hint-tr 0.9s ease-in-out infinite; }
   .arrow-hint-bl { animation: hint-bl 0.9s ease-in-out infinite; }
