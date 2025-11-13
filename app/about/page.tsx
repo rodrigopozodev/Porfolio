@@ -98,7 +98,7 @@ export default function AboutPage() {
   }, [language])
 
   return (
-    <main className="relative min-h-screen w-full bg-background text-foreground">
+    <main className="relative min-h-mobile safe-area-pad w-full bg-background text-foreground">
       <section className="container mx-auto px-6 py-20 min-[900px]:py-24 lg:py-28">
         <motion.div
           initial={{ opacity: 0, y: 10 }}

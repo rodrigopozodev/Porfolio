@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
@@ -16,6 +16,12 @@ export const metadata: Metadata = {
   title: "Rodrigo Pozo Sánchez - Desarrollador Web",
   description: "Portfolio de Desarrollador web especializada en crear experiencias digitales excepcionales",
   generator: "v0.app",
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 }
 
 export default function RootLayout({

@@ -167,7 +167,7 @@ export default function ProjectsPage() {
   }
 
   return (
-    <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
+    <main className="relative min-h-mobile safe-area-pad w-full bg-background text-foreground overflow-y-auto">
       <section className="container mx-auto px-6 py-16 md:py-20 lg:py-24">
         <div>
           <div className="mb-6">

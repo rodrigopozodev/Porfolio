@@ -20,7 +20,7 @@ export default function ZapasProPage() {
   const { language } = useLanguage()
 
   return (
-    <main className="relative min-h-screen w-full bg-background text-foreground overflow-y-auto">
+    <main className="relative min-h-mobile safe-area-pad w-full bg-background text-foreground overflow-y-auto">
       <div className={`fixed top-6 z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`}>
         {handedness === "right" ? (
           <>
