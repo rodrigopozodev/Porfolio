@@ -15,6 +15,7 @@ import { useHandedness } from "@/lib/context/handedness-context"
 import { useLanguage } from "@/lib/context/language-context"
 
 export default function ZapasProPage() {
+  return <main className="min-h-[100vh] w-full" />
   const router = useRouter()
   const { handedness } = useHandedness()
   const { language } = useLanguage()

@@ -1,0 +1,73 @@
+/* Grid principal: 5 columnas × 2 filas (10% / 90%) */
+.parent {
+  display: grid;
+  height: 100svh;
+  height: 100dvh;
+  grid-template-columns: 10% 26.6667% 26.6666% 26.6667% 10%;
+  grid-template-rows: 10% 90%;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+}
+
+/* HEADER */
+.header { grid-area: 1 / 1 / 2 / 6; }
+
+/* NAVEGACIÓN IZQUIERDA */
+.nav-left { grid-area: 2 / 1 / 3 / 2; }
+
+/* RECOMENDACIONES */
+.recomendaciones { grid-area: 2 / 2 / 3 / 3; }
+
+/* PERSONAL */
+.personal { grid-area: 2 / 3 / 3 / 4; }
+
+/* PROYECTO DESTACADO */
+.destacado { grid-area: 2 / 4 / 3 / 5; }
+
+/* NAVEGACIÓN DERECHA */
+.nav-right { grid-area: 2 / 5 / 3 / 6; }
+
+/* Evitar cortes: asegurar que los contenedores puedan encoger */
+.header,
+.nav-left,
+.recomendaciones,
+.personal,
+.destacado,
+.nav-right {
+  min-width: 0;
+  min-height: 0;
+}
+
+@media (orientation: portrait) {
+  .parent {
+    height: 100svh;
+    height: 100dvh;
+    grid-template-columns: 10% 26.6667% 26.6666% 26.6667% 10%;
+    grid-template-rows: 10% 90%;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+  }
+  .header { grid-area: 1 / 1 / 2 / 6; }
+  .nav-left { grid-area: 2 / 1 / 3 / 2; }
+  .recomendaciones { grid-area: 2 / 2 / 3 / 3; }
+  .personal { grid-area: 2 / 3 / 3 / 4; }
+  .destacado { grid-area: 2 / 4 / 3 / 5; }
+  .nav-right { grid-area: 2 / 5 / 3 / 6; }
+}
+
+@media (orientation: landscape) {
+  .parent {
+    height: 100svh;
+    height: 100dvh;
+    grid-template-columns: 10% 26.6667% 26.6666% 26.6667% 10%;
+    grid-template-rows: 10% 90%;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+  }
+  .header { grid-area: 1 / 1 / 2 / 6; }
+  .nav-left { grid-area: 2 / 1 / 3 / 2; }
+  .recomendaciones { grid-area: 2 / 2 / 3 / 3; }
+  .personal { grid-area: 2 / 3 / 3 / 4; }
+  .destacado { grid-area: 2 / 4 / 3 / 5; }
+  .nav-right { grid-area: 2 / 5 / 3 / 6; }
+}

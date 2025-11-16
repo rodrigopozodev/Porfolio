@@ -1,3 +1,5 @@
+// Layout raíz de la aplicación: define metadatos, fuentes, estilos globales
+// y envuelve la app con providers de idioma y lateralidad.
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
@@ -11,12 +13,14 @@ import { HandednessProvider } from "@/lib/context/handedness-context"
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
+// Metadatos base del sitio (título, descripción)
 export const metadata: Metadata = {
   title: "Rodrigo Pozo Sánchez - Desarrollador Web",
   description: "Portfolio de Desarrollador web especializada en crear experiencias digitales excepcionales",
   generator: "v0.app",
 }
 
+// Configuración de viewport para móviles y safe areas
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -31,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <head>
+        {/* Script inline para fijar tema oscuro si el sistema/usuario lo indica */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -43,6 +48,7 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Script inline para inicializar lateralidad a "right" antes de hidratación */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -60,9 +66,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
+        {/* Providers de contexto para idioma y lateralidad */}
         <LanguageProvider>
           <HandednessProvider>
+            {/* Emisor de evento cuando la ruta está lista (para transiciones) */}
             <RouteReadyEmitter />
+            {/* Contenedor de transiciones globales entre páginas */}
             <Transition
               intro={null}
               introDuration={1.5}
@@ -77,6 +86,7 @@ export default function RootLayout({
             </Transition>
           </HandednessProvider>
         </LanguageProvider>
+        {/* Analytics de Vercel */}
         <Analytics />
       </body>
     </html>

@@ -1,0 +1,38 @@
+/* Bloques de depuración con borde azul */
+.box {
+  border: 2px solid #3b82f6; /* blue-500 */
+  box-sizing: border-box;
+  padding: 8px;
+  min-width: 0; /* evita overflow en columnas estrechas */
+}
+
+/* Ajuste universal de contenido dentro del grid */
+.parent,
+.parent * {
+  box-sizing: border-box;
+}
+
+/* Texto: envolver siempre para evitar cortes */
+.parent * {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Imágenes y medios: caben dentro del contenedor */
+.parent img,
+.parent video,
+.parent canvas,
+.parent svg {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Controles: no sobresalen */
+.parent button,
+.parent .btn,
+.parent input,
+.parent select,
+.parent textarea {
+  max-width: 100%;
+}

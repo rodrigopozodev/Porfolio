@@ -38,6 +38,7 @@ const projectTags = [
 ]
 
 export default function ProjectsPage() {
+  return <main className="min-h-[100vh] w-full" />
   const { language } = useLanguage()
   const t = translations[language].portfolio
   const router = useRouter()
