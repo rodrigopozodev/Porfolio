@@ -278,7 +278,6 @@ export function HeroSection() {
             const imgByTitle: Record<string, string> = {
               "League tracker": "/League Tracker.png",
               "League Tracker": "/League Tracker.png",
-              "E-commerce Platform": "/modern-ecommerce-interface.svg",
               "Dashboard Analytics": "/analytics-dashboard.svg",
               "App Móvil Social": "/mobile-social-app-interface.svg",
               "Analytics Dashboard": "/analytics-dashboard.svg",
