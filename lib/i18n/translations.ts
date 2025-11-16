@@ -1,5 +1,11 @@
+// Este archivo define el diccionario de textos de la web en varios idiomas.
+// Uso típico: translations[language].<sección>.<clave>
+// Donde "language" es "es" (español) o "en" (inglés).
+// Estructura principal: hero (portada), about (sobre mí), testimonials (recomendaciones),
+// portfolio (proyectos), contact (contacto) y ui (textos de interfaz).
 export const translations = {
   es: {
+    // Textos de la sección principal (portada/hero)
     hero: {
       name: "Rodrigo Pozo Sánchez",
       tagline: "Impulsando tu negocio con", // ✅ nueva frase
@@ -9,6 +15,7 @@ export const translations = {
       aboutText: "¡Hola! Este es mi espacio donde la creatividad y la tecnología se encuentran. Explora mis proyectos y descubre en qué estoy trabajando.",
       aboutCta: "Saber más",
     },
+    // Contenidos de la página "Sobre mí": etiquetas, formación, experiencia y habilidades
     about: {
       title: "Sobre mí",
       labels: {
@@ -71,6 +78,7 @@ export const translations = {
         methodologies: ["Clean Code", "Testing", "Agile", "Trabajo en equipo"],
       },
     },
+    // Textos para la sección de recomendaciones/testimonios de clientes
     testimonials: {
       title: "Recomendaciones",
       subtitle: "Lo que dicen sobre mi trabajo",
@@ -84,6 +92,7 @@ export const translations = {
       jobTitleLabel: "Tu cargo (opcional)",
       photoLabel: "Foto (opcional)",
     },
+    // Títulos y textos de la sección de proyectos destacados
     portfolio: {
       title: "Proyectos Destacados",
       featuredTitle: "Proyecto Destacado",
@@ -105,6 +114,7 @@ export const translations = {
       visit: "Visitar",
       back: "Volver",
     },
+    // Textos de la sección de contacto y llamada a la acción
     contact: {
       title: "Trabajemos Juntos",
       subtitle: "¿Tienes un proyecto en mente? Me encantaría escucharte",
@@ -116,6 +126,7 @@ export const translations = {
       download: "Descargar CV",
       footer: "© 2025 Rodrigo Pozo Sánchez. Todos los derechos reservados.",
     },
+    // Textos de interfaz reutilizables (botones/etiquetas)
     ui: {
       handedLeft: "Zurdo",
       handedRight: "Diestro",
@@ -125,6 +136,7 @@ export const translations = {
     },
   },
   en: {
+    // English version of site texts (same structure as Spanish)
     hero: {
       name: "Rodrigo Pozo Sánchez",
       tagline: "Driving your business with", // ✅ versión en inglés
@@ -252,4 +264,5 @@ export const translations = {
   },
 }
 
+// Tipo utilitario: las claves de idioma disponibles en "translations"
 export type Language = keyof typeof translations

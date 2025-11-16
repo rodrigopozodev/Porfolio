@@ -1,14 +1,22 @@
+// Este módulo implementa un almacenaje sencillo basado en archivo JSON.
+// A pesar del nombre "sqlite", no usa una base de datos SQLite real.
+// Guarda y lee datos desde "data.db" (JSON) en la raíz del proyecto.
 import fs from "fs"
 import path from "path"
 
-const storePath = path.join(process.cwd(), "data.db") // usamos el mismo nombre pero en formato JSON
+// Ruta absoluta del archivo donde se persiste la información.
+// Usamos el nombre "data.db" pero su contenido es JSON.
+const storePath = path.join(process.cwd(), "data.db")
 
+// Crea el archivo de almacén si no existe.
 function ensureStore(): void {
   if (!fs.existsSync(storePath)) {
     fs.writeFileSync(storePath, JSON.stringify({ testimonials: [] }, null, 2), "utf-8")
   }
 }
 
+// Lee y valida el contenido del archivo JSON.
+// Si el archivo no existe o está corrupto, devuelve una estructura vacía segura.
 function readStore(): { testimonials: DbTestimonial[] } {
   ensureStore()
   const raw = fs.readFileSync(storePath, "utf-8")
@@ -21,10 +29,12 @@ function readStore(): { testimonials: DbTestimonial[] } {
   }
 }
 
+// Escribe el estado en disco en formato JSON.
 function writeStore(data: { testimonials: DbTestimonial[] }) {
   fs.writeFileSync(storePath, JSON.stringify(data, null, 2), "utf-8")
 }
 
+// Estructura que representa un testimonio almacenado.
 export type DbTestimonial = {
   id: number
   name: string
@@ -35,11 +45,14 @@ export type DbTestimonial = {
   created_at: string
 }
 
+// Devuelve los testimonios ordenados por fecha (más recientes primero).
 export async function listTestimonials(): Promise<DbTestimonial[]> {
   const { testimonials } = readStore()
   return [...testimonials].sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
 }
 
+// Inserta un nuevo testimonio asignando un id incremental y la fecha de creación.
+// Se añade al comienzo de la lista para que aparezca como reciente.
 export async function insertTestimonial(input: {
   name: string
   handle: string
@@ -64,6 +77,8 @@ export async function insertTestimonial(input: {
   return inserted
 }
 
+// Actualiza el campo "review_en" de un testimonio existente.
+// Útil si en el futuro se añade una traducción manual o externa.
 export async function updateTestimonialReviewEn(id: number, review_en: string): Promise<DbTestimonial | null> {
   const store = readStore()
   const idx = store.testimonials.findIndex(t => t.id === id)
@@ -73,6 +88,7 @@ export async function updateTestimonialReviewEn(id: number, review_en: string): 
   return store.testimonials[idx]
 }
 
+// Elimina todos los testimonios del almacén (reinicio).
 export async function clearTestimonials(): Promise<void> {
   const store = readStore()
   store.testimonials = []

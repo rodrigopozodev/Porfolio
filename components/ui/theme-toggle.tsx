@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/lib/language-context"
+import { useLanguage } from "@/lib/context/language-context"
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system")

@@ -1,5 +1,8 @@
 "use client"
 
+// Sección de proyectos destacada en la Home.
+// Usa grid en pantallas grandes y carrusel en móviles/tablet,
+// con tarjetas volteables y botones para ver/visitar cada proyecto.
 import type React from "react"
 
 import { Card, CardContent } from "@/components/ui/card"
@@ -7,10 +10,10 @@ import { Button } from "@/components/ui/button"
 import { ExternalLink, Eye } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { translations } from "@/lib/translations"
-import { useLanguage } from "@/lib/language-context"
+import { translations } from "@/lib/i18n/translations"
+import { useLanguage } from "@/lib/context/language-context"
 import { CardFlip, CardFlipFront, CardFlipBack, CardFlipContent } from "@/components/ui/card-flip"
-import { useHandedness } from "@/lib/handedness-context"
+import { useHandedness } from "@/lib/context/handedness-context"
 
 const projectImages = [
   "/League Tracker.png",
@@ -34,7 +37,8 @@ const projectTags = [
   [],
 ]
 
-export function PortfolioSection() {
+// Componente de página Proyectos. Gestiona idioma, lateralidad y navegación.
+export function Proyectos() {
   const { language } = useLanguage()
   const { handedness } = useHandedness()
   const router = useRouter()
@@ -69,6 +73,7 @@ export function PortfolioSection() {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length)
   }
 
+  // Gestos táctiles para navegación del carrusel.
   const handleTouchStart = (e: React.TouchEvent) => {
     setTouchStart(e.targetTouches[0].clientX)
   }

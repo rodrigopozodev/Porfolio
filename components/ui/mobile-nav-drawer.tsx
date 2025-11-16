@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
-import { useHandedness } from "@/lib/handedness-context"
+import { useHandedness } from "@/lib/context/handedness-context"
 import { Button } from "@/components/ui/button"
 import { X } from "lucide-react"
 import { motion } from "framer-motion"

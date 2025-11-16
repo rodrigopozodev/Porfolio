@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { Languages } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/lib/language-context"
+import { useLanguage } from "@/lib/context/language-context"
 
 export function LanguageToggle() {
   const { language, setLanguage } = useLanguage()

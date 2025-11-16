@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from "react"
 import { Hand } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useHandedness } from "@/lib/handedness-context"
-import { useLanguage } from "@/lib/language-context"
-import { translations } from "@/lib/translations"
+import { useHandedness } from "@/lib/context/handedness-context"
+import { useLanguage } from "@/lib/context/language-context"
+import { translations } from "@/lib/i18n/translations"
 
 export function HandednessToggle() {
   const { handedness, toggle } = useHandedness()

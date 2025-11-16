@@ -1,40 +1,41 @@
 "use client"
+// Página "Sobre mí" (contenido único dentro de componentes/paginas)
+// Mantiene todo el contenido aquí; no existe ruta propia en app/
+// Si se enlaza a "/sobre-mi" desde otra vista, ese enlace no funcionará.
 
 import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { useLanguage } from "@/lib/language-context"
-import { translations } from "@/lib/translations"
-import { Button } from "@/components/ui/button"
-import { HandednessToggle } from "@/components/handedness-toggle"
-import { LanguageToggle } from "@/components/language-toggle"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { HamburgerMenu } from "@/components/hamburger-menu"
-import { MobileNavDrawer } from "@/components/mobile-nav-drawer"
+import { useLanguage } from "@/lib/context/language-context"
+import { translations } from "@/lib/i18n/translations"
+import { HandednessToggle } from "@/components/ui/handedness-toggle"
+import { LanguageToggle } from "@/components/ui/language-toggle"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
+import { HamburgerMenu } from "@/components/ui/hamburger-menu"
 import { useRouter } from "next/navigation"
-import { translateText } from "@/lib/translate"
-import { BackHomeButton } from "@/components/back-home-button"
-import { useHandedness } from "@/lib/handedness-context"
+import { BackHomeButton } from "@/components/ui/back-home-button"
+import { useHandedness } from "@/lib/context/handedness-context"
 
-export default function AboutPage() {
+export default function SobreMi() {
+  // Idioma actual y diccionario base
   const { language } = useLanguage()
   const baseEs = translations.es.about
   const tEnAbout = translations.en.about
+  // Estado con los textos de la sección
   const [aboutData, setAboutData] = useState<any>(translations[language].about ?? baseEs)
   const router = useRouter()
   const { handedness } = useHandedness()
 
   useEffect(() => {
+    // Resolver textos según idioma con cache simple en localStorage
     const run = async () => {
       if (language === "es") {
         setAboutData(baseEs)
         return
       }
-      // Si ya tenemos traducción fija en en, usarla sin llamar a servicio
       if (language === "en" && tEnAbout) {
         setAboutData(tEnAbout)
         return
       }
-      // Intentar leer de cache
       try {
         const cached = localStorage.getItem("about_en_cache_v1")
         if (cached) {
@@ -43,56 +44,9 @@ export default function AboutPage() {
         }
       } catch {}
 
-      // Traducir al inglés desde español
-      const labels = {
-        intro: await translateText(baseEs.labels?.intro ?? "Sobre mí", "es", "en"),
-        education: await translateText(baseEs.labels?.education ?? "Formación", "es", "en"),
-        experience: await translateText(baseEs.labels?.experience ?? "Experiencia", "es", "en"),
-        skills: await translateText(baseEs.labels?.skills ?? "Competencias y tecnologías", "es", "en"),
-        frontend: await translateText(baseEs.labels?.frontend ?? "Frontend", "es", "en"),
-        backend: await translateText(baseEs.labels?.backend ?? "Backend", "es", "en"),
-        tools: await translateText(baseEs.labels?.tools ?? "Herramientas", "es", "en"),
-        databases: await translateText(baseEs.labels?.databases ?? "Bases de datos", "es", "en"),
-        methodologies: await translateText(baseEs.labels?.methodologies ?? "Metodologías", "es", "en"),
-      }
-
-      const introParagraphs = await Promise.all(
-        (baseEs.introParagraphs ?? []).map((p: string) => translateText(p, "es", "en"))
-      )
-
-      const education = await Promise.all(
-        (baseEs.education ?? []).map(async (e: any) => ({
-          title: await translateText(e.title, "es", "en"),
-          description: await translateText(e.description, "es", "en"),
-        }))
-      )
-
-      const experience = await Promise.all(
-        (baseEs.experience ?? []).map(async (ex: any) => ({
-          role: await translateText(ex.role, "es", "en"),
-          period: await translateText(ex.period, "es", "en"),
-          details: await Promise.all((ex.details ?? []).map((d: string) => translateText(d, "es", "en"))),
-        }))
-      )
-
-      const skills = {
-        frontend: await Promise.all((baseEs.skills?.frontend ?? []).map((s: string) => translateText(s, "es", "en"))),
-        backend: await Promise.all((baseEs.skills?.backend ?? []).map((s: string) => translateText(s, "es", "en"))),
-        tools: await Promise.all((baseEs.skills?.tools ?? []).map((s: string) => translateText(s, "es", "en"))),
-        databases: await Promise.all((baseEs.skills?.databases ?? []).map((s: string) => translateText(s, "es", "en"))),
-        methodologies: await Promise.all((baseEs.skills?.methodologies ?? []).map((s: string) => translateText(s, "es", "en"))),
-      }
-
-      const translated = {
-        title: await translateText(baseEs.title ?? "Sobre mí", "es", "en"),
-        labels,
-        introParagraphs,
-        education,
-        experience,
-        skills,
-      }
-      setAboutData(translated)
-      try { localStorage.setItem("about_en_cache_v1", JSON.stringify(translated)) } catch {}
+      const fallback = baseEs
+      setAboutData(fallback)
+      try { localStorage.setItem("about_en_cache_v1", JSON.stringify(fallback)) } catch {}
     }
     run()
   }, [language])
@@ -106,11 +60,12 @@ export default function AboutPage() {
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl mx-auto"
         >
+          {/* Encabezado */}
           <h1 className="text-4xl min-[900px]:text-5xl font-bold mb-6">
             {aboutData?.title}
           </h1>
 
-          {/* 👋 Intro */}
+          {/* Intro */}
           <div className="space-y-4 mb-10">
             <h2 className="text-2xl font-semibold">👋 {aboutData?.labels?.intro}</h2>
             {aboutData?.introParagraphs?.map((p: string, idx: number) => (
@@ -120,7 +75,7 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* 🎓 Educación */}
+          {/* Educación */}
           <div className="space-y-4 mb-10">
             <h2 className="text-2xl font-semibold">🎓 {aboutData?.labels?.education}</h2>
             <ul className="space-y-6">
@@ -133,7 +88,7 @@ export default function AboutPage() {
             </ul>
           </div>
 
-          {/* 💻 Experiencia */}
+          {/* Experiencia */}
           <div className="space-y-4 mb-10">
             <h2 className="text-2xl font-semibold">💻 {aboutData?.labels?.experience}</h2>
             <ul className="space-y-6">
@@ -150,7 +105,7 @@ export default function AboutPage() {
             </ul>
           </div>
 
-          {/* ⚙️ Competencias y tecnologías */}
+          {/* Habilidades y tecnologías */}
           <div className="space-y-4 mb-10">
             <h2 className="text-2xl font-semibold">⚙️ {aboutData?.labels?.skills}</h2>
             <div className="grid grid-cols-1 gap-6">
@@ -176,11 +131,10 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-
-          {/* Eliminado botón inferior; el acceso estará en el nav superior */}
         </motion.div>
       </section>
 
+      {/* Controles flotantes según lateralidad */}
       <div className={`fixed z-50 flex items-center gap-3 ${handedness === "right" ? "right-6" : "left-6"}`} style={{ top: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}>
         {handedness === "right" ? (
           <>
@@ -200,9 +154,6 @@ export default function AboutPage() {
           </>
         )}
       </div>
-      <MobileNavDrawer>
-        <BackHomeButton showLabelOnMobile />
-      </MobileNavDrawer>
     </main>
   )
 }

@@ -6,9 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 // Eliminamos Supabase y usamos API local (SQLite)
 // Eliminamos requisito de autenticación para el formulario
-import { useLanguage } from "@/lib/language-context"
-import { translations } from "@/lib/translations"
-import { translateText } from "@/lib/translate"
+import { useLanguage } from "@/lib/context/language-context"
+import { translations } from "@/lib/i18n/translations"
 
 export function TestimonialsSection() {
   const loading = false
@@ -119,24 +118,13 @@ export function TestimonialsSection() {
             review: lang === 'en' ? String(d.review_en ?? d.review) : String(d.review),
             avatar: d.avatar || null,
           }))
-          // Fallback de cliente: si estamos en EN y algún item viene sin review_en, intentamos traducir aquí
+          // Fallback de cliente: si estamos en EN y falta review_en, usamos el original
           if (lang === 'en') {
-            const translated = await Promise.all(
-              mapped.map(async (item, idx) => {
-                const raw = String(data[idx]?.review ?? "")
-                const hasEn = String(data[idx]?.review_en ?? "").trim().length > 0
-                if (!hasEn) {
-                  try {
-                    const t = await translateText(raw, "auto", "en")
-                    return { ...item, review: t || item.review }
-                  } catch {
-                    return item
-                  }
-                }
-                return item
-              })
-            )
-            mapped = translated
+            mapped = mapped.map((item, idx) => {
+              const hasEn = String(data[idx]?.review_en ?? "").trim().length > 0
+              if (!hasEn) return { ...item, review: String(data[idx]?.review ?? item.review) }
+              return item
+            })
           }
           setDbTestimonials(mapped)
         }
@@ -158,24 +146,12 @@ export function TestimonialsSection() {
             review: lang === 'en' ? String(d.review_en ?? d.review) : String(d.review),
             avatar: d.avatar || null,
           }))
-          // Fallback de cliente en cambios de idioma
           if (lang === 'en') {
-            const translated = await Promise.all(
-              mapped.map(async (item, idx) => {
-                const raw = String(data[idx]?.review ?? "")
-                const hasEn = String(data[idx]?.review_en ?? "").trim().length > 0
-                if (!hasEn) {
-                  try {
-                    const t = await translateText(raw, "auto", "en")
-                    return { ...item, review: t || item.review }
-                  } catch {
-                    return item
-                  }
-                }
-                return item
-              })
-            )
-            mapped = translated
+            mapped = mapped.map((item, idx) => {
+              const hasEn = String(data[idx]?.review_en ?? "").trim().length > 0
+              if (!hasEn) return { ...item, review: String(data[idx]?.review ?? item.review) }
+              return item
+            })
           }
           setDbTestimonials(mapped)
         }

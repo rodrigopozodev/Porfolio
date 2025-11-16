@@ -1,18 +1,22 @@
 "use client"
 
+// Sección principal de inicio: cabecera, foto, CTA, palabras animadas,
+// enlaces de contacto y un proyecto destacado en desktops.
+// Responde al idioma con `translations.hero` y usa `CardFlip` para interacciones.
 import { Button } from "@/components/ui/button"
 import { ArrowDown, ArrowDownLeft, ArrowDownRight, ArrowUpLeft, ArrowUpRight, ExternalLink, Eye, Github, Linkedin, Mail, Download } from "lucide-react"
 import React, { useEffect, useState } from "react"
-import { translations } from "@/lib/translations"
-import { useLanguage } from "@/lib/language-context"
+import { translations } from "@/lib/i18n/translations"
+import { useLanguage } from "@/lib/context/language-context"
 import Typeanimation from "@/components/ui/typeanimation"
 import { Announcement, AnnouncementTitle } from "@/components/ui/announcement"
 import Image from "next/image"
-import { TestimonialsSection } from "@/components/testimonials-section"
+import { TestimonialsSection } from "@/components/ui/testimonials-section"
 import { CardFlip, CardFlipFront, CardFlipBack } from "@/components/ui/card-flip"
 import { useRouter } from "next/navigation"
 
-export function HeroSection() {
+// Componente de página Inicio. Gestiona idioma y navegación.
+export function Inicio() {
   const { language } = useLanguage()
   const [renderKey, setRenderKey] = useState(0)
   const router = useRouter()
@@ -24,6 +28,7 @@ export function HeroSection() {
     setRenderKey(prev => prev + 1)
   }, [language])
 
+  // Desplaza suavemente hasta la sección de Proyectos.
   const scrollToPortfolio = () => {
     const portfolioSection = document.getElementById("portfolio")
     portfolioSection?.scrollIntoView({ behavior: "smooth" })
@@ -105,7 +110,7 @@ export function HeroSection() {
                     }
                     sessionStorage.setItem("postSweep", JSON.stringify(detail))
                   } catch {}
-                  router.push("/about")
+                  router.push("/sobre-mi")
                 }}
               >
                 {t.aboutCta}
@@ -113,7 +118,7 @@ export function HeroSection() {
             </div>
           </CardFlipBack>
         </CardFlip>
-        {/* Flechas de pista en primer nivel (no alteran el resto) */}
+        {/* Flechas guía para sugerir interacción en móvil */}
         <span className="pointer-events-none absolute top-2 left-2">
           <ArrowDownRight className="pointer-arrow arrow-hint-tl text-black dark:text-white" />
         </span>
@@ -168,7 +173,7 @@ export function HeroSection() {
                     }
                     sessionStorage.setItem("postSweep", JSON.stringify(detail))
                   } catch {}
-                  router.push("/about")
+                  router.push("/sobre-mi")
                 }}
               >
                 {t.aboutCta}
@@ -270,7 +275,7 @@ export function HeroSection() {
         
         </div>
         </div>
-        {/* Columna 3: Proyecto Destacado */}
+        {/* Columna 3: Proyecto Destacado en desktop */}
         <div className="hidden min-[1367px]:block hero-column h-full pt-8">
           {(() => {
             const tp = translations[language].portfolio
@@ -372,7 +377,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Indicador de scroll eliminado */}
+      {/* Animaciones CSS de flechas y ajustes responsivos */}
       <style jsx>{`
         @keyframes arrowMoveY { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
         .arrow-move { animation: arrowMoveY 0.7s ease-in-out infinite; }

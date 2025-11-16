@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
-import { useHandedness } from "@/lib/handedness-context"
+import { useHandedness } from "@/lib/context/handedness-context"
 
 const sections = [
   { id: "hero", label: "Inicio" },

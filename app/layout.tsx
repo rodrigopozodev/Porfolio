@@ -4,10 +4,9 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import Transition from "@/components/ui/transition"
-import RouteReadyEmitter from "@/components/route-ready-emitter"
-import { LanguageProvider } from "@/lib/language-context"
-import { HandednessProvider } from "@/lib/handedness-context"
-import { AuthProvider } from "@/context/AuthContext"
+import RouteReadyEmitter from "@/components/ui/route-ready-emitter"
+import { LanguageProvider } from "@/lib/context/language-context"
+import { HandednessProvider } from "@/lib/context/handedness-context"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
@@ -61,27 +60,23 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
-        <AuthProvider>
-          <LanguageProvider>
-            <HandednessProvider>
-          <RouteReadyEmitter />
-          <Transition
-            intro={null}
-            // Restauramos configuración por defecto para el botón de temas
-            // (curved desde bottom, colores neutros)
-            introDuration={1.5}
-            transitionDuration={0.9}
-            type="curved"
-            direction="bottom"
-            className="bg-neutral-900 dark:bg-white"
-            skip
-            autoExit={false}
-          >
-            {children}
-          </Transition>
-            </HandednessProvider>
-          </LanguageProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          <HandednessProvider>
+            <RouteReadyEmitter />
+            <Transition
+              intro={null}
+              introDuration={1.5}
+              transitionDuration={0.9}
+              type="curved"
+              direction="bottom"
+              className="bg-neutral-900 dark:bg-white"
+              skip
+              autoExit={false}
+            >
+              {children}
+            </Transition>
+          </HandednessProvider>
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>

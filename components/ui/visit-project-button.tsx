@@ -3,8 +3,8 @@
 import React from "react"
 import { ExternalLink } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/lib/language-context"
-import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/context/language-context"
+import { translations } from "@/lib/i18n/translations"
 
 export function VisitProjectButton({ href, showLabelOnMobile = false }: { href: string, showLabelOnMobile?: boolean }) {
   const { language } = useLanguage()

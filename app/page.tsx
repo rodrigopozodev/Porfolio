@@ -1,14 +1,14 @@
 "use client"
 
 import React from "react"
-import { HeroSection } from "@/components/hero-section"
-import { PortfolioSection } from "@/components/portfolio-section"
-import { PageNavigation } from "@/components/page-navigation"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { LanguageToggle } from "@/components/language-toggle"
-import { HandednessToggle } from "@/components/handedness-toggle"
+import { Inicio } from "@/components/paginas/inicio"
+import { Proyectos } from "@/components/paginas/proyectos"
+import { PageNavigation } from "@/components/ui/page-navigation"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
+import { LanguageToggle } from "@/components/ui/language-toggle"
+import { HandednessToggle } from "@/components/ui/handedness-toggle"
 import { motion } from "framer-motion"
-import { useHandedness } from "@/lib/handedness-context"
+import { useHandedness } from "@/lib/context/handedness-context"
 import { useEffect } from "react"
 
 export default function Home() {
@@ -39,8 +39,8 @@ export default function Home() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
     >
-      <HeroSection />
-      <PortfolioSection />
+      <Inicio />
+      <Proyectos />
       <PageNavigation />
       <div
         className={`fixed z-50 flex items-center gap-3 

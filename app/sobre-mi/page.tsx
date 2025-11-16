@@ -1,0 +1,1 @@
+export { default } from "@/components/paginas/sobre-mi"

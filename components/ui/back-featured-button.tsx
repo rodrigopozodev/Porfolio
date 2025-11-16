@@ -1,23 +1,22 @@
 "use client"
 
 import React from "react"
-import { Grid3X3 } from "lucide-react"
+import { Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/lib/language-context"
-import { translations } from "@/lib/translations"
+import { useLanguage } from "@/lib/context/language-context"
+import { translations } from "@/lib/i18n/translations"
 import { useRouter } from "next/navigation"
 
-export function BackAllProjectsButton({ showLabelOnMobile = false }: { showLabelOnMobile?: boolean }) {
+export function BackFeaturedButton({ showLabelOnMobile = false }: { showLabelOnMobile?: boolean }) {
   const { language } = useLanguage()
   const router = useRouter()
-  const label = translations[language].ui.backToAllProjects
+  const label = translations[language].ui.backToFeatured
 
   return (
     <Button
       variant="outline"
       size="default"
       onClick={() => {
-        // Restaurar animación con overlay (fade) antes de navegar a /projects
         try {
           window.dispatchEvent(
             new CustomEvent("routeSweep", {
@@ -30,10 +29,10 @@ export function BackAllProjectsButton({ showLabelOnMobile = false }: { showLabel
           )
         } catch {}
 
-        const navigate = () => router.push("/projects")
+        const navigate = () => router.push("/?section=portfolio")
         window.addEventListener("routeSweepFinished", navigate, { once: true })
         window.setTimeout(() => {
-          try { window.removeEventListener("routeSweepFinished", navigate as unknown as EventListener) } catch {}
+          try { window.removeEventListener("routeSweepFinished", navigate as EventListener) } catch {}
           navigate()
         }, 800)
       }}
@@ -41,7 +40,7 @@ export function BackAllProjectsButton({ showLabelOnMobile = false }: { showLabel
       aria-label={label}
     >
       <div className="flex items-center gap-1">
-        <Grid3X3 className="h-4 w-4 text-foreground" />
+        <Star className="h-4 w-4 text-foreground" />
         <span className={showLabelOnMobile ? "text-xs font-semibold" : "text-xs font-semibold hidden min-[900px]:inline"}>{label}</span>
       </div>
     </Button>
