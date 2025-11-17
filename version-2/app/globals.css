@@ -41,6 +41,21 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+html, body { height: 100%; }
+.snap-container {
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior-y: none;
+}
+.page-section {
+  height: 100dvh;
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  overflow: hidden;
+}
+
 /* Transición suave de tema */
 body.theme-transition {
   transition: background-color 200ms ease, color 200ms ease;
