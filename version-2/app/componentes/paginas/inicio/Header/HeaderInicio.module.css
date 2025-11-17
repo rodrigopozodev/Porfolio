@@ -41,6 +41,10 @@
 .headerGrid button:hover { transform: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .headerGrid button:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
 .headerGrid svg { width: 16px; height: 16px; }
+.headerGrid img { width: 16px; height: 16px; display: inline-block; }
+.iconMoonDark { filter: invert(1) brightness(2) saturate(0); }
+.iconHand {}
+:global(html.dark) .iconHand { filter: invert(1) brightness(2) saturate(0); }
 .headerGrid * {
   overflow-wrap: break-word;
   word-break: break-word;
