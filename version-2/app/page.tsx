@@ -12,9 +12,25 @@ export default function PageInicio() {
         <HeaderInicio />
       </div>
       <div className="nav-left box">Navegación izquierda</div>
-      <div className="recomendaciones box">Recomendaciones</div>
-      <div className="personal box">Personal</div>
-      <div className="destacado box">Proyecto destacado</div>
+      <div className="recomendaciones box">
+        <div className="div1">título</div>
+        <div className="div2">testimonio</div>
+        <div className="div3">reseña</div>
+      </div>
+      <div className="personal box">
+        <div className="div1">Foto</div>
+        <div className="div2">Nombre</div>
+        <div className="div3">Palabras animadas</div>
+        <div className="div4">Ver trabajos</div>
+        <div className="div5">Contactarme</div>
+      </div>
+      <div className="destacado box">
+        <div className="proyectoDestacado">
+          <div className="div1">título</div>
+          <div className="div2">tarjeta</div>
+          <div className="div3">reservado</div>
+        </div>
+      </div>
       <div className="nav-right box">Navegación derecha</div>
     </main>
   )
