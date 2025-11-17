@@ -45,3 +45,28 @@ body {
 body.theme-transition {
   transition: background-color 200ms ease, color 200ms ease;
 }
+
+/* Tipografía utilitaria inspirada en TypeAnimationDemo */
+.text-primary { color: var(--foreground); }
+.heading-hero {
+  /* text-3xl md:text-5xl font-bold text-primary mb-2 */
+  font-weight: 700;
+  color: var(--foreground);
+}
+@media (min-width: 768px) {
+  .heading-hero { font-size: 3rem; }
+}
+@media (max-width: 767.98px) {
+  .heading-hero { font-size: 1.875rem; }
+}
+.heading-anim {
+  /* text-3xl md:text-5xl font-extrabold text-teal-600 */
+  font-weight: 800;
+  color: #0d9488; /* teal-600 */
+}
+@media (min-width: 768px) {
+  .heading-anim { font-size: 3rem; }
+}
+@media (max-width: 767.98px) {
+  .heading-anim { font-size: 1.875rem; }
+}

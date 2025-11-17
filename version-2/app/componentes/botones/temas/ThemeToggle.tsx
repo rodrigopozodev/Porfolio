@@ -8,17 +8,14 @@ import styles from "../../paginas/inicio/Header/HeaderInicio.module.css"
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system")
-  const [mounted, setMounted] = useState(false)
+  const [mountedTheme, setMountedTheme] = useState<"light" | "dark" | "system">("system")
 
   useEffect(() => {
-    setMounted(true)
     const savedTheme = (typeof window !== "undefined" ? localStorage.getItem("theme") : null) as "light" | "dark" | "system" | null
-    if (savedTheme) {
-      setTheme(savedTheme)
-      applyTheme(savedTheme)
-    } else {
-      applyTheme("system")
-    }
+    const initial = savedTheme || "system"
+    setTheme(initial)
+    setMountedTheme(initial)
+    applyTheme(initial)
   }, [])
 
   const applyTheme = (newTheme: "light" | "dark" | "system") => {
@@ -51,11 +48,9 @@ export default function ThemeToggle() {
     try { window.dispatchEvent(new Event("themeToggleTransition")) } catch {}
   }
 
-  if (!mounted) return null
-
   return (
     <button onClick={toggleTheme} className={styles.headerButton} aria-label="Cambiar tema">
-      {theme === "dark" ? (
+      {mountedTheme === "dark" || (typeof document !== "undefined" && document.documentElement.classList.contains("dark")) ? (
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zM1 13h3v-2H1v2zm10-9h-2v3h2V4zm7.03 1.05l-1.8-1.8-1.79 1.8 1.79 1.79 1.8-1.79zM20 11v2h3v-2h-3zm-9 9h2v-3h-2v3zm-7.03-1.05l1.8 1.79 1.79-1.79-1.79-1.8-1.8 1.8zM17.24 19.16l1.8 1.79 1.79-1.79-1.79-1.8-1.8 1.8zM12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor"/></svg>
       ) : (
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a9.99 9.99 0 018.66 13.99A9.99 9.99 0 1112 2z" fill="currentColor"/></svg>
