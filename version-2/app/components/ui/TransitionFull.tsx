@@ -1,0 +1,246 @@
+"use client";
+/**
+ * Componente de transición de pantalla completa.
+ * Permite intro/salida con estilos "curved", "slide" o "fade".
+ */
+
+import React, { useEffect, useRef, useState, useCallback } from "react";
+
+type Type = "curved" | "slide" | "fade";
+type Dir = "top" | "bottom" | "left" | "right";
+
+export interface TransitionProps {
+  intro?: React.ReactNode | ((triggerExit: () => void) => React.ReactNode);
+  children: React.ReactNode;
+  introDuration?: number;
+  transitionDuration?: number;
+  type?: Type;
+  direction?: Dir;
+  className?: string;
+  skip?: boolean;
+  autoExit?: boolean;
+  trigger?: boolean;
+  onFinished?: () => void;
+}
+
+const easeInOutCubic = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+const Transition: React.FC<TransitionProps> = ({
+  intro,
+  children,
+  introDuration = 1.5,
+  transitionDuration = 0.9,
+  type = "curved",
+  direction = "bottom",
+  className = "bg-neutral-900 dark:bg-white",
+  skip = false,
+  autoExit = true,
+  trigger,
+  onFinished,
+}) => {
+  const [showIntro, setShowIntro] = useState(!skip);
+  const [animating, setAnimating] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [overrideDir, setOverrideDir] = useState<Dir | null>(null);
+  const [overrideType, setOverrideType] = useState<Type | null>(null);
+  const [overrideClassName, setOverrideClassName] = useState<string | null>(null);
+  const [overrideTransitionDuration, setOverrideTransitionDuration] = useState<number | null>(null);
+  const [overrideHoldBeforeMove, setOverrideHoldBeforeMove] = useState<number | null>(null);
+  const awaitRouteReadyRef = useRef(false);
+
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
+
+  const rafRef = useRef<number | null>(null);
+  const timersRef = useRef<number[]>([]);
+
+  const startTransition = useCallback(() => {
+    setAnimating(true);
+    let startTime: number | null = null;
+
+    const tick = (now: number) => {
+      if (!startTime) startTime = now;
+      const elapsed = (now - startTime) / 1000;
+      const dur = overrideTransitionDuration ?? transitionDuration;
+      const hold = overrideHoldBeforeMove ?? 0;
+      const effectiveElapsed = Math.max(0, elapsed - hold);
+      const raw = Math.min(effectiveElapsed / dur, 1);
+      const eased = easeInOutCubic(raw);
+      setProgress(eased);
+
+      if (raw < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        const finish = () => {
+          setAnimating(false);
+          setShowIntro(false);
+          setProgress(0);
+          rafRef.current = null;
+          setOverrideDir(null);
+          setOverrideType(null);
+          setOverrideClassName(null);
+          setOverrideTransitionDuration(null);
+          setOverrideHoldBeforeMove(null);
+          awaitRouteReadyRef.current = false;
+          onFinished?.();
+        };
+
+        try {
+          window.dispatchEvent(new CustomEvent("routeSweepFinished"));
+        } catch {}
+
+        if (awaitRouteReadyRef.current) {
+          const handleReady = () => {
+            window.removeEventListener("routeReady", handleReady as EventListener);
+            finish();
+          };
+          window.addEventListener("routeReady", handleReady as EventListener, { once: true });
+          const durMs = (overrideTransitionDuration ?? transitionDuration) * 1000;
+          window.setTimeout(() => {
+            window.removeEventListener("routeReady", handleReady as EventListener);
+            finish();
+          }, Math.max(300, Math.floor(durMs * 0.5)));
+        } else {
+          finish();
+        }
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, [transitionDuration, onFinished]);
+
+  useEffect(() => {
+    setInView(true);
+  }, []);
+
+  useEffect(() => {
+    if (skip) {
+      setShowIntro(false);
+      onFinished?.();
+      return;
+    }
+
+    if (inView && autoExit) {
+      const t = window.setTimeout(() => startTransition(), introDuration * 1000);
+      timersRef.current.push(t);
+    }
+
+    const currentTimers = timersRef.current;
+    return () => {
+      currentTimers.forEach(clearTimeout);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [skip, inView, introDuration, autoExit, onFinished, startTransition]);
+
+  useEffect(() => {
+    if (!autoExit && trigger && showIntro) {
+      startTransition();
+    }
+  }, [trigger, autoExit, showIntro, startTransition]);
+
+  useEffect(() => {
+    const handleThemeToggleTransition = () => {
+      setShowIntro(true);
+      startTransition();
+    };
+
+    window.addEventListener("themeToggleTransition", handleThemeToggleTransition);
+    return () => {
+      window.removeEventListener("themeToggleTransition", handleThemeToggleTransition);
+    };
+  }, [startTransition]);
+
+  useEffect(() => {
+    const handleRouteSweep = (e: any) => {
+      try {
+        const dir = e?.detail?.direction as Dir | undefined;
+        const typ = e?.detail?.type as Type | undefined;
+        const cls = e?.detail?.className as string | undefined;
+        const dur = e?.detail?.transitionDuration as number | undefined;
+        const hold = e?.detail?.holdBeforeMove as number | undefined;
+        const awaitReady = e?.detail?.awaitReady as boolean | undefined;
+        setOverrideDir(dir ?? null);
+        setOverrideType(typ ?? null);
+        setOverrideClassName(cls ?? null);
+        setOverrideTransitionDuration(dur ?? null);
+        setOverrideHoldBeforeMove(hold ?? null);
+        awaitRouteReadyRef.current = awaitReady ?? true;
+      } catch {}
+      setShowIntro(true);
+      startTransition();
+    };
+    window.addEventListener("routeSweep", handleRouteSweep as EventListener);
+    return () => {
+      window.removeEventListener("routeSweep", handleRouteSweep as EventListener);
+    };
+  }, [startTransition]);
+
+  const getCurvedClip = (p: number) => {
+    const startRadius = 160;
+    const radius = Math.max(0, startRadius * (1 - p));
+    const d = overrideDir ?? direction;
+    switch (d) {
+      case "top":
+        return `circle(${radius}% at 50% 0%)`;
+      case "bottom":
+        return `circle(${radius}% at 50% 100%)`;
+      case "left":
+        return `circle(${radius}% at 0% 50%)`;
+      case "right":
+      default:
+        return `circle(${radius}% at 100% 50%)`;
+    }
+  };
+
+  const getSlideTransform = (p: number) => {
+    const pct = Math.round(p * 100);
+    const d = overrideDir ?? direction;
+    switch (d) {
+      case "bottom":
+        return `translateY(${pct}%)`;
+      case "top":
+        return `translateY(${-pct}%)`;
+      case "left":
+        return `translateX(${-pct}%)`;
+      case "right":
+      default:
+        return `translateX(${pct}%)`;
+    }
+  };
+
+  const getFadeStyle = (p: number) => {
+    return { opacity: p };
+  };
+
+  return (
+    <div ref={ref} className="relative w-full h-full min-h-full">
+      <div className="relative z-0 w-full h-full">{children}</div>
+
+      {showIntro && (
+        <div
+          className="fixed inset-0 z-[100000] flex items-center justify-center pointer-events-none"
+          aria-hidden={!showIntro ? undefined : true}
+        >
+          <div
+            className="fixed inset-0"
+            style={
+              (overrideType ?? type) === "curved"
+                ? { clipPath: getCurvedClip(progress), transition: animating ? undefined : "none" }
+                : (overrideType ?? type) === "slide"
+                  ? { transform: getSlideTransform(progress) }
+                  : getFadeStyle(progress)
+            }
+          >
+            <div className={`absolute inset-0 ${overrideClassName ?? className}`} />
+            <div className="absolute inset-0 flex items-center justify-center">
+              {intro ? (typeof intro === "function" ? intro(startTransition) : intro) : null}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Transition;

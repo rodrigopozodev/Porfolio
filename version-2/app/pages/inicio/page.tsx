@@ -1,0 +1,25 @@
+"use client"
+/**
+ * Página Inicio: define el grid principal y monta las secciones.
+ */
+
+import React from "react"
+import HeaderInicio from "./sections/Header/HeaderInicio"
+import "./styles/grid.css"
+import "./styles/inicio.css"
+import "./styles/responsive.css"
+
+export default function PageInicio() {
+  return (
+    <main className="parent">
+      <div className="header">
+        <HeaderInicio />
+      </div>
+      <div className="nav-left box">Navegación izquierda</div>
+      <div className="recomendaciones box">Recomendaciones</div>
+      <div className="personal box">Personal</div>
+      <div className="destacado box">Proyecto destacado</div>
+      <div className="nav-right box">Navegación derecha</div>
+    </main>
+  )
+}

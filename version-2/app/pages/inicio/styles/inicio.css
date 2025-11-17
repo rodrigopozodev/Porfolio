@@ -1,0 +1,5 @@
+.box { border: 2px solid #3b82f6; box-sizing: border-box; padding: 8px; min-width: 0; }
+.parent, .parent * { box-sizing: border-box; }
+.parent * { overflow-wrap: break-word; word-break: break-word; }
+.parent img, .parent video, .parent canvas, .parent svg { max-width: 100%; height: auto; object-fit: contain; }
+.parent button, .parent .btn, .parent input, .parent select, .parent textarea { max-width: 100%; }
