@@ -50,11 +50,8 @@ export default function ThemeToggle() {
 
   return (
     <button onClick={toggleTheme} className={styles.headerButton} aria-label="Cambiar tema">
-      {mountedTheme === "dark" || (typeof document !== "undefined" && document.documentElement.classList.contains("dark")) ? (
-        <img src="/moon-svgrepo-com.svg" alt="Oscuro" width={16} height={16} className={styles.iconMoonDark} />
-      ) : (
-        <img src="/sun-alt-svgrepo-com.svg" alt="Claro" width={16} height={16} />
-      )}
+      <img src="/sun-alt-svgrepo-com.svg" alt="Claro" width={16} height={16} className={styles.iconSun} />
+      <img src="/moon-svgrepo-com.svg" alt="Oscuro" width={16} height={16} className={`${styles.iconMoon} ${styles.iconMoonDark}`} />
     </button>
   )
 }

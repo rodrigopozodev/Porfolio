@@ -47,7 +47,9 @@ html, body { height: 100%; }
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   overscroll-behavior-y: none;
+  scrollbar-width: none;
 }
+.snap-container::-webkit-scrollbar { width: 0; height: 0; display: none; }
 .page-section {
   height: 100dvh;
   min-height: 100dvh;

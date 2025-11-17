@@ -5,6 +5,9 @@
 .parent button, .parent .btn, .parent input, .parent select, .parent textarea { max-width: 100%; }
 .nav-left, .nav-right { display: flex; justify-content: center; align-items: center; text-align: center; }
 .nav-left > *, .nav-right > * { margin: 0 auto; }
+.nav-dots { display: flex; flex-direction: column; gap: 14px; align-items: center; justify-content: center; }
+.nav-dot { width: 18px; height: 18px; border-radius: 9999px; border: 2px solid #9CA3AF; background: transparent; padding: 0; }
+.nav-dot.active { background: #2563EB; border-color: #2563EB; }
 .personal { display: grid; height: 100%; padding: 0; grid-template-columns: 1fr; grid-template-rows: 45% 10% 15% 10% 20%; grid-column-gap: 0px; grid-row-gap: 0px; }
 .div1 { grid-area: 1 / 1 / 2 / 2; }
 .div2 { grid-area: 2 / 1 / 3 / 2; }
