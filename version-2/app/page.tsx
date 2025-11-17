@@ -2,13 +2,9 @@
 /**
  * Página Inicio: define el grid principal y monta las secciones.
  */
-
-import React from "react"
-import HeaderInicio from "./pages/inicio/sections/Header/HeaderInicio"
-import "./pages/inicio/styles/grid.css"
-import "./pages/inicio/styles/inicio.css"
-import "./pages/inicio/styles/responsive.css"
-
+import HeaderInicio from "./componentes/paginas/inicio/Header/HeaderInicio"
+import "./componentes/paginas/inicio/styles/grid.css"
+import "./componentes/paginas/inicio/styles/inicio.css"
 export default function PageInicio() {
   return (
     <main className="parent">

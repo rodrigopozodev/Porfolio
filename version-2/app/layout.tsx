@@ -5,7 +5,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
-import Transition from "./components/ui/TransitionFull"
+import Transition from "./componentes/transiciones/TransitionFull"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
