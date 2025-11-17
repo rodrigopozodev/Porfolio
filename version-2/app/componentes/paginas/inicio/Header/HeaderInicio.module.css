@@ -32,23 +32,27 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  gap: 8px;
+  gap: 0;
   background: color-mix(in oklch, var(--color-background) 85%, transparent);
   border: 1px solid var(--foreground);
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   transition: transform 120ms ease, box-shadow 120ms ease;
+  container-type: inline-size;
 }
 .headerGrid button:hover { transform: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 .headerGrid button:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
 .headerGrid svg { width: 16px; height: 16px; }
-.headerGrid img { width: 16px; height: 16px; display: inline-block; }
+.headerGrid img { width: 16px; height: 16px; display: block; margin: 0; }
+.iconWrap { position: relative; width: 24px; height: 24px; display: inline-block; }
+.iconWrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; margin: 0; }
+.headerGrid button span { font-size: clamp(0.72rem, 7.5cqw, 0.95rem); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .iconMoonDark { filter: invert(1) brightness(2) saturate(0); }
 .iconHand {}
 :global(html.dark) .iconHand { filter: invert(1) brightness(2) saturate(0); }
-.iconSun { display: inline-block; }
-.iconMoon { display: none; }
-:global(html.dark) .iconSun { display: none; }
-:global(html.dark) .iconMoon { display: inline-block; }
+.iconSun { opacity: 1; pointer-events: auto; }
+.iconMoon { opacity: 0; pointer-events: none; }
+:global(html.dark) .iconSun { opacity: 0; pointer-events: none; }
+:global(html.dark) .iconMoon { opacity: 1; pointer-events: auto; }
 .headerGrid * {
   overflow-wrap: break-word;
   word-break: break-word;
