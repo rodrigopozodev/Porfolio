@@ -18,7 +18,7 @@ const BodyInicio = () => {
     <>
       {!isCompact && (
         <div className="recomendaciones box">
-          <div className="div1">título</div>
+          <div className="div1"><span className="titulo">Recomendaciones</span></div>
           <div className="div2">testimonio</div>
           <div className="div3">reseña</div>
         </div>
@@ -33,7 +33,7 @@ const BodyInicio = () => {
       {!isCompact && (
         <div className="destacado box">
           <div className="proyectoDestacado">
-            <div className="div1">título</div>
+            <div className="div1"><span className="titulo">Proyecto destacado</span></div>
             <div className="div2">tarjeta</div>
             <div className="div3">reservado</div>
           </div>
