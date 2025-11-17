@@ -12,49 +12,43 @@ type HeaderProps = {
   mode?: "mobile" | "desktop"
 }
 
-export function Header({ mode = "desktop" }: HeaderProps) {
+export default function HeaderInicio({ mode = "desktop" }: HeaderProps) {
   const { handedness } = useHandedness()
 
   if (mode === "mobile") {
     return (
       <>
-        <div
-          className={"fixed z-50 flex items-center gap-3 left-0 right-0 justify-center"}
-          style={{ top: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}
-        >
-          <LanguageToggle />
-          <HandednessToggle />
-          <ThemeToggle />
-          <HamburgerMenu />
+        <div className="header-grid fixed z-50 left-0 right-0" style={{ top: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}>
+          <div className="col1">
+            <LanguageToggle size="default" variant="outline" />
+          </div>
+          <div className="col2">
+            <HandednessToggle size="default" variant="outline" />
+          </div>
+          <div className="col3">
+            <ThemeToggle size="default" variant="outline" />
+          </div>
         </div>
+        <HamburgerMenu />
         <MobileNavDrawer>{null}</MobileNavDrawer>
       </>
     )
   }
 
   return (
-    <div
-      className={`fixed z-50 flex items-center gap-3 
-        ${handedness === "right"
-          ? "left-0 right-0 justify-center min-[900px]:left-auto min-[900px]:right-3 min-[900px]:justify-end"
-          : "left-0 right-0 justify-center min-[900px]:right-auto min-[900px]:left-3 min-[900px]:justify-start"}
-      `}
-      style={{ top: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}
-    >
-      {handedness === "right" ? (
-        <>
-          <LanguageToggle />
-          <HandednessToggle />
-          <ThemeToggle />
-        </>
-      ) : (
-        <>
-          <ThemeToggle />
-          <HandednessToggle />
-          <LanguageToggle />
-        </>
-      )}
+    <>
+      <div className="header-grid fixed z-50 left-0 right-0" style={{ top: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}>
+        <div className="col1">
+          <LanguageToggle size="default" variant="outline" />
+        </div>
+        <div className="col2">
+          <HandednessToggle size="default" variant="outline" />
+        </div>
+        <div className="col3">
+          <ThemeToggle size="default" variant="outline" />
+        </div>
+      </div>
       <HamburgerMenu />
-    </div>
+    </>
   )
 }
