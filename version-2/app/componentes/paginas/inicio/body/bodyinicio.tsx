@@ -1,12 +1,20 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import TarjetasToggle from "../../../tarjetas/tarjetasToggle"
 
 const BodyInicio = () => {
-  const [isCompact, setIsCompact] = useState(false)
+  const [isCompact, setIsCompact] = useState(() => {
+    if (typeof window === "undefined") return true
+    return window.innerWidth <= 1250 && window.innerHeight <= 1000
+  })
 
   useEffect(() => {
-    const check = () => setIsCompact(window.innerWidth <= 1250 && window.innerHeight <= 800)
+    const check = () => {
+      const portrait = window.matchMedia && window.matchMedia("(orientation: portrait)").matches
+      const compact = window.innerWidth <= 1024 || window.innerHeight <= 1000 || portrait
+      setIsCompact(compact)
+    }
     check()
     window.addEventListener("resize", check)
     return () => window.removeEventListener("resize", check)
@@ -34,7 +42,7 @@ const BodyInicio = () => {
         <div className="destacado box">
           <div className="proyectoDestacado">
             <div className="div1"><span className="titulo">Proyecto destacado</span></div>
-            <div className="div2">tarjeta</div>
+            <div className="div2"><TarjetasToggle imageSrc="/League Tracker.png" imageName="League Tracker" /></div>
             <div className="div3">reservado</div>
           </div>
         </div>
