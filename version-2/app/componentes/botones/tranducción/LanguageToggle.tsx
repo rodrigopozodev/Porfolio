@@ -10,7 +10,7 @@ export default function LanguageToggle() {
   const [lang, setLang] = useState<"es" | "en">("es")
   return (
     <button onClick={() => setLang((p) => (p === "es" ? "en" : "es"))} className={styles.headerButton} aria-label="Cambiar idioma">
-      <img src="/translate-language-svgrepo-com.svg" alt="Idioma" width={16} height={16} />
+      <img src="/translate-language-svgrepo-com.svg" alt="Idioma" width={24} height={24} />
       <span>{lang.toUpperCase()}</span>
     </button>
   )

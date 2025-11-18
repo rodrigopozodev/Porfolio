@@ -26,7 +26,7 @@ export default function HandednessToggle() {
       className={styles.headerButton}
       aria-label="Cambiar lateralidad"
     >
-      <img src="/hand-svgrepo-com.svg" alt="Lateralidad" width={16} height={16} className={styles.iconHand} />
+      <img src="/hand-svgrepo-com.svg" alt="Lateralidad" width={24} height={24} className={styles.iconHand} />
       <span>{mode === "left" ? "Zurdo" : "Diestro"}</span>
     </button>
   )

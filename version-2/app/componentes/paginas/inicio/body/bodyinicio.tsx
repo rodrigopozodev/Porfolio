@@ -24,7 +24,7 @@ const BodyInicio = () => {
         <div className="proyectoDestacado">
           <div className="div1"><span className="titulo">Proyecto destacado</span></div>
           <div className="div2"><TarjetasToggle imageSrc="/League Tracker.png" imageName="League Tracker" /></div>
-          <div className="div3">reservado</div>
+          <div className="div3" aria-hidden="true"></div>
         </div>
       </div>
     </>
