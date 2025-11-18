@@ -4,7 +4,7 @@
  */
 
 import { useState } from "react"
-import styles from "../../paginas/inicio/Header/HeaderInicio.module.css"
+import styles from "../../../paginas/inicio/Header/HeaderInicio.module.css"
 
 export default function LanguageToggle() {
   const [lang, setLang] = useState<"es" | "en">("es")

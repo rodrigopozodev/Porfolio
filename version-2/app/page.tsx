@@ -1,11 +1,11 @@
 "use client"
 
-import HeaderInicio from "./componentes/paginas/inicio/Header/HeaderInicio"
-import BodyInicio from "./componentes/paginas/inicio/body/bodyinicio"
-import NavegacionInicio from "./componentes/paginas/inicio/navegacion/navegacioninicio"
-import Proyectos from "./componentes/paginas/proyectos/Proyectos"
-import "./componentes/paginas/inicio/styles/grid.css"
-import "./componentes/paginas/inicio/styles/inicio.css"
+import HeaderInicio from "./paginas/inicio/Header/HeaderInicio"
+import BodyInicio from "./paginas/inicio/body/bodyinicio"
+import NavegacionInicio from "./paginas/inicio/navegacion/navegacioninicio"
+import Proyectos from "./paginas/proyectos/Proyectos"
+import "./paginas/inicio/styles/grid.css"
+import "./paginas/inicio/styles/inicio.css"
 export default function PageInicio() {
   return (
     <div className="snap-container">

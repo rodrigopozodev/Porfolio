@@ -4,7 +4,7 @@
  */
 
 import { useEffect, useState } from "react"
-import styles from "../../paginas/inicio/Header/HeaderInicio.module.css"
+import styles from "../../../paginas/inicio/Header/HeaderInicio.module.css"
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system")

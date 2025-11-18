@@ -2,9 +2,9 @@
 /**
  * HeaderInicio: agrupa los tres toggles en una grilla de 3 columnas.
  */
-import LanguageToggle from "../../../botones/tranducción/LanguageToggle"
-import HandednessToggle from "../../../botones/lateralidad/HandednessToggle"
-import ThemeToggle from "../../../botones/temas/ThemeToggle"
+import LanguageToggle from "../../../componentes/botones/tranducción/LanguageToggle"
+import HandednessToggle from "../../../componentes/botones/lateralidad/HandednessToggle"
+import ThemeToggle from "../../../componentes/botones/temas/ThemeToggle"
 import styles from "./HeaderInicio.module.css"
 
 export default function HeaderInicio() {

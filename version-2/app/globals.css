@@ -87,3 +87,23 @@ body.theme-transition {
 @media (max-width: 767.98px) {
   .heading-anim { font-size: 1.875rem; }
 }
+
+/* Kinetic Testimonials */
+@keyframes kinetic-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, -50%, 0); }
+}
+
+@keyframes kinetic-scroll-reverse {
+  0% { transform: translate3d(0, -50%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.kinetic-column .kinetic-inner {
+  animation: kinetic-scroll var(--kinetic-duration, 28s) linear infinite;
+  animation-delay: var(--kinetic-delay, 0s);
+}
+
+.kinetic-column.reverse .kinetic-inner { animation-name: kinetic-scroll-reverse; }
+.kinetic-column:hover .kinetic-inner { animation-play-state: paused; }
+.kinetic-mask { -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%); }

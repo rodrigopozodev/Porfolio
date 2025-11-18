@@ -1,16 +1,28 @@
 "use client"
 
 import React, { useEffect, useLayoutEffect, useMemo, useState } from "react"
+import { HomeIcon, HomeIconHandle } from "@/componentes/svg/inicio/HomeIcon"
+import { SquareStackIcon, SquareStackIconHandle } from "@/componentes/svg/proyectos/SquareStackIcon"
 
 const NavPaginas = () => {
   const initialCount = typeof window !== "undefined" ? (document.querySelectorAll<HTMLElement>(".page-section").length || 2) : 2
   const [active, setActive] = useState(0)
   const [count, setCount] = useState(initialCount)
+  const [labels, setLabels] = useState<string[]>([])
 
   useLayoutEffect(() => {
     const container = document.querySelector<HTMLElement>(".snap-container")
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".page-section"))
     setCount(sections.length || 2)
+    try {
+      const ls = sections.map((s) => {
+        const id = s.id?.trim() || ""
+        if (id.toLowerCase() === "inicio") return "Inicio"
+        if (id.toLowerCase() === "proyectos") return "Proyectos"
+        return id ? id : "Sección"
+      })
+      setLabels(ls)
+    } catch {}
 
     if (!container || sections.length === 0) return
 
@@ -42,6 +54,9 @@ const NavPaginas = () => {
   }, [])
 
   const dots = useMemo(() => Array.from({ length: Math.max(count, 0) }), [count])
+  const homeRef = React.useRef<HomeIconHandle | null>(null)
+  const projectsRef = React.useRef<SquareStackIconHandle | null>(null)
+  // Los iconos se muestran siempre para primer y último punto
 
   const goto = (index: number) => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".page-section"))
@@ -57,7 +72,18 @@ const NavPaginas = () => {
           className={`nav-dot ${i === active ? "active" : ""}`}
           aria-label={`Ir a página ${i + 1} de ${count}`}
           onClick={() => goto(i)}
-        />
+          onMouseEnter={() => { if (i === 0) homeRef.current?.startAnimation(); if (i === count - 1) projectsRef.current?.startAnimation(); }}
+          onMouseLeave={() => { if (i === 0) homeRef.current?.stopAnimation(); if (i === count - 1) projectsRef.current?.stopAnimation(); }}
+        >
+          <span className="sr-only">{labels[i] ?? `Sección ${i + 1}`}</span>
+          {i === 0 || i === count - 1 ? (
+            <span className="nav-label nav-label-icon">
+              {i === 0 ? <HomeIcon ref={homeRef} size={18} /> : <SquareStackIcon ref={projectsRef} size={18} />}
+            </span>
+          ) : (
+            <span className="nav-label">{labels[i] ?? `Sección ${i + 1}`}</span>
+          )}
+        </button>
       ))}
     </div>
   )
