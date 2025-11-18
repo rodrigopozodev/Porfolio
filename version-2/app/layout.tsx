@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preload" as="image" href="/League%20Tracker.png" fetchPriority="high" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
