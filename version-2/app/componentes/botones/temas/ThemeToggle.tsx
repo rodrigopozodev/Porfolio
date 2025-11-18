@@ -3,12 +3,17 @@
  * ThemeToggle: alterna entre temas light/dark y aplica clases en <html>.
  */
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
+import { MoonIcon, MoonIconHandle } from "@/componentes/svg/tema-ocuro/MoonIcon"
+import { SunIcon, SunIconHandle } from "@/componentes/svg/tema-claro/SunIcon"
 import styles from "../../../paginas/inicio/Header/HeaderInicio.module.css"
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system")
   const [mountedTheme, setMountedTheme] = useState<"light" | "dark" | "system">("system")
+  const [isDark, setIsDark] = useState(false)
+  const sunRef = useRef<SunIconHandle | null>(null)
+  const moonRef = useRef<MoonIconHandle | null>(null)
 
   useEffect(() => {
     const savedTheme = (typeof window !== "undefined" ? localStorage.getItem("theme") : null) as "light" | "dark" | "system" | null
@@ -26,16 +31,19 @@ export default function ThemeToggle() {
       const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
       if (systemTheme === "dark") root.classList.add("dark")
       else root.classList.add("light")
+      setIsDark(systemTheme === "dark")
       return
     }
     if (newTheme === "dark") {
       root.classList.remove("light")
       root.classList.add("dark")
+      setIsDark(true)
       return
     }
     // light
     root.classList.remove("dark")
     root.classList.add("light")
+    setIsDark(false)
   }
 
   const toggleTheme = () => {
@@ -49,10 +57,20 @@ export default function ThemeToggle() {
   }
 
   return (
-    <button onClick={toggleTheme} className={styles.headerButton} aria-label="Cambiar tema">
+    <button
+      onClick={toggleTheme}
+      className={styles.headerButton}
+      aria-label="Cambiar tema"
+      onMouseEnter={() => { if (isDark) { moonRef.current?.startAnimation() } else { sunRef.current?.startAnimation() } }}
+      onMouseLeave={() => { if (isDark) { moonRef.current?.stopAnimation() } else { sunRef.current?.stopAnimation() } }}
+    >
       <span className={styles.iconWrap}>
-        <img src="/sun-alt-svgrepo-com.svg" alt="Claro" width={16} height={16} className={styles.iconSun} />
-        <img src="/moon-svgrepo-com.svg" alt="Oscuro" width={16} height={16} className={`${styles.iconMoon} ${styles.iconMoonDark}`} />
+        {!isDark && (
+          <SunIcon ref={sunRef} size={16} className={styles.iconSunSvg} />
+        )}
+        {isDark && (
+          <MoonIcon ref={moonRef} size={16} className={styles.iconMoonSvg} />
+        )}
       </span>
     </button>
   )
