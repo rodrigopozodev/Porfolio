@@ -21,8 +21,8 @@ const NavegacionInicio = () => {
 
   return (
     <>
-      <div className="nav-left box">{mode === "left" ? <NavPaginas /> : ""}</div>
-      <div className="nav-right box">{mode === "right" ? <NavPaginas /> : ""}</div>
+      <div className="nav-left box" style={{ display: mode === "left" ? "flex" : "none" }}><NavPaginas /></div>
+      <div className="nav-right box" style={{ display: mode === "right" ? "flex" : "none" }}><NavPaginas /></div>
     </>
   )
 }

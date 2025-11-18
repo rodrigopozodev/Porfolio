@@ -1,0 +1,49 @@
+/* Estilos del componente Conectar: cargados como CSS real para evitar flash en hidratación */
+.conectar { display: grid; grid-template-rows: 33% 34% 33%; gap: 0; width: 100%; height: 100%; }
+.conectar > * { display: flex; align-items: center; justify-content: center; border: 1px solid #ef4444; width: 100%; height: 100%; box-sizing: border-box; }
+.titulo { font-weight: 700; font-size: 1.2rem; color: var(--color-foreground); }
+.acciones { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; width: 100%; height: 100%; }
+.acciones .cell { display: flex; align-items: center; justify-content: center; border: 1px solid #ef4444; width: 100%; height: 100%; box-sizing: border-box; container-type: size; overflow: hidden; }
+.circle { aspect-ratio: 1 / 1; height: min(44px, 80%); width: auto; border-radius: 9999px; border: none; background: color-mix(in oklch, var(--color-background) 85%, transparent); display: grid; place-items: center; overflow: hidden; position: relative; }
+.circle svg { color: var(--color-foreground); width: 70%; height: 70%; }
+.textLabel { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; font-weight: 600; color: var(--color-foreground); }
+.iconGit { width: 88%; height: 88%; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
+.iconGit img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.iconGitImg { filter: none; }
+html.dark .iconGitImg { filter: invert(1) brightness(2) saturate(0); }
+.iconLinked, .iconMail { width: 88%; height: 88%; display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative; }
+.iconLinked img, .iconMail img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.iconLinkedDefault { opacity: 1; }
+.iconLinkedHover { opacity: 0; }
+.circle:hover .iconLinkedDefault { opacity: 0; }
+.circle:hover .iconLinkedHover { opacity: 1; }
+/* Overrides para evitar doble render y parpadeo */
+.iconLinked img, .iconMail img { position: absolute !important; inset: 0 !important; }
+.iconLinkedDefault { will-change: opacity; transition: opacity 160ms ease; }
+.iconLinkedHover { visibility: hidden; pointer-events: none; will-change: opacity; transition: opacity 160ms ease; }
+.circle:hover .iconLinkedHover { visibility: visible; }
+.textLabel { display: none !important; }
+.circle::after { content: none; }
+@container (max-width: 64px) {
+  .circle { width: auto; height: 80%; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-foreground); border-radius: 9999px; align-self: center; }
+  .circle svg { display: none; }
+  .circle img { display: none; }
+  .iconGit { display: none; }
+  .iconLinked, .iconMail { display: none; }
+  .textLabel { display: inline-flex !important; font-size: clamp(0.75rem, 7cqw, 0.95rem); }
+  .circle:hover { background: #2563EB; color: #ffffff; border-color: #2563EB; }
+}
+@container (max-height: 42px) {
+  .circle { aspect-ratio: auto; height: 80%; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-foreground); border-radius: 9999px; align-self: center; }
+  .circle svg { display: none; }
+  .circle img { display: none; }
+  .iconGit { display: none; }
+  .iconLinked, .iconMail { display: none; }
+  .textLabel { display: inline-flex !important; font-size: clamp(0.72rem, 6cqh, 0.95rem); }
+  .circle:hover { background: #2563EB; color: #ffffff; border-color: #2563EB; }
+}
+.cv { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 9999px; padding: 8px 14px; border: 1px solid color-mix(in oklch, var(--color-foreground) 35%, transparent); background: color-mix(in oklch, var(--color-background) 85%, transparent); color: var(--color-foreground); font-weight: 600; font-size: 0.9rem; width: 80%; height: 80%; box-sizing: border-box; justify-self: center; align-self: center; }
+.conectar > .cv { width: 80%; height: 80%; justify-self: center; align-self: center; }
+.cv svg { color: var(--color-foreground); }
+html.light .cv { border-color: #000000; }
+html.dark .cv { border-color: #ffffff; }

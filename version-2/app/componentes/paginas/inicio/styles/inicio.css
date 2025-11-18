@@ -5,6 +5,7 @@
 .parent button, .parent .btn, .parent input, .parent select, .parent textarea { max-width: 100%; }
 .nav-left, .nav-right { display: flex; justify-content: center; align-items: center; text-align: center; }
 .nav-left > *, .nav-right > * { margin: 0 auto; }
+.page-section#inicio .nav-left.box, .page-section#inicio .nav-right.box { border: none; }
 .nav-dots { display: flex; flex-direction: column; gap: 14px; align-items: center; justify-content: center; }
 .nav-dot { width: 18px; height: 18px; border-radius: 9999px; border: 2px solid #9CA3AF; background: transparent; padding: 0; }
 .nav-dot.active { background: #2563EB; border-color: #2563EB; }
@@ -16,7 +17,7 @@
 .div5 { grid-area: 5 / 1 / 6 / 2; }
 .personal .div2, .personal .div3, .personal .div4, .personal .div5 { display: flex; justify-content: center; align-items: center; border: 2px solid #93c5fd; width: 100%; height: 100%; }
 .personal .div2 { overflow: hidden; padding-inline: 0.75rem; }
-.personal .div1 img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; max-width: 100%; max-height: 100%; border: none; }
+.personal .div1 img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; max-width: 100%; max-height: 100%; border: none; transform: scale(0.95); }
 .personal .div1 { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; border: none; border-radius: 9999px; overflow: hidden; }
 .personal .div2 { container-type: inline-size; }
 .personal .div2 .nombre { font-weight: 400; font-size: clamp(0.95rem, 8cqw, 2.4rem); line-height: 1.15; display: inline-block; text-align: center; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-bottom: 0.05em; }

@@ -49,10 +49,10 @@
 .iconMoonDark { filter: invert(1) brightness(2) saturate(0); }
 .iconHand {}
 :global(html.dark) .iconHand { filter: invert(1) brightness(2) saturate(0); }
-.iconSun { opacity: 1; pointer-events: auto; }
-.iconMoon { opacity: 0; pointer-events: none; }
-:global(html.dark) .iconSun { opacity: 0; pointer-events: none; }
-:global(html.dark) .iconMoon { opacity: 1; pointer-events: auto; }
+.iconSun { opacity: 1; visibility: visible; pointer-events: auto; }
+.iconMoon { opacity: 0; visibility: hidden; pointer-events: none; }
+:global(html.dark) .iconSun { opacity: 0; visibility: hidden; pointer-events: none; }
+:global(html.dark) .iconMoon { opacity: 1; visibility: visible; pointer-events: auto; }
 .headerGrid * {
   overflow-wrap: break-word;
   word-break: break-word;

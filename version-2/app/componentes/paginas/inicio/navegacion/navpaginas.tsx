@@ -1,17 +1,27 @@
 "use client"
 
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react"
 
 const NavPaginas = () => {
+  const initialCount = typeof window !== "undefined" ? (document.querySelectorAll<HTMLElement>(".page-section").length || 2) : 2
   const [active, setActive] = useState(0)
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(initialCount)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const container = document.querySelector<HTMLElement>(".snap-container")
     const sections = Array.from(document.querySelectorAll<HTMLElement>(".page-section"))
-    setCount(sections.length)
+    setCount(sections.length || 2)
 
     if (!container || sections.length === 0) return
+
+    // Establecer página activa antes del primer paint
+    try {
+      const vis = sections
+        .map((s, idx) => ({ idx, rect: s.getBoundingClientRect() }))
+        .sort((a, b) => Math.abs(a.rect.top) - Math.abs(b.rect.top))
+      const topIdx = vis[0]?.idx ?? 0
+      setActive(topIdx)
+    } catch {}
 
     const io = new IntersectionObserver(
       (entries) => {
