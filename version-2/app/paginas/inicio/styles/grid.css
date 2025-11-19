@@ -57,3 +57,14 @@
   .personal { grid-area: 2 / 2 / 3 / 3; }
   .nav-right { grid-area: 2 / 3 / 3 / 4; }
 }
+
+/* Colapso en landscape para portátiles pequeños y tablets grandes (≤1366px) */
+@media (orientation: landscape) and (max-width: 1366px) {
+  .recomendaciones, .destacado { display: none; }
+  .recomendaciones *, .destacado * { display: none !important; }
+  .parent { grid-template-columns: 10% 80% 10%; grid-template-rows: 10% 90%; }
+  .header { grid-area: 1 / 1 / 2 / 4; }
+  .nav-left { grid-area: 2 / 1 / 3 / 2; }
+  .personal { grid-area: 2 / 2 / 3 / 3; }
+  .nav-right { grid-area: 2 / 3 / 3 / 4; }
+}
