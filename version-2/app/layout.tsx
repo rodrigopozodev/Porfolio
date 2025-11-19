@@ -29,15 +29,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preload" as="image" href="/League%20Tracker.png" fetchPriority="high" />
-        <link rel="preload" as="image" href="/github-142-svgrepo-com.svg" fetchPriority="high" />
-        <link rel="preload" as="image" href="/linkedin-1-svgrepo-com.svg" fetchPriority="high" />
-        <link rel="preload" as="image" href="/gmail-svgrepo-com.svg" fetchPriority="high" />
-        <link rel="preload" as="image" href="/linkedin-verde.svg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/icon-github.svg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/icon-linkedin.svg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/icon-gmail.svg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/icon-linkedin-hover.svg" fetchPriority="high" />
         <link rel="preload" as="image" href="/Rodrigo.png" fetchPriority="high" />
-        <link rel="preload" as="image" href="/moon-svgrepo-com.svg" fetchPriority="high" />
-        <link rel="preload" as="image" href="/sun-alt-svgrepo-com.svg" fetchPriority="high" />
-        <link rel="preload" as="image" href="/translate-language-svgrepo-com.svg" fetchPriority="high" />
-        <link rel="preload" as="image" href="/hand-svgrepo-com.svg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/icon-translate.svg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/icon-translate-hover.png" fetchPriority="high" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

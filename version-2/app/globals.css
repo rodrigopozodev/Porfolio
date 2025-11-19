@@ -41,6 +41,9 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Visual del GIF de la mano sin fondo artificial */
+img[src="/mano.gif"], .gif-negro { filter: none; background: transparent; }
+
 html, body { height: 100%; }
 .snap-container {
   height: 100dvh;

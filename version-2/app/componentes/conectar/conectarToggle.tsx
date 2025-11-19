@@ -8,7 +8,7 @@ const ConectarToggle = () => {
         <div className="cell">
           <button className="circle" aria-label="GitHub" data-label="github">
             <span className="iconGit">
-              <img src="/github-142-svgrepo-com.svg" alt="GitHub" className="iconGitImg" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
+              <img src="/icon-github.svg" alt="GitHub" className="iconGitImg" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
             </span>
             <span className="textLabel">github</span>
           </button>
@@ -16,8 +16,8 @@ const ConectarToggle = () => {
         <div className="cell">
           <a className="circle" aria-label="LinkedIn" href="https://www.linkedin.com/in/rodrigopozosanchez/" target="_blank" rel="noopener noreferrer" data-label="linkedin">
             <span className="iconLinked">
-              <img src="/linkedin-1-svgrepo-com.svg" alt="LinkedIn" className="iconLinkedDefault" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
-              <img src="/linkedin-verde.svg" alt="LinkedIn Hover" className="iconLinkedHover" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
+              <img src="/icon-linkedin.svg" alt="LinkedIn" className="iconLinkedDefault" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
+              <img src="/icon-linkedin-hover.svg" alt="LinkedIn Hover" className="iconLinkedHover" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
             </span>
             <span className="textLabel">linkedin</span>
           </a>
@@ -25,7 +25,7 @@ const ConectarToggle = () => {
         <div className="cell">
           <button className="circle" aria-label="Email" data-label="correo">
             <span className="iconMail">
-              <img src="/gmail-svgrepo-com.svg" alt="Correo" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
+              <img src="/icon-gmail.svg" alt="Correo" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
             </span>
             <span className="textLabel">correo</span>
           </button>

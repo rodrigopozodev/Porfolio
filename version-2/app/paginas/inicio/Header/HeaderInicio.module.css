@@ -46,6 +46,7 @@
 .headerGrid svg { width: 24px; height: 24px; }
 .headerGrid img { width: 24px; height: 24px; display: block; margin: 0; }
 .iconWrap { position: relative; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; }
+.iconWrapLateralidad { width: 32px; height: 32px; }
 .iconWrap img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; margin: 0; }
 .headerGrid button span { font-size: clamp(0.72rem, 7.5cqw, 0.95rem); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .iconMoonDark { filter: invert(1) brightness(2) saturate(0); }
@@ -55,6 +56,20 @@
 .iconMoonSvg svg { width: 28px; height: 28px; }
 .iconHand {}
 :global(html.dark) .iconHand { filter: invert(1) brightness(2) saturate(0); }
+.iconGif { filter: none; width: 28px; height: 28px; background: transparent; }
+.iconStatic { opacity: 1; visibility: visible; pointer-events: auto; }
+.iconHoverGif { opacity: 0; visibility: hidden; pointer-events: none; filter: none; }
+.headerGrid button:hover .iconHoverGif { opacity: 1; visibility: visible; pointer-events: auto; }
+.headerGrid button:hover .iconStatic { opacity: 0; visibility: hidden; pointer-events: none; }
+.invertX { transform: scaleX(-1); transform-origin: center; }
+.iconStatic.invertX { transform: scaleX(-1) scale(0.85); transform-origin: center; }
+.iconHoverGif.invertX { transform: scaleX(-1); transform-origin: center; }
+.invertXImg { transform: scaleX(-1) !important; transform-origin: center !important; }
+.iconWrap .iconStatic.invertXImg { transform: scaleX(-1) scale(0.85) !important; transform-origin: center !important; }
+/* Reducir levemente el tamaño del GIF en tema oscuro */
+:global(html.dark) .iconHoverGif { transform: scale(0.9); transform-origin: center; }
+:global(html.dark) .iconHoverGif.invertX { transform: scaleX(-1) scale(0.9); transform-origin: center; }
+.iconWrap .iconStatic { transform: scale(0.85); }
 .iconSun { opacity: 1; visibility: visible; pointer-events: auto; }
 .iconMoon { opacity: 0; visibility: hidden; pointer-events: none; }
 :global(html.dark) .iconSun { opacity: 0; visibility: hidden; pointer-events: none; }
@@ -68,3 +83,7 @@
   .headerGrid button { height: calc(36px * 0.9); }
 }
 .headerButton { cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+.iconTranslateDefault { opacity: 1; visibility: visible; pointer-events: auto; }
+.iconTranslateHover { opacity: 0; visibility: hidden; pointer-events: none; }
+.headerGrid button:hover .iconTranslateDefault { opacity: 0; visibility: hidden; pointer-events: none; }
+.headerGrid button:hover .iconTranslateHover { opacity: 1; visibility: visible; pointer-events: auto; }

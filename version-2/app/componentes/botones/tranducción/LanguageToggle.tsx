@@ -11,7 +11,8 @@ export default function LanguageToggle() {
   return (
     <button onClick={() => setLang((p) => (p === "es" ? "en" : "es"))} className={styles.headerButton} aria-label="Cambiar idioma">
       <span className={styles.iconWrap}>
-        <img src="/translate-language-svgrepo-com.svg" alt="Idioma" width={24} height={24} loading="eager" decoding="sync" fetchPriority="high" />
+        <img src="/icon-translate.svg" alt="Idioma" width={24} height={24} className={styles.iconTranslateDefault} loading="eager" decoding="sync" fetchPriority="high" />
+        <img src="/icon-translate-hover.png" alt="Idioma Hover" width={24} height={24} className={styles.iconTranslateHover} loading="eager" decoding="sync" fetchPriority="high" />
       </span>
       <span>{lang.toUpperCase()}</span>
     </button>
