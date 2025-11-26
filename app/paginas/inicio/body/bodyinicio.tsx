@@ -6,6 +6,7 @@ import ConectarToggle from "../../../componentes/conectar/conectarToggle"
 import KineticTestimonial, { Testimonial } from "../../../componentes/testimonios/KineticTestimonial"
 import AddReviewButton from "../../../componentes/botones/reseñas/AddReviewButton"
 import PalabrasAnimadas from "../../../componentes/palabras-animadas/PalabrasAnimadas"
+import VerTrabajosButton from "../../../componentes/botones/ver-trabajos/VerTrabajosButton"
 
 const BodyInicio = () => {
   // El tamaño del nombre se gestiona con CSS (container queries y clamp)
@@ -173,15 +174,7 @@ const BodyInicio = () => {
           <PalabrasAnimadas />
         </div>
         <div className="div4">
-          <button 
-            onClick={() => {
-              const proyectos = document.getElementById("proyectos")
-              proyectos?.scrollIntoView({ behavior: "smooth" })
-            }}
-            aria-label="Ver proyectos destacados"
-          >
-            Ver trabajos
-          </button>
+          <VerTrabajosButton />
         </div>
         <div className="div5"><ConectarToggle /></div>
       </div>

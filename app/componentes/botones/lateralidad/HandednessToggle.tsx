@@ -11,24 +11,33 @@ export default function HandednessToggle() {
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("handedness") as "left" | "right" | null
-      if (saved === "left" || saved === "right") setMode(saved)
-    } catch {}
+    // Escuchar cambios de lateralidad desde la detección automática
+    const handler = (e: any) => {
+      const m = e?.detail?.mode as "left" | "right" | undefined
+      if (m === "left" || m === "right") setMode(m)
+    }
+    window.addEventListener("handednessChange", handler as EventListener)
+    
     try {
       const root = document.documentElement
       setIsDark(root.classList.contains("dark"))
-      const handler = () => setIsDark(root.classList.contains("dark"))
-      window.addEventListener("themeToggleTransition", handler as EventListener)
-      return () => window.removeEventListener("themeToggleTransition", handler as EventListener)
-    } catch {}
+      const themeHandler = () => setIsDark(root.classList.contains("dark"))
+      window.addEventListener("themeToggleTransition", themeHandler as EventListener)
+      return () => {
+        window.removeEventListener("handednessChange", handler as EventListener)
+        window.removeEventListener("themeToggleTransition", themeHandler as EventListener)
+      }
+    } catch {
+      return () => {
+        window.removeEventListener("handednessChange", handler as EventListener)
+      }
+    }
   }, [])
   return (
     <button
       onClick={() => {
         const next = mode === "right" ? "left" : "right"
         setMode(next)
-        try { localStorage.setItem("handedness", next) } catch {}
         try { window.dispatchEvent(new CustomEvent("handednessChange", { detail: { mode: next } })) } catch {}
       }}
       className={styles.headerButton}

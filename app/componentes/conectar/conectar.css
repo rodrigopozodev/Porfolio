@@ -1,49 +1,329 @@
 /* Estilos del componente Conectar: cargados como CSS real para evitar flash en hidratación */
-.conectar { display: grid; grid-template-rows: 33% 34% 33%; gap: 0; width: 100%; height: 100%; }
-.conectar > * { display: flex; align-items: center; justify-content: center; border: 1px solid #ef4444; width: 100%; height: 100%; box-sizing: border-box; }
-.titulo { font-weight: 700; font-size: 1.2rem; color: var(--color-foreground); }
-.acciones { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; width: 100%; height: 100%; }
-.acciones .cell { display: flex; align-items: center; justify-content: center; border: 1px solid #ef4444; width: 100%; height: 100%; box-sizing: border-box; container-type: size; overflow: hidden; }
-.circle { aspect-ratio: 1 / 1; height: min(44px, 80%); width: auto; border-radius: 9999px; border: none; background: color-mix(in oklch, var(--color-background) 85%, transparent); display: grid; place-items: center; overflow: hidden; position: relative; }
+
+/* ============================================
+   BASE: MÓVIL, TABLET, IPAD (≤1024px)
+   ============================================ */
+.conectar { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  grid-template-rows: auto 1fr 1fr 1fr; 
+  gap: 0; 
+  width: 100%; 
+  height: 100%; 
+  container-type: size; 
+}
+
+.conectar > * { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border: none; 
+  width: 100%; 
+  height: 100%; 
+  box-sizing: border-box; 
+}
+
+/* Título ocupa toda la primera fila */
+.titulo { 
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700; 
+  font-size: clamp(0.8rem, 15cqh, 4rem); 
+  color: var(--color-foreground); 
+  text-align: center;
+  padding-inline: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+/* Iconos sociales apilados en columna izquierda */
+.github {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.linkedin {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.correo {
+  grid-column: 1 / 2;
+  grid-row: 4 / 5;
+}
+
+/* CV ocupa toda la columna derecha (filas 2-4) */
+.cv {
+  grid-column: 2 / 3;
+  grid-row: 2 / 5;
+  display: inline-flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 0.5em; 
+  border-radius: 9999px; 
+  padding: 0; 
+  padding-inline: clamp(0.5em, 4cqw, 1em);
+  border: 1px solid color-mix(in oklch, var(--color-foreground) 35%, transparent); 
+  background: color-mix(in oklch, var(--color-background) 85%, transparent); 
+  color: var(--color-foreground); 
+  font-weight: 600; 
+  font-size: clamp(0.54rem, 11.5cqh, 2.3rem); 
+  width: auto; 
+  max-width: 100%;
+  height: min(60px, 80%); 
+  box-sizing: border-box; 
+  justify-self: center; 
+  align-self: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.cell { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border: none; 
+  width: 100%; 
+  height: 100%; 
+  box-sizing: border-box; 
+  container-type: size; 
+  overflow: hidden; 
+}
+.circle { 
+  aspect-ratio: 1 / 1; 
+  height: min(60px, 80%); 
+  width: auto; 
+  border-radius: 9999px; 
+  border: none; 
+  background: transparent; 
+  display: grid; 
+  place-items: center; 
+  overflow: hidden; 
+  position: relative; 
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.circle:hover {
+  transform: scale(1.05);
+}
+
 .circle svg { color: var(--color-foreground); width: 70%; height: 70%; }
-.textLabel { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; font-weight: 600; color: var(--color-foreground); }
-.iconGit { width: 88%; height: 88%; display: flex; align-items: center; justify-content: center; margin: 0 auto; }
-.iconGit img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.iconGitImg { filter: none; }
-html.dark .iconGitImg { filter: invert(1) brightness(2) saturate(0); }
-.iconLinked, .iconMail { width: 88%; height: 88%; display: flex; align-items: center; justify-content: center; margin: 0 auto; position: relative; }
-.iconLinked img, .iconMail img { width: 100%; height: 100%; object-fit: contain; display: block; }
-.iconLinkedDefault { opacity: 1; }
-.iconLinkedHover { opacity: 0; }
-.circle:hover .iconLinkedDefault { opacity: 0; }
-.circle:hover .iconLinkedHover { opacity: 1; }
+
+.iconGit { 
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin: 0 auto; 
+}
+
+.iconGit img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
+  display: block; 
+}
+
+.iconGitImg { 
+  filter: none; 
+}
+
+html.dark .iconGitImg { 
+  filter: invert(1) brightness(2) saturate(0); 
+}
+
+.iconLinked, .iconMail { 
+  width: 100%; 
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  margin: 0 auto; 
+  position: relative; 
+}
+
+.iconLinked img, .iconMail img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: contain; 
+  display: block; 
+}
+
+.iconLinkedDefault { 
+  opacity: 1; 
+  transition: opacity 160ms ease;
+}
+
+.iconLinkedHover { 
+  opacity: 0; 
+  position: absolute;
+  inset: 0;
+  transition: opacity 160ms ease;
+}
+
+.circle:hover .iconLinkedDefault { 
+  opacity: 0; 
+}
+
+.circle:hover .iconLinkedHover { 
+  opacity: 1; 
+}
+
 /* Overrides para evitar doble render y parpadeo */
-.iconLinked img, .iconMail img { position: absolute !important; inset: 0 !important; }
-.iconLinkedDefault { will-change: opacity; transition: opacity 160ms ease; }
-.iconLinkedHover { visibility: hidden; pointer-events: none; will-change: opacity; transition: opacity 160ms ease; }
-.circle:hover .iconLinkedHover { visibility: visible; }
-.textLabel { display: none !important; }
-.circle::after { content: none; }
-@container (max-width: 64px) {
-  .circle { width: auto; height: 80%; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-foreground); border-radius: 9999px; align-self: center; }
-  .circle svg { display: none; }
-  .circle img { display: none; }
-  .iconGit { display: none; }
-  .iconLinked, .iconMail { display: none; }
-  .textLabel { display: inline-flex !important; font-size: clamp(0.75rem, 7cqw, 0.95rem); }
-  .circle:hover { background: #2563EB; color: #ffffff; border-color: #2563EB; }
+.iconLinked img, .iconMail img { 
+  position: absolute !important; 
+  inset: 0 !important; 
 }
-@container (max-height: 42px) {
-  .circle { aspect-ratio: auto; height: 80%; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-foreground); border-radius: 9999px; align-self: center; }
-  .circle svg { display: none; }
-  .circle img { display: none; }
-  .iconGit { display: none; }
-  .iconLinked, .iconMail { display: none; }
-  .textLabel { display: inline-flex !important; font-size: clamp(0.72rem, 6cqh, 0.95rem); }
-  .circle:hover { background: #2563EB; color: #ffffff; border-color: #2563EB; }
+
+.iconLinkedDefault { 
+  will-change: opacity; 
+  transition: opacity 160ms ease; 
 }
-.cv { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 9999px; padding: 8px 14px; border: 1px solid color-mix(in oklch, var(--color-foreground) 35%, transparent); background: color-mix(in oklch, var(--color-background) 85%, transparent); color: var(--color-foreground); font-weight: 600; font-size: 0.9rem; width: 80%; height: 80%; box-sizing: border-box; justify-self: center; align-self: center; }
-.conectar > .cv { width: 80%; height: 80%; justify-self: center; align-self: center; }
-.cv svg { color: var(--color-foreground); }
+
+.iconLinkedHover { 
+  visibility: visible; 
+  pointer-events: none; 
+  will-change: opacity; 
+  transition: opacity 160ms ease; 
+}
+
+.cv svg { 
+  color: var(--color-foreground); 
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.cv span {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 html.light .cv { border-color: #000000; }
 html.dark .cv { border-color: #ffffff; }
+
+/* ============================================
+   MÓVIL, TABLET, IPAD (≤1024px) - Ocultar icono CV
+   ============================================ */
+@media (max-width: 1024px) {
+  .cv svg {
+    display: none;
+  }
+}
+
+/* ============================================
+   DESKTOP (>1024px) - Diseño con 3 columnas
+   ============================================ */
+@media (min-width: 1025px) {
+  .conectar { 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: auto 1fr 1fr; 
+  }
+
+  /* Título ocupa toda la primera fila (3 columnas) */
+  .titulo { 
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+
+  /* Fila 2: Los 3 iconos sociales en 3 columnas */
+  .github {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .linkedin {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  .correo {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+  }
+
+  /* Fila 3: CV ocupa toda la fila (3 columnas) */
+  .cv {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+  }
+}
+
+/* ============================================
+   ALTURA MENOR A 500px O ANCHO MENOR A 300px - Diseño horizontal
+   ============================================ */
+@media (max-height: 500px), (max-width: 300px) {
+  .conectar { 
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: auto 1fr; 
+  }
+
+  /* Título ocupa toda la primera fila (4 columnas) */
+  .titulo { 
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+  }
+
+  /* Fila 2: Los 4 elementos en 4 columnas */
+  .github {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .linkedin {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  .correo {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+  }
+
+  .cv {
+    grid-column: 4 / 5;
+    grid-row: 2 / 3;
+  }
+
+  /* Reducir tamaño del SVG un 50% */
+  .cv svg {
+    width: 0.5em;
+    height: 0.5em;
+  }
+}
+
+/* Ajustes responsivos usando container queries */
+@container (max-width: 200px) {
+  .titulo {
+    font-size: clamp(0.7rem, 4cqw, 0.95rem);
+  }
+  
+  .cv {
+    font-size: clamp(0.65rem, 4cqw, 0.8rem);
+    gap: 0.4em;
+    padding: 0.4em 0.8em;
+  }
+}
+
+@container (max-height: 42px) {
+  .titulo {
+    font-size: clamp(0.7rem, 4cqh, 0.95rem);
+  }
+  
+  .cv {
+    font-size: clamp(0.65rem, 4cqh, 0.8rem);
+    gap: 0.4em;
+    padding: 0.4em 0.8em;
+  }
+}

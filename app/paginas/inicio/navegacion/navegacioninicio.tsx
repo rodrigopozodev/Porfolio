@@ -7,10 +7,7 @@ const NavegacionInicio = () => {
   const [mode, setMode] = useState<"left" | "right">("right")
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("handedness") as "left" | "right" | null
-      if (saved === "left" || saved === "right") setMode(saved)
-    } catch {}
+    // Por defecto modo diestro, solo cambia si se detecta o se cambia manualmente
     const handler = (e: any) => {
       const m = e?.detail?.mode as "left" | "right" | undefined
       if (m === "left" || m === "right") setMode(m)

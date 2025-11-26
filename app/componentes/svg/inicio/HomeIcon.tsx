@@ -1,7 +1,7 @@
 "use client"
 
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from "react"
-import { motion, useAnimation } from "framer-motion"
+import { motion, useAnimation } from "motion/react"
 
 export interface HomeIconHandle {
   startAnimation: () => void
