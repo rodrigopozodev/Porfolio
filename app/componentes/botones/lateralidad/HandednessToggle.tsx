@@ -3,43 +3,17 @@
  * HandednessToggle: alterna entre modo diestro y zurdo.
  */
 
-import { useEffect, useState } from "react"
+import { useHandedness } from "@/componentes/utils/useHandedness"
+import { useIsDark } from "@/componentes/utils/useTheme"
 import styles from "../../../paginas/inicio/Header/HeaderInicio.module.css"
 
 export default function HandednessToggle() {
-  const [mode, setMode] = useState<"left" | "right">("right")
-  const [isDark, setIsDark] = useState(false)
+  const { mode, toggleMode } = useHandedness()
+  const isDark = useIsDark()
 
-  useEffect(() => {
-    // Escuchar cambios de lateralidad desde la detección automática
-    const handler = (e: any) => {
-      const m = e?.detail?.mode as "left" | "right" | undefined
-      if (m === "left" || m === "right") setMode(m)
-    }
-    window.addEventListener("handednessChange", handler as EventListener)
-    
-    try {
-      const root = document.documentElement
-      setIsDark(root.classList.contains("dark"))
-      const themeHandler = () => setIsDark(root.classList.contains("dark"))
-      window.addEventListener("themeToggleTransition", themeHandler as EventListener)
-      return () => {
-        window.removeEventListener("handednessChange", handler as EventListener)
-        window.removeEventListener("themeToggleTransition", themeHandler as EventListener)
-      }
-    } catch {
-      return () => {
-        window.removeEventListener("handednessChange", handler as EventListener)
-      }
-    }
-  }, [])
   return (
     <button
-      onClick={() => {
-        const next = mode === "right" ? "left" : "right"
-        setMode(next)
-        try { window.dispatchEvent(new CustomEvent("handednessChange", { detail: { mode: next } })) } catch {}
-      }}
+      onClick={toggleMode}
       className={styles.headerButton}
       aria-label="Cambiar lateralidad"
     >

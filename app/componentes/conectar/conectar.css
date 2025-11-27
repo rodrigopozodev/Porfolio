@@ -89,12 +89,18 @@
 
 .cv:hover {
   background: color-mix(in oklch, var(--color-foreground) 15%, var(--color-background));
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .cv:active {
-  transform: scale(1);
+  transform: translateY(0) scale(1.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.cv:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cell { 
@@ -120,11 +126,22 @@
   overflow: hidden; 
   position: relative; 
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
 }
 
 .circle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: color-mix(in oklch, currentColor 8%, transparent);
+}
+.circle:active {
   transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.circle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
 }
 
 .circle svg { color: var(--color-foreground); width: 70%; height: 70%; }

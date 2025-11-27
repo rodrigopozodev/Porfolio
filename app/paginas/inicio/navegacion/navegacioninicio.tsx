@@ -5,6 +5,17 @@ import NavPaginas from "./navpaginas"
 
 const NavegacionInicio = () => {
   const [mode, setMode] = useState<"left" | "right">("right")
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Detectar si es móvil
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   useEffect(() => {
     // Por defecto modo diestro, solo cambia si se detecta o se cambia manualmente
@@ -18,8 +29,8 @@ const NavegacionInicio = () => {
 
   return (
     <>
-      <div className="nav-left box" style={{ display: mode === "left" ? "flex" : "none" }}><NavPaginas /></div>
-      <div className="nav-right box" style={{ display: mode === "right" ? "flex" : "none" }}><NavPaginas /></div>
+      <div className="nav-left box" style={{ display: !isMobile && mode === "left" ? "flex" : "none" }}><NavPaginas /></div>
+      <div className="nav-right box" style={{ display: isMobile || mode === "right" ? "flex" : "none" }}><NavPaginas /></div>
     </>
   )
 }

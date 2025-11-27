@@ -80,7 +80,7 @@
 
 ### 11. **Código y Arquitectura**
 - 💡 Eliminar dependencia `motion` (solo usar framer-motion)
-- 💡 Crear hooks personalizados para lógica repetida (useHandedness, useTheme)
+- ✅ Crear hooks personalizados para lógica repetida (useHandedness, useTheme, useLanguage, useLocalStorage)
 - 💡 Separar lógica de negocio de componentes
 - 💡 Crear constantes para strings mágicos
 - 💡 Usar TypeScript más estrictamente (strict mode)
@@ -94,6 +94,7 @@
 - 💡 Implementar modo de alto contraste
 - ✅ Mejorada calidad visual de imágenes en tarjetas (renderizado optimizado)
 - ✅ Añadido color azul a palabras clave en modo claro para mejor legibilidad
+- ✅ Mejorado feedback visual en todos los elementos interactivos (hover, active, focus states)
 
 ### 13. **Optimizaciones**
 - 💡 Implementar virtual scrolling para testimonios largos
@@ -138,13 +139,13 @@
 | SEO | 0 | 5 | 0 | 5 |
 | A11y | 0 | 5 | 0 | 5 |
 | Responsividad | 0 | 4 | 0 | 4 |
-| Código | 0 | 0 | 5 | 5 |
+| Código | 0 | 0 | 4 | 4 |
 | UI/UX | 0 | 0 | 6 | 6 |
 | Optimizaciones | 0 | 0 | 5 | 5 |
 | Documentación | 0 | 0 | 4 | 4 |
 | DevOps | 0 | 0 | 5 | 5 |
 | Features | 0 | 0 | 6 | 6 |
-| **TOTAL** | **14** | **28** | **36** | **78** |
+| **TOTAL** | **14** | **28** | **35** | **77** |
 
 
 

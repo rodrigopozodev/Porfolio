@@ -6,6 +6,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import Transition from "./componentes/transiciones/TransitionFull"
+import { ErrorBoundary } from "./componentes/utils/ErrorBoundary"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,16 +52,21 @@ export default function RootLayout({
                   } else {
                     root.classList.add(theme);
                   }
-                } catch {}
+                } catch (e) {
+                  // Silently fail theme initialization - it's not critical
+                  // Error will be handled by useTheme hook on client side
+                }
               })();
             `,
           }}
         />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen">
-          <Transition className="bg-neutral-900 dark:bg-white">{children}</Transition>
-        </div>
+        <ErrorBoundary>
+          <div className="min-h-screen">
+            <Transition className="bg-neutral-900 dark:bg-white">{children}</Transition>
+          </div>
+        </ErrorBoundary>
       </body>
     </html>
   )

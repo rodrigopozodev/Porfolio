@@ -91,7 +91,12 @@ const Transition: React.FC<TransitionProps> = ({
 
         try {
           window.dispatchEvent(new CustomEvent("routeSweepFinished"));
-        } catch {}
+        } catch (error) {
+          // Non-critical: event dispatch failure doesn't affect functionality
+          if (process.env.NODE_ENV === "development") {
+            console.warn("Failed to dispatch routeSweepFinished event", error);
+          }
+        }
 
         if (awaitRouteReadyRef.current) {
           const handleReady = () => {
@@ -170,7 +175,12 @@ const Transition: React.FC<TransitionProps> = ({
         setOverrideTransitionDuration(dur ?? null);
         setOverrideHoldBeforeMove(hold ?? null);
         awaitRouteReadyRef.current = awaitReady ?? true;
-      } catch {}
+      } catch (error) {
+        // Non-critical: transition config parsing failure
+        if (process.env.NODE_ENV === "development") {
+          console.warn("Failed to parse routeSweep event data", error);
+        }
+      }
       setShowIntro(true);
       startTransition();
     };

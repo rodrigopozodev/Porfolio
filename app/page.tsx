@@ -1,6 +1,6 @@
 "use client"
 
-import HeaderInicio from "./paginas/inicio/Header/HeaderInicio"
+import HeaderInicio from "./paginas/inicio/header/HeaderInicio"
 import BodyInicio from "./paginas/inicio/body/bodyinicio"
 import NavegacionInicio from "./paginas/inicio/navegacion/navegacioninicio"
 import Proyectos from "./paginas/proyectos/Proyectos"

@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useMemo, useState } from "react"
+import { logger } from "@/lib/logger"
 import TarjetasToggle from "../../../componentes/tarjetas/tarjetasToggle"
 import VisitarButton from "../../../componentes/botones/visitar/VisitarButton"
 import InformacionButton from "../../../componentes/botones/informacion/InformacionButton"
@@ -27,9 +28,12 @@ const BodyInicio = () => {
     const load = async () => {
       try {
         const res = await fetch(`/api/testimonios?language=${language}`, { cache: "no-store" })
-        if (!res.ok) return
-        const rows: any[] = await res.json()
-        const mapped: Testimonial[] = rows.map(r => ({
+        if (!res.ok) {
+          logger.warn("Failed to fetch testimonials", { status: res.status, language })
+          return
+        }
+        const rows: unknown[] = await res.json()
+        const mapped: Testimonial[] = rows.map((r: any) => ({
           name: r.name,
           handle: r.handle,
           review: r.review,
@@ -37,10 +41,12 @@ const BodyInicio = () => {
           linkedin: r.linkedin ?? null,
         }))
         setExtras(mapped)
-      } catch {}
+      } catch (error) {
+        logger.error("Error loading testimonials", error instanceof Error ? error : new Error(String(error)), { language })
+      }
     }
     load()
-  }, [])
+  }, [language])
 
   const canSubmit = useMemo(() => {
     return nombre.trim().length > 0 && puesto.trim().length > 0 && recomendacion.trim().length > 0
@@ -88,8 +94,12 @@ const BodyInicio = () => {
             linkedin: inserted.linkedin ?? null,
           }
           setExtras((prev) => [mapped, ...prev])
+        } else {
+          logger.warn("Failed to submit testimonial", { status: res.status })
         }
-      } catch {}
+      } catch (error) {
+        logger.error("Error submitting testimonial", error instanceof Error ? error : new Error(String(error)))
+      }
       setModalOpen(false)
       resetForm()
     })()

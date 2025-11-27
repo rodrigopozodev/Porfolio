@@ -22,7 +22,9 @@ const NavPaginas = () => {
         return id ? id : "Sección"
       })
       setLabels(ls)
-    } catch {}
+    } catch (error) {
+      logger.warn("Failed to extract section labels", { error })
+    }
 
     if (!container || sections.length === 0) return
 
@@ -33,7 +35,9 @@ const NavPaginas = () => {
         .sort((a, b) => Math.abs(a.rect.top) - Math.abs(b.rect.top))
       const topIdx = vis[0]?.idx ?? 0
       setActive(topIdx)
-    } catch {}
+    } catch (error) {
+      logger.warn("Failed to set initial active section", { error })
+    }
 
     const io = new IntersectionObserver(
       (entries) => {

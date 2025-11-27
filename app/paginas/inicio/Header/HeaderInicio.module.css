@@ -17,12 +17,24 @@
   background: color-mix(in oklch, var(--color-background) 85%, transparent);
   border: 1px solid var(--foreground);
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  transition: transform 120ms ease, box-shadow 120ms ease;
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
   container-type: inline-size;
   cursor: pointer;
 }
-.headerGrid button:hover { transform: none; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-.headerGrid button:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+.headerGrid button:hover { 
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  background: color-mix(in oklch, var(--color-background) 95%, transparent);
+}
+.headerGrid button:active { 
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.headerGrid button:focus-visible { 
+  outline: 2px solid var(--color-ring); 
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+}
 .headerGrid svg { width: 24px; height: 24px; }
 .headerGrid img { width: 24px; height: 24px; display: block; margin: 0; }
 .iconWrap { position: relative; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; }
