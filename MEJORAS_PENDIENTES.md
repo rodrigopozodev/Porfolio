@@ -27,7 +27,8 @@
 - ✅ Lazy loading de componentes pesados (dynamic imports)
 - ✅ Optimización de imágenes implementada (next/image con priority y sizes)
 - ✅ Code splitting granular (dynamic imports para BodyInicio, Proyectos, etc.)
-- ⚠️ No hay service worker / PWA
+- ✅ PWA básico implementado (manifest.ts)
+- ⚠️ Falta service worker completo
 - ✅ Compresión de assets habilitada (next.config.ts)
 - ✅ Optimización de bundle (optimizePackageImports)
 - ✅ Scrollbars eliminados globalmente para mejor performance visual
