@@ -12,6 +12,7 @@ const NavPaginas = () => {
   const [active, setActive] = useState(0)
   const [count, setCount] = useState(initialCount)
   const [labels, setLabels] = useState<string[]>([])
+  const [iconSize, setIconSize] = useState(13.5) // Valor por defecto que coincide con el servidor
 
   useLayoutEffect(() => {
     const container = document.querySelector<HTMLElement>(".snap-container")
@@ -69,6 +70,24 @@ const NavPaginas = () => {
   const bottomButtonRef = React.useRef<HTMLButtonElement | null>(null)
   const topTextRef = React.useRef<HTMLSpanElement | null>(null)
   const bottomTextRef = React.useRef<HTMLSpanElement | null>(null)
+
+  // Detectar tamaño de icono según viewport (solo en cliente)
+  useEffect(() => {
+    const updateIconSize = () => {
+      if (typeof window === "undefined") return
+      const width = window.innerWidth
+      if (width < 768) {
+        setIconSize(10.125) // Móvil: -25%
+      } else if (width >= 1025) {
+        setIconSize(16.875) // Desktop: +25%
+      } else {
+        setIconSize(13.5) // Tablet/iPad: base
+      }
+    }
+    updateIconSize()
+    window.addEventListener("resize", updateIconSize)
+    return () => window.removeEventListener("resize", updateIconSize)
+  }, [])
 
   useEffect(() => {
     const update = () => {
@@ -142,12 +161,12 @@ const NavPaginas = () => {
               {i === 0 ? (
                 <HomeIcon 
                   ref={homeRef} 
-                  size={typeof window !== "undefined" && window.innerWidth < 768 ? 10.125 : (typeof window !== "undefined" && window.innerWidth >= 1025 ? 16.875 : 13.5)} 
+                  size={iconSize}
                 />
               ) : (
                 <SquareStackIcon 
                   ref={projectsRef} 
-                  size={typeof window !== "undefined" && window.innerWidth < 768 ? 10.125 : (typeof window !== "undefined" && window.innerWidth >= 1025 ? 16.875 : 13.5)} 
+                  size={iconSize}
                 />
               )}
               {/* El texto siempre se renderiza para medir su ancho, pero se oculta si no cabe */}
