@@ -120,9 +120,9 @@ const NavPaginas = () => {
             if (i === count - 1) projectsRef.current?.startAnimation()
             // recalcular con medición de texto
             const vw = window.innerWidth
-            const margin = 2
-            const iconW = 4.5
-            const padX = 4
+            const margin = 3
+            const iconW = 6.75
+            const padX = 6
             const topTextW = (topTextRef.current?.offsetWidth ?? 0)
             const bottomTextW = (bottomTextRef.current?.offsetWidth ?? 0)
             const topW = Math.max(iconW, topTextW) + padX
@@ -139,7 +139,7 @@ const NavPaginas = () => {
           <span className="sr-only">{labels[i] ?? `Sección ${i + 1}`}</span>
           {i === 0 || i === count - 1 ? (
             <span className={`nav-label nav-label-icon ${showText ? "has-text" : ""}`}>
-              {i === 0 ? <HomeIcon ref={homeRef} size={4.5} /> : <SquareStackIcon ref={projectsRef} size={4.5} />}
+              {i === 0 ? <HomeIcon ref={homeRef} size={6.75} /> : <SquareStackIcon ref={projectsRef} size={6.75} />}
               {/* El texto siempre se renderiza para medir su ancho, pero se oculta si no cabe */}
               <span ref={i === 0 ? topTextRef : bottomTextRef} className="nav-label-text">{labels[i] ?? (i === 0 ? "Inicio" : "Proyectos")}</span>
               {!showText && null}
