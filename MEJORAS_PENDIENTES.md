@@ -4,9 +4,9 @@
 
 ### 1. **Testing y Calidad de Código**
 - ✅ Tests unitarios implementados (Vitest) para hooks, validaciones, sanitización y rate limiting
-- ❌ No hay tests E2E
+- ✅ Tests E2E implementados (Playwright) para homepage, testimonios y accesibilidad
 - ✅ Validación de tipos en runtime implementada (Zod)
-- ✅ CI/CD configurado (GitHub Actions con tests, lint y build)
+- ✅ CI/CD configurado (GitHub Actions con tests unitarios, E2E, lint y build)
 
 ### 2. **Manejo de Errores**
 - ✅ Errores silenciosos eliminados (todos los catch {} tienen logging)
