@@ -175,3 +175,5 @@ Con las mejoras críticas implementadas, este portfolio podría destacar signifi
 
 *Última actualización: Después de implementar mejoras de mobile-first, breakpoints, accesibilidad y unificación de estilos.*
 
+
+

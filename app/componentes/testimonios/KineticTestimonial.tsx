@@ -66,7 +66,7 @@ export default function KineticTestimonial({ testimonials, extraTestimonials, de
                 {loopItems.map((t, idx) => (
                   <div
                     key={`${t.name}-${idx}`}
-                    className="kt-card group relative w-full overflow-hidden p-4 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white border-2 border-black dark:border-white rounded-xl shrink-0"
+                    className="kt-card group relative w-full overflow-hidden p-4 bg-transparent rounded-xl shrink-0"
                     style={{ flex: "0 0 25%" }}
                   >
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sky-300/50 via-blue-200/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 dark:from-sky-500/30 dark:via-blue-500/20" />

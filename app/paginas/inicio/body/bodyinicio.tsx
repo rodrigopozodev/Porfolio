@@ -2,6 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from "react"
 import TarjetasToggle from "../../../componentes/tarjetas/tarjetasToggle"
+import VisitarButton from "../../../componentes/botones/visitar/VisitarButton"
+import InformacionButton from "../../../componentes/botones/informacion/InformacionButton"
 import ConectarToggle from "../../../componentes/conectar/conectarToggle"
 import KineticTestimonial, { Testimonial } from "../../../componentes/testimonios/KineticTestimonial"
 import AddReviewButton from "../../../componentes/botones/reseñas/AddReviewButton"
@@ -9,6 +11,7 @@ import PalabrasAnimadas from "../../../componentes/palabras-animadas/PalabrasAni
 import VerTrabajosButton from "../../../componentes/botones/ver-trabajos/VerTrabajosButton"
 
 const BodyInicio = () => {
+  const [cardFlipped, setCardFlipped] = React.useState(false)
   // El tamaño del nombre se gestiona con CSS (container queries y clamp)
   const [modalOpen, setModalOpen] = useState(false)
   const [nombre, setNombre] = useState("")
@@ -184,9 +187,22 @@ const BodyInicio = () => {
             <h2 className="titulo">Proyecto destacado</h2>
           </div>
           <div className="div2">
-            <TarjetasToggle imageSrc="/League Tracker.png" imageName="League Tracker" />
+            <TarjetasToggle 
+              imageSrc="/League Tracker.png" 
+              imageName="League Tracker"
+              visitUrl="https://lol-tracker-beta.vercel.app"
+              infoHref="/proyectos/league-tracker"
+              onFlipChange={setCardFlipped}
+            />
           </div>
-          <div className="div3" aria-hidden="true"></div>
+          <div className="div3" aria-hidden="true">
+            {cardFlipped && (
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", width: "100%", height: "100%", padding: "0.5rem" }}>
+                <InformacionButton href="/proyectos/league-tracker" className="w-full h-full" />
+                <VisitarButton url="https://lol-tracker-beta.vercel.app" className="w-full h-full" />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>
