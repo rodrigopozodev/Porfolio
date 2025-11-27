@@ -52,6 +52,35 @@ body {
 }
 
 /* ============================================
+   TOUCH TARGETS: Mínimo 44x44px para accesibilidad
+   ============================================ */
+button,
+a,
+[role="button"],
+input[type="submit"],
+input[type="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+/* ============================================
+   TABLETS: Optimización para portrait
+   ============================================ */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  /* Ajustes específicos para tablets en portrait */
+  body {
+    font-size: 1.1rem;
+  }
+  
+  /* Mejorar espaciado en tablets */
+  .container,
+  .box {
+    padding: 1.5rem;
+  }
+}
+
+/* ============================================
    SCROLLBARS: Ocultar todas las barras de desplazamiento
    ============================================ */
 

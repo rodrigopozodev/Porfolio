@@ -28,9 +28,12 @@ const BodyInicio = () => {
   const [fotoFile, setFotoFile] = useState<File | null>(null)
   const [fotoPreview, setFotoPreview] = useState<string | null>(null)
   const [extras, setExtras] = useState<Testimonial[]>([])
+  const [loading, setLoading] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     const load = async () => {
+      setLoading(true)
       try {
         const res = await fetch(`/api/testimonios?language=${language}`, { cache: "no-store" })
         if (!res.ok) {
@@ -48,6 +51,8 @@ const BodyInicio = () => {
         setExtras(mapped)
       } catch (error) {
         logger.error("Error loading testimonials", error instanceof Error ? error : new Error(String(error)), { language })
+      } finally {
+        setLoading(false)
       }
     }
     load()
@@ -131,6 +136,7 @@ const BodyInicio = () => {
       linkedin: sanitizedLinkedin,
     }
     ;(async () => {
+      setSubmitting(true)
       try {
         const res = await fetch(`/api/testimonios`, {
           method: "POST",
@@ -152,9 +158,11 @@ const BodyInicio = () => {
         }
       } catch (error) {
         logger.error("Error submitting testimonial", error instanceof Error ? error : new Error(String(error)))
+      } finally {
+        setSubmitting(false)
+        setModalOpen(false)
+        resetForm()
       }
-      setModalOpen(false)
-      resetForm()
     })()
   }
 
@@ -217,7 +225,12 @@ const BodyInicio = () => {
                   </div>
                   {fotoPreview && <img src={fotoPreview} alt="Previsualización" className="mt-2 h-16 w-16 rounded-full object-cover" />}
                 </label>
-                <button type="submit" className="btn border-2 border-black dark:border-white rounded-md px-3 py-2 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white" disabled={!canSubmit}>{t.testimonios.enviar}</button>
+                <button type="submit" className="btn border-2 border-black dark:border-white rounded-md px-3 py-2 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2" disabled={!canSubmit || submitting}>
+                  {submitting && (
+                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" aria-hidden="true"></div>
+                  )}
+                  <span>{submitting ? (language === "es" ? "Enviando..." : "Submitting...") : t.testimonios.enviar}</span>
+                </button>
               </form>
             </div>
           </div>
