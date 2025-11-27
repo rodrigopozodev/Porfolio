@@ -24,7 +24,8 @@
 
 ### 4. **Performance**
 - ⚠️ Falta lazy loading de componentes pesados
-- ⚠️ No hay optimización de imágenes (next/image)
+- ⚠️ No hay optimización de imágenes (next/image) - *Parcial: mejorado renderizado CSS pero falta next/image*
+- ✅ Mejorado renderizado de imágenes con CSS (image-rendering, transform, will-change)
 - ⚠️ Falta code splitting más granular
 - ⚠️ No hay service worker / PWA
 - ⚠️ Falta compresión de assets
@@ -91,6 +92,8 @@
 - 💡 Mejorar estados de carga y error
 - 💡 Agregar tooltips informativos
 - 💡 Implementar modo de alto contraste
+- ✅ Mejorada calidad visual de imágenes en tarjetas (renderizado optimizado)
+- ✅ Añadido color azul a palabras clave en modo claro para mejor legibilidad
 
 ### 13. **Optimizaciones**
 - 💡 Implementar virtual scrolling para testimonios largos

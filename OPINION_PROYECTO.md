@@ -13,15 +13,17 @@
 
 ---
 
-### 2. **Diseño y UI** ⭐⭐⭐⭐ (4/5)
+### 2. **Diseño y UI** ⭐⭐⭐⭐ (4.5/5)
 - ✅ **Diseño moderno**: Uso de técnicas avanzadas (CSS Grid, Container Queries)
 - ✅ **Animaciones fluidas**: Framer Motion bien implementado
 - ✅ **Tema claro/oscuro**: Implementación correcta con persistencia
 - ✅ **Lateralidad (handedness)**: Feature única y bien pensada
 - ✅ **Scroll snap**: Navegación por secciones muy fluida
+- ✅ **Calidad de imágenes**: Renderizado optimizado para mejor calidad visual
+- ✅ **Palabras clave destacadas**: Color azul en modo claro para mejor legibilidad
 - ⚠️ **Mejorable**: Algunos elementos podrían tener mejor feedback visual
 
-**Veredicto**: El diseño es profesional y moderno. La atención al detalle (lateralidad, temas) muestra cuidado por la UX.
+**Veredicto**: El diseño es profesional y moderno. La atención al detalle (lateralidad, temas, calidad de imágenes) muestra cuidado por la UX.
 
 ---
 
@@ -47,14 +49,16 @@
 
 ---
 
-### 5. **Performance** ⭐⭐⭐ (3/5)
+### 5. **Performance** ⭐⭐⭐ (3.5/5)
 - ✅ **Preload de recursos**: Bien implementado
 - ✅ **Lazy loading**: Algunos componentes
 - ✅ **Optimización de fuentes**: Next.js fonts
-- ⚠️ **Falta**: next/image, code splitting más granular, PWA
+- ✅ **Renderizado de imágenes optimizado**: CSS mejorado (image-rendering, transform, will-change)
+- ✅ **Atributo sizes**: Implementado para mejor selección de resolución
+- ⚠️ **Falta**: next/image (aunque se mejoró el renderizado), code splitting más granular, PWA
 - ⚠️ **Mejorable**: Bundle size, compresión
 
-**Veredicto**: Performance decente, pero hay margen de mejora significativo.
+**Veredicto**: Performance mejorada con optimizaciones de renderizado de imágenes. Falta implementar next/image para optimización completa.
 
 ---
 
@@ -96,15 +100,15 @@
 | Categoría | Puntuación | Comentario |
 |-----------|-----------|------------|
 | Arquitectura | ⭐⭐⭐⭐ 4/5 | Sólida y bien organizada |
-| Diseño/UI | ⭐⭐⭐⭐ 4/5 | Moderno y profesional |
+| Diseño/UI | ⭐⭐⭐⭐ 4.5/5 | Moderno y profesional, mejorado |
 | Responsividad | ⭐⭐⭐⭐ 4/5 | Bien implementada |
 | Accesibilidad | ⭐⭐⭐ 3/5 | Base buena, necesita más |
-| Performance | ⭐⭐⭐ 3/5 | Decente, mejorable |
+| Performance | ⭐⭐⭐ 3.5/5 | Mejorada con optimizaciones de imágenes |
 | Mantenibilidad | ⭐⭐⭐ 3/5 | Código limpio, falta infraestructura |
 | Funcionalidad | ⭐⭐ 2/5 | Incompleta |
 | Seguridad | ⭐⭐ 2/5 | Básica |
 
-### Puntuación Global: ⭐⭐⭐ (3.25/5)
+### Puntuación Global: ⭐⭐⭐ (3.38/5)
 
 ---
 
@@ -167,13 +171,15 @@ Este proyecto tiene **MUCHO potencial**. La base técnica es sólida, el diseño
 - Mejorar seguridad
 - Implementar i18n real
 
-**Veredicto final**: ⭐⭐⭐⭐ (4/5) - **Muy buen proyecto con potencial para ser excepcional**
+**Veredicto final**: ⭐⭐⭐⭐ (4.1/5) - **Muy buen proyecto con potencial para ser excepcional**
+
+*Nota: Puntuación actualizada tras mejoras en calidad de imágenes y UI.*
 
 Con las mejoras críticas implementadas, este portfolio podría destacar significativamente. El trabajo realizado hasta ahora es de calidad, solo necesita completarse y pulirse.
 
 ---
 
-*Última actualización: Después de implementar mejoras de mobile-first, breakpoints, accesibilidad y unificación de estilos.*
+*Última actualización: Después de implementar mejoras de mobile-first, breakpoints, accesibilidad, unificación de estilos, optimización de renderizado de imágenes y mejoras de UI (color azul en palabras clave).*
 
 
 
