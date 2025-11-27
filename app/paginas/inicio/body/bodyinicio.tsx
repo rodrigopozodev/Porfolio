@@ -3,6 +3,9 @@
 import React, { useEffect, useMemo, useState } from "react"
 import { logger } from "@/lib/logger"
 import { sanitizeName, sanitizeText, sanitizeUrl } from "@/lib/sanitize"
+import { useTranslation } from "@/componentes/utils/useTranslation"
+import { useLanguage } from "@/componentes/utils/useLanguage"
+import { externalUrls, routes } from "@/lib/config"
 import TarjetasToggle from "../../../componentes/tarjetas/tarjetasToggle"
 import VisitarButton from "../../../componentes/botones/visitar/VisitarButton"
 import InformacionButton from "../../../componentes/botones/informacion/InformacionButton"
@@ -13,6 +16,8 @@ import PalabrasAnimadas from "../../../componentes/palabras-animadas/PalabrasAni
 import VerTrabajosButton from "../../../componentes/botones/ver-trabajos/VerTrabajosButton"
 
 const BodyInicio = () => {
+  const t = useTranslation()
+  const { language } = useLanguage()
   const [cardFlipped, setCardFlipped] = React.useState(false)
   // El tamaño del nombre se gestiona con CSS (container queries y clamp)
   const [modalOpen, setModalOpen] = useState(false)
@@ -23,7 +28,6 @@ const BodyInicio = () => {
   const [fotoFile, setFotoFile] = useState<File | null>(null)
   const [fotoPreview, setFotoPreview] = useState<string | null>(null)
   const [extras, setExtras] = useState<Testimonial[]>([])
-  const language = "es"
 
   useEffect(() => {
     const load = async () => {
@@ -110,12 +114,12 @@ const BodyInicio = () => {
     
     // Validar que la sanitización fue exitosa
     if (!sanitizedName || sanitizedName.length === 0) {
-      alert("El nombre contiene caracteres inválidos")
+      alert(t.validation.nombreRequerido)
       return
     }
     
     if (sanitizedLinkedin === null && linkedin.trim()) {
-      alert("La URL de LinkedIn no es válida")
+      alert(t.validation.urlInvalida)
       return
     }
     
@@ -158,7 +162,7 @@ const BodyInicio = () => {
     <>
       <div className="recomendaciones box">
         <div className="div1">
-          <h2 className="titulo">Recomendaciones</h2>
+          <h2 className="titulo">{t.testimonios.titulo}</h2>
         </div>
         <div className="div2"><KineticTestimonial desktopColumns={1} extraTestimonials={extras} /></div>
         <div className="div3">
@@ -176,9 +180,9 @@ const BodyInicio = () => {
           >
             <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl dark:bg-neutral-900 dark:text-white border-2 border-black dark:border-white">
               <div className="mb-4 flex items-center justify-between">
-                <h2 id="modal-title" className="text-lg font-semibold">Nueva reseña</h2>
+                <h2 id="modal-title" className="text-lg font-semibold">{t.testimonios.nuevaReseña}</h2>
                 <button 
-                  aria-label="Cerrar modal" 
+                  aria-label={t.testimonios.cerrar} 
                   onClick={() => setModalOpen(false)}
                   onKeyDown={(e) => {
                     if (e.key === "Escape") setModalOpen(false)
@@ -189,31 +193,31 @@ const BodyInicio = () => {
               </div>
               <form onSubmit={onSubmit} className="flex flex-col gap-3">
                 <label className="flex flex-col gap-1">
-                  <span>Nombre y Apellidos</span>
-                  <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="input border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" placeholder="Ej. Ana López García" required />
+                  <span>{t.testimonios.nombre}</span>
+                  <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="input border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" placeholder={t.testimonios.nombrePlaceholder} required />
                 </label>
                 <label className="flex flex-col gap-1">
-                  <span>Puesto</span>
-                  <input type="text" value={puesto} onChange={(e) => setPuesto(e.target.value)} className="input border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" placeholder="Ej. Frontend Engineer @ TechCo" required />
+                  <span>{t.testimonios.puesto}</span>
+                  <input type="text" value={puesto} onChange={(e) => setPuesto(e.target.value)} className="input border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" placeholder={t.testimonios.puestoPlaceholder} required />
                 </label>
                 <label className="flex flex-col gap-1">
-                  <span>Recomendación</span>
-                  <textarea value={recomendacion} onChange={(e) => setRecomendacion(e.target.value)} className="textarea border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" rows={4} placeholder="Ej. Trabajar con Rodrigo fue eficiente y agradable…" required />
+                  <span>{t.testimonios.recomendacion}</span>
+                  <textarea value={recomendacion} onChange={(e) => setRecomendacion(e.target.value)} className="textarea border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" rows={4} placeholder={t.testimonios.recomendacionPlaceholder} required />
                 </label>
                 <label className="flex flex-col gap-1">
-                  <span>LinkedIn (opcional)</span>
-                  <input type="url" placeholder="https://linkedin.com/in/usuario" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} className="input border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" />
+                  <span>{t.testimonios.linkedin}</span>
+                  <input type="url" placeholder={t.testimonios.linkedinPlaceholder} value={linkedin} onChange={(e) => setLinkedin(e.target.value)} className="input border-2 border-black dark:border-white rounded-md px-3 py-2 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400" />
                 </label>
                 <label className="flex flex-col gap-1">
-                  <span>Foto (opcional)</span>
+                  <span>{t.testimonios.foto}</span>
                   <input id="fotoInput" type="file" accept="image/*" onChange={onFotoChange} className="sr-only" />
                   <div className="flex items-center gap-3">
-                    <label htmlFor="fotoInput" className="btn border-2 border-black dark:border-white rounded-md px-3 py-2 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white cursor-pointer">Seleccionar foto</label>
-                    <span className="text-sm text-neutral-700 dark:text-neutral-300">{fotoFile ? fotoFile.name : "Ninguna seleccionada"}</span>
+                    <label htmlFor="fotoInput" className="btn border-2 border-black dark:border-white rounded-md px-3 py-2 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white cursor-pointer">{t.testimonios.seleccionarFoto}</label>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300">{fotoFile ? fotoFile.name : t.testimonios.ningunaSeleccionada}</span>
                   </div>
                   {fotoPreview && <img src={fotoPreview} alt="Previsualización" className="mt-2 h-16 w-16 rounded-full object-cover" />}
                 </label>
-                <button type="submit" className="btn border-2 border-black dark:border-white rounded-md px-3 py-2 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white" disabled={!canSubmit}>Enviar</button>
+                <button type="submit" className="btn border-2 border-black dark:border-white rounded-md px-3 py-2 bg-white text-neutral-900 dark:bg-neutral-900 dark:text-white" disabled={!canSubmit}>{t.testimonios.enviar}</button>
               </form>
             </div>
           </div>
@@ -230,7 +234,7 @@ const BodyInicio = () => {
           />
         </div>
         <div className="div2">
-          <h1 className="nombre">Rodrigo Pozo Sánchez</h1>
+          <h1 className="nombre">{t.personal.name}</h1>
         </div>
         <div className="div3" role="status" aria-live="polite">
           <PalabrasAnimadas />
@@ -243,22 +247,22 @@ const BodyInicio = () => {
       <div className="destacado box">
         <div className="proyectoDestacado">
           <div className="div1">
-            <h2 className="titulo">Proyecto destacado</h2>
+            <h2 className="titulo">{t.proyectos.destacado}</h2>
           </div>
           <div className="div2">
             <TarjetasToggle 
               imageSrc="/League Tracker.png" 
               imageName="League Tracker"
-              visitUrl="https://lol-tracker-beta.vercel.app"
-              infoHref="/proyectos/league-tracker"
+              visitUrl={externalUrls.leagueTracker}
+              infoHref={routes.leagueTracker}
               onFlipChange={setCardFlipped}
             />
           </div>
           <div className="div3" aria-hidden="true">
             {cardFlipped && (
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", width: "100%", height: "100%", padding: "0.5rem" }}>
-                <InformacionButton href="/proyectos/league-tracker" className="w-full h-full" />
-                <VisitarButton url="https://lol-tracker-beta.vercel.app" className="w-full h-full" />
+                <InformacionButton href={routes.leagueTracker} className="w-full h-full" />
+                <VisitarButton url={externalUrls.leagueTracker} className="w-full h-full" />
               </div>
             )}
           </div>

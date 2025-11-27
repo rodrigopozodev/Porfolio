@@ -8,6 +8,7 @@ import "./globals.css"
 import Transition from "./componentes/transiciones/TransitionFull"
 import { ErrorBoundary } from "./componentes/utils/ErrorBoundary"
 import SkipLink from "./componentes/utils/SkipLink"
+import ErrorBoundaryWrapper from "./componentes/utils/ErrorBoundaryWrapper"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,11 +65,11 @@ export default function RootLayout({
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SkipLink />
-        <ErrorBoundary>
+        <ErrorBoundaryWrapper>
           <div className="min-h-screen">
             <Transition className="bg-neutral-900 dark:bg-white">{children}</Transition>
           </div>
-        </ErrorBoundary>
+        </ErrorBoundaryWrapper>
       </body>
     </html>
   )

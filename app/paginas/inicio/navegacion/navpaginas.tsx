@@ -4,8 +4,10 @@ import React, { useEffect, useLayoutEffect, useMemo, useState } from "react"
 import { HomeIcon, HomeIconHandle } from "@/componentes/svg/inicio/HomeIcon"
 import { SquareStackIcon, SquareStackIconHandle } from "@/componentes/svg/proyectos/SquareStackIcon"
 import { logger } from "@/lib/logger"
+import { useTranslation } from "@/componentes/utils/useTranslation"
 
 const NavPaginas = () => {
+  const t = useTranslation()
   const initialCount = typeof window !== "undefined" ? (document.querySelectorAll<HTMLElement>(".page-section").length || 2) : 2
   const [active, setActive] = useState(0)
   const [count, setCount] = useState(initialCount)
@@ -18,8 +20,8 @@ const NavPaginas = () => {
     try {
       const ls = sections.map((s) => {
         const id = s.id?.trim() || ""
-        if (id.toLowerCase() === "inicio") return "Inicio"
-        if (id.toLowerCase() === "proyectos") return "Proyectos"
+        if (id.toLowerCase() === "inicio") return t.nav.inicio
+        if (id.toLowerCase() === "proyectos") return t.nav.proyectos
         return id ? id : "Sección"
       })
       setLabels(ls)

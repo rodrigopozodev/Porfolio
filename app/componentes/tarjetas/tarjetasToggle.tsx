@@ -7,6 +7,8 @@ import VisitarButton from "../botones/visitar/VisitarButton"
 import InformacionButton from "../botones/informacion/InformacionButton"
 import ResumenLeagueTracker from "./resumen-proyecto/ResumenLeagueTracker"
 import TecnologiasLeagueTracker from "./tecnologias-utilizadas/TecnologiasLeagueTracker"
+import { useTranslation } from "../utils/useTranslation"
+import { externalUrls, routes } from "@/lib/config"
 
 interface Props {
   imageSrc: string
@@ -23,8 +25,13 @@ const getComponentName = (projectName: string): string => {
 }
 
 const TarjetasToggle = ({ imageSrc, imageName, visitUrl, infoHref, onFlipChange }: Props) => {
+  const t = useTranslation()
   const [flipped, setFlipped] = useState(false)
   const normalizedSrc = imageSrc.replace(/\s/g, "%20")
+  
+  // Usar URLs de config si no se proporcionan
+  const finalVisitUrl = visitUrl || externalUrls.leagueTracker
+  const finalInfoHref = infoHref || routes.leagueTracker
   
   const handleFlip = () => {
     const newFlipped = !flipped
@@ -64,7 +71,7 @@ const TarjetasToggle = ({ imageSrc, imageName, visitUrl, infoHref, onFlipChange 
       }}
       role="button"
       tabIndex={0}
-      aria-label={`${imageName} - Click para ver detalles`}
+      aria-label={`${imageName} - ${t.proyectos.clickForDetails}`}
     >
       <div className={`flip-inner ${flipped ? "flipped" : ""}`} style={{ position: "relative", width: "100%", height: "100%", transformStyle: "preserve-3d", transition: "transform 0.6s ease" }}>
         <div

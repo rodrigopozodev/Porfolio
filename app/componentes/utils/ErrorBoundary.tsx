@@ -6,6 +6,13 @@ interface Props {
   children: ReactNode
   fallback?: ReactNode
   onError?: (error: Error, errorInfo: ErrorInfo) => void
+  translations?: {
+    title: string
+    message: string
+    details: string
+    tryAgain: string
+    reload: string
+  }
 }
 
 interface State {
@@ -56,19 +63,27 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback
       }
 
+      const t = this.props.translations || {
+        title: "Algo salió mal",
+        message: "Ha ocurrido un error inesperado. Por favor, intenta recargar la página.",
+        details: "Detalles del error (solo en desarrollo)",
+        tryAgain: "Intentar de nuevo",
+        reload: "Recargar página",
+      }
+
       return (
         <div className="flex min-h-screen items-center justify-center bg-background p-4">
           <div className="max-w-md w-full rounded-lg border-2 border-foreground/20 bg-background p-6 text-center">
             <h2 className="text-2xl font-semibold mb-4 text-foreground">
-              Algo salió mal
+              {t.title}
             </h2>
             <p className="text-foreground/70 mb-6">
-              Ha ocurrido un error inesperado. Por favor, intenta recargar la página.
+              {t.message}
             </p>
             {process.env.NODE_ENV === "development" && this.state.error && (
               <details className="mb-4 text-left">
                 <summary className="cursor-pointer text-sm font-medium text-foreground/80 mb-2">
-                  Detalles del error (solo en desarrollo)
+                  {t.details}
                 </summary>
                 <pre className="text-xs bg-foreground/5 p-3 rounded overflow-auto max-h-40">
                   {this.state.error.toString()}
@@ -81,13 +96,13 @@ export class ErrorBoundary extends Component<Props, State> {
                 onClick={this.handleReset}
                 className="px-4 py-2 bg-foreground text-background rounded-md hover:opacity-90 transition-opacity"
               >
-                Intentar de nuevo
+                {t.tryAgain}
               </button>
               <button
                 onClick={() => window.location.reload()}
                 className="px-4 py-2 border-2 border-foreground text-foreground rounded-md hover:bg-foreground/10 transition-colors"
               >
-                Recargar página
+                {t.reload}
               </button>
             </div>
           </div>

@@ -1,8 +1,11 @@
 "use client"
 
 import React from "react"
+import { useTranslation } from "../../utils/useTranslation"
 
 export default function VerTrabajosButton() {
+  const t = useTranslation()
+  
   const handleClick = () => {
     const proyectos = document.getElementById("proyectos")
     proyectos?.scrollIntoView({ behavior: "smooth" })
@@ -12,7 +15,7 @@ export default function VerTrabajosButton() {
     <button
       onClick={handleClick}
       className="ver-trabajos-btn"
-      aria-label="Ver proyectos destacados"
+      aria-label={`${t.personal.verTrabajos} - ${t.proyectos.destacado}`}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault()
@@ -20,7 +23,7 @@ export default function VerTrabajosButton() {
         }
       }}
     >
-      <span className="ver-trabajos-text">Ver Trabajos</span>
+      <span className="ver-trabajos-text">{t.personal.verTrabajos}</span>
       <svg
         className="ver-trabajos-arrow"
         width="20"
