@@ -31,7 +31,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preload" as="image" href="/League%20Tracker.png" fetchPriority="high" />
         <link rel="preload" as="image" href="/icon-github.svg" fetchPriority="high" />
         <link rel="preload" as="image" href="/icon-linkedin.svg" fetchPriority="high" />
         <link rel="preload" as="image" href="/icon-gmail.svg" fetchPriority="high" />
