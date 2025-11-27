@@ -46,14 +46,15 @@ export async function validateCsrfToken(token: string): Promise<boolean> {
   const cookieStore = await cookies()
   const storedToken = cookieStore.get(CSRF_TOKEN_NAME)?.value
 
-  if (!storedToken || !token) {
+  if (!storedToken || !token || storedToken.length !== token.length) {
     return false
   }
 
   // Comparación segura contra timing attacks
-  return crypto.timingSafeEqual(
-    Buffer.from(storedToken),
-    Buffer.from(token)
-  )
+  let result = 0
+  for (let i = 0; i < storedToken.length; i++) {
+    result |= storedToken.charCodeAt(i) ^ token.charCodeAt(i)
+  }
+  return result === 0
 }
 

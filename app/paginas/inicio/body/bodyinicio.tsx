@@ -172,7 +172,18 @@ const BodyInicio = () => {
         <div className="div1">
           <h2 className="titulo">{t.testimonios.titulo}</h2>
         </div>
-        <div className="div2"><KineticTestimonial desktopColumns={1} extraTestimonials={extras} /></div>
+        <div className="div2">
+          {loading ? (
+            <div className="flex items-center justify-center h-full" role="status" aria-live="polite">
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-8 h-8 border-4 border-current border-t-transparent rounded-full animate-spin" aria-hidden="true"></div>
+                <span className="text-sm">{t.testimonios.titulo}...</span>
+              </div>
+            </div>
+          ) : (
+            <KineticTestimonial desktopColumns={1} extraTestimonials={extras} />
+          )}
+        </div>
         <div className="div3">
           <AddReviewButton onClick={() => setModalOpen(true)} />
         </div>
