@@ -120,9 +120,9 @@ const NavPaginas = () => {
             if (i === count - 1) projectsRef.current?.startAnimation()
             // recalcular con medición de texto
             const vw = window.innerWidth
-            const margin = 6
-            const iconW = 13.5
-            const padX = 12
+            const margin = window.innerWidth >= 1025 ? 7.5 : 6
+            const iconW = window.innerWidth >= 1025 ? 16.875 : 13.5
+            const padX = window.innerWidth >= 1025 ? 15 : 12
             const topTextW = (topTextRef.current?.offsetWidth ?? 0)
             const bottomTextW = (bottomTextRef.current?.offsetWidth ?? 0)
             const topW = Math.max(iconW, topTextW) + padX
@@ -139,7 +139,17 @@ const NavPaginas = () => {
           <span className="sr-only">{labels[i] ?? `Sección ${i + 1}`}</span>
           {i === 0 || i === count - 1 ? (
             <span className={`nav-label nav-label-icon ${showText ? "has-text" : ""}`}>
-              {i === 0 ? <HomeIcon ref={homeRef} size={13.5} /> : <SquareStackIcon ref={projectsRef} size={13.5} />}
+              {i === 0 ? (
+                <HomeIcon 
+                  ref={homeRef} 
+                  size={typeof window !== "undefined" && window.innerWidth < 768 ? 10.125 : (typeof window !== "undefined" && window.innerWidth >= 1025 ? 16.875 : 13.5)} 
+                />
+              ) : (
+                <SquareStackIcon 
+                  ref={projectsRef} 
+                  size={typeof window !== "undefined" && window.innerWidth < 768 ? 10.125 : (typeof window !== "undefined" && window.innerWidth >= 1025 ? 16.875 : 13.5)} 
+                />
+              )}
               {/* El texto siempre se renderiza para medir su ancho, pero se oculta si no cabe */}
               <span ref={i === 0 ? topTextRef : bottomTextRef} className="nav-label-text">{labels[i] ?? (i === 0 ? "Inicio" : "Proyectos")}</span>
               {!showText && null}
