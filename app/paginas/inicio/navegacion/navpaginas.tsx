@@ -3,6 +3,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useState } from "react"
 import { HomeIcon, HomeIconHandle } from "@/componentes/svg/inicio/HomeIcon"
 import { SquareStackIcon, SquareStackIconHandle } from "@/componentes/svg/proyectos/SquareStackIcon"
+import { logger } from "@/lib/logger"
 
 const NavPaginas = () => {
   const initialCount = typeof window !== "undefined" ? (document.querySelectorAll<HTMLElement>(".page-section").length || 2) : 2

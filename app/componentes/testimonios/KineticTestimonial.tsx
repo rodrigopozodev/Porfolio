@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useMemo } from "react"
+import Image from "next/image"
 
 export interface Testimonial {
   name: string
@@ -73,7 +74,16 @@ export default function KineticTestimonial({ testimonials, extraTestimonials, de
                     <p className="kt-review text-sm leading-relaxed mb-4">{t.review}</p>
                     <div className="kt-footer flex items-center gap-3">
                       {t.avatar && (
-                        <img src={t.avatar} alt={t.name} className="kt-avatar h-10 w-10 rounded-full object-cover ring-2 ring-blue-500" loading="eager" decoding="sync" fetchPriority="high" />
+                        <div className="kt-avatar h-10 w-10 rounded-full ring-2 ring-blue-500 relative overflow-hidden">
+                          <Image
+                            src={t.avatar}
+                            alt={t.name}
+                            fill
+                            className="object-cover"
+                            sizes="40px"
+                            loading="lazy"
+                          />
+                        </div>
                       )}
                       <div className="kt-meta min-w-0">
                         <p className="kt-name text-sm font-semibold">{t.name}</p>

@@ -26,10 +26,7 @@
 html.light .flip-back { background: #000000; color: #ffffff; }
 html.dark .flip-back { background: #ffffff; color: #171717; }
 .flip-image { 
-  width: 100%; 
-  height: 100%; 
   object-fit: cover; 
-  display: block; 
   image-rendering: -webkit-optimize-contrast;
   image-rendering: auto;
   transform: translateZ(0);

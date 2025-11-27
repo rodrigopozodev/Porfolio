@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useMemo } from "react"
+import Image from "next/image"
 import "./tarjetas.css"
 import VisitarButton from "../botones/visitar/VisitarButton"
 import InformacionButton from "../botones/informacion/InformacionButton"
@@ -70,16 +71,16 @@ const TarjetasToggle = ({ imageSrc, imageName, visitUrl, infoHref, onFlipChange 
           className="flip-face flip-front"
           style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", overflow: "hidden" }}
         >
-          <img
-            src={normalizedSrc}
-            alt={imageName}
-            className="flip-image"
-            loading="eager"
-            decoding="sync"
-            fetchPriority="high"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <Image
+              src={normalizedSrc}
+              alt={imageName}
+              fill
+              className="flip-image"
+              priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
         </div>
         <div className="flip-face flip-back" style={{ position: "absolute", inset: 0, backfaceVisibility: "hidden", overflow: "hidden", transform: "rotateY(180deg)" }}>
           <div className="flip-content">

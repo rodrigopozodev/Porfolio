@@ -52,6 +52,27 @@ body {
 }
 
 /* ============================================
+   SCROLLBARS: Ocultar todas las barras de desplazamiento
+   ============================================ */
+
+/* Ocultar scrollbars globalmente en todos los navegadores */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}
+
+/* Permitir scroll funcional pero sin scrollbar visible */
+html, body {
+  overflow: hidden;
+}
+
+/* ============================================
    ACCESIBILIDAD: Skip Link
    ============================================ */
 
@@ -120,7 +141,11 @@ textarea:focus-visible,
     --foreground: #000000;
   }
 
-  .dark,
+  .dark {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+
   @media (prefers-color-scheme: dark) {
     :root {
       --background: #000000;
@@ -180,15 +205,33 @@ textarea:focus-visible,
 /* Visual del GIF de la mano sin fondo artificial */
 img[src="/mano.gif"], .gif-negro { filter: none; background: transparent; }
 
-html, body { height: 100%; }
+html, body { 
+  height: 100%; 
+  overflow: hidden; /* Sin scrollbars en body */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+  width: 0;
+  height: 0;
+}
+
 .snap-container {
   height: 100dvh;
   overflow-y: auto;
+  overflow-x: hidden;
   scroll-snap-type: y mandatory;
   overscroll-behavior-y: none;
-  scrollbar-width: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE y Edge */
 }
-.snap-container::-webkit-scrollbar { width: 0; height: 0; display: none; }
+.snap-container::-webkit-scrollbar { 
+  width: 0; 
+  height: 0; 
+  display: none; /* Chrome, Safari, Opera */
+}
 .page-section {
   height: 100dvh;
   min-height: 100dvh;
