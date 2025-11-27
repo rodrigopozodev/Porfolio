@@ -8,6 +8,7 @@ import styles from "../../../paginas/inicio/Header/HeaderInicio.module.css"
 
 export default function LanguageToggle() {
   const { language, toggleLanguage } = useLanguage()
+  
   return (
     <button onClick={toggleLanguage} className={styles.headerButton} aria-label="Cambiar idioma">
       <span className={styles.iconWrap}>

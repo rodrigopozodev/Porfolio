@@ -18,15 +18,15 @@ const ConectarToggle = () => {
           onClick={() => window.open(externalUrls.github, "_blank", "noopener,noreferrer")}
         >
           <span className="iconGit">
-            <img src="/icon-github.svg" alt="GitHub" className="iconGitImg" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
+            <img src="/icon-github.svg" alt="GitHub" className="iconGitImg" width={24} height={24} loading="eager" decoding="sync" fetchPriority="high" />
           </span>
         </button>
       </div>
       <div className="linkedin cell">
         <a className="circle" aria-label={t.conectar.linkedin} href={externalUrls.linkedin} target="_blank" rel="noopener noreferrer" data-label="linkedin">
           <span className="iconLinked">
-            <img src="/icon-linkedin.svg" alt="LinkedIn" className="iconLinkedDefault" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
-            <img src="/icon-linkedin-hover.svg" alt="LinkedIn Hover" className="iconLinkedHover" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
+            <img src="/icon-linkedin.svg" alt="LinkedIn" className="iconLinkedDefault" width={24} height={24} loading="eager" decoding="sync" fetchPriority="high" />
+            <img src="/icon-linkedin-hover.svg" alt="LinkedIn Hover" className="iconLinkedHover" width={24} height={24} loading="eager" decoding="sync" fetchPriority="high" />
           </span>
         </a>
       </div>
@@ -38,7 +38,7 @@ const ConectarToggle = () => {
           onClick={() => window.open(externalUrls.email, "_blank", "noopener,noreferrer")}
         >
           <span className="iconMail">
-            <img src="/icon-gmail.svg" alt="Gmail" width={28} height={28} loading="eager" decoding="sync" fetchPriority="high" />
+            <img src="/icon-gmail.svg" alt="Gmail" width={24} height={24} loading="eager" decoding="sync" fetchPriority="high" />
           </span>
         </button>
       </div>

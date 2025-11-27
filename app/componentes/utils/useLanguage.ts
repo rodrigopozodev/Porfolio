@@ -19,25 +19,17 @@ function detectBrowserLanguage(): Language {
 
 /**
  * Hook personalizado para gestionar el idioma de la aplicación
- * Persiste la preferencia en localStorage y detecta automáticamente el idioma del navegador
+ * Persiste la preferencia en localStorage, por defecto español
  */
 export function useLanguage() {
-  const [language, setLanguage] = useLocalStorageString("language", "")
-
-  // Detectar idioma del navegador si no hay preferencia guardada
-  useEffect(() => {
-    if (!language || language === "") {
-      const detected = detectBrowserLanguage()
-      setLanguage(detected)
-    }
-  }, [language, setLanguage])
+  const [language, setLanguage] = useLocalStorageString("language", "es")
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "es" ? "en" : "es"))
   }
 
   return {
-    language: (language || detectBrowserLanguage()) as Language,
+    language: (language || "es") as Language,
     setLanguage: (lang: Language) => setLanguage(lang),
     toggleLanguage,
   }

@@ -157,6 +157,7 @@
   padding-inline: 0.5rem; 
   min-width: 0;
   container-type: size;
+  overflow: visible;
 }
 .personal .div1 img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; max-width: 100%; max-height: 100%; border: none; transform: scale(0.95); }
 .personal .div1 { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; border: none; border-radius: 9999px; overflow: hidden; }
@@ -265,20 +266,21 @@ html.dark .proyectoDestacado .div3 .action-right {
   border: 2px solid #ffffff;
   border-radius: 24px;
   font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
-  font-size: clamp(1.05rem, 22.5cqh, 4.5rem);
+  font-size: clamp(0.85rem, 18cqh, 3.5rem);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   max-width: 100%;
-  width: auto;
-  height: min(60px, 80%);
-  padding-inline: clamp(0.5em, 4cqw, 1em);
+  width: fit-content;
+  height: min(54px, 72%);
+  padding-inline: clamp(0.4em, 3cqw, 0.8em);
   box-sizing: border-box;
   flex-shrink: 1;
   min-width: 0;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* Borde del color contrario al tema de la página */
@@ -310,6 +312,10 @@ html.dark .ver-trabajos-btn {
   letter-spacing: 0.01em;
   flex-shrink: 1;
   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
 .ver-trabajos-arrow {
@@ -357,5 +363,12 @@ html.dark .ver-trabajos-btn {
     font-size: clamp(0.65rem, 4cqh, 0.85rem);
     gap: 4px;
     padding: 0.4em 0.8em;
+  }
+}
+
+/* Reducir altura adicional en pantallas con altura inferior a 700px */
+@media (max-height: 700px) {
+  .ver-trabajos-btn {
+    height: min(38px, 50%);
   }
 }
