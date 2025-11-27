@@ -11,7 +11,7 @@ export default function PageInicio() {
   return (
     <div className="snap-container">
         <section id="inicio" className="page-section">
-          <main className="parent">
+          <main id="main-content" className="parent" tabIndex={-1}>
             <div className="header">
               <HeaderInicio />
             </div>

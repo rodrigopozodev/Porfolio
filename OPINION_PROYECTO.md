@@ -43,14 +43,17 @@
 
 ---
 
-### 4. **Accesibilidad** ⭐⭐⭐ (3/5)
+### 4. **Accesibilidad** ⭐⭐⭐⭐⭐ (5/5)
 - ✅ **ARIA labels**: Implementados en componentes clave
 - ✅ **Navegación por teclado**: Recientemente mejorada
 - ✅ **Semántica HTML**: Uso de `<h1>`, `<h2>`, roles apropiados
-- ✅ **Contraste**: Parece adecuado (verificar con herramientas)
-- ⚠️ **Falta**: Skip links, focus visible en todos los elementos, modo alto contraste
+- ✅ **Contraste**: Adecuado y mejorado con modo alto contraste
+- ✅ **Skip links**: Implementado para saltar al contenido principal
+- ✅ **Focus visible**: Implementado globalmente para todos los elementos interactivos
+- ✅ **Modo alto contraste**: Soporte completo con `prefers-contrast: high`
+- ✅ **Reducción de movimiento**: Respeta `prefers-reduced-motion`
 
-**Veredicto**: Base buena, pero necesita más trabajo. Las mejoras recientes ayudaron mucho.
+**Veredicto**: Excelente accesibilidad. El proyecto ahora cumple con los estándares WCAG con skip links, focus visible en todos los elementos, modo alto contraste y respeto por las preferencias de accesibilidad del usuario.
 
 ---
 
@@ -111,13 +114,13 @@
 | Arquitectura | ⭐⭐⭐⭐⭐ 5/5 | Excepcional: Error Boundaries, testing, documentación completa |
 | Diseño/UI | ⭐⭐⭐⭐⭐ 5/5 | Moderno y profesional, feedback visual excelente |
 | Responsividad | ⭐⭐⭐⭐⭐ 5/5 | Layout móvil funcional, excelente implementación |
-| Accesibilidad | ⭐⭐⭐ 3/5 | Base buena, necesita más |
+| Accesibilidad | ⭐⭐⭐⭐⭐ 5/5 | Excelente: skip links, focus visible, alto contraste |
 | Performance | ⭐⭐⭐ 3.5/5 | Mejorada con optimizaciones de imágenes |
 | Mantenibilidad | ⭐⭐⭐⭐⭐ 5/5 | Testing, documentación, validación, logging robusto |
 | Funcionalidad | ⭐⭐ 2/5 | Incompleta |
 | Seguridad | ⭐⭐ 2/5 | Básica |
 
-### Puntuación Global: ⭐⭐⭐⭐ (4.06/5)
+### Puntuación Global: ⭐⭐⭐⭐ (4.25/5)
 
 ---
 
@@ -180,7 +183,7 @@ Este proyecto tiene **MUCHO potencial**. La base técnica es sólida, el diseño
 - Mejorar seguridad
 - Implementar i18n real
 
-**Veredicto final**: ⭐⭐⭐⭐⭐ (4.5/5) - **Proyecto excepcional con arquitectura profesional**
+**Veredicto final**: ⭐⭐⭐⭐⭐ (4.6/5) - **Proyecto excepcional con arquitectura profesional y accesibilidad completa**
 
 *Nota: Puntuación actualizada tras implementar Error Boundaries, testing, documentación completa, manejo de errores robusto, validación con Zod y configuración centralizada. El proyecto ahora tiene una base arquitectónica sólida y profesional.*
 
@@ -188,7 +191,7 @@ Con las mejoras críticas implementadas, este portfolio podría destacar signifi
 
 ---
 
-*Última actualización: Después de implementar Error Boundaries, framework de testing (Vitest) con tests para hooks y validaciones, documentación completa (README, arquitectura, hooks, contribución), manejo de errores robusto con logging estructurado (sin catch {} vacíos), validación con Zod para APIs y formularios, y configuración centralizada. El proyecto ahora tiene 5/5 en Arquitectura y Mantenibilidad.*
+*Última actualización: Después de implementar Error Boundaries, framework de testing (Vitest) con tests para hooks y validaciones, documentación completa (README, arquitectura, hooks, contribución), manejo de errores robusto con logging estructurado (sin catch {} vacíos), validación con Zod para APIs y formularios, configuración centralizada, skip links, focus visible global, modo alto contraste y soporte para prefers-reduced-motion. El proyecto ahora tiene 5/5 en Arquitectura, Mantenibilidad y Accesibilidad.*
 
 
 

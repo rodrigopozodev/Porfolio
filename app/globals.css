@@ -51,6 +51,132 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* ============================================
+   ACCESIBILIDAD: Skip Link
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  z-index: 1000;
+  padding: 1rem 1.5rem;
+  background: var(--foreground);
+  color: var(--background);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--foreground);
+  outline-offset: 2px;
+}
+
+@media (prefers-contrast: high) {
+  .skip-link {
+    border: 3px solid;
+    font-size: 1.1rem;
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD: Focus Visible Global
+   ============================================ */
+
+/* Focus visible para todos los elementos interactivos */
+*:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Mejorar focus para botones */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+/* Remover outline por defecto (solo visible con teclado) */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================
+   ACCESIBILIDAD: Modo Alto Contraste
+   ============================================ */
+
+@media (prefers-contrast: high) {
+  :root {
+    --background: #ffffff;
+    --foreground: #000000;
+  }
+
+  .dark,
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #000000;
+      --foreground: #ffffff;
+    }
+  }
+
+  /* Bordes más visibles en alto contraste */
+  * {
+    border-color: var(--foreground) !important;
+  }
+
+  /* Mejorar contraste de texto */
+  body {
+    background: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  /* Botones más visibles */
+  button,
+  [role="button"],
+  a[role="button"] {
+    border: 2px solid var(--foreground) !important;
+    background: var(--background) !important;
+    color: var(--foreground) !important;
+  }
+
+  button:hover,
+  [role="button"]:hover,
+  a[role="button"]:hover {
+    background: var(--foreground) !important;
+    color: var(--background) !important;
+  }
+
+  /* Focus más visible */
+  *:focus-visible {
+    outline: 4px solid var(--foreground) !important;
+    outline-offset: 4px !important;
+  }
+}
+
+/* ============================================
+   ACCESIBILIDAD: Reducción de Movimiento
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Visual del GIF de la mano sin fondo artificial */
 img[src="/mano.gif"], .gif-negro { filter: none; background: transparent; }
 
