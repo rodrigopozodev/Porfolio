@@ -103,9 +103,9 @@ export const testimonialsConfig = {
  * URLs externas.
  */
 export const externalUrls = {
-  github: "https://github.com/rodrigopozosanchez",
+  github: "https://github.com/rodrigopozodev",
   linkedin: "https://www.linkedin.com/in/rodrigopozosanchez",
-  email: "mailto:rodrigopozosanchez@gmail.com",
+  email: "https://mail.google.com/mail/?view=cm&fs=1&to=rodrigopozosanchez@gmail.com&su=&body=",
   leagueTracker: "https://lol-tracker-beta.vercel.app",
 } as const
 
