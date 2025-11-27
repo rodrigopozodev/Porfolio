@@ -127,7 +127,7 @@ export const translations: Record<Language, Translations> = {
       github: "Visitar perfil de GitHub",
       linkedin: "Visitar perfil de LinkedIn",
       email: "Enviar correo electrónico",
-      descargarCV: "Descargar curriculum vitae",
+      descargarCV: "Descargar CV",
     },
     errors: {
       algoSalióMal: "Algo salió mal",
