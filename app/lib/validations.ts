@@ -6,13 +6,14 @@ import { z } from "zod"
 import { validationConfig } from "./config"
 
 /**
- * Schema para testimonios.
+ * Schema para testimonios con validación mejorada.
  */
 export const testimonialSchema = z.object({
   name: z
     .string()
     .min(1, "El nombre es requerido")
     .max(validationConfig.maxNameLength, `El nombre no puede exceder ${validationConfig.maxNameLength} caracteres`)
+    .regex(/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s'-]+$/, "El nombre solo puede contener letras, espacios, guiones y apóstrofes")
     .trim(),
   handle: z
     .string()
@@ -21,18 +22,35 @@ export const testimonialSchema = z.object({
     .trim(),
   review: z
     .string()
-    .min(1, "La recomendación es requerida")
+    .min(10, "La recomendación debe tener al menos 10 caracteres")
     .max(validationConfig.maxReviewLength, `La recomendación no puede exceder ${validationConfig.maxReviewLength} caracteres`)
     .trim(),
   avatar: z
     .string()
     .url("La URL del avatar debe ser válida")
+    .refine((url) => {
+      try {
+        const parsed = new URL(url)
+        return ["http:", "https:"].includes(parsed.protocol)
+      } catch {
+        return false
+      }
+    }, "La URL debe usar http o https")
     .optional()
     .nullable()
     .or(z.literal("").transform(() => null)),
   linkedin: z
     .string()
     .url("La URL de LinkedIn debe ser válida")
+    .refine((url) => {
+      try {
+        const parsed = new URL(url)
+        return ["http:", "https:"].includes(parsed.protocol) && 
+               (parsed.hostname.includes("linkedin.com") || parsed.hostname.includes("www.linkedin.com"))
+      } catch {
+        return false
+      }
+    }, "La URL debe ser de LinkedIn")
     .max(validationConfig.maxLinkedInUrlLength, `La URL no puede exceder ${validationConfig.maxLinkedInUrlLength} caracteres`)
     .optional()
     .nullable()

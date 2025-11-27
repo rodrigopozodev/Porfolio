@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react"
 import { logger } from "@/lib/logger"
+import { sanitizeName, sanitizeText, sanitizeUrl } from "@/lib/sanitize"
 import TarjetasToggle from "../../../componentes/tarjetas/tarjetasToggle"
 import VisitarButton from "../../../componentes/botones/visitar/VisitarButton"
 import InformacionButton from "../../../componentes/botones/informacion/InformacionButton"
@@ -54,6 +55,33 @@ const BodyInicio = () => {
 
   const onFotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0] ?? null
+    
+    // Validación de archivo
+    if (f) {
+      // Validar tipo de archivo
+      const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"]
+      if (!allowedTypes.includes(f.type)) {
+        logger.warn("Invalid file type uploaded", { type: f.type })
+        alert("Solo se permiten imágenes (JPEG, PNG, WebP, GIF)")
+        e.target.value = ""
+        return
+      }
+      
+      // Validar tamaño (máximo 5MB)
+      const maxSize = 5 * 1024 * 1024 // 5MB
+      if (f.size > maxSize) {
+        logger.warn("File too large", { size: f.size })
+        alert("La imagen no puede exceder 5MB")
+        e.target.value = ""
+        return
+      }
+      
+      // Limpiar preview anterior
+      if (fotoPreview) {
+        URL.revokeObjectURL(fotoPreview)
+      }
+    }
+    
     setFotoFile(f)
     setFotoPreview(f ? URL.createObjectURL(f) : null)
   }
@@ -63,6 +91,9 @@ const BodyInicio = () => {
     setPuesto("")
     setRecomendacion("")
     setLinkedin("")
+    if (fotoPreview) {
+      URL.revokeObjectURL(fotoPreview)
+    }
     setFotoFile(null)
     setFotoPreview(null)
   }
@@ -70,12 +101,30 @@ const BodyInicio = () => {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!canSubmit) return
+    
+    // Sanitizar inputs antes de enviar
+    const sanitizedName = sanitizeName(nombre.trim())
+    const sanitizedHandle = sanitizeText(puesto.trim())
+    const sanitizedReview = sanitizeText(recomendacion.trim())
+    const sanitizedLinkedin = linkedin.trim() ? sanitizeUrl(linkedin.trim()) : null
+    
+    // Validar que la sanitización fue exitosa
+    if (!sanitizedName || sanitizedName.length === 0) {
+      alert("El nombre contiene caracteres inválidos")
+      return
+    }
+    
+    if (sanitizedLinkedin === null && linkedin.trim()) {
+      alert("La URL de LinkedIn no es válida")
+      return
+    }
+    
     const nuevo: Testimonial = {
-      name: nombre.trim(),
-      handle: puesto.trim(),
-      review: recomendacion.trim(),
+      name: sanitizedName,
+      handle: sanitizedHandle,
+      review: sanitizedReview,
       avatar: fotoPreview ?? null,
-      linkedin: linkedin.trim() ? linkedin.trim() : null,
+      linkedin: sanitizedLinkedin,
     }
     ;(async () => {
       try {
