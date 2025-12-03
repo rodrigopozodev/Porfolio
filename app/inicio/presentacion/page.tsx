@@ -54,7 +54,7 @@ export default function PresentacionPage() {
                 </a>
               </Button>
               <Button variant="ghost" size="icon" asChild className="h-9 w-9 sm:h-10 sm:w-10">
-                <a href="mailto:tu@email.com">
+                <a href="mailto:rodrigopozosanchz@gmail.com">
                   <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
                 </a>
               </Button>

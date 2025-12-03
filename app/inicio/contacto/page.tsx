@@ -27,7 +27,7 @@ export default function ContactoPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <h3 className="font-semibold mb-1 text-base sm:text-lg">{t.email}</h3>
-                <p className="text-muted-foreground text-sm sm:text-base break-all">tu@email.com</p>
+                <p className="text-muted-foreground text-sm sm:text-base break-all">rodrigopozosanchz@gmail.com</p>
               </div>
             </div>
           </Card>
@@ -39,7 +39,7 @@ export default function ContactoPage() {
               </div>
               <div className="min-w-0 flex-1">
                 <h3 className="font-semibold mb-1 text-base sm:text-lg">{t.phone}</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">+34 123 456 789</p>
+                <p className="text-muted-foreground text-sm sm:text-base">+34 620 396 775</p>
               </div>
             </div>
           </Card>
