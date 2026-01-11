@@ -4,6 +4,8 @@ import { useState } from "react"
 import Image from "next/image"
 import { ExternalLink, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { usePortfolio } from "@/lib/context/portfolio-context"
+import { translations } from "@/lib/translations"
 
 interface ProjectCardProps {
   title: string
@@ -16,6 +18,8 @@ interface ProjectCardProps {
 
 export function ProjectCard({ title, description, image, technologies, demoUrl, githubUrl }: ProjectCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
+  const { language } = usePortfolio()
+  const t = translations[language].projects.comingSoon
 
   return (
     <div
@@ -38,10 +42,10 @@ export function ProjectCard({ title, description, image, technologies, demoUrl, 
           />
           {/* Overlay encima */}
           <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-          {/* "Proximamente" centrado */}
+          {/* "Coming Soon" / "Próximamente" centrado */}
           <div className="absolute inset-0 flex items-center justify-center z-10">
             <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
-              Proximamente
+              {t}
             </span>
           </div>
         </div>

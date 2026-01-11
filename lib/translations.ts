@@ -54,6 +54,7 @@ export const translations = {
         viewProject: "Ver proyecto",
         viewCode: "Ver código",
       },
+      comingSoon: "Próximamente",
     },
   },
   en: {
@@ -111,6 +112,7 @@ export const translations = {
         viewProject: "View project",
         viewCode: "View code",
       },
+      comingSoon: "Coming Soon",
     },
   },
 }
