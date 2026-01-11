@@ -12,7 +12,7 @@ export default function PresentacionPage() {
   const t = translations[language].home.presentation
 
   return (
-    <div className="h-full w-full flex items-center justify-center bg-background overflow-hidden">
+    <div className="min-h-[92vh] w-full flex items-center justify-center bg-background overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full py-4 sm:py-6">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-16">
           <div className="flex-shrink-0">
@@ -44,12 +44,12 @@ export default function PresentacionPage() {
 
             <div className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
               <Button variant="ghost" size="icon" asChild className="h-9 w-9 sm:h-10 sm:w-10">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/rodrigopozodev" target="_blank" rel="noopener noreferrer">
                   <Github className="h-4 w-4 sm:h-5 sm:w-5" />
                 </a>
               </Button>
               <Button variant="ghost" size="icon" asChild className="h-9 w-9 sm:h-10 sm:w-10">
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/rodrigopozosanchez/" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-4 w-4 sm:h-5 sm:w-5" />
                 </a>
               </Button>

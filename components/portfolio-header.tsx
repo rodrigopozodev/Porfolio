@@ -54,7 +54,7 @@ export function PortfolioHeader() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-[20vh] bg-background/95 backdrop-blur-sm border-b border-border z-50">
+    <header className="fixed top-0 left-0 right-0 h-[8vh] bg-card backdrop-blur-sm border-b border-border z-50">
       <div className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
         {/* Navigation sections */}
         <nav className={cn("flex items-center gap-1 sm:gap-2 flex-shrink", handedness === "left" && "order-2")}>

@@ -63,9 +63,9 @@ export function ScrollNavigation({ pages, currentPath }: ScrollNavigationProps) 
   }, [currentIndex])
 
   return (
-    <div ref={containerRef} className="scroll-container h-[80vh] mt-[20vh]">
+    <div ref={containerRef} className="scroll-container h-[93vh] mt-[7vh]">
       {pages.map((page, index) => (
-        <div key={page.path} className="scroll-page h-[80vh] w-full">
+        <div key={page.path} className="scroll-page h-[93vh] w-full">
           {page.component}
         </div>
       ))}

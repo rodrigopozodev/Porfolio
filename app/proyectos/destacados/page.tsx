@@ -75,7 +75,7 @@ export default function DestacadosPage() {
   }
 
   return (
-    <div className="h-full w-full flex items-center justify-center bg-background overflow-hidden">
+    <div className="min-h-[92vh] w-full flex items-center justify-center bg-background overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
         <div className="text-center mb-4 sm:mb-6 lg:mb-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-2 text-balance text-foreground">{t.title}</h1>
